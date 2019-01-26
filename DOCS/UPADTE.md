@@ -10,3 +10,4 @@
     * view 架构搭建
 * 项目文档撰写(开始)
 * Github 上建立[项目仓库](https://github.com/WarehouseManagementSystem/WMS)(完成)
+* Github 中完善项目管理配置(待完善)
