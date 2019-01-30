@@ -6,6 +6,7 @@
 2019-01-30
 
 * api 项目目录结构调整，项目文件管理更清晰
+* docs 添加文档 [项目规范-编码规范](Standard/CodingStandards.md)
 
 2019-01-26
 
