@@ -35,7 +35,7 @@ dotnet watch run
 
 ## 运行用户 UI
 
-构建
+构建
 
 ```bash
 cd View
@@ -72,6 +72,10 @@ npm run serve
 ## TODO
 
 [TODO](DOCS/TODO.md)  
+
+## 项目规范或约定
+
+[项目规范](DOCS/Standard/README.MD)  
 
 ## License
 
