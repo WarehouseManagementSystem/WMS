@@ -18,7 +18,7 @@
 
 新建分支的命名规范：
 
-`[上级分支]-[任务开始日期(yyyyMMdd)]-(bug 修改请加 ‘bug’)[任务编号/简短英文描述/issues编号]` 如 `dev-20190131-001` | | `master-20190131-#1` | `master-20190131-bug#2` | `ftest-20190131-DataDemonstration`
+`[上级分支]-[任务开始日期(yyyyMMdd)]-(bug 修改请加 ‘bug’)[任务编号/简短英文描述/issues编号]` 如 `dev-20190131-001` | `master-20190131-#1` | `master-20190131-bug#2` | `ftest-20190131-DataDemonstration`
 
 ## 1.2 合并分支
 

@@ -8,6 +8,8 @@
 * api 项目目录结构调整，项目文件管理更清晰(bate0.1)
 * docs 添加文档 [项目规范-编码规范](Standard/CodingStandards.md)
 * docs 修改文档 [项目规范相关文档](Standard/README.md)
+* docs 修改文档 [开发流程规范](Standard/DevelopStandards.md)
+
 
 2019-01-26
 
