@@ -22,3 +22,7 @@ Controller 相对于 API 项目根节点地址为：api/Source/Z_Template/Values
 即：api/子模块地址/所在 Controller.cs 的文件名/[controller]  
 注意：由于项目的源文件均在 Source 目录下因此去除文件地址中的 `Source/`  
 但会在调用地址前保留 `api/`，以表明其为 API 调用  
+
+## 2. 开发流程规范
+
+[开发流程规范](DevelopStandards.md)
