@@ -11,3 +11,7 @@
 * 项目文档撰写(开始)
 * Github 上建立[项目仓库](https://github.com/WarehouseManagementSystem/WMS)(完成)
 * Github 中完善项目管理配置(待完善)
+
+2019-01-30
+
+* api 项目目录结构调整，项目文件管理更清晰
