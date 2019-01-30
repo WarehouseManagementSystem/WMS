@@ -21,11 +21,11 @@ dotnet run
 dotnet watch run
 ```
 
-**开发环境**：  
+## 开发环境  
 
 .Net Core 2.2  
 
-**项目文件目录**：  
+## 项目文件目录  
 
 ```text
 ./
@@ -35,7 +35,7 @@ dotnet watch run
     -| Z_Template             模版：项目模块的模版，无特定功能。
 ```
 
-**项目子模块目录结构**  
+## 项目子模块目录结构
 
 ```text
 ./Z-Template            模版：项目模块的模版。除 `A-Util`,`B-Base` 外，项目其它子模块均使用此目录结构
