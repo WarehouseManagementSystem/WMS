@@ -1,4 +1,4 @@
-# View
+# view
 
 ## Project setup
 ```
