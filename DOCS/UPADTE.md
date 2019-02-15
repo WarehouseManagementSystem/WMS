@@ -3,6 +3,11 @@
 > 此处记录项目的开发进度  
 > (这会让项目开发变得紧紧有条)
 
+2019-02-15
+
+* view 添加 bootstrap([Page](https://getbootstrap.com) | [Github](https://github.com/twbs/bootstrap)) 页面框架
+* view 添加 vue-i18n([Page](https://kazupon.github.io/vue-i18n/) | [Github](https://github.com/kazupon/vue-i18n)) 国际化
+
 2019-01-30
 
 * api 项目目录结构调整，项目文件管理更清晰(bate0.1)
