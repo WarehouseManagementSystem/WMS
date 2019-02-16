@@ -3,10 +3,22 @@
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
+      <lang></lang>
     </div>
     <router-view/>
   </div>
 </template>
+
+<script>
+import lang from '@/components/lang.vue'
+
+export default {
+  components: {
+		lang,
+	},
+}
+</script>
+
 
 <style lang="scss">
 

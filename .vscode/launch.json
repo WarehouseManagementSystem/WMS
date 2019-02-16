@@ -42,6 +42,16 @@
             "type": "coreclr",
             "request": "attach",
             "processId": "${command:pickProcess}"
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "sourceMaps": true,
+            "name": "Launch Chrome against localhost",
+            // your web server url
+            "url": "http://localhost:8080",
+            // set your webroot directory
+            "webRoot": "${workspaceRoot}/View/dist"
         }
     ,]
 }

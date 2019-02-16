@@ -1,10 +1,10 @@
 import Vue from 'vue'
-import App from './App.vue'
-import router from './router'
-import store from './store'
-import i18n from './lang/index'
+import App from '@/App.vue'
+import router from '@/router'
+import store from '@/store'
+import i18n from '@/lang/index'
 import 'bootstrap/dist/js/bootstrap.min.js'
-import './custom.scss'
+import '@/custom.scss'
 
 Vue.config.productionTip = false
 
