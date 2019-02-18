@@ -3,9 +3,14 @@
 > 此处记录项目的开发进度  
 > (这会让项目开发变得紧紧有条)
 
+2019-02-18
+
+* view vue-i18n 添加 `config` 目录，集中管理可配置项，未来可能添加一个配置页面通过用户 UI 对这些选项进行管理
+* view vue-router 添加 404 页面
+
 2019-02-16
 
-* view vue-i18n([Page](https://kazupon.github.io/vue-i18n/) | [Github](https://github.com/kazupon/vue-i18n)) 国际化实现按需加载语言包
+* view vue-i18n 国际化实现按需加载语言包
 
 2019-02-15
 

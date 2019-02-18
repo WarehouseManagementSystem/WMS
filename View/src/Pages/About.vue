@@ -1,6 +1,6 @@
 <template>
   <div class="about">
-    <p>a {{ $t('hello') }}</p>
+    <p>{{ $t('hello') }}</p>
     <h1>This is an about page</h1>
     <div>
       <div class="alert alert-primary" role="alert">A simple primary alert—check it out!</div>
