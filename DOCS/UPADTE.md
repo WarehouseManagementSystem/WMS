@@ -3,6 +3,10 @@
 > 此处记录项目的开发进度  
 > (这会让项目开发变得紧紧有条)
 
+2019-02-19
+
+* view 添加 cookie、localStorage、sessionStorage、Service Worker 的通用方法（未测试可用性）
+
 2019-02-18
 
 * view vue-i18n 添加 `config` 目录，集中管理可配置项，未来可能添加一个配置页面通过用户 UI 对这些选项进行管理
