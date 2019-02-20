@@ -6,7 +6,7 @@ import config from '../index'
 Vue.use(VueI18n)
 
 // default Locale
-// import en_US from '@/lang/en-US';
+// import en_US from '@/config/lang/packages/en-US';
 // import zh from '@/lang/zh';
 
 // const messages = {

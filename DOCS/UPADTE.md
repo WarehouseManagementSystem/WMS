@@ -3,6 +3,11 @@
 > 此处记录项目的开发进度  
 > (这会让项目开发变得紧紧有条)
 
+2019-02-20
+
+* view 修改 调整页面布局
+* view 调整 调整 config 文件
+
 2019-02-19
 
 * view 添加 cookie、localStorage、sessionStorage、Service Worker 的通用方法（未测试可用性）

@@ -14,8 +14,8 @@ export default  new Router({
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */'@/Pages/About.vue')
+      component: async () => await import(/* webpackChunkName: "about" */'@/Pages/About.vue')
     },
-    { path: '/*', name: '404', component: () => import('@/Pages/404.vue') },
+    { path: '/*', name: '404', component: async () => await import('@/Pages/404.vue') },
   ]
  })
