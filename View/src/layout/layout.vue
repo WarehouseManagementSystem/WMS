@@ -8,10 +8,10 @@
 </template>
 
 <script>
-import MainHeader from "@/components/base/layout/MainHeader.vue";
-import MainNav from "@/components/base/layout/MainNav.vue";
-import MaincContent from "@/components/base/layout/MainContent.vue";
-import MainFooter from "@/components/base/layout/MainFooter.vue";
+import MainHeader from "@/components/layout/MainHeader.vue";
+import MainNav from "@/components/layout/MainNav.vue";
+import MaincContent from "@/components/layout/MainContent.vue";
+import MainFooter from "@/components/layout/MainFooter.vue";
 
 export default {
   components: {

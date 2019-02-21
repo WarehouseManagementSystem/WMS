@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueI18n from 'vue-i18n'
 import axios from 'axios'
-import config from '../index'
+import config from '@/config/index'
 
 Vue.use(VueI18n)
 
@@ -47,7 +47,7 @@ function setI18nLanguage(lang) {
 // Asynchronous loading of locale package
 async function loadLanguageAsync(lang) {
     if (!loadedLocales.includes(lang)) {
-        return await import(/* webpackChunkName: "lang-[request]" */ `@/config/lang/packages/${lang}`).then(msgs => {
+        return await import(/* webpackChunkName: "lang-[request]" */ `@/lang/packages/${lang}`).then(msgs => {
             i18n.setLocaleMessage(lang, msgs.default.lang)
             loadedLocales.push(lang)
             return setI18nLanguage(lang)
