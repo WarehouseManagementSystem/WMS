@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="mx-auto">
+  <div id="app" class="mx-auto min-vw-100">
     <layout></layout>
   </div>
 </template>

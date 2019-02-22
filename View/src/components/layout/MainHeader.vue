@@ -1,8 +1,8 @@
 <template>
-  <div id="header" class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark d-print">
-    <a class="navbar-brand" href="#">
-      <img src="./../../assets/logo.png" width="30" height="30" class="d-inline-block align-top" alt="logo">
-      {{ $t('systemName') }}
+  <nav id="header" class="shadow-sm navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand overflow-hidden" href="#">
+      <img src="@/assets/logo.png" width="30" height="30" class="d-inline-block" alt="logo">
+      <span class="h2 text-truncate font-weight-bolder">{{ $t('systemName') }}</span>
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -14,35 +14,32 @@
       </ul>
       <ul class="navbar-nav my-2 my-lg-0">
         <li class="nav-item dropdown">
-          <lang-select data-toggle="tooltip" data-placement="bottom" title='selectLanguage'></lang-select>
+            <lang-select></lang-select>~
         </li>
-        <li class="navbar-text nav-item">
-          <Screenfull data-toggle="tooltip" data-placement="bottom" title='screenfull'></Screenfull>
+        <li class="nav-item navbar-text">
+          <Screenfull></Screenfull>
         </li>
-        <!-- <li class="navbar-text nav-item">
-          <strong>{{ new Date() }}</strong>
-        </li>  -->
       </ul>
-
-
+       <ul class="navbar-nav  my-2 my-lg-0">
+          <li class="nav-item dropdown">
+            <user-card></user-card>
+        </li> 
+      </ul>
     </div>
-  </div>
+  </nav>
 </template>
 
 <script>
 import LangSelect from "@/components/base/LangSelect/index.vue";
 import Screenfull from "@/components/base/Screenfull/index.vue";
+import UserCard from '@/components/base/UserCard/index.vue';
 
 export default {
   components: {
     LangSelect,
     Screenfull,
+    UserCard,
   },
-  data () {
-    return {
-      selectLanguage: this.$t('tips.selectLanguage'),
-      screenfull: this.$t('tips.screenfull'),
-    }
-  }
+  
 };
 </script>
