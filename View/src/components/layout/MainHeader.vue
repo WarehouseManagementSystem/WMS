@@ -1,8 +1,8 @@
 <template>
-  <nav id="header" class="shadow-sm navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand overflow-hidden" href="#">
-      <img src="@/assets/logo.png" width="30" height="30" class="d-inline-block" alt="logo">
-      <span class="h2 text-truncate font-weight-bolder">{{ $t('systemName') }}</span>
+  <header id="header" class="shadow-sm navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand d-inline-block text-truncate" href="#">
+      <img src="@/assets/logo.png" width="30" height="30" alt="logo" />
+      {{ $t('systemName') }}
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -14,19 +14,19 @@
       </ul>
       <ul class="navbar-nav my-2 my-lg-0">
         <li class="nav-item dropdown">
-            <lang-select></lang-select>~
+            <lang-select></lang-select>
         </li>
         <li class="nav-item navbar-text">
           <Screenfull></Screenfull>
         </li>
       </ul>
-       <ul class="navbar-nav  my-2 my-lg-0">
+      <ul class="navbar-nav my-2 my-lg-0">
           <li class="nav-item dropdown">
             <user-card></user-card>
         </li> 
       </ul>
     </div>
-  </nav>
+  </header>
 </template>
 
 <script>

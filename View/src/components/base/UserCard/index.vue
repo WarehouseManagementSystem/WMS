@@ -1,6 +1,6 @@
 <template>
     <div id="user-card">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <Avatar></Avatar>
         </a>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -8,7 +8,7 @@
             <div class="card dropdown-item m-0" style="width: 18rem;">
                 <Avatar class="card-img-top d-inline" ></Avatar>
                 <h5 class="card-title d-inline">User Name</h5>
-                <p class="card-text">Some quick example text.</p>
+                <p class="card-text text-wrap">Some quick example text.</p>
                 <a href="#" class="btn btn-primary">Go somewhere</a>
             </div>
             <div class="dropdown-divider"></div>
