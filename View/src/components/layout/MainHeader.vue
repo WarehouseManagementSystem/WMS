@@ -32,7 +32,7 @@
 <script>
 import LangSelect from "@/components/base/LangSelect/index.vue";
 import Screenfull from "@/components/base/Screenfull/index.vue";
-import UserCard from '@/components/base/UserCard/index.vue';
+import UserCard from '@/components/user/UserCard/index.vue';
 
 export default {
   components: {
