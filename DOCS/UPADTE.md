@@ -3,6 +3,11 @@
 > 此处记录项目的开发进度  
 > (这会让项目开发变得紧紧有条)
 
+2019-02-26
+
+* view 界面调整
+* view 加入 jQuery（本来不想加的，为了 bootstrap，哎，希望 bootstrap 早日放弃 jQuery）
+
 2019-02-25
 
 * view ui header end

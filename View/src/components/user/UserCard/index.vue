@@ -9,7 +9,6 @@
                 <Avatar class="card-img-top d-inline" ></Avatar>
                 <h5 class="card-title d-inline">User Name</h5>
                 <p class="card-text text-wrap">Some quick example text.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
             </div>
             <div class="dropdown-divider"></div>
             <div class="card dropdown-item m-0">
