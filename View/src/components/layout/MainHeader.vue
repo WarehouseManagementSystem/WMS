@@ -29,7 +29,7 @@
         </ul>
       </div>
     </div>
-    <div class="nav navbar-dark nav-tabs bg-dark" id="nav-tab" role="tablist">
+    <div class="nav nav-tabs bg-dark" id="nav-tab" role="tablist">
       <!-- <nav aria-label="breadcrumb">
         <ol class="breadcrumb bg-dark text-white rounded-0 overflow-hidden py-1 mb-1">
           <li class="breadcrumb-item"><a class="text-reset text-decoration-none" href="#">Home</a></li>
@@ -37,27 +37,9 @@
         </ol>
       </nav> -->
         <DropdownMenu></DropdownMenu>
-        <a class="btn btn-dark" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-          home
-        </a>
-        <a class="nav-item nav-link border-0 active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">
-          Home
-          <button type="button" class="close" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </a>
-        <a class="nav-item nav-link border-0" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">
-          Profile
-           <button type="button" class="close" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </a>
-        <a class="nav-item nav-link border-0" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">
-          Contact
-           <button type="button" class="close" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </a>
+        <router-link class="btn btn-dark" to="/" role="butto">
+          <i class="fas fa-home"></i>
+        </router-link>
     </div>
   </header>
 </template>

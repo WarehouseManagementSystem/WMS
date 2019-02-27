@@ -11,11 +11,6 @@ if (navigator.serviceWorker) {
         });
     });
 
-    function postMessage(msg) {
-        // 主页面发送信息到 Service Worker
-        navigator.serviceWorker.controller.postMessage(msg);
-    });
-
     navigator.serviceWorker.addEventListener('message', function (e) {
         // Service Worker 发送信息到主页面
         return e.data
@@ -23,3 +18,8 @@ if (navigator.serviceWorker) {
 } else {
     console.log('Service Worker is not supported');
 }
+
+// function postMessage(msg) {
+//     // 主页面发送信息到 Service Worker
+//     navigator.serviceWorker.controller.postMessage(msg);
+// };
