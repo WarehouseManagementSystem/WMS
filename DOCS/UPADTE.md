@@ -3,6 +3,11 @@
 > 此处记录项目的开发进度  
 > (这会让项目开发变得紧紧有条)
 
+2019-03-04
+
+* view 加入动画过度效果
+* view 确定菜单样式，之前采用 bootstrap 的 Popovers 存在较多问题，已放弃，目前使用列表进行控制，但 blur 事件无响应，暂未解决
+
 2019-02-28
 
 * view 加入 [Font Awesome](https://fontawesome.com) 字体图标，免费版

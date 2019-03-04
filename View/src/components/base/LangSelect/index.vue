@@ -26,7 +26,7 @@ export default {
       langs: config.lang.langsList, // 支持的语言列表
     }; 
   },
-  beforeCreate() {
+  mounted() {
     loadLanguageAsync(config.lang.fallbackLocale); // 加载备用语言包
     loadLanguageAsync(config.lang.defaultLocale); // 加载默认语言包
   },

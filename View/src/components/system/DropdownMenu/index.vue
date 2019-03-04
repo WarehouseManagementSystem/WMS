@@ -1,47 +1,45 @@
 <template>
-    <!-- <div class="dropdown">
-        <button class="btn btn-dark" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <div @blur="showMenu()">
+        <a id="dropdownMenuButton" class="btn btn-dark" href="#" @click="showMenu()">
             <i class="fas fa-bars"></i>
-            menu
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <div class="dropdown-item">Action</div>
-            <div class="dropdown-item">Another action</div>
-            <div class="dropdown-item">Something else here</div>
-        </div>
-    </div> -->
-    <div>
-        <a id="dropdownMenuButton" class="btn btn-dark" href="#" data-container="body" data-toggle="popover" data-placement="bottom" data-html="true" :data-content="content">
-            <i class="fas fa-bars"></i>
-            menu
+            <font> menu </font>
         </a>
-        <dropdownMenuTooltip id="popover-content-dropdownMenuButton"></dropdownMenuTooltip>
-        
+        <transition name="fade">
+            <dropdownMenuTooltip id="popover-content-dropdownMenuButton" v-show="show" @blur="showMenu()"></dropdownMenuTooltip>
+        </transition>
     </div>
 </template>
 
 <script>
 import dropdownMenuTooltip from '@/components/base/Nav/index.vue'
 
-// var popoverContent = document.getElementById('popover-content-dropdownMenuButton')
-// var dropdownMenuButton = document.getElementById('dropdownMenuButton')
-// dropdownMenuButton.setAttribute('data-content', popoverContent.innerText)
-
 export default {
     name: 'dropdownMenuButton',
+    data () {
+        return {
+            show: false,
+        }
+    },
     components: {
         dropdownMenuTooltip,
     },
-    props: {
-        content: {
-            type: String,
-            default: dropdownMenuTooltip
-        },
+    methods: {
+        showMenu: function () {
+            this.show = !this.show
+        }
     },
 };
-
-// function show() {
-//     return document.getElementById('popover-content-dropdownMenuButton').innerHTML
-// }
-
 </script>
+
+<style lang="scss">
+#popover-content-dropdownMenuButton {
+    position: absolute;
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+</style>
