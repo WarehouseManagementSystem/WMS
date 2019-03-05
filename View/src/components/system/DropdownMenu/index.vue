@@ -1,11 +1,11 @@
 <template>
-    <div @blur="showMenu()">
-        <a id="dropdownMenuButton" class="btn btn-dark" href="#" @click="showMenu()">
+    <div id="dropdownMenu">
+        <a id="dropdownMenuButton" class="btn btn-dark" href="#" @click="showMenu">
             <i class="fas fa-bars"></i>
             <font> menu </font>
         </a>
         <transition name="fade">
-            <dropdownMenuTooltip id="popover-content-dropdownMenuButton" v-show="show" @blur="showMenu()"></dropdownMenuTooltip>
+            <dropdownMenuTooltip id="dropdownMenuT" v-show="show"></dropdownMenuTooltip>
         </transition>
     </div>
 </template>
@@ -14,10 +14,11 @@
 import dropdownMenuTooltip from '@/components/base/Nav/index.vue'
 
 export default {
-    name: 'dropdownMenuButton',
+    name: 'dropdownMenu',
     data () {
         return {
             show: false,
+            blurred: false,
         }
     },
     components: {
@@ -28,13 +29,11 @@ export default {
             this.show = !this.show
         }
     },
+    template: "#dropdownMenuT"
 };
 </script>
 
 <style lang="scss">
-#popover-content-dropdownMenuButton {
-    position: absolute;
-}
 
 .fade-enter-active, .fade-leave-active {
   transition: opacity .5s;

@@ -34,7 +34,7 @@ export default {
     this.locale = config.lang.defaultLocale // 加载默认语言
   },
   methods: {
-    lamgChange: function(code) {
+    lamgChange: function(event, code) {
       this.locale = code,
       loadLanguageAsync(this.locale); // 加载所选择的语言
     }

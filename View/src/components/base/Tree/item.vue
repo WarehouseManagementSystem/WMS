@@ -24,7 +24,7 @@
 export default {
   name: 'Item',
   components: {
-      item,
+      item: () => import('./item.vue'),
   },
   props: {
       model: Object

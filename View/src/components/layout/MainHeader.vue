@@ -30,12 +30,6 @@
       </div>
     </div>
     <div class="nav nav-tabs bg-dark" id="nav-tab" role="tablist">
-      <!-- <nav aria-label="breadcrumb">
-        <ol class="breadcrumb bg-dark text-white rounded-0 overflow-hidden py-1 mb-1">
-          <li class="breadcrumb-item"><a class="text-reset text-decoration-none" href="#">Home</a></li>
-          <li class="breadcrumb-item" aria-current="page">Library</li>
-        </ol>
-      </nav> -->
         <DropdownMenu></DropdownMenu>
         <router-link class="btn btn-dark" to="/" role="butto">
           <i class="fas fa-home"></i>

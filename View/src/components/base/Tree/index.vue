@@ -17,7 +17,7 @@
 export default {
     name: 'Tree',
     components: {
-        item,
+        item: () => import('./item.vue'),
     },
     data: function () {
     return {
