@@ -36,8 +36,6 @@ export default {
   },
   computed: {
     isFolder: function () {
-      console.log(this.model.children &&
-      this.model.children.length > 0)
       return this.model.children &&
       this.model.children.length > 0
     }

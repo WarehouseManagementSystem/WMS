@@ -15,14 +15,14 @@
 
 <script>
 import config from "@/config/index";
-import { loadLanguageAsync, i18n } from "@/lang/index";
+import { loadLanguageAsync } from "@/lang/index";
 
 export default {
   name: "locale-changer",
   data() {
     // return { langs: ["zh", "en"] }
     return {
-      locale: i18n.locale,
+      locale: this.$i18n.locale,
       langs: config.lang.langsList, // 支持的语言列表
     }; 
   },
@@ -34,7 +34,7 @@ export default {
     this.locale = config.lang.defaultLocale // 加载默认语言
   },
   methods: {
-    lamgChange: function(event, code) {
+    lamgChange: function(code) {
       this.locale = code,
       loadLanguageAsync(this.locale); // 加载所选择的语言
     }

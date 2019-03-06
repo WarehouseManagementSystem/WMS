@@ -1,5 +1,5 @@
 <template>
-    <div id="dropdownMenu">
+    <div id="dropdownMenu" @blur="showMenu" tabindex="-1">
         <a id="dropdownMenuButton" class="btn btn-dark" href="#" @click="showMenu">
             <i class="fas fa-bars"></i>
             <font> menu </font>
@@ -29,7 +29,15 @@ export default {
             this.show = !this.show
         }
     },
-    template: "#dropdownMenuT"
+    directives: {
+        'onblur' (el) {
+            let dropdownMenuT = el.getElementById('dropdownMenuT')
+            dropdownMenuT.onblur = function () {
+                // 如果要对节点的数据进行更改,且更改要映射到页面上,则更改可在vnode.context上进行,这样,改完之后,改变就会映射到页面
+                this.show = !this.show
+            }
+        }
+    }
 };
 </script>
 
