@@ -29,11 +29,13 @@
         </ul>
       </div>
     </div>
-    <div class="nav nav-tabs bg-dark" id="nav-tab" role="tablist">
+    <div id="nav-tab" class="button-group bg-dark overflow-auto d-inline-flex w-100" role="group">
         <DropdownMenu></DropdownMenu>
-        <router-link class="btn btn-dark" to="/" role="butto">
+        <router-link class="btn btn-dark" to="/" role="button">
           <i class="fas fa-home"></i>
+          <!-- <font> home </font> -->
         </router-link>
+        <!-- <NavTab></NavTab> -->
     </div>
   </header>
 </template>
@@ -43,6 +45,7 @@ import LangSelect from "@/components/base/LangSelect/index.vue";
 import Screenfull from "@/components/base/Screenfull/index.vue";
 import UserCard from '@/components/user/UserCard/index.vue';
 import DropdownMenu from '@/components/system/DropdownMenu/index.vue';
+// import NavTab from '@/components/system/NavTab/index.vue'
 
 export default {
   components: {
@@ -50,7 +53,7 @@ export default {
     Screenfull,
     UserCard,
     DropdownMenu,
+    // NavTab,
   },
-  
 };
 </script>

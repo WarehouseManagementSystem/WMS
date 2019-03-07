@@ -1,7 +1,5 @@
 <template>
-    <div id="Avatar">
-        <img src="@/assets/Avatar.png" width="30" height="30" alt="User Avatar" class="rounded-circle border border-primary">
-    </div>
+    <img src="@/assets/Avatar.png" :width="width" :height="height" alt="User Avatar" class="rounded-circle border border-primary">
 </template>
 
 <script>

@@ -3,6 +3,11 @@
 > 此处记录项目的开发进度  
 > (这会让项目开发变得紧紧有条)
 
+2019-03-07
+
+* view LangSelect 添加 active class
+* view Nav 添加 NavTabs（存在较多问题，会在 DropdownMenu 完成后解决）
+
 2019-03-06
 
 * view blur 事件无响应，已解决

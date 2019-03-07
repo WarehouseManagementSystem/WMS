@@ -8,7 +8,7 @@
         language
       </a>
       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <a class="dropdown-item" href="#" v-for="lang in langs" :key="lang.code" :value="lang.code" v-on:click="lamgChange(lang.code)">{{ lang.name }}</a>
+        <a class="dropdown-item" href="#" v-for="lang in langs" :class="{ active: locale === lang.code }" :key="lang.code" :value="lang.code" @click="lamgChange(lang.code)">{{ lang.name }}</a>
       </div>
     </div>
 </template>
@@ -18,7 +18,7 @@ import config from "@/config/index";
 import { loadLanguageAsync } from "@/lang/index";
 
 export default {
-  name: "locale-changer",
+  name: "LangSelect",
   data() {
     // return { langs: ["zh", "en"] }
     return {
@@ -35,7 +35,7 @@ export default {
   },
   methods: {
     lamgChange: function(code) {
-      this.locale = code,
+      this.locale = code
       loadLanguageAsync(this.locale); // 加载所选择的语言
     }
   }

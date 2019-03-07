@@ -10,22 +10,22 @@
     <path d="M333.590658 594.033341 167.8171 759.804852 64.218604 655.67219 64.218604 958.270996 366.342596 958.502263 262.234493 855.071589 428.421466 688.86108Z"
       p-id="2073"></path>
   </svg> -->
-  <i @click='click' class="screenfull-svg fas fa-compress-arrows-alt" width="32" height="32"></i>
+  <i @click='click' class="screenfull-svg fas fa-compress-arrows-alt" :width="width" :height="height"></i>
 </template>
 
 <script>
 import screenfull from 'screenfull'
 
 export default {
-  name: 'screenfull',
+  name: 'Screenfull',
   props: {
     width: {
       type: Number,
-      default: 22
+      default: 32
     },
     height: {
       type: Number,
-      default: 22
+      default: 32
     },
     fill: {
       type: String,

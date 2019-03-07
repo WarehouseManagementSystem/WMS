@@ -1,8 +1,8 @@
 <template>
-    <div id="dropdownMenu" @blur="showMenu" tabindex="-1">
-        <a id="dropdownMenuButton" class="btn btn-dark" href="#" @click="showMenu">
+    <div id="dropdownMenu" @blur="show = false" tabindex="-1">
+        <a id="dropdownMenuButton" class="btn btn-dark d-block" href="#" role="button" @click="show = !show">
             <i class="fas fa-bars"></i>
-            <font> menu </font>
+            <!-- <font> menu </font> -->
         </a>
         <transition name="fade">
             <dropdownMenuTooltip id="dropdownMenuT" v-show="show"></dropdownMenuTooltip>
@@ -11,33 +11,21 @@
 </template>
 
 <script>
-import dropdownMenuTooltip from '@/components/base/Nav/index.vue'
+import dropdownMenuTooltip from './Nav/index.vue'
 
 export default {
-    name: 'dropdownMenu',
+    name: 'DropdownMenu',
     data () {
         return {
             show: false,
-            blurred: false,
         }
     },
     components: {
         dropdownMenuTooltip,
     },
     methods: {
-        showMenu: function () {
-            this.show = !this.show
-        }
     },
-    directives: {
-        'onblur' (el) {
-            let dropdownMenuT = el.getElementById('dropdownMenuT')
-            dropdownMenuT.onblur = function () {
-                // 如果要对节点的数据进行更改,且更改要映射到页面上,则更改可在vnode.context上进行,这样,改完之后,改变就会映射到页面
-                this.show = !this.show
-            }
-        }
-    }
+    
 };
 </script>
 
