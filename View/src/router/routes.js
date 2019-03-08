@@ -1,15 +1,14 @@
-// 添加子系统
-import system from './Subsystem/system'
+import util from './util'
 
-let routers = [
-    // 主页（默认页面）
-    { path: '/', name: 'home', component: async () => await import(/* webpackChunkName: "Home" */'@/Pages/Home.vue') },
-    // 添加子系统
-    ...system, // 系统
+// System
+import { SystemRouters } from './Subsystem/System'
+import { aRouters } from './Subsystem/a'
+import { bRouters } from './Subsystem/b'
+import { cRouters } from './Subsystem/c'
+
+export default [
+    ...util.Subsystem('System', SystemRouters), // System
+    ...util.Subsystem('a', aRouters), // a
+    ...util.Subsystem('a-b', bRouters), // a-b
+    ...util.Subsystem('c-b', cRouters), // a-b
 ]
-
-// 放在最后
-// 当路由匹配不成功时会自动匹配此路由
-routers.push({ path: '/*', name: '404', component: async () => await import(/* webpackChunkName: "404" */'@/Pages/404.vue') })
-
-export default routers
