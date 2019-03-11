@@ -3,6 +3,16 @@
 > 此处记录项目的开发进度  
 > (这会让项目开发变得紧紧有条)
 
+2018-03-11
+
+* view DropdownMenu 完成部分
+* view 解决 router 问题
+* view 制定 router 规则，以适应 DropdownMenu 的实现
+
+2019-03-08
+
+* view 调整 router 存在问题，待解决(已解决 2018-03-11)
+
 2019-03-07
 
 * view LangSelect 添加 active class
