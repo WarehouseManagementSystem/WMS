@@ -1,19 +1,32 @@
 import util from './util'
 
 // System
-import { SystemRouters } from './Subsystem/System'
-import { aRouters } from './Subsystem/a'
-import { bRouters } from './Subsystem/b'
-import { cRouters } from './Subsystem/c'
+import aRouters from './Subsystem/a'
+import bRouters from './Subsystem/b'
+import cRouters from './Subsystem/c'
+import SystemRouters from './Subsystem/System'
 
-export default [
-    ...util.Subsystem('a', aRouters), // a
-    ...util.Subsystem('b', bRouters), // b
-    ...util.Subsystem('c', cRouters), // c
-    ...util.Subsystem('System', SystemRouters), // System
-
+const Module = [
+    util.FormateModels(aRouters),
+    util.FormateModels(bRouters),
+    util.FormateModels(cRouters),
+    util.FormateModels(SystemRouters),
 ]
 
+const Routers = [
+    ...util.FormatRouters(aRouters), // a
+    ...util.FormatRouters(bRouters), // b
+    ...util.FormatRouters(cRouters), // c
+    ...util.FormatRouters(SystemRouters), // System
+]
+console.log(Module)
+console.log(Routers)
+
+
+export default Routers
+
+export { Module }
+    
 /*\
 |*| 路由规则
 |*| 0. 依赖于 vue router（https://router.vuejs.org/zh/）
