@@ -8,7 +8,7 @@
       {{ model.name }}
       <span v-if="isFolder">[{{ open ? '-' : '+' }}]</span>
     </div>
-    <ul v-if="isFolder" v-show="open">
+    <ul  v-show="open" v-if="isFolder">
       <item
         class="item"
         v-for="(item, index) in model.children"

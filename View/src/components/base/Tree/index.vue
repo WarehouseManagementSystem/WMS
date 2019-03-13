@@ -34,7 +34,7 @@ export default {
                 children: [
                     { name: 'hello' },
                     { name: 'wat' }
-                ]
+                ],
                 },
                 { name: 'hello' },
                 { name: 'wat' },
