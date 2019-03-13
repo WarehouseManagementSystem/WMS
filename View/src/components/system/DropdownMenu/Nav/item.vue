@@ -14,7 +14,6 @@
             <item
                 class="NavItem"
                 v-for="(item, index) in children"
-                v-if="item.base.split('-').length > 0"
                 :key="index"
                 :model="[item]" />
         </ul>
