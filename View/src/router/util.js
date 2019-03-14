@@ -45,7 +45,7 @@ function FormatRouters(routers, SubsystemName = '', array = []) {
     return array
 }
 
-function FormateModels(routers, SubsystemName = '', obj = {}) { 
+function FormatModels(routers, SubsystemName = '', obj = {}) { 
     if (!ExcludeRouters(routers)) return []
 
     SubsystemName = SubsystemName
@@ -54,7 +54,7 @@ function FormateModels(routers, SubsystemName = '', obj = {}) {
     let items = []
     for (let item of routers.Modules) {
         if (ExcludeRouters(item)) {
-            FormateModels(item, SubsystemName, obj)
+            FormatModels(item, SubsystemName, obj)
         } else {
             if (!ExcludePath(item) || (item && item.unDisplay)) continue
             item.path = '/' + SubsystemName + '-' + item.path
@@ -82,5 +82,5 @@ export default {
     //     return array
     // }
     FormatRouters,
-    FormateModels,
+    FormatModels,
 }

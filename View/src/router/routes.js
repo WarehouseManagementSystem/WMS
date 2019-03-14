@@ -6,11 +6,12 @@ import bRouters from './Subsystem/b'
 import cRouters from './Subsystem/c'
 import SystemRouters from './Subsystem/System'
 
-const Module = [
-    util.FormateModels(aRouters),
-    util.FormateModels(bRouters),
-    util.FormateModels(cRouters),
-    util.FormateModels(SystemRouters),
+const Modules = [
+    cRouters,
+    aRouters,
+    bRouters,
+    
+    SystemRouters,
 ]
 
 const Routers = [
@@ -19,13 +20,13 @@ const Routers = [
     ...util.FormatRouters(cRouters), // c
     ...util.FormatRouters(SystemRouters), // System
 ]
-console.log(Module)
-console.log(Routers)
+// console.log(Module)
+// console.log(Routers)
 
 
 export default Routers
 
-export { Module }
+export { Modules }
     
 /*\
 |*| 路由规则

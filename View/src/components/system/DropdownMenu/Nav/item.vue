@@ -1,22 +1,32 @@
 <template>
     <!-- Nav Item template -->
     <li>
-       <!-- 建议不多于十八个汉子，超出部分会被隐藏 -->
-        <router-link class="list-group-item bg-light text-dark text-decoration-none" :to="path">
-            <font class="text-truncate w-75 d-inline-block" @click="open = !open">{{ name }}</font>
-            <i class="fas fa-chevron-down w-25 text-right" v-if="isFolder"></i>
-        </router-link>
-        <ul  v-show="open" v-if="isFolder">
-             <!-- <router-link class="list-group-item bg-light text-dark text-decoration-none" to="/System-About">
-                <font class="text-truncate w-75 d-inline-block">{{ $t("nav.About") }}</font>
-                <i class="fas fa-chevron-down w-25 text-right"></i>
-            </router-link> -->
-            <item
-                class="NavItem"
-                v-for="(item, index) in children"
-                :key="index"
-                :model="[item]" />
-        </ul>
+        <template v-for="(item, index) in model">
+            <!-- 建议不多于十八个汉子，超出部分会被隐藏 -->
+            <router-link class="list-group-item bg-light text-dark text-decoration-none" :key="index" v-if="!item.Modules" :to="item.path">
+                <font class="text-truncate w-100 d-inline-block">{{ item.name }}</font>
+            </router-link>
+            <template v-else>
+                <div :key="index" @click="toggle">
+                    <router-link class="list-group-item bg-light text-dark text-decoration-none" to="">
+                        <font class="text-truncate w-75 d-inline-block">{{ item.SubsystemName }}</font>
+                        <i class="fas fa-chevron-down w-25 text-right" v-if="!open"></i>
+                        <i class="fas fa-chevron-up w-25 text-right" v-else></i>
+                    </router-link>
+                </div>
+                <ul v-show="open" :key="index">
+                    <!-- <router-link class="list-group-item bg-light text-dark text-decoration-none" to="/System-About">
+                        <font class="text-truncate w-75 d-inline-block">{{ $t("nav.About") }}</font>
+                        <i class="fas fa-chevron-down w-25 text-right"></i>
+                    </router-link> -->
+                    <item
+                        class="NavItem"
+                        v-for="(Module, key) in item.Modules"
+                        :key="key"
+                        :model="[Module]" />
+                </ul>
+            </template>
+        </template>
     </li>
 </template>
 
@@ -28,49 +38,24 @@ export default {
     },
     data () {
         return {
-            path: '',
-            name: '',
-            isFolder: false,
             open: false,
-            children: [],
-            //Modules: [],
         }
     },
     props: {
       model: Array
     },
-    created() {
-        this.Modules()
-    },
     methods: {
-        Modules: function () {
-            this.children = []
-            for (const item of this.model) {
-                if (item.base.split('-').length > 0) {
-                    this.path = ''
-                    this.isFolder = true
-                    item.base = item.base.substring(item.base.split('-')[0].length + 1)
-                    this.name = item.base.split('-')[0]
-                    this.children.push(item)
-                } else {
-                    this.path = item.path
-                    this.isFolder = false
-                    this.name = item.name
-                }
-            }
-            return this.children
-        },
-        // FormatModules: function () {
-        //     for (const item of this.model) {
-        //         if (item.base.split('-').length > 0) {
-
-        //         }
-        //     }
-        // },
+        toggle: function () {
+            this.open = !this.open
+        }
     },
     watch: {
-        model: function () {
-            this.Modules()
+        model: function (newValue, oldValue) {
+            if (newValue === oldValue) {
+                this.model = newValue
+                this.open = false
+            }
+
         }
     }
 }
