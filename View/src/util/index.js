@@ -1,5 +1,6 @@
 import docCookies from './storage/cookies'
 import serviceWorker from './serviceWorker/serviceWorker'
+import { clone } from './global'
 import './bootstrap/index'
 
 export default {
@@ -8,4 +9,7 @@ export default {
         cookies: docCookies,
     },
     serviceWorker: serviceWorker,
+    global: {
+        clone,
+    },
 }

@@ -7,21 +7,21 @@ import cRouters from './Subsystem/c'
 import SystemRouters from './Subsystem/System'
 
 const Modules = [
-    cRouters,
-    aRouters,
-    bRouters,
-    
-    SystemRouters,
+    util.GetModels(cRouters),
+    util.GetModels(aRouters),
+    util.GetModels(bRouters),
+    util.GetModels(SystemRouters),
 ]
 
 const Routers = [
-    ...util.FormatRouters(aRouters), // a
-    ...util.FormatRouters(bRouters), // b
-    ...util.FormatRouters(cRouters), // c
-    ...util.FormatRouters(SystemRouters), // System
+    ...util.GetRouters(aRouters),               // a
+    ...util.GetRouters(bRouters),               // b
+    ...util.GetRouters(cRouters),               // c
+    ...util.GetRouters(SystemRouters),          // System
 ]
-// console.log(Module)
-// console.log(Routers)
+
+console.log(Modules)
+console.log(Routers)
 
 
 export default Routers

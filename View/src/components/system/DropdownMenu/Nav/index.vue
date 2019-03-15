@@ -46,19 +46,19 @@ export default {
     },
     InitRouters: async function () {
         this.Routers = []
-        let routers
         await import('@/router/routes').then((conf) => {
-          routers = conf.Modules
+          this.Routers = conf.Modules
         })
-        if (!routers) {
+        if (!this.Routers) {
           console.warn('[System Error] routers is not an array')
         }
-        this.Routers = routers//await this.FormatRouters(routers)
     },
     InitSubsystem: function () {
       this.Subsystem = []
       for (const item of this.Routers) {
-        this.Subsystem.push(item.SubsystemName)
+        if (item.SubsystemName) {
+          this.Subsystem.push(item.SubsystemName)
+        }
       }
     },
     InitModules: function (SubsystemName) {
@@ -68,24 +68,6 @@ export default {
         this.Modules = [...this.Modules, ...item.Modules]
         break
       }
-    },
-    FormatRouters: function (routers, array = []) {
-      if (routers) {
-        for (const item of routers) {
-          if (!item.unDisplay) {
-            if (item.Modules && item.Modules.length == 0) {
-              routers.pop(item)
-            }
-          }
-          if (item.Modules && item.Modules.length == 0) {
-            routers.pop(item.Modules)
-            continue
-          } else {
-            this.FormatRouters(item.Modules, array)
-          }
-        }
-      }
-      return routers
     },
   },
 }
