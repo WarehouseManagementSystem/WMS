@@ -3,6 +3,12 @@
 > 此处记录项目的开发进度  
 > (这会让项目开发变得紧紧有条)
 
+2019-03-16
+
+* view DropdownMenuNav 完成
+* view bug DropdownMenuNav 在 Chrome 浏览器下 blur 事件不响应（safari 没问题，其他浏览器为测试）
+（没想到 DropdownMenuNav 会花这么长时间，问题还是比较多的，但好在都解决了）
+
 2018-03-11
 
 * view DropdownMenu 完成部分
@@ -11,7 +17,7 @@
 
 2019-03-08
 
-* view 调整 router 存在问题，待解决(已解决 2018-03-11)
+* view bug 调整 router 存在问题，待解决(已解决 2018-03-11)
 
 2019-03-07
 
@@ -32,7 +38,7 @@
 2019-03-04
 
 * view 加入动画过度效果
-* view 确定菜单样式，之前采用 bootstrap 的 Popovers 存在较多问题，已放弃，目前使用列表进行控制，但 blur 事件无响应，暂未解决（已解决 2019-03-06）
+* view bug 确定菜单样式，之前采用 bootstrap 的 Popovers 存在较多问题，已放弃，目前使用列表进行控制，但 blur 事件无响应，暂未解决（已解决 2019-03-06）
 
 2019-02-28
 

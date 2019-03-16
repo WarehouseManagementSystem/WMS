@@ -11,9 +11,10 @@
             </div>
           </ul>
           <ul class="list-group col-8 d-inline-block overflow-auto bg-light border border-dark rounded-lg h-100 p-0">
-            <NavItem
+            <NavItem v-for="(item, index) in Modules" 
+                :key="index" 
                 class="NavItem"
-                :model="Modules" >
+                :model="item" >
             </NavItem>
           </ul>
         </div>
@@ -29,6 +30,7 @@ export default {
       Routers: [],
       Subsystem: [],
       Modules: [],
+      SubsystemName: '',
     }
   },
   components: {
@@ -66,6 +68,7 @@ export default {
       for (const item of this.Routers) {
         if (item.SubsystemName !== SubsystemName) continue
         this.Modules = [...this.Modules, ...item.Modules]
+        this.SubsystemName = SubsystemName
         break
       }
     },

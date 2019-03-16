@@ -30,12 +30,12 @@
       </div>
     </div>
     <div id="nav-tab" class="button-group bg-dark overflow-auto d-inline-flex w-100" role="group">
-        <DropdownMenu></DropdownMenu>
-        <router-link class="btn btn-dark" to="/" role="button">
-          <i class="fas fa-home"></i>
-          <!-- <font> home </font> -->
-        </router-link>
-        <!-- <NavTab></NavTab> -->
+      <DropdownMenu></DropdownMenu>
+      <router-link class="btn btn-dark" to="/" role="button">
+        <i class="fas fa-home"></i>
+        <!-- <font> home </font> -->
+      </router-link>
+      <!-- <NavTab></NavTab> -->
     </div>
   </header>
 </template>

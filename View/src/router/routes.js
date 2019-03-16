@@ -20,10 +20,6 @@ const Routers = [
     ...util.GetRouters(SystemRouters),          // System
 ]
 
-console.log(Modules)
-console.log(Routers)
-
-
 export default Routers
 
 export { Modules }

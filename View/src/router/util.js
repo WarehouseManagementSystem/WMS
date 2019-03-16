@@ -67,7 +67,6 @@ function FormatModels(routers, SubsystemName = '') {
                     i--
                 } else if (IsRouters(item) && !(item.unDisplay || item.Modules.length == 0)) {
                     item = FormatModels(item, SubsystemName)
-                    debugger
                     if (!IsRouters(item)) {
                         // 子模块 均为 unDisplay: true,
                         routers.Modules.splice(i, 1)
