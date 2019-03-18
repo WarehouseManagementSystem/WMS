@@ -43,8 +43,10 @@ export default {
     init: async function () {
       await this.InitRouters()
       await this.InitSubsystem()
-      if (this.Subsystem.length > 0)
+      if (this.Subsystem.length > 0) {
+        // 默认显示第一个
         await this.InitModules(this.Subsystem[0])
+      }
     },
     InitRouters: async function () {
         this.Routers = []

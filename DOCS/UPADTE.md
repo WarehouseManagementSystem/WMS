@@ -3,10 +3,14 @@
 > 此处记录项目的开发进度  
 > (这会让项目开发变得紧紧有条)
 
+2019-03-18
+
+* view NavTab 完成 80%
+
 2019-03-16
 
 * view DropdownMenuNav 完成
-* view bug DropdownMenuNav 在 Chrome 浏览器下 blur 事件不响应（safari 没问题，其他浏览器为测试）
+* view bug DropdownMenuNav 在 Chrome 浏览器下 blur 事件不响应（safari 没问题，其他浏览器为测试）(暂缓)
 （没想到 DropdownMenuNav 会花这么长时间，问题还是比较多的，但好在都解决了）
 
 2018-03-11
@@ -22,7 +26,7 @@
 2019-03-07
 
 * view LangSelect 添加 active class
-* view Nav 添加 NavTabs（存在较多问题，会在 DropdownMenu 完成后解决）
+* view bug Nav 添加 NavTabs（存在较多问题，会在 DropdownMenu 完成后解决）(已解决 2019-03-18)
 
 2019-03-06
 

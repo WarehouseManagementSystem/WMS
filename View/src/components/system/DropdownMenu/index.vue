@@ -1,11 +1,11 @@
 <template>
-    <div id="dropdownMenu" @blur="show = false" tabindex="-1">
-        <a id="dropdownMenuButton" class="btn btn-dark d-block" href="#" role="button" @click="show = !show">
+    <div id="dropdownMenu" @blur="show = false" :model="show" tabindex="0">
+        <a id="dropdownMenuButton" class="btn btn-dark d-inline-block" href="#" role="button" @click="show = !show">
             <i class="fas fa-bars"></i>
-            <!-- <font> menu </font> -->
+            <font> menu </font>
         </a>
         <transition name="fade">
-            <dropdownMenuTooltip id="dropdownMenuT" v-show="show"></dropdownMenuTooltip>
+            <dropdownMenuTooltip id="dropdownMenuTooltip" v-show="show"></dropdownMenuTooltip>
         </transition>
     </div>
 </template>

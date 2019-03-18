@@ -37,7 +37,6 @@ export default {
       model: Array
     },
     created() {
-                    debugger
         this.open = false
     },
     methods: {
@@ -51,7 +50,6 @@ export default {
                 this.model = newValue
                 this.open = false
             }
-
         }
     }
 }
