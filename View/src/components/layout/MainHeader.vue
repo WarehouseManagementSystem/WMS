@@ -31,9 +31,9 @@
     </div>
     <div id="nav-tab" class="bg-dark d-flex w-100">
       <DropdownMenu></DropdownMenu>
-      <router-link class="btn btn-dark d-inline-block" to="/" role="button">
-        <i class="fas fa-home"></i>
-        <font> home </font>
+      <router-link class="btn btn-dark d-inline-flex" to="/" role="button">
+        <i class="fas fa-home align-self-center"></i>
+        <font class="align-self-center"> home </font>
       </router-link>
       <NavTabs class="d-inline-flex overflow-auto"></NavTabs>
     </div>
