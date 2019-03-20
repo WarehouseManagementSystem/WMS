@@ -1,36 +1,43 @@
 <template>
     <div>
         <div v-for="(item, index) in Paths" :key="index" class="d-inline-flex overflow-auto">
-            <router-link class="btn btn-dark text-truncate d-inline-block" style="min-width:5rem;" :to="item.path" role="button" >
-                <font class="px-1 align-self-center">{{ item.name }}</font>
+            <router-link class="btn btn-dark text-truncate d-inline-block" style="min-width:5rem;" :to="item.pathInfo.path" role="button" >
+                <font class="px-1 align-self-center">{{ item.pathInfo.path }}</font>
             </router-link>
-            <i class="fas fa-times-circle text-secondary align-self-center" @click.stop="CloseTab(item.path)"></i>
+            <i class="fas fa-times-circle text-secondary align-self-center" @click.stop="CloseTab(item)"></i>
         </div>
     </div>
 </template>
 
 <script>
+import util from '@/util/index'
+import router from '@/router/index'
+
 export default {
     name: 'NavTabs',
     data () {
         return {
-            Paths: paths,
+            Paths: pathList,
         }
     },
     methods: {
-        CloseTab: function (url) {
-            this.removePath(url)
+        CloseTab: function (willClose) {
+            debugger
+            this.removePath(willClose.pathInfo.path)
             // 如果关闭的标签是刚刚跳转的地址，则路由回退到上一个跳转的低着
-            if (this.$route.path == url) {
-                 window.history.length > 1
-                    ? this.$router.go(-1)
-                    : this.$router.push('/')
+            if (this.$route.path == willClose.pathInfo.path) {
+                if (pathList.length > 0) {
+                    let arr = util.global.clone(pathList, false)
+                    this.$router.push(arr.sort((a, b) => a.index - b.index)[arr.length - 1].pathInfo.path)
+                } else {
+                    this.$router.push('/')
+                }
             }
         },
         removePath: function (url) {
-            for (let n = 0; n < paths.length; n++) {
-                if (paths[n].path == url) {
-                    paths.splice(n, 1)
+            for (let n = 0; n < pathList.length; n++) {
+                if (pathList[n].pathInfo.path == url) {
+                    pathList.splice(n, 1)
                     break
                 }
             }
@@ -38,21 +45,19 @@ export default {
     }
 }
 
-import router from '@/router/index'
-
-let paths = []
+let pathList = [], maxHistory = 0
 router.afterEach((to, from) => {
-                           debugger
     if (to && to.path != '/' && to != from) {
         let flag = false
-        for (const item of paths) {
-            if (item.path == to.path) { 
+        for (const item of pathList) {
+            if (item.pathInfo.path == to.path) { 
+                item.index = ++maxHistory
                 flag = true
                 break
             }
         }
         if (!flag) {
-            paths.push(to)
+            pathList.push({ pathInfo: to, index: ++maxHistory} )
         }
     }
 })
