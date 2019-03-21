@@ -1,8 +1,8 @@
 <template>
     <div>
-        <div v-for="(item, index) in Paths" :key="index" class="d-inline-flex overflow-auto">
-            <router-link class="btn btn-dark text-truncate d-inline-block" style="min-width:5rem;" :to="item.pathInfo.path" role="button" >
-                <font class="px-1 align-self-center">{{ item.pathInfo.path }}</font>
+        <div v-for="item in Paths" :key="item.index" class="d-inline-flex overflow-auto"> <!-- border border-top-0 border-left-0 border-right-0 border-danger -->
+            <router-link class="btn btn-dark text-truncate d-inline-block" :class="[ $route.path === item.pathInfo.path ? active : '' ]" style="min-width:5rem;" :to="item.pathInfo.path" role="button" >
+                <font class="px-1 align-self-center">{{ item.pathInfo.name }}</font>
             </router-link>
             <i class="fas fa-times-circle text-secondary align-self-center" @click.stop="CloseTab(item)"></i>
         </div>
@@ -18,11 +18,14 @@ export default {
     data () {
         return {
             Paths: pathList,
+            active: 'text-primary',
         }
+    },
+    mounted() {
+        // 使用 sessionStorage 保持用户打开的页面数据，防止刷新时丢失，在会话结束时销毁（暂缓）
     },
     methods: {
         CloseTab: function (willClose) {
-            debugger
             this.removePath(willClose.pathInfo.path)
             // 如果关闭的标签是刚刚跳转的地址，则路由回退到上一个跳转的低着
             if (this.$route.path == willClose.pathInfo.path) {
@@ -41,7 +44,7 @@ export default {
                     break
                 }
             }
-        }
+        },
     }
 }
 
@@ -63,3 +66,7 @@ router.afterEach((to, from) => {
 })
 
 </script>
+
+<style langg="scss">
+   
+</style>
