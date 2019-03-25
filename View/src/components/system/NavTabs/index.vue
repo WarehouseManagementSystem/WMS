@@ -1,52 +1,19 @@
 <template>
     <div>
-        <div v-for="item in Paths" :key="item.index" class="d-inline-flex overflow-auto"> <!-- border border-top-0 border-left-0 border-right-0 border-danger -->
-            <router-link class="btn btn-dark text-truncate d-inline-block" :class="[ $route.path === item.pathInfo.path ? active : '' ]" style="min-width:5rem;" :to="item.pathInfo.path" role="button" >
-                <font class="px-1 align-self-center">{{ item.pathInfo.name }}</font>
-            </router-link>
-            <i class="fas fa-times-circle text-secondary align-self-center" @click.stop="CloseTab(item)"></i>
+        <div v-for="item in Paths" :key="item.index" class="d-inline-flex overflow-auto">
+            <div class="btn btn-dark text-truncate d-inline-block px-1" v-if="item.pathInfo.name && item.pathInfo.path" role="button">
+                <i class="fas fa-times-circle text-secondary align-self-center px-1" @click.stop="CloseTab(item)"></i>
+                <router-link class="text-truncate text-decoration-none text-center d-inline-flex" style="min-width: 3rem;" :class="[ $route.path == item.pathInfo.path ? 'text-primary' : 'text-light' ]" :to="item.pathInfo.path" >
+                    <font class="px-1 align-self-center px-1">{{ item.pathInfo.name }}</font>
+                </router-link>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
-import util from '@/util/index'
 import router from '@/router/index'
-
-export default {
-    name: 'NavTabs',
-    data () {
-        return {
-            Paths: pathList,
-            active: 'text-primary',
-        }
-    },
-    mounted() {
-        // 使用 sessionStorage 保持用户打开的页面数据，防止刷新时丢失，在会话结束时销毁（暂缓）
-    },
-    methods: {
-        CloseTab: function (willClose) {
-            this.removePath(willClose.pathInfo.path)
-            // 如果关闭的标签是刚刚跳转的地址，则路由回退到上一个跳转的低着
-            if (this.$route.path == willClose.pathInfo.path) {
-                if (pathList.length > 0) {
-                    let arr = util.global.clone(pathList, false)
-                    this.$router.push(arr.sort((a, b) => a.index - b.index)[arr.length - 1].pathInfo.path)
-                } else {
-                    this.$router.push('/')
-                }
-            }
-        },
-        removePath: function (url) {
-            for (let n = 0; n < pathList.length; n++) {
-                if (pathList[n].pathInfo.path == url) {
-                    pathList.splice(n, 1)
-                    break
-                }
-            }
-        },
-    }
-}
+import util from '@/util/index.js'
 
 let pathList = [], maxHistory = 0
 router.afterEach((to, from) => {
@@ -65,8 +32,42 @@ router.afterEach((to, from) => {
     }
 })
 
+export default {
+    name: 'NavTabs',
+    data () {
+        return {
+            Paths: pathList,
+        }
+    },
+    created () {
+        // 使用 sessionStorage 保持用户打开的页面数据，防止刷新时丢失，在会话结束时销毁（暂缓）
+        pathList.push(...util.JSON.parse(sessionStorage.getItem('System_NavTabs_PathList')) || [])
+    },
+    beforeUpdate () {
+        sessionStorage.setItem('System_NavTabs_PathList', util.JSON.stringify(pathList))
+    },
+    methods: {
+        CloseTab: function (willClose) {
+            this.removePath(willClose.pathInfo.path)
+            // 如果关闭的标签是刚刚跳转的地址，则路由回退到上一个跳转的低着
+            if (this.$route.path == willClose.pathInfo.path) {
+                if (pathList.length > 0) {
+                    let arr = pathList.slice(0)
+                    // 将地址数组按点击的先后顺序进行反向排序（a.index - b.index 越迟被点击的差值越大，就会排的越靠后），取最后一个进行跳转
+                    this.$router.push(arr.sort((a, b) => a.index - b.index)[arr.length - 1].pathInfo.path)
+                } else {
+                    this.$router.push('/')
+                }
+            }
+        },
+        removePath: function (url) {
+            for (let n = 0; n < pathList.length; n++) {
+                if (pathList[n].pathInfo.path == url) {
+                    pathList.splice(n, 1)
+                    break
+                }
+            }
+        },
+    },
+}
 </script>
-
-<style langg="scss">
-   
-</style>

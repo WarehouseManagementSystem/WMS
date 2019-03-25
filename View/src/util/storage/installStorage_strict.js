@@ -1,11 +1,11 @@
-// set localStorage（本项目中会使用此版本 localStorage 实现）
+// set localStorage（本项目中会使用此版本 Storage 实现）
 // 
-// 解决浏览器兼容问题严谨实现 localStorage
+// 解决浏览器兼容问题严谨实现 localStorage 和 sessionStorage
 // 
 // https://developer.mozilla.org/zh-CN/docs/Web/API/Storage/localStorage
 
-if (!window.localStorage) {
-    Object.defineProperty(window, "localStorage", new (function () {
+function installStorage(Storage, expires = '') {
+    Object.defineProperty(window, Storage, new (function () {
         var aKeys = [], oStorage = {};
         Object.defineProperty(oStorage, "getItem", {
             value: function (sKey) { return sKey ? this[sKey] : null; },
@@ -22,7 +22,7 @@ if (!window.localStorage) {
         Object.defineProperty(oStorage, "setItem", {
             value: function (sKey, sValue) {
                 if (!sKey) { return; }
-                document.cookie = escape(sKey) + "=" + escape(sValue) + "; expires=Tue, 19 Jan 2038 03:14:07 GMT; path=/";
+                document.cookie = escape(sKey) + "=" + escape(sValue) + expires + "; path=/";
             },
             writable: false,
             configurable: false,
@@ -36,7 +36,7 @@ if (!window.localStorage) {
         Object.defineProperty(oStorage, "removeItem", {
             value: function (sKey) {
                 if (!sKey) { return; }
-                document.cookie = escape(sKey) + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
+                document.cookie = escape(sKey) + "=" + expires + "; path=/";
             },
             writable: false,
             configurable: false,
@@ -64,3 +64,18 @@ if (!window.localStorage) {
         this.enumerable = true;
     })());
 }
+
+export default {
+    installLocalStorage: function() {
+        if (!window.localStorage) {
+            installStorage('localStorage', '; expires=Tue, 19 Jan 2038 03:14:07 GMT')
+        }
+    },
+
+    installSessionStorage: function() {
+        if (!window.sessionStorage) {
+            installStorage('sessionStorage')
+        }
+    }
+}
+

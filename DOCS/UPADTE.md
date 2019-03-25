@@ -3,6 +3,14 @@
 > 此处记录项目的开发进度  
 > (这会让项目开发变得紧紧有条)
 
+2019-03-25
+
+* view 引入 [circular-json](https://github.com/WebReflection/circular-json) 解决 js 中
+    * JSON.stringify() 中的循环引用对象解析报错，
+    * JSON.parse() 浏览器兼容性（行为不一）
+* view 修改 localStorage(可用)、sessionStorage(可用)
+* view NavTabs 添加 sessionStorage，优化用户体验：解决刷新页面时其他页面打开状态丢失的问题
+
 2019-03-21
 
 * view NavTabs 完成 100%
@@ -79,7 +87,7 @@
 
 2019-02-19
 
-* view 添加 cookie、localStorage、sessionStorage、Service Worker 的通用方法（未测试可用性）
+* view 添加 cookie、localStorage(可用)、sessionStorage(可用)、Service Worker 的通用方法（未测试可用性）
 
 2019-02-18
 

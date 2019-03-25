@@ -1,8 +1,8 @@
 <template>
     <div id="dropdownMenu" @blur="show = false" :model="show" tabindex="0">
         <a id="dropdownMenuButton" class="btn btn-dark d-inline-flex" href="#" role="button" @click="show = !show">
-            <i class="fas fa-bars align-self-center"></i>
-            <font class="align-self-center"> menu </font>
+            <i class="fas fa-bars align-self-center px-1"></i>
+            <font class="align-self-center px-1"> menu </font>
         </a>
         <transition name="fade">
             <dropdownMenuTooltip id="dropdownMenuTooltip" v-show="show"></dropdownMenuTooltip>
