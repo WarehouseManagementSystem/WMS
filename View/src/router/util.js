@@ -102,6 +102,8 @@ function GetModels(models) {
 }
 
 export default {
+    IsRouters,
+    IsPath,
     GetRouters,
     GetModels,
 }
