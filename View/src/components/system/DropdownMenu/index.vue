@@ -1,5 +1,5 @@
 <template>
-    <div id="dropdownMenu" @blur="show = false" :model="show" tabindex="0">
+    <div id="dropdownMenu" @blur="show = false" tabindex="0" contenteditable :model="show">
         <a id="dropdownMenuButton" class="btn btn-dark d-inline-flex" href="#" role="button" @click="show = !show">
             <i class="fas fa-bars align-self-center px-1"></i>
             <font class="align-self-center px-1"> menu </font>
@@ -23,10 +23,23 @@ export default {
     components: {
         dropdownMenuTooltip,
     },
-    methods: {
+     methods: {
+        bindHideEvents: function () {
+            document.addEventListener('blur', this.dropdownMenuTooltipHiden)
+        },
+        removeEventListener: function () {
+            document.removeEventListener('blur', this.dropdownMenuTooltipHiden)
+        },
+        dropdownMenuTooltipHiden: function () {
+            this.show = false
+        }
     },
-    
-};
+    watch: {
+        show: function (newValue) {
+            newValue ? this.bindHideEvents() : this.removeEventListener()
+        },
+    },
+}
 </script>
 
 <style lang="scss">

@@ -1,5 +1,5 @@
 <template>
-  <main id="content" class="rounded border py-2 px-3">
+  <main id="content" class="rounded border position-sticky p-1 mx-1 mt-1 mb-1" >
     <!-- 路由出口 -->
     <!-- 路由匹配到的组件将渲染在这里 -->
     <transition name="component-fade" mode="out-in">

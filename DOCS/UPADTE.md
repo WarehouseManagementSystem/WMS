@@ -3,6 +3,10 @@
 > 此处记录项目的开发进度  
 > (这会让项目开发变得紧紧有条)
 
+2019-03-27
+
+* 解决 bug DropdownMenuNav 在 Chrome 浏览器下 blur 事件不响应
+
 2019-03-26
 
 * view NavTabs 添加右键菜单，优化使用体验
@@ -27,7 +31,7 @@
 2019-03-16
 
 * view DropdownMenuNav 完成
-* view bug DropdownMenuNav 在 Chrome 浏览器下 blur 事件不响应（safari 没问题，其他浏览器为测试）(暂缓)
+* view bug DropdownMenuNav 在 Chrome 浏览器下 blur 事件不响应（safari 没问题，其他浏览器为测试）(暂缓)(已解决 2019-03-27)
 （没想到 DropdownMenuNav 会花这么长时间，问题还是比较多的，但好在都解决了）
 
 2018-03-11

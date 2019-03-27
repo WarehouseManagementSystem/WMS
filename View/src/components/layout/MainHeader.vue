@@ -33,7 +33,7 @@
       <DropdownMenu></DropdownMenu>
       <router-link class="btn btn-dark d-inline-flex" to="/" role="button">
         <i class="fas fa-home align-self-center px-1"></i>
-        <font class="align-self-center px-1"> home </font>
+        <font class="align-self-center px-1">home</font>
       </router-link>
       <NavTabs class="d-inline-flex overflow-auto"></NavTabs>
     </div>

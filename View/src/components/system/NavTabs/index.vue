@@ -3,7 +3,8 @@
         <div v-for="(item, index) in Paths" :key="index" class="d-inline-flex overflow-auto">
             <div class="btn btn-dark text-truncate d-inline-block px-1" role="button"
                 v-if="item.pathInfo.name && item.pathInfo.path" 
-                @click.right="mouseRightClick(event, item)" >
+                @click.right="mouseRightClick(event, item)" 
+                @dblclick="$router.replace(item.pathInfo)">
                 <i class="fas fa-times-circle text-secondary align-self-center px-1" @click.stop="closeTab(item, 'closeIco')"></i>
                 <router-link class="text-truncate text-decoration-none text-center d-inline-flex" style="min-width: 3rem;" :class="[ $route.path == item.pathInfo.path ? 'text-primary' : 'text-light' ]" :to="item.pathInfo.path" >
                     <font class="px-1 align-self-center px-1">{{ item.pathInfo.name }}</font>
@@ -13,13 +14,13 @@
         <!-- 右键菜单 -->
         <ul class="list-group p-1" v-show="isShow" style="position: absolute; z-index: 1050" :style="{ 'top': top, 'left': left }">
             <li class="list-group-item list-group-item-action btn btn-light p-1" role="button" @mousedown="closeTab(RightClickItem, 'rigthClick')">
-                <a class="text-truncate text-decoration-none text-center d-inline-block" href="#">Close</a>
+                <a class="text-truncate text-decoration-none text-center text-muted d-inline-block" href="#">Close</a>
             </li>
             <li class="list-group-item list-group-item-action btn btn-light p-1" role="button" @mousedown="closeOthers(RightClickItem)">
-                <a class="text-truncate text-decoration-none text-center d-inline-block" href="#">Close Others</a>
+                <a class="text-truncate text-decoration-none text-center text-muted d-inline-block" href="#">Close Others</a>
             </li>
             <li class="list-group-item list-group-item-action btn btn-light p-1" role="button" @mousedown="closeAll">
-                <a class="text-truncate text-decoration-none text-center d-inline-block" href="#">Closs All</a>
+                <a class="text-truncate text-decoration-none text-center text-muted d-inline-block" href="#">Closs All</a>
             </li>
         </ul>
     </div>
@@ -40,6 +41,7 @@ router.afterEach((to, from) => {
                 break
             }
         }
+        debugger
         if (!flag)  pathList.push({ pathInfo: to, index: ++maxHistory} )
     }
 })
@@ -73,6 +75,7 @@ export default {
         },
         // 关闭标签
         closeTab: function (willClose, type = '') {
+            debugger
             if (!(willClose && willClose.pathInfo)) return
             // 通过右键菜单调用
             if (type == 'rigthClick') this.rightContextHiden()
@@ -85,12 +88,12 @@ export default {
             } else {
                 let arr = pathList.slice(0)
                 // 将地址数组按点击的先后顺序进行反向排序（a.index - b.index 越迟被点击的差值越大，就会排的越靠后），取最后一个进行跳转
-                this.$router.push(arr.sort((a, b) => a.index - b.index)[arr.length - 1].pathInfo.path)
+                let item = Object.assign({}, arr.sort((a, b) => a.index - b.index)[arr.length - 1].pathInfo)
+                this.$router.push(item.path)
             }
         },
         // 关闭其他
         closeOthers: function (item) {
-            debugger
             if (!(item && item.pathInfo)) return
             // 清空数组（pathList = [] vue 无法追踪变化）
             maxHistory = 0
@@ -134,12 +137,12 @@ export default {
             this.RightClickItem = null
             // 启用右键菜单
             document.oncontextmenu = new Function("return true;")
-        }
+        },
     },
     watch: {
         isShow: function (newValue) {
-            newValue ? this.bindHideEvents() : this.removeEventListener()
-        }
-    }
+            newValue ? this.bindHideEvents() : this.unbindHideEvents()
+        },
+    },
 }
 </script>
