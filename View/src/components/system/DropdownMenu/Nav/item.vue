@@ -3,10 +3,10 @@
     <!-- 建议不多于十八个汉子，超出部分会被隐藏 -->
     <li class="list-group-item bg-light p-0 border-0">
         <div @click="toggle">
-            <router-link class="list-group-item bg-light border-top-0 text-dark text-decoration-none" v-if="!model.Modules" :to="model.path">
+            <router-link class="list-group-item bg-light border-top-0 text-dark text-decoration-none" style="cursor: default;" v-if="!model.Modules" :to="model.path">
                 <font class="text-truncate w-100 d-inline-block">{{ model.name }}</font>
             </router-link>
-            <router-link class="list-group-item bg-light border-top-0 text-dark text-decoration-none" to="" v-else>
+            <router-link class="list-group-item bg-light border-top-0 text-dark text-decoration-none" style="cursor: default;" to="" v-else>
                 <font class="text-truncate w-75 d-inline-block">{{ model.SubsystemName }}</font>
                 <i class="fas fa-chevron-down w-25 text-right" v-if="!open"></i>
                 <i class="fas fa-chevron-up w-25 text-right" v-else></i>
@@ -34,7 +34,7 @@ export default {
         }
     },
     props: {
-      model: Array
+      model: Object
     },
     created() {
         this.open = false

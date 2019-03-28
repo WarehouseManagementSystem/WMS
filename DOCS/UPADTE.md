@@ -3,6 +3,11 @@
 > 此处记录项目的开发进度  
 > (这会让项目开发变得紧紧有条)
 
+2019-03-28
+
+* 解决 bug NavTabs prop 接受类型错误，已修正
+* 解决 MaintContent 布局问题
+
 2019-03-27
 
 * 解决 bug DropdownMenuNav 在 Chrome 浏览器下 blur 事件不响应

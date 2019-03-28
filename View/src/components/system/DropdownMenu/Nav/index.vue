@@ -1,10 +1,10 @@
 <template>
-    <nav id="nav" class="position-absolute container bg-light border border-dark rounded-lg shadow-lg w-50 h-75 m-1" style="z-index:1000;">
+    <nav id="nav" class="position-absolute container bg-light border border-dark rounded-lg shadow-lg w-50 h-75 m-1" style="min-width: 425px; max-width: 720px; z-index:1000;">
       <div class="row overflow-auto border rounded-lg h-100 p-1">
           <ul class="list-group col-4 d-inline-block overflow-auto bg-dark border border-dark rounded-lg h-100 p-0">
             <!-- 建议不多于七个汉子，超出部分会被隐藏 -->
             <div v-for="(item, index) in Subsystem" :key="index" @click="InitModules(item)">
-              <router-link class="list-group-item bg-dark text-white text-decoration-none" to="">
+              <router-link class="list-group-item bg-dark text-white text-decoration-none" style="cursor: default;" to="">
                 <font class="text-truncate w-75 d-inline-block">{{ item }}</font>
                 <i class="fas fa-caret-right w-25 text-right"></i>
               </router-link>
