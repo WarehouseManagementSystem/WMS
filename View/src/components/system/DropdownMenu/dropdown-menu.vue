@@ -5,23 +5,23 @@
             <font class="align-self-center px-1">menu</font>
         </a>
         <transition name="fade">
-            <dropdownMenuTooltip id="dropdownMenuTooltip" v-show="show"></dropdownMenuTooltip>
+            <dropdown-menu-tooltip id="dropdownMenuTooltip" v-show="show"></dropdown-menu-tooltip>
         </transition>
     </div>
 </template>
 
 <script>
-import dropdownMenuTooltip from './Nav/index.vue'
+import DropdownMenuTooltip from './Nav/nav.vue'
 
 export default {
-    name: 'DropdownMenu',
+    name: 'dropdown-menu',
     data () {
         return {
             show: false,
         }
     },
     components: {
-        dropdownMenuTooltip,
+        DropdownMenuTooltip,
     },
 }
 </script>

@@ -1,9 +1,11 @@
 <template>
-  <main id="content" class="rounded border p-1 m-1" style="position: absolute; top: 100px; right: 0px; bottom: 56px; left: 0px;">
+  <main id="content" class="position-absolute" style="top: 100px; right: 0px; bottom: 56px; left: 0px;">
     <!-- 路由出口 -->
     <!-- 路由匹配到的组件将渲染在这里 -->
     <transition name="component-fade" mode="out-in">
-      <router-view></router-view>
+      <div class="border rounded w-100 h-100 d-block p-1">
+        <router-view></router-view>
+      </div>
     </transition>
   </main>
 </template>

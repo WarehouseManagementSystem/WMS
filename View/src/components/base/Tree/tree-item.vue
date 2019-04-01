@@ -22,7 +22,7 @@
 <script>
 
 export default {
-  name: 'TreeItem',
+  name: 'tree-item',
   components: {
       item: () => import('./item.vue'),
   },

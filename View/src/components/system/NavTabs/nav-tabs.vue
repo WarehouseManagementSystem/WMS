@@ -47,7 +47,7 @@ router.afterEach((to, from) => {
 })
 
 export default {
-    name: 'NavTabs',
+    name: 'nav-tabs',
     data () {
         return {
             Paths: pathList,

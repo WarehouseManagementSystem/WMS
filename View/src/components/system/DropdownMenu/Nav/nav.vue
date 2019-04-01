@@ -24,7 +24,7 @@
 <script>
 
 export default {
-  name: "DropdownMenuNav",
+  name: "dropdown-menu-nav",
   data () {
     return {
       Routers: [],

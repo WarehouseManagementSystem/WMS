@@ -18,7 +18,7 @@ import config from "@/config/index";
 import { loadLanguageAsync } from "@/lang/index";
 
 export default {
-  name: "LangSelect",
+  name: "lang-select",
   data() {
     // return { langs: ["zh", "en"] }
     return {

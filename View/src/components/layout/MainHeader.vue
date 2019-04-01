@@ -19,7 +19,7 @@
               <lang-select></lang-select>
           </li>
           <li class="nav-item navbar-text">
-            <Screenfull></Screenfull>
+            <screenfull></screenfull>
           </li>
         </ul>
         <ul class="navbar-nav my-2 my-lg-0">
@@ -30,22 +30,22 @@
       </div>
     </div>
     <div id="nav-tab" class="bg-dark d-flex w-100">
-      <DropdownMenu></DropdownMenu>
+      <dropdown-menu></dropdown-menu>
       <router-link class="btn btn-dark d-inline-flex" to="/" role="button">
         <i class="fas fa-home align-self-center px-1"></i>
         <font class="align-self-center px-1">home</font>
       </router-link>
-      <NavTabs class="d-inline-flex overflow-auto"></NavTabs>
+      <nav-tabs class="d-inline-flex overflow-auto"></nav-tabs>
     </div>
   </header>
 </template>
 
 <script>
-import LangSelect from "@/components/base/LangSelect/index.vue";
-import Screenfull from "@/components/base/Screenfull/index.vue";
-import UserCard from '@/components/user/UserCard/index.vue';
-import DropdownMenu from '@/components/system/DropdownMenu/index.vue';
-import NavTabs from '@/components/system/NavTabs/index.vue'
+import LangSelect from "@/components/base/LangSelect/lang-select.vue";
+import Screenfull from "@/components/base/Screenfull/screenfull.vue";
+import UserCard from '@/components/system/User/user-card.vue';
+import DropdownMenu from '@/components/system/DropdownMenu/dropdown-menu.vue';
+import NavTabs from '@/components/system/NavTabs/nav-tabs.vue'
 
 export default {
   components: {

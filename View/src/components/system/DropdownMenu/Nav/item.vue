@@ -24,7 +24,7 @@
 
 <script>
 export default {
-    name: 'DropdownMenuNavItem',
+    name: 'dropdown-menu-nav-item',
     components: {
         item: () => import('./item.vue')
     },

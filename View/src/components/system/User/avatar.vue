@@ -4,7 +4,7 @@
 
 <script>
 export default {
-    name: 'Avatar',
+    name: 'avatar',
     props: {
         width: {
             type: Number,

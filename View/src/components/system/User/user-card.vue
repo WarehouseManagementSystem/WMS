@@ -22,9 +22,9 @@
 </template>
 
 <script>
-import Avatar from '@/components/base//Avatar/index.vue'
+import Avatar from './avatar.vue'
 export default {
-    name: 'UserCard',
+    name: 'user-card',
     components: {
         Avatar,
     },
