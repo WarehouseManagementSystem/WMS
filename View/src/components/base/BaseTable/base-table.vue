@@ -1,7 +1,7 @@
 <template>
     <div>
         <template v-if="heros && heros.length > 0">
-
+            
         </template>
          <template v-else>
             无相关数据
