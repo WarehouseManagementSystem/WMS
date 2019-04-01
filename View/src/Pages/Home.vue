@@ -1,18 +1,17 @@
 <template>
   <div class="h-100 d-block">
-    <ListView 
-     :heroes="gridData"></ListView>
+   
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import ListView from '@/components/view/ListView/list-view.vue'
+// import ListView from '@/components/view/ListView/list-view.vue'
 
 export default {
   name: 'HomePage',
   components: {
-    ListView,
+
   },
   data () {
     return {
