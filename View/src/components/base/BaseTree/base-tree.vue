@@ -15,9 +15,9 @@
 <script>
 
 export default {
-    name: 'tree',
+    name: 'base-tree',
     components: {
-        item: () => import('./item.vue'),
+        item: () => import('./base-tree-item.vue'),
     },
     data: function () {
     return {

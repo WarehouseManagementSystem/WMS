@@ -24,7 +24,7 @@
 export default {
   name: 'tree-item',
   components: {
-      item: () => import('./item.vue'),
+      item: () => import('./base-tree-item.vue'),
   },
   props: {
       model: Object

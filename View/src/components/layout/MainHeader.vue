@@ -41,8 +41,8 @@
 </template>
 
 <script>
-import LangSelect from "@/components/base/LangSelect/lang-select.vue";
-import Screenfull from "@/components/base/Screenfull/screenfull.vue";
+import LangSelect from "@/components/system/LangSelect/lang-select.vue";
+import Screenfull from "@/components/system/Screenfull/screenfull.vue";
 import UserCard from '@/components/system/User/user-card.vue';
 import DropdownMenu from '@/components/system/DropdownMenu/dropdown-menu.vue';
 import NavTabs from '@/components/system/NavTabs/nav-tabs.vue'

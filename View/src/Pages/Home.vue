@@ -7,7 +7,7 @@
 
 <script>
 // @ is an alias to /src
-import ListView from '@/components/base/ListView/list-view.vue'
+import ListView from '@/components/view/ListView/list-view.vue'
 
 export default {
   name: 'HomePage',
