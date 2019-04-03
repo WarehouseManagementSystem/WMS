@@ -35,12 +35,11 @@ export default {
         hindeMenu: function (event) {
             const e = event.target
             // 判断鼠标点击位置是否在菜单内，如果是则不隐藏，如果不是则隐藏
-            this.isChildById(e, 'dropdownMenuTooltip')
-                
+            this.isChildById(e, 'dropdownMenu')
+            
         },
         isChildById: function (e, id) {
-            if (!(e || e.nodeName) || ['#document', 'HTML', 'BODY'].includes(e.nodeName)) 
-                return this.show = false
+            if (!(e || e.nodeName) || ['#document', 'HTML', 'BODY'].includes(e.nodeName)) return this.show = false
             e = e.parentNode
             if (e.id && e.id == id) return
             this.isChildById(e, id)
