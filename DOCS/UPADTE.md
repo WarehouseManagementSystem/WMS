@@ -5,7 +5,7 @@
 
 2019-04-04
 
-* view [bootstrap](https://getbootstrap.com/docs/4.3/components/alerts/) [alert vue template](View/src/components/base/Bootstrap/BAlert) end
+* view [bootstrap](https://getbootstrap.com/docs/4.3/components/alerts/) [alert vue template](../View/src/components/base/Bootstrap/BAlert) end
 
 2019-04-03
 
