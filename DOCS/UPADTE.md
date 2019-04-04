@@ -3,9 +3,13 @@
 > 此处记录项目的开发进度  
 > (这会让项目开发变得紧紧有条)
 
+2019-04-04
+
+* view [bootstrap](https://getbootstrap.com/docs/4.3/components/alerts/) [alert vue template](View/src/components/base/Bootstrap/BAlert) end
+
 2019-04-03
 
-* view debug dropdownMenu 显示与隐藏方案存在bug 已解决
+* view debug dropdownMenu 显示与隐藏方案存在bug 已解决([bate0.2.1](https://github.com/WarehouseManagementSystem/WMS/tree/bate0.2.1))
 
 2019-04-02
 
