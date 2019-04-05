@@ -1,12 +1,19 @@
 <template>
-    <span class="badge" :class="objClass" v-show="$slots.default" v-if="!href"><slot></slot></span>
-    <a class="badge" :class="objClass" :href="href" v-show="$slots.default" v-else><slot></slot></a>
+    <div v-show="$slots.default">
+        <span class="badge" :class="objClass" v-if="!href"><slot></slot></span>
+        <a class="badge" :class="objClass" :href="href" v-else><slot></slot></a>
+        <sr-message>{{ fillSrMessage }}</sr-message>
+    </div>
 </template>
 <script>
 import utilities from './../utilities'
+import SrMessage from '@/components/base/Bootstrap/SrOney/b-sr-only.vue'
 
 export default {
     name: 'b-badge',
+    components: {
+        SrMessage
+    },
     props: {
         variant: {
             type: String,
@@ -24,10 +31,20 @@ export default {
             type: String,
             default: '',
         },
+        SrMessage: {
+            type: String,
+            default: '',
+        },
     },
     computed: {
         objClass: function () {
             return `badge-${this.variant} ${this.pill ? 'badge-pill' : ''}`
+        },
+        fillSrMessage: function () {
+            if (this.SrMessage) {
+                return this.variant
+            }
+            return this.SrMessage
         },
     }
 }
