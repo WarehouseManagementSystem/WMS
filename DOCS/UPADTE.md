@@ -3,13 +3,38 @@
 > 此处记录项目的开发进度  
 > (这会让项目开发变得紧紧有条)
 
+<!-- bootstrap 组件 -->
+[bootstrap alert]:                          https://getbootstrap.com/docs/4.3/components/alerts/
+[b-alert]:                                  ../View/src/components/base/Bootstrap/Alert
+[bootstrap badge]:                          https://getbootstrap.com/docs/4.3/components/badge/
+[b-badge]:                                  ../View/src/components/base/Bootstrap/Badge
+[b-sr-only]:                                ../View/src/components/base/Bootstrap/SrOney
+
+<!-- version -->
+[项目仓库]:                                     https://github.com/WarehouseManagementSystem/WMS
+[项目规范-编码规范]:                            Standard/CodingStandards.md
+[项目规范相关文档]:                             Standard/README.md
+[开发流程规范]:                                 Standard/DevelopStandards.md
+[bate0.2.1]:                                https://github.com/WarehouseManagementSystem/WMS/tree/bate0.2.1
+
+<!-- links -->
+[Font Awesome]:                             https://fontawesome.com
+[circular-json]:                            https://github.com/WebReflection/circular-json
+
+
+2019-04-05
+
+* view 组件 辅助信息 bootstrap [b-sr-only] vue template end
+* view 组件 提示框 完善：添加 b-sr-only 控件 优化用户体验
+* view 组件 徽标 [bootstrap badge] [b-badge]  vue template finished
+
 2019-04-04
 
-* view [bootstrap](https://getbootstrap.com/docs/4.3/components/alerts/) [alert vue template](../View/src/components/base/Bootstrap/BAlert) end
+* view 组件 提示框 [bootstrap alert] [b-alert] vue template end
 
 2019-04-03
 
-* view debug dropdownMenu 显示与隐藏方案存在bug 已解决([bate0.2.1](https://github.com/WarehouseManagementSystem/WMS/tree/bate0.2.1))
+* view debug dropdownMenu 显示与隐藏方案存在bug 已解决([bate0.2.1])
 
 2019-04-02
 
@@ -34,7 +59,7 @@
 
 2019-03-25
 
-* view 引入 [circular-json](https://github.com/WebReflection/circular-json) 解决 js 中
+* view 引入 [circular-json] 解决 js 中
     * JSON.stringify() 中的循环引用对象解析报错，
     * JSON.parse() 浏览器兼容性（行为不一）
 * view 修改 localStorage(可用)、sessionStorage(可用)
@@ -88,7 +113,7 @@
 
 2019-02-28
 
-* view 加入 [Font Awesome](https://fontawesome.com) 字体图标，免费版
+* view 加入 [Font Awesome] 字体图标，免费版
 
 2019-02-26
 
@@ -135,9 +160,9 @@
 2019-01-30
 
 * api 项目目录结构调整，项目文件管理更清晰(bate0.1)
-* docs 添加文档 [项目规范-编码规范](Standard/CodingStandards.md)
-* docs 修改文档 [项目规范相关文档](Standard/README.md)
-* docs 修改文档 [开发流程规范](Standard/DevelopStandards.md)
+* docs 添加文档 [项目规范-编码规范]
+* docs 修改文档 [项目规范相关文档]
+* docs 修改文档 [开发流程规范]
 
 
 2019-01-26
@@ -146,5 +171,5 @@
     * api 架构搭建
     * view 架构搭建
 * 项目文档撰写(开始)
-* Github 上建立[项目仓库](https://github.com/WarehouseManagementSystem/WMS)(完成)
+* Github 上建立 [项目仓库] (完成)
 * Github 中完善项目管理配置(待完善)

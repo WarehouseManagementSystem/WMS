@@ -14,6 +14,7 @@
                <slot>
                    <!-- <alert-link>{{countDownSec}}</alert-link> -->
                </slot>
+               <sr-message>{{ fillSrMessage }}</sr-message>
             </div>
             <alert-footer><slot name="footer"></slot></alert-footer>
             <button type="button" class="close" v-show="showDismisLable" data-dismiss="alert" aria-label="Close">
@@ -24,8 +25,10 @@
 </template>
 <script>
 // import AlertLink from './b-alert-link'
+import utilities from './../utilities'
 import AlertHeader from './b-alert-header'
 import AlertFooter from './b-alert-footer'
+import SrMessage from '@/components/base/Bootstrap/SrOney/b-sr-only.vue'
 
 export default {
     name: 'b-alert',
@@ -33,6 +36,7 @@ export default {
         // AlertLink,
         AlertHeader,
         AlertFooter,
+        SrMessage,
     },
     data () {
         return {
@@ -50,7 +54,15 @@ export default {
             default: 'primary',
             validator: function (value) {
                 // 这个值必须匹配下列字符串中的一个
-                return ['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark'].includes(value)
+                return utilities.themes.includes(value)
+            },
+        },
+        position: {
+            type: String,
+            default: 'top-center',
+             validator: function (value) {
+                // 这个值必须匹配下列字符串中的一个
+                return utilities.position.includes(value)
             },
         },
         width: {
@@ -64,14 +76,6 @@ export default {
             type: Boolean,
             default: false,
         },
-        position: {
-            type: String,
-            default: 'top-center',
-             validator: function (value) {
-                // 这个值必须匹配下列字符串中的一个
-                return ['top-left', 'top-center', 'top-right', 'bottom-left', 'bottom-center', 'bottom-right'].includes(value)
-            },
-        },
         countDownDisdismis: {
             type: Boolean,
             default: false,
@@ -79,6 +83,9 @@ export default {
         countDownSec: {
             type: Number,
             default: 5,
+        },
+        SrMessage: {
+            type: String,
         },
     },
     computed: {
@@ -111,40 +118,60 @@ export default {
             // return (!this.countDownDisdismis || this.dismissible)
             return this.dismissible
         },
+        fillSrMessage: function () {
+            if (this.SrMessage) {
+                return this.variant
+            }
+            return this.SrMessage
+        },
     },
     created () {
         this.isShow = this.show
         if (this.countDownDisdismis) this.countDown()
     },
     methods: {
-        alert: function () {
+        alert: function() {
             this.$emit('alert')
             this.isShow = true
+            if (this.countDownDisdismis) this.countDown()
         },
         close: function () {
             this.$emit('close')
             this.clearTimer()
             this.isShow = false
         },
+        reset: async function () {
+            await this.close()
+            await this.alert()
+        },
         clearTimer: function () {
             if (this.dismissCountDownTimerId) window.clearInterval(this.dismissCountDownTimerId)
         },
         countDown: function () {
-            if (this.countDownSec < 1) return 
+            if (this.countDownSec < 1) return
+            // 每一次计时前都会先清空可能存在的计时器
+            this.clearTimer()
             let countDownSec = this.countDownSec
             this.dismissCountDownTimerId = setInterval( () => {
                 if (countDownSec < 1) {
                     this.close()
                     return
                 }
+                console.log(countDownSec)
                 countDownSec--
             }, 1000)
         }
     },
     watch: {
-        show: function (newValue) {
-            this.isShow = newValue
-        }
+        show: function (newVal) {
+            this.isShow = newVal
+        },
+        '$slots.default': function (newVal, oldVal) {
+            if (newVal !== oldVal) this.reset();
+        },
+        variant: function (newVal, oldVal) {
+            if (newVal !== oldVal) this.reset()
+        },
     }
 }
 </script>
