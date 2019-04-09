@@ -9,6 +9,8 @@
 [bootstrap badge]:                          https://getbootstrap.com/docs/4.3/components/badge/
 [b-badge]:                                  ../View/src/components/base/Bootstrap/Badge
 [b-sr-only]:                                ../View/src/components/base/Bootstrap/SrOney
+[bootstrap Breadcrumb]:                     https://getbootstrap.com/docs/4.3/components/breadcrumb/
+[b-breadcrumb]:                               ../View/src/components/base/Bootstrap/Breadcrumb
 
 <!-- version -->
 [项目仓库]:                                     https://github.com/WarehouseManagementSystem/WMS
@@ -21,12 +23,15 @@
 [Font Awesome]:                             https://fontawesome.com
 [circular-json]:                            https://github.com/WebReflection/circular-json
 
+2019-04-08
+
+* view 组件 Breadcrumb [bootstrap Breadcrumb] [b-breadcrumb] vue template finished
 
 2019-04-05
 
 * view 组件 辅助信息 bootstrap [b-sr-only] vue template end
 * view 组件 提示框 完善：添加 b-sr-only 控件 优化用户体验
-* view 组件 徽标 [bootstrap badge] [b-badge]  vue template finished
+* view 组件 徽标 [bootstrap badge] [b-badge] vue template finished
 
 2019-04-04
 
