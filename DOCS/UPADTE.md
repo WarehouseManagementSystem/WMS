@@ -10,7 +10,9 @@
 [b-badge]:                                  ../View/src/components/base/Bootstrap/Badge
 [b-sr-only]:                                ../View/src/components/base/Bootstrap/SrOney
 [bootstrap Breadcrumb]:                     https://getbootstrap.com/docs/4.3/components/breadcrumb/
-[b-breadcrumb]:                               ../View/src/components/base/Bootstrap/Breadcrumb
+[b-breadcrumb]:                             ../View/src/components/base/Bootstrap/Breadcrumb
+[bootstrap button]:                         https://getbootstrap.com/docs/4.3/components/buttons/
+[b-button]:                                 ../View/src/components/base/Bootstrap/Button
 
 <!-- version -->
 [项目仓库]:                                     https://github.com/WarehouseManagementSystem/WMS
@@ -22,6 +24,10 @@
 <!-- links -->
 [Font Awesome]:                             https://fontawesome.com
 [circular-json]:                            https://github.com/WebReflection/circular-json
+
+2019-04-10
+
+* view 组件 按钮 [bootstrap button] [b-button] vue template finished （button radios 暂缓）
 
 2019-04-08
 

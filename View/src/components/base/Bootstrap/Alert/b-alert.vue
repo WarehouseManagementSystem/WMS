@@ -90,7 +90,8 @@ export default {
     },
     computed: {
         objClass: function () {
-            return `alert-${this.variant} ${this.showDismisLable ? 'alert-dismissible' : ''}`
+            return `alert-${this.variant} 
+                ${this.showDismisLable ? 'alert-dismissible' : ''}`
         },
         objStyle: function () {
             let position = {}

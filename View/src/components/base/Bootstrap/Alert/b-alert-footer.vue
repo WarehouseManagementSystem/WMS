@@ -7,11 +7,6 @@
 <script>
 export default {
     name: 'b-alert-footer',
-    data () {
-        return {
-            show: true,
-        }
-    },
 }
 </script>
 

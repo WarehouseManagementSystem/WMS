@@ -1,12 +1,13 @@
 <template>
   <div class="h-100 d-block">
-    <bd :content="content"></bd>
+    <bd :type="'submit'" :active="true" :variant="'dark'" @submit="click('submit')"></bd>
+    <bd :type="'button'" @click="click('reset')"></bd>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import bd from '@/components/base/Bootstrap/Breadcrumb/b-breadcrumb.vue'
+import bd from '@/components/base/Bootstrap/Button/b-button.vue'
 export default {
   name: 'HomePage',
   components: {
@@ -21,7 +22,9 @@ export default {
     }
   },
   methods: {
-      
+      click: function (str) {
+        alert(str)
+      }
   }
 }
 

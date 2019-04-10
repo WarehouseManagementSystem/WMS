@@ -38,7 +38,8 @@ export default {
     },
     computed: {
         objClass: function () {
-            return `badge-${this.variant} ${this.pill ? 'badge-pill' : ''}`
+            return `badge-${this.variant} 
+                ${this.pill ? 'badge-pill' : ''}`
         },
         fillSrMessage: function () {
             if (this.SrMessage) {
