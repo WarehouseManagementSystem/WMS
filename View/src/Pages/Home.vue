@@ -1,17 +1,29 @@
 <template>
   <div class="h-100 d-block">
-    <bd :type="'submit'" :active="true" :variant="'dark'" @submit="click('submit')"></bd>
-    <bd :type="'button'" @click="click('reset')"></bd>
+    <bt>
+    <bg :size="'sm'" :vertical="true" :role="'toolbar'" :aria-label="'buttons'">
+      <bd :type="'submit'" :active="true" :variant="'dark'" @submit="click('submit')"></bd>
+      <bd :type="'button'" @click="click('reset')"></bd>
+    </bg>
+     <bg :size="'lg'">
+      <bd :type="'submit'" :active="true" :variant="'dark'" @submit="click('submit')"></bd>
+      <bd :type="'button'" @click="click('reset')"></bd>
+    </bg>
+    </bt>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import bd from '@/components/base/Bootstrap/Button/b-button.vue'
+import bg from '@/components/base/Bootstrap/ButtonGroup/b-button-group.vue'
+import bt from '@/components/base/Bootstrap/ButtonGroup/b-btn-toolbar.vue'
 export default {
   name: 'HomePage',
   components: {
-    bd
+    bd,
+    bg,
+    bt,
   },
   data () {
     return {

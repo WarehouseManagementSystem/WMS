@@ -13,6 +13,8 @@
 [b-breadcrumb]:                             ../View/src/components/base/Bootstrap/Breadcrumb
 [bootstrap button]:                         https://getbootstrap.com/docs/4.3/components/buttons/
 [b-button]:                                 ../View/src/components/base/Bootstrap/Button
+[bootstrap button group]:                   https://getbootstrap.com/docs/4.3/components/button-group/
+[b-button-group]:                           ../View/src/components/base/Bootstrap/ButtonGroup
 
 <!-- version -->
 [项目仓库]:                                     https://github.com/WarehouseManagementSystem/WMS
@@ -28,6 +30,7 @@
 2019-04-10
 
 * view 组件 按钮 [bootstrap button] [b-button] vue template finished （button radios 暂缓）
+* view 控件 按钮组 [bootstrap button group] [b-button-group] vue template finished
 
 2019-04-08
 
