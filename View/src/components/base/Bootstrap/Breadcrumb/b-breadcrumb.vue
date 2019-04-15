@@ -6,7 +6,9 @@
                 :class="{active: obj.isActive}" 
                 :aria-current="obj.isActive ? 'page' : ''" 
                 v-for="(obj, index) in content" 
-                :key="index"><slot><a :href="obj.path">{{obj.name}}</a></slot></li>
+                :key="index">
+                <slot><a :href="obj.path">{{obj.name}}</a></slot>
+            </li>
         </ol>
     </nav>
 </template>

@@ -1,5 +1,4 @@
 <template>
-    <span>
         <a class="btn" 
             v-if="target == 'a'" 
             :class="objClass" 
@@ -11,7 +10,8 @@
             @click="onClick($event)"
             data-toggle="button" 
             role="button">
-            {{value}}
+            {{ value }}
+            <sr-message>{{ fillSrMessage }}</sr-message>
         </a>
         <input class="btn" 
             v-else-if="target == 'input'" 
@@ -23,7 +23,7 @@
             :tabindex="objTabindex" 
             :autocomplete="autocomplete" 
             @click="onClick($event)" 
-            data-toggle="button">
+            data-toggle="button" />
         <button class="btn" 
             v-else 
             :class="objClass" 
@@ -34,10 +34,9 @@
             :autocomplete="autocomplete" 
             @click="onClick($event)" 
             data-toggle="button">
-            {{value}}
+            {{ value }}
+            <sr-message>{{ fillSrMessage }}</sr-message>
         </button>
-        <sr-message>{{ fillSrMessage }}</sr-message>
-    </span>
 </template>
 <script>
 import utilities from './../utilities'

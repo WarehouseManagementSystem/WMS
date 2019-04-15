@@ -1,9 +1,12 @@
 <template>
-    <div v-show="$slots.default">
-        <span class="badge" :class="objClass" v-if="!href"><slot></slot></span>
-        <a class="badge" :class="objClass" :href="href" v-else><slot></slot></a>
+    <span class="badge" :class="objClass" v-show="$slots.default" v-if="!href">
+        <slot></slot>
         <sr-message>{{ fillSrMessage }}</sr-message>
-    </div>
+    </span>
+    <a class="badge" :class="objClass" :href="href" v-show="$slots.default" v-else>
+        <slot></slot>
+        <sr-message>{{ fillSrMessage }}</sr-message>
+    </a>
 </template>
 <script>
 import utilities from './../utilities'
