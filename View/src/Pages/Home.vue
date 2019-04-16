@@ -16,8 +16,7 @@ export default {
   data () {
     return {
       items: [
-        {src: 'https://images.pexels.com/photos/1388069/pexels-photo-1388069.jpeg?cs=srgb&dl=architecture-big-apple-buildings-1388069.jpg&fm=jpg', title: 'a'},
-        {src: 'https://images.pexels.com/photos/1236720/pexels-photo-1236720.jpeg?cs=srgb&dl=4k-wallpaper-action-asphalt-1236720.jpg&fm=jpg', title: 'b', isActive: true}
+        
       ],
     }
   },
