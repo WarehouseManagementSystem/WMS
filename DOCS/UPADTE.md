@@ -15,6 +15,8 @@
 [b-button]:                                 ../View/src/components/base/Bootstrap/Button
 [bootstrap button group]:                   https://getbootstrap.com/docs/4.3/components/button-group/
 [b-button-group]:                           ../View/src/components/base/Bootstrap/ButtonGroup
+[bootstrap card]:                           https://getbootstrap.com/docs/4.3/components/card/
+[b-card]:                                   ../View/src/components/base/Bootstrap/Card
 
 <!-- version -->
 [项目仓库]:                                     https://github.com/WarehouseManagementSystem/WMS
@@ -26,6 +28,15 @@
 <!-- links -->
 [Font Awesome]:                             https://fontawesome.com
 [circular-json]:                            https://github.com/WebReflection/circular-json
+
+2019-04-16
+
+* view 控件 卡 [bootstrap card] [b-card] vue template finished
+
+> 不建议使用
+> 突然发现做了多余的事情，
+> 像 [b-card] 这样的控件属于纯样式类的，封装成 vue 控件不但不会有任何好处，反而增加了使用的门槛
+> [b-button-group] 也是一个典型的例子，今后不会再对此类控件做 vue 封装以降低使用成本。
 
 2019-04-10
 
@@ -45,6 +56,8 @@
 2019-04-04
 
 * view 组件 提示框 [bootstrap alert] [b-alert] vue template end
+
+----------------------------------------------------------------------
 
 2019-04-03
 
