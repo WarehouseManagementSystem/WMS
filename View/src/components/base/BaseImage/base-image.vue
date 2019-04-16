@@ -23,7 +23,7 @@ export default {
             if (this.src) return this.src
             const src = this.imgList[this.imgList.length].src
             return src ? src : ''
-        }
-    }
+        },
+    },
 }
 </script>

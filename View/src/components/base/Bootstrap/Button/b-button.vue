@@ -1,42 +1,42 @@
 <template>
-        <a class="btn" 
-            v-if="target == 'a'" 
-            :class="objClass" 
-            :href="href" 
-            :aria-pressed="active" 
-            :aria-disabled="disabled"
-            :tabindex="objTabindex" 
-            :autocomplete="autocomplete" 
-            @click="onClick($event)"
-            data-toggle="button" 
-            role="button">
-            {{ value }}
-            <sr-message>{{ fillSrMessage }}</sr-message>
-        </a>
-        <input class="btn" 
-            v-else-if="target == 'input'" 
-            :class="objClass" 
-            :type="type" 
-            :value="value" 
-            :aria-pressed="active" 
-            :disabled="disabled" 
-            :tabindex="objTabindex" 
-            :autocomplete="autocomplete" 
-            @click="onClick($event)" 
-            data-toggle="button" />
-        <button class="btn" 
-            v-else 
-            :class="objClass" 
-            :type="type" 
-            :aria-pressed="active" 
-            :disabled="disabled" 
-            :tabindex="objTabindex" 
-            :autocomplete="autocomplete" 
-            @click="onClick($event)" 
-            data-toggle="button">
-            {{ value }}
-            <sr-message>{{ fillSrMessage }}</sr-message>
-        </button>
+    <a class="btn" 
+        v-if="target == 'a'" 
+        :class="objClass" 
+        :href="href" 
+        :aria-pressed="active" 
+        :aria-disabled="disabled"
+        :tabindex="objTabindex" 
+        :autocomplete="autocomplete" 
+        @click="onClick($event)"
+        data-toggle="button" 
+        role="button">
+        {{ value }}
+        <sr-message>{{ fillSrMessage }}</sr-message>
+    </a>
+    <input class="btn" 
+        v-else-if="target == 'input'" 
+        :class="objClass" 
+        :type="type" 
+        :value="value" 
+        :aria-pressed="active" 
+        :disabled="disabled" 
+        :tabindex="objTabindex" 
+        :autocomplete="autocomplete" 
+        @click="onClick($event)" 
+        data-toggle="button" />
+    <button class="btn" 
+        v-else 
+        :class="objClass" 
+        :type="type" 
+        :aria-pressed="active" 
+        :disabled="disabled" 
+        :tabindex="objTabindex" 
+        :autocomplete="autocomplete" 
+        @click="onClick($event)" 
+        data-toggle="button">
+        {{ value }}
+        <sr-message>{{ fillSrMessage }}</sr-message>
+    </button>
 </template>
 <script>
 import utilities from './../utilities'

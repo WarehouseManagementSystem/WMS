@@ -2,6 +2,16 @@
 
 > 此处记录项目的开发进度  
 > (这会让项目开发变得紧紧有条)
+<!-- version -->
+[项目仓库]:                                     https://github.com/WarehouseManagementSystem/WMS
+[项目规范-编码规范]:                            Standard/CodingStandards.md
+[项目规范相关文档]:                             Standard/README.md
+[开发流程规范]:                                 Standard/DevelopStandards.md
+[bate0.2.1]:                                https://github.com/WarehouseManagementSystem/WMS/tree/bate0.2.1
+
+<!-- links -->
+[Font Awesome]:                             https://fontawesome.com
+[circular-json]:                            https://github.com/WebReflection/circular-json
 
 <!-- bootstrap 组件 -->
 [bootstrap alert]:                          https://getbootstrap.com/docs/4.3/components/alerts/
@@ -17,23 +27,15 @@
 [b-button-group]:                           ../View/src/components/base/Bootstrap/ButtonGroup
 [bootstrap card]:                           https://getbootstrap.com/docs/4.3/components/card/
 [b-card]:                                   ../View/src/components/base/Bootstrap/Card
-
-<!-- version -->
-[项目仓库]:                                     https://github.com/WarehouseManagementSystem/WMS
-[项目规范-编码规范]:                            Standard/CodingStandards.md
-[项目规范相关文档]:                             Standard/README.md
-[开发流程规范]:                                 Standard/DevelopStandards.md
-[bate0.2.1]:                                https://github.com/WarehouseManagementSystem/WMS/tree/bate0.2.1
-
-<!-- links -->
-[Font Awesome]:                             https://fontawesome.com
-[circular-json]:                            https://github.com/WebReflection/circular-json
+[bootstrap Carousel]:                       https://getbootstrap.com/docs/4.3/components/carousel/
+[b-carousel]:                               ../View/src/components/base/Bootstrap/Carousel
 
 2019-04-16
 
 * view 控件 卡 [bootstrap card] [b-card] vue template finished
+* view 控件 传送带 [bootstrap Carousel] [b-carousel] vue template finished
 
-> 不建议使用
+> 不建议使用  
 > 突然发现做了多余的事情，
 > 像 [b-card] 这样的控件属于纯样式类的，封装成 vue 控件不但不会有任何好处，反而增加了使用的门槛
 > [b-button-group] 也是一个典型的例子，今后不会再对此类控件做 vue 封装以降低使用成本。

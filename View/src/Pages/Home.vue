@@ -1,35 +1,23 @@
 <template>
   <div class="h-100 d-block">
-    <bt>
-    <bg :size="'sm'" :vertical="true" :role="'toolbar'" :aria-label="'buttons'">
-      <bd :type="'submit'" :active="true" :variant="'dark'" @submit="click('submit')"></bd>
-      <bd :type="'button'" @click="click('reset')"></bd>
-    </bg>
-     <bg :size="'lg'">
-      <bd :type="'submit'" :active="true" :variant="'dark'" @submit="click('submit')"></bd>
-      <bd :type="'button'" @click="click('reset')"></bd>
-    </bg>
-    </bt>
+    <c style="width: 80%; height: 80%" :items="items" control indicators fade></c>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import bd from '@/components/base/Bootstrap/Button/b-button.vue'
-import bg from '@/components/base/Bootstrap/ButtonGroup/b-button-group.vue'
-import bt from '@/components/base/Bootstrap/ButtonGroup/b-btn-toolbar.vue'
+import c from '@/components/base/Bootstrap/Carousel/b-carousel.vue'
+
 export default {
   name: 'HomePage',
   components: {
-    bd,
-    bg,
-    bt,
+    c
   },
   data () {
     return {
-      content: [
-        {path: 'a', name: 'a'},
-        {path: 'b', name: 'b', isActive: true}
+      items: [
+        {src: 'https://images.pexels.com/photos/1388069/pexels-photo-1388069.jpeg?cs=srgb&dl=architecture-big-apple-buildings-1388069.jpg&fm=jpg', title: 'a'},
+        {src: 'https://images.pexels.com/photos/1236720/pexels-photo-1236720.jpeg?cs=srgb&dl=4k-wallpaper-action-asphalt-1236720.jpg&fm=jpg', title: 'b', isActive: true}
       ],
     }
   },
