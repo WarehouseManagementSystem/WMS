@@ -9,8 +9,8 @@
     </a>
 </template>
 <script>
-import utilities from './../utilities'
 import SrMessage from '@/components/base/Bootstrap/SrOney/b-sr-only.vue'
+import utilities from '@/components/base/Bootstrap/utilities/index.js'
 
 export default {
     name: 'b-badge',
@@ -18,25 +18,12 @@ export default {
         SrMessage
     },
     props: {
-        variant: {
-            type: String,
-            default: 'primary',
-            validator: function (value) {
-                // 这个值必须匹配下列字符串中的一个
-                return utilities.themes.includes(value)
-            },
-        },
+        color: utilities.props.color(),
+        href: utilities.props.href(),
+        SrMessage: utilities.props.SrMessage(),
         pill: {
             type: Boolean,
             default: false,
-        },
-        href: {
-            type: String,
-            default: '',
-        },
-        SrMessage: {
-            type: String,
-            default: '',
         },
     },
     computed: {

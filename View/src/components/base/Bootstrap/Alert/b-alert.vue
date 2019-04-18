@@ -25,10 +25,10 @@
 </template>
 <script>
 // import AlertLink from './b-alert-link'
-import utilities from './../utilities'
 import AlertHeader from './b-alert-header'
 import AlertFooter from './b-alert-footer'
 import SrMessage from '@/components/base/Bootstrap/SrOney/b-sr-only.vue'
+import utilities from '@/components/base/Bootstrap/utilities/index.js'
 
 export default {
     name: 'b-alert',
@@ -45,33 +45,11 @@ export default {
         }
     },
     props: {
-        show: {
-            type: Boolean,
-            default: false,
-        },
-        variant: {
-            type: String,
-            default: 'primary',
-            validator: function (value) {
-                // 这个值必须匹配下列字符串中的一个
-                return utilities.themes.includes(value)
-            },
-        },
-        position: {
-            type: String,
-            default: 'top-center',
-             validator: function (value) {
-                // 这个值必须匹配下列字符串中的一个
-                return utilities.position.includes(value)
-            },
-        },
-        width: {
-            type: Number,
-            default: 50,
-            validator: function (value) {
-                return value > 0 && value <= 100
-            }
-        },
+        show: utilities.props.show(),
+        color: utilities.props.color(),
+        width: utilities.props.width(),
+        position: utilities.props.position(),
+        SrMessage: utilities.props.SrMessage(),
         dismissible: {
             type: Boolean,
             default: false,
@@ -84,13 +62,10 @@ export default {
             type: Number,
             default: 5,
         },
-        SrMessage: {
-            type: String,
-        },
     },
     computed: {
         objClass: function () {
-            return `alert-${this.variant} 
+            return `alert-${this.color} 
                 ${this.showDismisLable ? 'alert-dismissible' : ''}`
         },
         objStyle: function () {

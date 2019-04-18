@@ -39,8 +39,8 @@
     </button>
 </template>
 <script>
-import utilities from './../utilities'
 import SrMessage from '@/components/base/Bootstrap/SrOney/b-sr-only.vue'
+import utilities from '@/components/base/Bootstrap/utilities/index.js'
 
 export default {
     name: 'b-button',
@@ -48,14 +48,12 @@ export default {
         SrMessage,
     },
     props: {
-        variant: {
-            type: String,
-            default: 'primary',
-            validator: function (value) {
-                // 这个值必须匹配下列字符串中的一个
-                return utilities.themes.includes(value)
-            },
-        },
+        color: utilities.props.color(),
+        href: utilities.props.href(),
+        size: utilities.props.size(),
+        active: utilities.props.active(),
+        disabled: utilities.props.disabled(),
+        SrMessage: utilities.props.SrMessage(),
         outline: {
             type: Boolean,
             default: false,
@@ -64,14 +62,14 @@ export default {
             type: String,
             default: 'button',
             validator: function (value) {
-                return utilities.btnTarget.includes(value)
+                return ['button', 'a', 'input'].includes(value)
             },
         },
         type: {
             type: String,
             default: 'button',
             validator: function (value) {
-                return utilities.btnType.includes(value)
+                return ['button', 'reset', 'submit'].includes(value)
             },
         },
         value: {
@@ -80,23 +78,7 @@ export default {
                 return `${this.type.substring(0, 1).toUpperCase()}${this.type.substring(1)}`
             },
         },
-        size: {
-            type: String,
-            default: '',
-            validator: function (value) {
-                // 这个值必须匹配下列字符串中的一个
-                return utilities.btnSize.includes(value)
-            },
-        },
         block: {
-            type: Boolean,
-            default: false,
-        },
-        active: {
-            type: Boolean,
-            default: false,
-        },
-        disabled: {
             type: Boolean,
             default: false,
         },
@@ -107,18 +89,11 @@ export default {
             type: String,
             default: 'off'
         },
-        href: {
-            type: String,
-            default: '#',
-        },
-        SrMessage: {
-            type: String,
-            default: '',
-        },
+        
     },
     computed: {
         objClass: function () {
-            return `btn-${this.outline ? 'outline-' : ''}${this.variant} 
+            return `btn-${this.outline ? 'outline-' : ''}${this.color} 
                 ${this.size ? `btn-${this.size}` : ''} 
                 ${this.block ? 'btn-block' : ''} 
                 ${this.active ? 'active' : ''} 

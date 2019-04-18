@@ -1,6 +1,6 @@
 <template>
   <div class="h-100 d-block">
-    <drop>
+    <drop set="right">
       <template #trigger>
           Action
       </template>
@@ -19,6 +19,7 @@
 
 <script>
 // @ is an alias to /src
+
 import drop from '@/components/base/Bootstrap/Dropdown/b-dropdown.vue'
 import dropItem from '@/components/base/Bootstrap/Dropdown/b-dropdown-item.vue'
 import dropText from '@/components/base/Bootstrap/Dropdown/b-dropdown-item-text.vue'

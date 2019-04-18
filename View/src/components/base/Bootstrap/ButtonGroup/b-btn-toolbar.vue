@@ -3,7 +3,7 @@
         v-if="$slots.default"
         class="btn-toolbar" 
         :role="role" 
-        :aria-label="AriaLabel">
+        :aria-label="ariaLabel">
         <slot></slot>
     </div>
 </template>
@@ -15,7 +15,7 @@ export default {
             type: String,
             default: 'toolbar',
         },
-        AriaLabel: {
+        ariaLabel: {
             type: String,
             default: 'Toolbar with button groups',
         },

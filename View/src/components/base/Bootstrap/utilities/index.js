@@ -1,6 +1,5 @@
-import './variables'
-import props from './BasePorps'
+import props from './porps'
 
 export default {
-        props
+        props,
 }

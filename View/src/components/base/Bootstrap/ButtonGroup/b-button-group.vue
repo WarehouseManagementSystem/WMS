@@ -4,24 +4,17 @@
         class="btn-group"
         :class="objClass" 
         :role="role" 
-        :aria-label="AriaLabel">
+        :aria-label="ariaLabel">
         <slot></slot>
     </div>
 </template>
 <script>
-import utilities from './../utilities'
+import utilities from '@/components/base/Bootstrap/utilities/index.js'
 
 export default {
     name: 'b-button-group',
     props: {
-         size: {
-            type: String,
-            default: '',
-            validator: function (value) {
-                // 这个值必须匹配下列字符串中的一个
-                return utilities.btnSize.includes(value)
-            },
-        },
+        size: utilities.props.size(),
         vertical: {
             type: Boolean,
             default: false,
@@ -30,7 +23,7 @@ export default {
             type: String,
             default: 'group',
         },
-        AriaLabel: {
+        ariaLabel: {
             type: String,
             default: 'Button Group',
         },

@@ -2,16 +2,13 @@
     <a v-show="text" :href="href" class="card-link">{{ text }}</a>
 </template>
 <script>
+import utilities from '@/components/base/Bootstrap/utilities/index.js'
+
 export default {
     name: 'b-card-link',
     props: {
-        href: {
-            type: String,
-            default: '#'
-        },
-        text: {
-            type: String,
-        },
+        href: utilities.props.href(),
+        text: utilities.props.text(),
     },
 }
 </script>

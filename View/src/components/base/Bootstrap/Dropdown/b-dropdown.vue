@@ -9,19 +9,12 @@
 </template>
 <script>
 import util from '@/util/index.js'
-import utilities from './../utilities'
+import utilities from '@/components/base/Bootstrap/utilities/index.js'
 
 export default {
     name: 'b-dropdown',
     props: {
-        set: {
-            type: String,
-            default: 'down',
-             validator: function (value) {
-                // 这个值必须匹配下列字符串中的一个
-                return utilities.set.includes(value)
-            },
-        },
+        set: utilities.props.set(),
         'menu-set': {
             type: String,
             default: '',
@@ -43,7 +36,6 @@ export default {
         },
     },
     mounted () {
-        debugger
         const el = document.getElementById('div-' + this.guid) && document.getElementById('div-' + this.guid)
         if (!el) return
         let node = el.firstChild

@@ -13,12 +13,12 @@
     </nav>
 </template>
 <script>
+import utilities from '@/components/base/Bootstrap/utilities/index.js'
+
 export default {
     name: 'b-breadcrumb',
     props: {
-        content: {
-            type: Array,
-        },
+        content: utilities.props.content(),
     },
 }
 </script>
