@@ -69,7 +69,7 @@ export default {
     },
     computed: {
         guid: function () {
-            return 'carouselCaptions-'+ util.random.GetRandomString()
+            return 'carouselCaptions-'+ util.random.getRandomString()
         },
     },
 }

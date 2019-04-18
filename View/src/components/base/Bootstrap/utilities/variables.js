@@ -1,7 +1,7 @@
 // base
 const themes = ['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark']
 const size = ['', 'lg', 'sm']
-const set = { 'top', 'right', 'bottom', 'left'}
+const set = ['top', 'right', 'bottom', 'left']
 const position = ['top-left', 'top-center', 'top-right', 'bottom-left', 'bottom-center', 'bottom-right']
 
 // border

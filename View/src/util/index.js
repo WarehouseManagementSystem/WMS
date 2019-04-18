@@ -3,6 +3,7 @@ import circularJSON from 'circular-json'
 import docStorage from './storage/installStorage_strict'
 import serviceWorker from './serviceWorker/serviceWorker'
 import random from './random'
+import dom from './dom'
 import { clone } from './global'
 import './bootstrap/index'
 
@@ -26,4 +27,5 @@ export default {
     // https://stackoverflow.com/questions/4816099/chrome-sendrequest-error-typeerror-converting-circular-structure-to-json
     JSON: circularJSON,
     random: random,
+    dom: dom,
 }

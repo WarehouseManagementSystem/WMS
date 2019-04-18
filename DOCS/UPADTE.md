@@ -29,6 +29,12 @@
 [b-card]:                                   ../View/src/components/base/Bootstrap/Card
 [bootstrap Carousel]:                       https://getbootstrap.com/docs/4.3/components/carousel/
 [b-carousel]:                               ../View/src/components/base/Bootstrap/Carousel
+[bootstrap dropdown]:                       https://getbootstrap.com/docs/4.3/components/dropdowns/
+[b-dropdown]:                               ../View/src/components/base/Bootstrap/Dropdown
+
+2019-04-17
+
+* view 控件 下拉菜单 [bootstrap dropdown] [b-dropdown] vue template finished
 
 2019-04-16
 
