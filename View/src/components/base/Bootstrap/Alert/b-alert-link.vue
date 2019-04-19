@@ -2,7 +2,7 @@
     <a :href="href" class="alert-link"><slot></slot></a>
 </template>
 <script>
-import utilities from '@/components/base/Bootstrap/utilities/index.js'
+import utilities from '@/components/utilities/index.js'
 export default {
     name: 'b-alert-link',
     props: {

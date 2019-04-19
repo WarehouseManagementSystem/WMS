@@ -92,12 +92,12 @@ function FormatModels(routers, SubsystemName = '') {
 }
 
 function GetRouters(routers) { 
-    return FormatRouters(util.global.clone(routers, false))
+    return FormatRouters(util.clone(routers, false))
     // return FormatRouters(routers)
 }
 
 function GetModels(models) {
-    return FormatModels(util.global.clone(models, false))
+    return FormatModels(util.clone(models, false))
     // return FormatModels(models)
 }
 

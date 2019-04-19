@@ -28,7 +28,7 @@
 import AlertHeader from './b-alert-header'
 import AlertFooter from './b-alert-footer'
 import SrMessage from '@/components/base/Bootstrap/SrOney/b-sr-only.vue'
-import utilities from '@/components/base/Bootstrap/utilities/index.js'
+import utilities from '@/components/utilities/index.js'
 
 export default {
     name: 'b-alert',

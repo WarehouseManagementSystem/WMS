@@ -3,7 +3,7 @@
     <img :src="src" :class="isTop" :alt="alt">
 </template>
 <script>
-import utilities from '@/components/base/Bootstrap/utilities/index.js'
+import utilities from '@/components/utilities/index.js'
 
 export default {
     name: 'b-card-image',

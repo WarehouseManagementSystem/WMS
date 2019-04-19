@@ -9,7 +9,7 @@
 </template>
 <script>
 import util from '@/util/index.js'
-import utilities from '@/components/base/Bootstrap/utilities/index.js'
+import utilities from '@/components/utilities/index.js'
 
 export default {
     name: 'b-dropdown',

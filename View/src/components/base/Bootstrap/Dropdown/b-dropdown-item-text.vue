@@ -2,7 +2,7 @@
     <span class="dropdown-item-text">{{ text }}</span>
 </template>
 <script>
-import utilities from '@/components/base/Bootstrap/utilities/index.js'
+import utilities from '@/components/utilities/index.js'
 
 export default {
     name: 'b-dropdown-item-text',

@@ -14,6 +14,7 @@
         <drop-line />
       </template>
     </drop>
+    <b-button></b-button>
   </div>
 </template>
 
@@ -26,6 +27,8 @@ import dropText from '@/components/base/Bootstrap/Dropdown/b-dropdown-item-text.
 import dropHeader from '@/components/base/Bootstrap/Dropdown/b-dropdown-header.vue'
 import dropLine from '@/components/base/Bootstrap/Dropdown/b-dropdown-divider.vue'
 
+import bButton from '@/components/base/Bootstrap/Button/b-button.vue'
+
 export default {
   name: 'HomePage',
   components: {
@@ -34,6 +37,7 @@ export default {
     dropText,
     dropHeader,
     dropLine,
+    bButton,
   },
   data () {
     return {

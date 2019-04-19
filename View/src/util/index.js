@@ -1,11 +1,11 @@
+import './bootstrap/index'
 import docCookies from './storage/cookies'
-import circularJSON from 'circular-json'
 import docStorage from './storage/installStorage_strict'
 import serviceWorker from './serviceWorker/serviceWorker'
 import random from './random'
 import dom from './dom'
-import { clone } from './global'
-import './bootstrap/index'
+import { clone } from './clone'
+import circularJSON from 'circular-json'
 
 // 解决 storage 兼容性问题
 docStorage.installLocalStorage()
@@ -17,9 +17,7 @@ export default {
         cookies: docCookies,
     },
     serviceWorker: serviceWorker,
-    global: {
-        clone,
-    },
+    clone: clone,
     // 解决 JSON.stringify() 的 
     // ‘Chrome sendrequest error: TypeError: Converting circular structure to JSON’
     // 参考链接

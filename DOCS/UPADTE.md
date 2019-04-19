@@ -32,6 +32,10 @@
 [bootstrap dropdown]:                       https://getbootstrap.com/docs/4.3/components/dropdowns/
 [b-dropdown]:                               ../View/src/components/base/Bootstrap/Dropdown
 
+2019-04-19
+
+* view 调整目录结构，优化项目组成
+
 2019-04-17
 
 * view 控件 下拉菜单 [bootstrap dropdown] [b-dropdown] vue template finished

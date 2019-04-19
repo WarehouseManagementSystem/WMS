@@ -2,7 +2,7 @@
     <a v-show="text" :href="href" class="card-link">{{ text }}</a>
 </template>
 <script>
-import utilities from '@/components/base/Bootstrap/utilities/index.js'
+import utilities from '@/components/utilities/index.js'
 
 export default {
     name: 'b-card-link',

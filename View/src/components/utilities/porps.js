@@ -1,7 +1,7 @@
 import v from './variables'
 
 export default {
-    color: (val = '') => {
+    color: (val = undefined) => {
         return {
             type: String,
             default: val || 'primary',
@@ -11,7 +11,7 @@ export default {
             },
         }
     },
-    size: (val = '') => {
+    size: (val = undefined) => {
         return {
             type: String,
             default: val || '',
@@ -21,7 +21,7 @@ export default {
             },
         }
     },
-    set: (val = '') => {
+    set: (val = undefined) => {
         return {
             type: String,
             default: val || 'down',
@@ -31,7 +31,7 @@ export default {
             },
         }
     },
-    position: (val = '') => {
+    position: (val = undefined) => {
         return {
             type: String,
             default: val || 'top-center',
@@ -41,7 +41,7 @@ export default {
             },
         }
     },
-    width: (val = '') => {
+    width: (val = undefined) => {
         return {
             type: Number,
             default: val || 50,
@@ -50,7 +50,7 @@ export default {
             }
         }
     },
-    href: (val = '') => {
+    href: (val = undefined) => {
         return {
             type: String,
             default: val || '#',
@@ -59,7 +59,7 @@ export default {
             },
         }
     },
-    src: (val) => {
+    src: (val = undefined) => {
         return {
             type: String,
             default: val || '',
@@ -68,32 +68,47 @@ export default {
             },
         }
     },
-    text: (val) => {
+    text: (val = undefined) => {
         return {
-            type: String,
+            type: [String, Number, Boolean, Date],
             default: val || '',
-            
         }
     },
-    show: (val) => { 
+    value: (val = undefined) => { 
+        return {
+            type: [String, Number, Boolean, Date],
+            default: val || ''
+        }
+    },
+    content: () => { 
+        return {
+            type: Array,
+        }
+    },
+    items: () => {
+        return {
+            type: Object,
+        }
+     },
+    show: (val = undefined) => { 
         return {
             type: Boolean,
             default: val || false,
         }
     },
-    disabled: (val) => {
+    disabled: (val = undefined) => {
         return {
             type: Boolean,
             default: val || false,
         }
     },
-    active: (val) => {
+    active: (val = undefined) => {
         return {
             type: Boolean,
             default: val || false,
         }
     },
-    SrMessage: (val) => {
+    SrMessage: (val = undefined) => {
         return {
             type: String,
             default: val || '',
