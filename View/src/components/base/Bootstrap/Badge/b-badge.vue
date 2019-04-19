@@ -18,9 +18,9 @@ export default {
         SrMessage
     },
     props: {
-        color: utilities.props.color(),
-        href: utilities.props.href(),
-        SrMessage: utilities.props.SrMessage(),
+        color: utilities.props.color,
+        href: utilities.props.href,
+        SrMessage: utilities.props.SrMessage,
         pill: {
             type: Boolean,
             default: false,

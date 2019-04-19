@@ -8,12 +8,12 @@
     </div>
 </template>
 <script>
+import utilities from '@/components/utilities/index.js'
+
 export default {
     name: 'b-carousel-item',
     props: {
-        item: {
-            type: Object,
-        },
+        item: utilities.props.item,
     },
     computed: {
         imgSrc: function () {

@@ -48,12 +48,12 @@ export default {
         SrMessage,
     },
     props: {
-        color: utilities.props.color(),
-        href: utilities.props.href(),
-        size: utilities.props.size(),
-        active: utilities.props.active(),
-        disabled: utilities.props.disabled(),
-        SrMessage: utilities.props.SrMessage(),
+        color: utilities.props.color,
+        href: utilities.props.href,
+        size: utilities.props.size,
+        active: utilities.props.active,
+        disabled: utilities.props.disabled,
+        SrMessage: utilities.props.SrMessage,
         outline: {
             type: Boolean,
             default: false,

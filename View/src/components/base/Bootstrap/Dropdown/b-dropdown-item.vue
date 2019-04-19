@@ -8,10 +8,10 @@ import utilities from '@/components/utilities/index.js'
 export default {
     name: 'b-dropdown-item',
     props: {
-        href: utilities.props.href(),
-        text: utilities.props.text(),
-        active: utilities.props.active(),
-        disabled: utilities.props.disabled(),
+        href: utilities.props.href,
+        text: utilities.props.text,
+        active: utilities.props.active,
+        disabled: utilities.props.disabled,
     },
 }
 </script>

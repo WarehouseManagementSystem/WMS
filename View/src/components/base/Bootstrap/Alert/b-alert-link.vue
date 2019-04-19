@@ -6,7 +6,7 @@ import utilities from '@/components/utilities/index.js'
 export default {
     name: 'b-alert-link',
     props: {
-        href: utilities.props.href(),
+        href: utilities.props.href,
     },
 }
 </script>

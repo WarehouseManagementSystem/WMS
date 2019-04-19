@@ -18,7 +18,7 @@ import utilities from '@/components/utilities/index.js'
 export default {
     name: 'b-breadcrumb',
     props: {
-        content: utilities.props.content(),
+        content: utilities.props.content,
     },
 }
 </script>

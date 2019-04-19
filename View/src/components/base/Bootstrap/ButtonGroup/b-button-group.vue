@@ -14,7 +14,7 @@ import utilities from '@/components/utilities/index.js'
 export default {
     name: 'b-button-group',
     props: {
-        size: utilities.props.size(),
+        size: utilities.props.size,
         vertical: {
             type: Boolean,
             default: false,

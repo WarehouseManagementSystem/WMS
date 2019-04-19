@@ -14,7 +14,7 @@ import utilities from '@/components/utilities/index.js'
 export default {
     name: 'b-dropdown',
     props: {
-        set: utilities.props.set(),
+        set: utilities.props.set,
         'menu-set': {
             type: String,
             default: '',

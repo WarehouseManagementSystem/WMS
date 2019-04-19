@@ -7,7 +7,7 @@ import utilities from '@/components/utilities/index.js'
 export default {
     name: 'b-dropdown-item-text',
     props: {
-        text: utilities.props.text(),
+        text: utilities.props.text,
     },
 }
 </script>

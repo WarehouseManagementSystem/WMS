@@ -1,120 +1,93 @@
 import v from './variables'
 
 export default {
-    color: (val = undefined) => {
-        return {
-            type: String,
-            default: val || 'primary',
-            validator: (value) => {
-                // 这个值必须匹配下列字符串中的一个
-                return v.base.color.bg.includes(value)
-            },
+    color: {
+        type: String,
+        default: 'primary',
+        validator: (value) => {
+            // 这个值必须匹配下列字符串中的一个
+            return v.base.color.bg.includes(value)
         }
     },
-    size: (val = undefined) => {
-        return {
-            type: String,
-            default: val || '',
-            validator: (value) => {
-                // 这个值必须匹配下列字符串中的一个
-                return v.base.size.includes(value)
-            },
+    size: {
+        type: String,
+        default: '',
+        validator: (value) => {
+            // 这个值必须匹配下列字符串中的一个
+            return v.base.size.includes(value)
+        },
+    },
+    set: {
+        type: String,
+        default: 'down',
+        validator: (value) => {
+            // 这个值必须匹配下列字符串中的一个
+            return v.base.set.default.includes(value)
+        },
+    },
+    position: {
+        type: String,
+        default: 'top-center',
+        validator: (value) => {
+            // 这个值必须匹配下列字符串中的一个
+            return v.base.position.default.includes(value)
+        },
+    },
+    width: {
+        type: Number,
+        default: 50,
+        validator: (value) => {
+            return value > 0 && value <= 100
         }
     },
-    set: (val = undefined) => {
-        return {
-            type: String,
-            default: val || 'down',
-            validator: (value) => {
-                // 这个值必须匹配下列字符串中的一个
-                return v.base.set.default.includes(value)
-            },
-        }
+    href: {
+        type: String,
+        default: '#',
+        validator: function () {
+            return true
+        },
     },
-    position: (val = undefined) => {
-        return {
-            type: String,
-            default: val || 'top-center',
-            validator: (value) => {
-                // 这个值必须匹配下列字符串中的一个
-                return v.base.position.default.includes(value)
-            },
-        }
+    src: {
+        type: String,
+        default: '',
+        validator: function () {
+            return true
+        },
     },
-    width: (val = undefined) => {
-        return {
-            type: Number,
-            default: val || 50,
-            validator: (value) => {
-                return value > 0 && value <= 100
-            }
-        }
+    text: {
+        type: String,
+        default: '',
     },
-    href: (val = undefined) => {
-        return {
-            type: String,
-            default: val || '#',
-            validator: function () {
-                return true
-            },
-        }
+    value: {
+        type: String,
+        default: ''
     },
-    src: (val = undefined) => {
-        return {
-            type: String,
-            default: val || '',
-            validator: function () {
-                return true
-            },
-        }
+    content: {
+        type: Array,
     },
-    text: (val = undefined) => {
-        return {
-            type: [String, Number, Boolean, Date],
-            default: val || '',
-        }
+    list: {
+        type: Object,
     },
-    value: (val = undefined) => { 
-        return {
-            type: [String, Number, Boolean, Date],
-            default: val || ''
-        }
+    item: {
+        type: Object,
     },
-    content: () => { 
-        return {
-            type: Array,
-        }
+    show: {
+        type: Boolean,
+        default: false,
     },
-    items: () => {
-        return {
-            type: Object,
-        }
-     },
-    show: (val = undefined) => { 
-        return {
-            type: Boolean,
-            default: val || false,
-        }
+    disabled: {
+        type: Boolean,
+        default: false,
     },
-    disabled: (val = undefined) => {
-        return {
-            type: Boolean,
-            default: val || false,
-        }
+    active: {
+        type: Boolean,
+        default: false,
     },
-    active: (val = undefined) => {
-        return {
-            type: Boolean,
-            default: val || false,
-        }
-    },
-    SrMessage: (val = undefined) => {
-        return {
-            type: String,
-            default: val || '',
-            validator: function () {
-                return true
-            },
-        }
+    SrMessage: {
+        type: String,
+        default: '',
+        validator: function () {
+            return true
+        },
     },
 }

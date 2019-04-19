@@ -45,11 +45,11 @@ export default {
         }
     },
     props: {
-        show: utilities.props.show(),
-        color: utilities.props.color(),
-        width: utilities.props.width(),
-        position: utilities.props.position(),
-        SrMessage: utilities.props.SrMessage(),
+        show: utilities.props.show,
+        color: utilities.props.color,
+        width: utilities.props.width,
+        position: utilities.props.position,
+        SrMessage: utilities.props.SrMessage,
         dismissible: {
             type: Boolean,
             default: false,

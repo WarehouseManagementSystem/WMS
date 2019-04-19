@@ -8,7 +8,7 @@ import utilities from '@/components/utilities/index.js'
 export default {
     name: 'b-card-image',
     props: {
-        src: utilities.props.src(),
+        src: utilities.props.src,
         top: {
             type: Boolean,
             default: true,
