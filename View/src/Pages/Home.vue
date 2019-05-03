@@ -1,55 +1,42 @@
 <template>
   <div class="h-100 d-block">
-    <drop set="right">
-      <template #trigger>
-          Action
-      </template>
-      <template #menu>
-        <drop-item text="button" />
-        <drop-item text="button" />
-        <drop-item text="button" />
-        <drop-item text="button" />
-        <drop-text text="text" />
-        <drop-header text="header" />
-        <drop-line />
-      </template>
-    </drop>
-    <b-button></b-button>
+    <form class="was-validated" novalidate>
+      <div class="my-1">
+        <b-text id="text1" type="color" :aria-describedby="'HelpBlock-text1'" min="2" max="100" required></b-text>
+        <b-info state="success"><slot name="success"></slot>success</b-info>
+        <b-info state="error"><slot name="error"></slot>error</b-info>
+        <B-help :id="'HelpBlock-text1'" message="hello"></B-help>
+      </div>
+      <div class="col-auto my-1">
+        <b-text></b-text>
+      </div>
+      <div class="col-auto my-1">
+        <b-text></b-text>
+      </div>
+      <button type="submit">submit</button>
+    </form>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 
-import drop from '@/components/base/Bootstrap/Dropdown/b-dropdown.vue'
-import dropItem from '@/components/base/Bootstrap/Dropdown/b-dropdown-item.vue'
-import dropText from '@/components/base/Bootstrap/Dropdown/b-dropdown-item-text.vue'
-import dropHeader from '@/components/base/Bootstrap/Dropdown/b-dropdown-header.vue'
-import dropLine from '@/components/base/Bootstrap/Dropdown/b-dropdown-divider.vue'
-
-import bButton from '@/components/base/Bootstrap/Button/b-button.vue'
+import BText from '@/components/base/Bootstrap/FormConter/b-text.vue'
+import BHelp from '@/components/base/Bootstrap/FormConter/b-help-block'
+import BInfo from '@/components/base/Bootstrap/FormConter/b-valid-info'
 
 export default {
   name: 'HomePage',
   components: {
-    drop,
-    dropItem,
-    dropText,
-    dropHeader,
-    dropLine,
-    bButton,
+    BText,
+    BHelp,
+    BInfo,
   },
   data () {
     return {
-      items: [
-        
-      ],
     }
   },
   methods: {
-      click: function (str) {
-        alert(str)
-      }
   }
 }
 

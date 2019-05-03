@@ -9,6 +9,22 @@ export default {
             return v.base.color.bg.includes(value)
         }
     },
+    textColor: {
+        type: String,
+        default: 'body',
+        validator: (value) => {
+            // 这个值必须匹配下列字符串中的一个
+            return v.base.color.text.includes(value)
+        }
+    },
+    borderColor: {
+        type: String,
+        default: 'secondary',
+        validator: (value) => {
+            // 这个值必须匹配下列字符串中的一个
+            return v.base.border.color.includes(value)
+        }
+    },
     size: {
         type: String,
         default: '',
@@ -61,6 +77,18 @@ export default {
     value: {
         type: String,
         default: ''
+    },
+    label: {
+        type: String,
+    },
+    message: {
+        type: String,
+    },
+    success: {
+        type: String,
+    },
+    error: {
+        type: String,
     },
     content: {
         type: Array,

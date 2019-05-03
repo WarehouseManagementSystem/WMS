@@ -28,5 +28,11 @@ export default {
             // zh-CN
         ],
     }, // Locale config
+    ui: {
+        forms: {
+            // b-valid-info type: 'feedback'、'tooltip'
+            validInfoType: 'feedback',
+        }, // forms
+    }, // UI config
     // routes: routes, // routes config
 }

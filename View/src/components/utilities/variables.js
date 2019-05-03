@@ -25,7 +25,7 @@ const position = [ ...positionT, ...positionB ]
 // border
 const borders = ['border', ...[set.map(e => `border-${e}`)]]
 const border0 = borders.map(e => `${e}-0`)
-const borderColor = colors.map(e => `border border-${e}` )
+const borderColor = colors.map(e => `border-${e}` )
 const borderRadius = ['rounded', 'rounded-circle', 'rounded-pill', 'rounded-0', ...[set.map(e => `rounded-${e}`)]]
 const borderRadiusSize = size.map(e => `rounded-${e}`)
 
