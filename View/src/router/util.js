@@ -54,37 +54,37 @@ function FormatRouters(routers, SubsystemName = '', array = []) {
 }
 
 function FormatModels(routers, SubsystemName = '') { 
-    if (IsRouters(routers) && !routers.unDisplay) {
+    if (IsRouters(routers) && !routers.hide) {
         SubsystemName = FormatSubsystemName(routers, SubsystemName)
-        if (!routers.unDisplay) {
+        if (!routers.hide) {
             for (let i = 0; i < routers.Modules.length; i++) {
                 let item = routers.Modules[i]
-                if (IsPath(item) && !item.unDisplay) {
+                if (IsPath(item) && !item.hide) {
                     item.path = FormatPath(item, SubsystemName)
-                } else if (IsPath(item) && item.unDisplay) {
-                    // 连接为 unDisplay: true,
+                } else if (IsPath(item) && item.hide) {
+                    // 连接为 hide: true,
                     routers.Modules.splice(i, 1)
                     i--
-                } else if (IsRouters(item) && !(item.unDisplay || item.Modules.length == 0)) {
+                } else if (IsRouters(item) && !(item.hide || item.Modules.length == 0)) {
                     item = FormatModels(item, SubsystemName)
                     if (!IsRouters(item)) {
-                        // 子模块 均为 unDisplay: true,
+                        // 子模块 均为 hide: true,
                         routers.Modules.splice(i, 1)
                         i--
                     }
-                } else if (IsRouters(item) && (item.unDisplay || item.Modules.length == 0)) {
+                } else if (IsRouters(item) && (item.hide || item.Modules.length == 0)) {
                     routers.Modules.splice(i, 1)
                     i--
                 }
             }
         }
         if (routers.Modules.length == 0) {
-            // 子系统根结点没有设置 unDisplay: true, 
-            // 但所有子模块 和 链接 均设置为 unDisplay: true,
+            // 子系统根结点没有设置 hide: true, 
+            // 但所有子模块 和 链接 均设置为 hide: true,
             return {}
         }
     } else {
-        // 子系统根结点设置 unDisplay: true,
+        // 子系统根结点设置 hide: true,
         return {}
     }
    
@@ -92,13 +92,13 @@ function FormatModels(routers, SubsystemName = '') {
 }
 
 function GetRouters(routers) { 
-    return FormatRouters(util.clone(routers, false))
     // return FormatRouters(routers)
+    return FormatRouters(util.clone(routers, false))
 }
 
 function GetModels(models) {
-    return FormatModels(util.clone(models, false))
     // return FormatModels(models)
+    return FormatModels(util.clone(models, false))
 }
 
 export default {
