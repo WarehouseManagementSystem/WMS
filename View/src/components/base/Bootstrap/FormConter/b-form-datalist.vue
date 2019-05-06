@@ -9,7 +9,7 @@
 import utilities from '@/components/utilities/index.js'
 
 export default {
-    name: 'b-datalist',
+    name: 'b-form-datalist',
     props: {
         id: {
             type: String,

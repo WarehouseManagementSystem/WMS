@@ -22,8 +22,8 @@
 // @ is an alias to /src
 
 import BText from '@/components/base/Bootstrap/FormConter/b-text.vue'
-import BHelp from '@/components/base/Bootstrap/FormConter/b-help-block'
-import BInfo from '@/components/base/Bootstrap/FormConter/b-valid-info'
+import BHelp from '@/components/base/Bootstrap/FormConter/b-form-help'
+import BInfo from '@/components/base/Bootstrap/FormConter/b-form-info'
 
 export default {
   name: 'HomePage',

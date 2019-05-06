@@ -3,7 +3,7 @@
 </template>
 <script>
 export default {
-    name: 'b-help-block',
+    name: 'b-form-help',
     props: {
         message: {
             type: String,  

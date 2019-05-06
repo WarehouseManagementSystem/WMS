@@ -5,7 +5,7 @@
 import config from "@/config/index";
 
 export default {
-    name: 'b-valid-info',
+    name: 'b-form-info',
     props: {
         state: {
             type: String,
