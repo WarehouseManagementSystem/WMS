@@ -6,14 +6,18 @@ import utilities from '@/components/utilities/index.js'
 export default {
     form: {
         props: {
-            color: utilities.props.color = { default: 'transparent', },
+            color: utilities.props.color = { default: 'transparent' },
             textColor: utilities.props.textColor,
+            required: {
+                type: Boolean,
+                default: false,
+            },
             maxlength: {
                 type: Number,
-                default: 512,
+                default: 64,
                 validator: (value) => {
                     // 这个值必须匹配下列字符串中的一个
-                    return value > 0
+                    return value >= 0
                 },
             },
             minlength: {
@@ -21,7 +25,7 @@ export default {
                 default: 0,
                 validator: (value) => {
                     // 这个值必须匹配下列字符串中的一个
-                    return value > 0
+                    return value >= 0
                 },
             },
             max: {

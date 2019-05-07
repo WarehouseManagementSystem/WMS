@@ -4,6 +4,8 @@ import docStorage from './storage/installStorage_strict'
 import serviceWorker from './serviceWorker/serviceWorker'
 import random from './random'
 import dom from './dom'
+import string from './String'
+import regex from './regex'
 import { clone } from './clone'
 import circularJSON from 'circular-json'
 
@@ -26,4 +28,6 @@ export default {
     JSON: circularJSON,
     random: random,
     dom: dom,
+    string: string,
+    regex: regex,
 }

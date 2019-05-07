@@ -30,7 +30,7 @@ export default {
     }, // Locale config
     ui: {
         forms: {
-            // b-valid-info type: 'feedback'、'tooltip'
+            // b-form-info type: 'feedback'、'tooltip'
             validInfoType: 'feedback',
         }, // forms
     }, // UI config
