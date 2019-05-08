@@ -41,7 +41,6 @@ router.afterEach((to, from) => {
                 break
             }
         }
-        debugger
         if (!flag)  pathList.push({ pathInfo: to, index: ++maxHistory} )
     }
 })
@@ -75,7 +74,6 @@ export default {
         },
         // 关闭标签
         closeTab: function (willClose, type = '') {
-            debugger
             if (!(willClose && willClose.pathInfo)) return
             // 通过右键菜单调用
             if (type == 'rigthClick') this.rightContextHiden()

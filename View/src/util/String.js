@@ -14,4 +14,14 @@ export default {
         if (typeof (str) == 'number') context = 0
         return str.padEnd(lenght, context)
     },
+    toRegExp: function (str) { 
+        var regParts = str.match(/^\/(.*?)\/([gim]*)$/);
+        if (regParts) {
+            // the parsed pattern had delimiters and modifiers. handle them. 
+            return new RegExp(regParts[1], regParts[2]);
+        } else {
+            // we got pattern string without delimiters
+            return new RegExp(str);
+        }
+    }
 }

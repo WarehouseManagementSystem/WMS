@@ -1,5 +1,5 @@
 <template>
-    <div v-show="$slots.default && state" :class="objClass"><slot></slot></div>
+    <div v-show="$slots.default && state" :class="`${this.state}-${this.type}`"><slot></slot></div>
 </template>
 <script>
 import config from "@/config/index";
@@ -12,7 +12,7 @@ export default {
             required: true,
             validator: function (value) {
                 // 这个值必须匹配下列字符串中的一个
-                return ['success', 'error'].includes(value)
+                return ['valid', 'invalid'].includes(value)
             },
         },
         type: {
@@ -24,12 +24,6 @@ export default {
             },
         },
     },
-    computed: {
-        objClass: function () {
-            if (this.state == 'success') return `valid-${this.type}`
-            else if (this.state == 'error') return `invalid-${this.type}`
-            else return ''
-        },
-    },
+    
 }
 </script>

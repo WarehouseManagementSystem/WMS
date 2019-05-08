@@ -13,7 +13,7 @@ export default {
                 default: false,
             },
             maxlength: {
-                type: Number,
+                type: [String, Number],
                 default: 64,
                 validator: (value) => {
                     // 这个值必须匹配下列字符串中的一个
@@ -21,23 +21,26 @@ export default {
                 },
             },
             minlength: {
-                type: Number,
+                type: [String, Number],
                 default: 0,
                 validator: (value) => {
                     // 这个值必须匹配下列字符串中的一个
                     return value >= 0
                 },
             },
+            pattern: {
+                type: String,
+            },
             max: {
-                type: Number,
+                type: [String, Number],
                 default: 100,
             },
             min: {
-                type: Number,
+                type: [String, Number],
                 default: 0,
             },
             setup: {
-                type: Number,
+                type: [String, Number],
                 default: 1,
                 validator: (value) => {
                     // 这个值必须匹配下列字符串中的一个

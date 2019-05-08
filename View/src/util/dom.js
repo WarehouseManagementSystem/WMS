@@ -30,13 +30,13 @@ function hasClass(e, className) {
 function addClass(e, className) { 
     className = className.trim()
     if (hasClass(e, className)) return
-    e.classList ? e.classList.add(className) : e.className = ' ' + className
+    e.classList ? e.classList.add(className) : e.className += ' ' + className
 }
 
 function removeClass(e, className) { 
     className = className.trim()
     if (!hasClass(e, className)) return
-    e.classList ? e.classList.remove(className) : e.className.split(' ').remove(className).join(' ')
+    e.classList ? e.classList.remove(className) : e.className = e.className.replace(className, "");
 }
 
 export default {

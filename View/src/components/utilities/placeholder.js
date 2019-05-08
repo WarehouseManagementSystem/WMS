@@ -1,3 +1,4 @@
+// placeholder
 export default {
     email: 'Place enter your email',
     tel: 'Place enter your tel number',

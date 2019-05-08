@@ -34,6 +34,10 @@
 [Bootstrap forms]:                           https://getbootstrap.com/docs/4.3/components/forms/
 [formconter]:                               ../View/src/components/base/Bootstrap/FormConter
 
+2019-05-08
+
+* view 控件 [formconter] 完成 'text', 'password', 'search', 'email', 'url', 'tel', 'phone' finished
+
 2019-04-20 - 2019-05-07
 
 * view 控件 表单控件 [Bootstrap forms] [formconter] view template 部分
