@@ -1,8 +1,8 @@
 export default {
     // 正确返回字符长度（兼容 UTF-8 和 UTF-16）
     codePointLength: (text) => {
-        var result = text.match(/[\s\S]/gu);
-        return result ? result.length : 0;
+        var result = text.replace(/[^\x00-\xff]/g,"aa").length // text.match(/[\s\S]/gu);
+        return result ? result : 0;
     },
     // 向前补全字符串/格式提示
     padStart: (str, lenght = 0, context = ' ') => { 
