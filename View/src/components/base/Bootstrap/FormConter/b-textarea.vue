@@ -42,12 +42,6 @@ export default {
             default: false,
         },
         maxlength: utilities.props.maxlength = {default: 512,},
-        validInfo: {
-            type: String,
-        },
-        invalidInfo: {
-            type: String,
-        },
         showMessage: {
             type: Boolean,
             default: false,

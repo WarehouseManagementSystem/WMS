@@ -58,6 +58,12 @@ export default {
                 pattern: {
                     type: String,
                 },
+                validInfo: {
+                    type: String,
+                },
+                invalidInfo: {
+                    type: String,
+                },
             },
             methods: {
                 validator: function (e, regex = this.pattern) {

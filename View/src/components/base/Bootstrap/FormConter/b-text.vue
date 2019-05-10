@@ -28,12 +28,6 @@ export default {
         placeholder: {
             type: String,
         },
-        validInfo: {
-            type: String,
-        },
-        invalidInfo: {
-            type: String,
-        },
     },
     computed: {
         imputType: function () {

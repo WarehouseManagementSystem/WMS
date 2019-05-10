@@ -17,6 +17,10 @@
         <b-text type="phone"></b-text>
         <b-text type="url" required></b-text>
         <b-textarea invalid-info="success"></b-textarea>
+        <b-redio required></b-redio>
+        <!-- <b-redio required></b-redio> -->
+        <b-switch v-model="value"></b-switch>
+        {{ value }}
       </div>
     </form>
   </div>
@@ -27,19 +31,27 @@
 
 import BText from '@/components/base/Bootstrap/FormConter/b-text.vue'
 import BTextarea from '@/components/base/Bootstrap/FormConter/b-textarea.vue'
+// import BRedio from '@/components/base/Bootstrap/FormConter/b-radio-group.vue'
+import BSwitch from '@/components/base/Bootstrap/FormConter/b-switch.vue'
 
 export default {
   name: 'HomePage',
   components: {
     BText,
     BTextarea,
+    // BRedio,
+    BSwitch,
   },
   data () {
     return {
-      
+      value: false,
+      message: ''
     }
   },
   methods: {
+    change:function (e) {
+      console.log(e.target.value)
+    }
   }
 }
 
