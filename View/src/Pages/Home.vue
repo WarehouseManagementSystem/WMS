@@ -16,7 +16,7 @@
         <b-text type="tel"></b-text>
         <b-text type="phone"></b-text>
         <b-text type="url" required></b-text>
-        <b-textarea></b-textarea>
+        <b-textarea invalid-info="success"></b-textarea>
       </div>
     </form>
   </div>

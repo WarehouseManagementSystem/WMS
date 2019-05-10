@@ -6,6 +6,7 @@ import random from './random'
 import dom from './dom'
 import string from './string'
 import regex from './regex'
+import obj from './object'
 import { clone } from './clone'
 import circularJSON from 'circular-json'
 
@@ -30,4 +31,5 @@ export default {
     dom: dom,
     string: string,
     regex: regex,
+    obj: obj,
 }
