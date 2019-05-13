@@ -1,6 +1,6 @@
 <template>
   <div class="h-100 d-block">
-    <form class="needs-validation">
+    <form class="needs-validation" novalidate>
       <div class="my-1">
         <b-text type="text" minlength="5">
           <template #invalid-info>
@@ -17,8 +17,8 @@
         <b-text type="phone"></b-text>
         <b-text type="url" required></b-text>
         <b-textarea invalid-info="success"></b-textarea>
-        <b-redio required></b-redio>
-        <!-- <b-redio required></b-redio> -->
+        <b-redio name="a" required></b-redio>
+        <b-redio name="a" required></b-redio>
         <b-switch v-model="value"></b-switch>
         {{ value }}
       </div>
@@ -31,7 +31,7 @@
 
 import BText from '@/components/base/Bootstrap/FormConter/b-text.vue'
 import BTextarea from '@/components/base/Bootstrap/FormConter/b-textarea.vue'
-// import BRedio from '@/components/base/Bootstrap/FormConter/b-radio-group.vue'
+import BRedio from '@/components/base/Bootstrap/FormConter/b-radio.vue'
 import BSwitch from '@/components/base/Bootstrap/FormConter/b-switch.vue'
 
 export default {
@@ -39,7 +39,7 @@ export default {
   components: {
     BText,
     BTextarea,
-    // BRedio,
+    BRedio,
     BSwitch,
   },
   data () {

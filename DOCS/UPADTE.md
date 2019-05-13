@@ -34,6 +34,10 @@
 [Bootstrap forms]:                           https://getbootstrap.com/docs/4.3/components/forms/
 [formconter]:                               ../View/src/components/base/Bootstrap/FormConter
 
+2019-05-13
+
+* view 组件 [formconter] 完成 ‘radio’
+
 2019-05-09
 
 * viww 优化

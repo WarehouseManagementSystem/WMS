@@ -1,11 +1,9 @@
 <template>
     <div class="custom-control custom-radio">
         <input type="radio" class="custom-control-input" :id="id" v-bind="$attrs" v-on="inputListeners" @change="validator">
-        <template>
-            <b-info v-if="validInfo || Object.keys($scopedSlots).includes('valid-info')" state="valid"><slot name="valid-info">{{ validInfo }}</slot></b-info>
-            <b-info v-if="invalidInfo || Object.keys($scopedSlots).includes('invalid-info')" state="invalid"><slot name="invalid-info">{{ invalidInfo }}</slot></b-info>
-        </template>
-        <label class="custom-control-label" :for="id">Toggle this custom radio</label>
+        <b-info v-if="validInfo || Object.keys($scopedSlots).includes('valid-info')" state="valid"><slot name="valid-info">{{ validInfo }}</slot></b-info>
+        <b-info v-if="invalidInfo || Object.keys($scopedSlots).includes('invalid-info')" state="invalid"><slot name="invalid-info">{{ invalidInfo }}</slot></b-info>
+        <label class="custom-control-label" :for="id">{{ text }}</label>
     </div>
 </template>
 
@@ -16,12 +14,12 @@ import utilities from '@/components/utilities/index.js'
 import BInfo from './b-form-info'
 
 export default {
-    name: 'b-radio-group',
+    name: 'b-radio',
     inheritAttrs: false,
     mixins: [ utilities.mixins.form.base, utilities.mixins.form.validator ],
-    components: {  BInfo },
+    components: { BInfo },
     props: {
-        list: utilities.props.list,
+        text: utilities.props.text,
         id: {
             type: String,
             default: function () {
