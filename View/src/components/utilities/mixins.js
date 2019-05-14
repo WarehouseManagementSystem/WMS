@@ -115,25 +115,5 @@ export default {
                 },
             },
         },
-        range: {
-            props: {
-                min: {
-                    type: [String, Number],
-                    default: 0,
-                },
-                max: {
-                    type: [String, Number],
-                    default: 100,
-                },
-                setup: {
-                    type: [String, Number],
-                    default: 1,
-                    validator: (value) => {
-                        // 这个值必须匹配下列字符串中的一个
-                        return value > 0
-                    },
-                },
-            },
-        },
     },
 }

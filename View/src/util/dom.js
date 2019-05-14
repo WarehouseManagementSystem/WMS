@@ -39,6 +39,13 @@ function removeClass(e, className) {
     e.classList ? e.classList.remove(className) : e.className = e.className.replace(className, "");
 }
 
+function getDOMCoordinate(e) { 
+    return {
+        x: (e.pageX || e.clientX + (document.documentElement.scrollLeft || document.body.scrollLeft)) + 'px',
+        y: (e.pageY || e.clientY + (document.documentElement.scrollTop || document.body.scrollTop)) + 'px',
+    }
+}
+
 export default {
     addAttr,
     addAttrs,
@@ -46,4 +53,5 @@ export default {
     hasClass,
     addClass,
     removeClass,
+    getDOMCoordinate,
 }

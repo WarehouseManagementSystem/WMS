@@ -19,7 +19,8 @@
         <b-textarea invalid-info="success"></b-textarea>
         <b-redio name="a" required></b-redio>
         <b-redio name="a" required></b-redio>
-        <b-switch v-model="value"></b-switch>
+        <b-switch></b-switch>
+        <b-range v-model="value"></b-range>
         {{ value }}
       </div>
     </form>
@@ -33,6 +34,7 @@ import BText from '@/components/base/Bootstrap/FormConter/b-text.vue'
 import BTextarea from '@/components/base/Bootstrap/FormConter/b-textarea.vue'
 import BRedio from '@/components/base/Bootstrap/FormConter/b-radio.vue'
 import BSwitch from '@/components/base/Bootstrap/FormConter/b-switch.vue'
+import BRange from '@/components/base/Bootstrap/FormConter/b-range.vue'
 
 export default {
   name: 'HomePage',
@@ -41,10 +43,11 @@ export default {
     BTextarea,
     BRedio,
     BSwitch,
+    BRange,
   },
   data () {
     return {
-      value: false,
+      value: 10,
       message: ''
     }
   },

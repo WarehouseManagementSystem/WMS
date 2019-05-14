@@ -1,6 +1,6 @@
 <template>
     <div class="custom-control custom-radio">
-        <input type="radio" class="custom-control-input" :id="id" v-bind="$attrs" v-on="inputListeners" @change="validator">
+        <input type="radio" class="custom-control-input" :id="id" v-bind="$attrs" v-on="inputListeners">
         <b-info v-if="validInfo || Object.keys($scopedSlots).includes('valid-info')" state="valid"><slot name="valid-info">{{ validInfo }}</slot></b-info>
         <b-info v-if="invalidInfo || Object.keys($scopedSlots).includes('invalid-info')" state="invalid"><slot name="invalid-info">{{ invalidInfo }}</slot></b-info>
         <label class="custom-control-label" :for="id">{{ text }}</label>
