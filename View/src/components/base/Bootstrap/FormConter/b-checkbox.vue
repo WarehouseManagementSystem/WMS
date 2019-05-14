@@ -1,6 +1,6 @@
 <template>
-    <div class="custom-control custom-radio" :class="{ 'custom-control-inline': inline}">
-        <input type="radio" class="custom-control-input" :class="objClass" :id="id" v-bind="$attrs" v-on="inputListeners">
+    <div class="custom-control custom-checkbox" :class="{ 'custom-control-inline': inline}">
+        <input type="checkbox" class="custom-control-input" :class="objClass" :id="id" v-bind="$attrs" v-on="inputListeners">
         <b-info v-if="validInfo || Object.keys($scopedSlots).includes('valid-info')" state="valid"><slot name="valid-info">{{ validInfo }}</slot></b-info>
         <b-info v-if="invalidInfo || Object.keys($scopedSlots).includes('invalid-info')" state="invalid"><slot name="invalid-info">{{ invalidInfo }}</slot></b-info>
         <label class="custom-control-label" :for="id">{{ text }}</label>
@@ -14,25 +14,17 @@ import utilities from '@/components/utilities/index.js'
 import BInfo from './b-form-info'
 
 export default {
-    name: 'b-radio',
+    name: 'b-checkbox',
     inheritAttrs: false,
     mixins: [ utilities.mixins.form.base, utilities.mixins.form.validator ],
     components: { BInfo },
-    model: {
-        prop: 'checked',
-        event: 'input'
-    },
     props: {
         text: utilities.props.text,
         id: {
             type: String,
             default: function () {
-                return 'Radio-' + util.random.getRandomString()
+                return 'Checkbox-' + util.random.getRandomString()
             }
-        },
-        checked: {
-            type: Boolean,
-            default: false,
         },
         inline: {
             type: Boolean,
@@ -40,7 +32,7 @@ export default {
         },
     },
     computed: {
-        inputListeners: function () {
+      inputListeners: function () {
             var vm = this
             // `Object.assign` 将所有的对象合并为一个新对象
             return Object.assign({},
@@ -50,12 +42,12 @@ export default {
                 // 或覆写一些监听器的行为
                 {
                     // 这里确保组件配合 `v-model` 的工作
-                    change: function (event) {
-                        vm.$emit('input', event.target.value)
+                    input: function (event) {
+                        vm.$emit('input', event.target.checked)
                     }
                 }
             )
-        },
+        },  
     },
     methods: {
         validator: function (e) {
@@ -69,3 +61,4 @@ export default {
     },
 }
 </script>
+

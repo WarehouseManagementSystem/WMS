@@ -17,10 +17,13 @@
         <b-text type="phone"></b-text>
         <b-text type="url" required></b-text>
         <b-textarea invalid-info="success"></b-textarea>
-        <b-redio name="a" required></b-redio>
-        <b-redio name="a" required></b-redio>
+        <b-radio name="a" value="a1" true-value="yes" false-value="no" required inline></b-radio>
+        <b-radio name="a" value="a2" true-value="yes" false-value="no" required inline></b-radio>
         <b-switch></b-switch>
-        <b-range v-model="value"></b-range>
+        <b-range></b-range>
+        <b-checkbox text="a" inline></b-checkbox>
+        <b-checkbox text="b" inline></b-checkbox>
+        <b-checkbox text="c" inline v-model="value"></b-checkbox>
         {{ value }}
       </div>
     </form>
@@ -32,29 +35,36 @@
 
 import BText from '@/components/base/Bootstrap/FormConter/b-text.vue'
 import BTextarea from '@/components/base/Bootstrap/FormConter/b-textarea.vue'
-import BRedio from '@/components/base/Bootstrap/FormConter/b-radio.vue'
+import BRadio from '@/components/base/Bootstrap/FormConter/b-radio.vue'
 import BSwitch from '@/components/base/Bootstrap/FormConter/b-switch.vue'
 import BRange from '@/components/base/Bootstrap/FormConter/b-range.vue'
+import BCheckbox from '@/components/base/Bootstrap/FormConter/b-checkbox.vue'
 
 export default {
   name: 'HomePage',
   components: {
     BText,
     BTextarea,
-    BRedio,
+    BRadio,
     BSwitch,
     BRange,
+    BCheckbox,
   },
   data () {
     return {
-      value: 10,
-      message: ''
+      value: false,
+      message: '',
     }
   },
+  computed: {
+    
+  },
   methods: {
-    change:function (e) {
-      console.log(e.target.value)
-    }
+  },
+  watch: {
+    value: function (val) {
+      console.log(val)
+    },
   }
 }
 

@@ -37,6 +37,7 @@
 2019-05-14
 
 * view 控件 [formconter] 完成 ‘range’
+* view 控件 [formconter] 完成 'checkbox'
 
 2019-05-13
 
