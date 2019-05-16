@@ -22,7 +22,9 @@
         <b-switch></b-switch>
         <b-range></b-range>
         <b-checkbox text="c"></b-checkbox>
-        <b-file @change:upload="change" multiple></b-file>
+        <b-file multiple></b-file>
+        <b-image width="100" height="30" src="https://raw.githubusercontent.com/mdn/learning-area/master/html/forms/image-type-example/login.png"></b-image>
+        <b-hidden></b-hidden>
         {{ value }}
       </div>
     </form>
@@ -39,6 +41,8 @@ import BSwitch from '@/components/base/Bootstrap/FormConter/b-switch.vue'
 import BRange from '@/components/base/Bootstrap/FormConter/b-range.vue'
 import BCheckbox from '@/components/base/Bootstrap/FormConter/b-checkbox.vue'
 import BFile from '@/components/base/Bootstrap/FormConter/b-file.vue'
+import BImage from '@/components/base/Bootstrap/FormConter/b-image.vue'
+import BHidden from '@/components/base/Bootstrap/FormConter/b-hidden.vue'
 
 export default {
   name: 'HomePage',
@@ -50,10 +54,12 @@ export default {
     BRange,
     BCheckbox,
     BFile,
+    BImage,
+    BHidden,
   },
   data () {
     return {
-      value: '',
+      value: 'a',
       message: '',
     }
   },
@@ -61,10 +67,7 @@ export default {
     
   },
   methods: {
-    change: function (files, fileName) {
-      console.log(files)
-      this.value = fileName
-    }
+  
   },
   watch: {
     

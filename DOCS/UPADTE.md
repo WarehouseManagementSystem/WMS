@@ -34,6 +34,11 @@
 [Bootstrap forms]:                           https://getbootstrap.com/docs/4.3/components/forms/
 [formconter]:                               ../View/src/components/base/Bootstrap/FormConter
 
+2019-05-16
+
+* view 控件 [formconter] 完成 'file'
+* view 控件 [formconter] 完成 'image', 'hidden'
+
 2019-05-14
 
 * view 控件 [formconter] 完成 ‘range’
