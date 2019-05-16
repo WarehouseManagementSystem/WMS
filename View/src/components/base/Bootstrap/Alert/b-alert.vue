@@ -133,7 +133,6 @@ export default {
                     this.close()
                     return
                 }
-                console.log(countDownSec)
                 countDownSec--
             }, 1000)
         }

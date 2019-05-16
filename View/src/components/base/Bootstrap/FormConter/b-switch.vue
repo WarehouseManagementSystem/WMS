@@ -39,7 +39,6 @@ export default {
                 {
                     // 这里确保组件配合 `v-model` 的工作
                     change: function (event) {
-                        debugger
                         vm.$emit('input', event.target.checked)
                     }
                 }

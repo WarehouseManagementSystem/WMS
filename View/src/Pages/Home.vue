@@ -21,9 +21,8 @@
         <b-radio name="a" value="a2" true-value="yes" false-value="no" required inline></b-radio>
         <b-switch></b-switch>
         <b-range></b-range>
-        <b-checkbox text="a" inline></b-checkbox>
-        <b-checkbox text="b" inline></b-checkbox>
-        <b-checkbox text="c" inline v-model="value"></b-checkbox>
+        <b-checkbox text="c"></b-checkbox>
+        <b-file @change:upload="change" multiple></b-file>
         {{ value }}
       </div>
     </form>
@@ -39,6 +38,7 @@ import BRadio from '@/components/base/Bootstrap/FormConter/b-radio.vue'
 import BSwitch from '@/components/base/Bootstrap/FormConter/b-switch.vue'
 import BRange from '@/components/base/Bootstrap/FormConter/b-range.vue'
 import BCheckbox from '@/components/base/Bootstrap/FormConter/b-checkbox.vue'
+import BFile from '@/components/base/Bootstrap/FormConter/b-file.vue'
 
 export default {
   name: 'HomePage',
@@ -49,10 +49,11 @@ export default {
     BSwitch,
     BRange,
     BCheckbox,
+    BFile,
   },
   data () {
     return {
-      value: false,
+      value: '',
       message: '',
     }
   },
@@ -60,11 +61,13 @@ export default {
     
   },
   methods: {
+    change: function (files, fileName) {
+      console.log(files)
+      this.value = fileName
+    }
   },
   watch: {
-    value: function (val) {
-      console.log(val)
-    },
+    
   }
 }
 
