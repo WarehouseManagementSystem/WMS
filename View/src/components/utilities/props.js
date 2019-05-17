@@ -90,11 +90,8 @@ export default {
     error: {
         type: String,
     },
-    content: {
-        type: Array,
-    },
     list: {
-        type: Object,
+        type: Array,
     },
     item: {
         type: Object,

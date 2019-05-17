@@ -1,9 +1,16 @@
 <template>
     <div class="custom-control custom-radio" :class="{ 'custom-control-inline': inline}">
-        <input type="radio" class="custom-control-input" :class="objClass" :id="id" v-bind="$attrs" v-on="inputListeners">
+        <input 
+            type="radio" 
+            class="custom-control-input" 
+            :id="id" 
+            v-bind="$attrs" 
+            :checked="checked" 
+            :aria-checked="checked" 
+            v-on="inputListeners">
         <b-info v-if="validInfo || Object.keys($scopedSlots).includes('valid-info')" state="valid"><slot name="valid-info">{{ validInfo }}</slot></b-info>
         <b-info v-if="invalidInfo || Object.keys($scopedSlots).includes('invalid-info')" state="invalid"><slot name="invalid-info">{{ invalidInfo }}</slot></b-info>
-        <label class="custom-control-label" :for="id">{{ text }}</label>
+        <label class="custom-control-label" :class="objClass" :for="id">{{ text }}</label>
     </div>
 </template>
 

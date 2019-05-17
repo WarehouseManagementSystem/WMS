@@ -2,7 +2,7 @@
   <div class="h-100 d-block">
     <form class="needs-validation" novalidate>
       <div class="my-1">
-        <b-text type="text" minlength="5">
+        <b-text type="text" minlength="5" invalid-info="e">
           <template #invalid-info>
             error
           </template>
@@ -25,6 +25,7 @@
         <b-file multiple></b-file>
         <b-image width="100" height="30" src="https://raw.githubusercontent.com/mdn/learning-area/master/html/forms/image-type-example/login.png"></b-image>
         <b-hidden></b-hidden>
+        <b-redio-group :list="list" name="abc" inline v-model="value"></b-redio-group>
         {{ value }}
       </div>
     </form>
@@ -43,6 +44,7 @@ import BCheckbox from '@/components/base/Bootstrap/FormConter/b-checkbox.vue'
 import BFile from '@/components/base/Bootstrap/FormConter/b-file.vue'
 import BImage from '@/components/base/Bootstrap/FormConter/b-image.vue'
 import BHidden from '@/components/base/Bootstrap/FormConter/b-hidden.vue'
+import BRedioGroup from '@/components/base/Bootstrap/FormConter/b-radio-group.vue'
 
 export default {
   name: 'HomePage',
@@ -56,11 +58,18 @@ export default {
     BFile,
     BImage,
     BHidden,
+    BRedioGroup,
   },
   data () {
     return {
-      value: 'a',
+      value: 'v-d',
       message: '',
+      list: [
+        { text: 'a', value: 'v-a', },
+        { text: 'b', value: 'v-b', },
+        { text: 'c', value: 'v-c', disabled: true },
+        { text: 'd', value: 'v-d', checked: true },
+      ],
     }
   },
   computed: {
