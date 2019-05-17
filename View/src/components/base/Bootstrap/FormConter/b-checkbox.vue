@@ -1,9 +1,16 @@
 <template>
     <div class="custom-control custom-checkbox" :class="{ 'custom-control-inline': inline}">
-        <input type="checkbox" class="custom-control-input" :class="objClass" :id="id" v-bind="$attrs" v-on="inputListeners">
+        <input 
+            type="checkbox" 
+            class="custom-control-input" 
+            :id="id" 
+            :checked="checked" 
+            :aria-checked="checked" 
+            v-bind="$attrs" 
+            v-on="inputListeners">
         <b-info v-if="validInfo || Object.keys($scopedSlots).includes('valid-info')" state="valid"><slot name="valid-info">{{ validInfo }}</slot></b-info>
         <b-info v-if="invalidInfo || Object.keys($scopedSlots).includes('invalid-info')" state="invalid"><slot name="invalid-info">{{ invalidInfo }}</slot></b-info>
-        <label class="custom-control-label" :for="id">{{ text }}</label>
+        <label class="custom-control-label" :class="objClass" :for="id">{{ text }}</label>
     </div>
 </template>
 
@@ -25,6 +32,10 @@ export default {
             default: function () {
                 return 'Checkbox-' + util.random.getRandomString()
             }
+        },
+        checked: {
+            type: Boolean,
+            default: false,
         },
         inline: {
             type: Boolean,

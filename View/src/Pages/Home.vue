@@ -25,7 +25,8 @@
         <b-file multiple></b-file>
         <b-image width="100" height="30" src="https://raw.githubusercontent.com/mdn/learning-area/master/html/forms/image-type-example/login.png"></b-image>
         <b-hidden></b-hidden>
-        <b-redio-group :list="list" name="abc" inline v-model="value"></b-redio-group>
+        <b-redio-group :list="list" name="abc" inline ></b-redio-group>
+        <b-checkbox-group :list="list" name="abcd" v-model="value" ></b-checkbox-group>
         {{ value }}
       </div>
     </form>
@@ -45,6 +46,7 @@ import BFile from '@/components/base/Bootstrap/FormConter/b-file.vue'
 import BImage from '@/components/base/Bootstrap/FormConter/b-image.vue'
 import BHidden from '@/components/base/Bootstrap/FormConter/b-hidden.vue'
 import BRedioGroup from '@/components/base/Bootstrap/FormConter/b-radio-group.vue'
+import BCheckboxGroup from '@/components/base/Bootstrap/FormConter/b-checkbox-group.vue'
 
 export default {
   name: 'HomePage',
@@ -59,10 +61,11 @@ export default {
     BImage,
     BHidden,
     BRedioGroup,
+    BCheckboxGroup,
   },
   data () {
     return {
-      value: 'v-d',
+      value: ['v-d'],
       message: '',
       list: [
         { text: 'a', value: 'v-a', },
@@ -79,7 +82,10 @@ export default {
   
   },
   watch: {
-    
+    value: function (val) {
+      
+      console.log(val)
+    }
   }
 }
 

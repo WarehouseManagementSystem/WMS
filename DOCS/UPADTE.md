@@ -37,6 +37,7 @@
 2019-05-17
 
 * view 控件 [formconter] 完成 'radio-group'
+* view 控件 [formconter] 完成 'checkbox-group'
 
 2019-05-16
 
