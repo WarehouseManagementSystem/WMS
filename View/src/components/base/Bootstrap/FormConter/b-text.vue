@@ -1,6 +1,15 @@
 <template>
     <div>
-        <input :type="imputType" class="form-control" :class="objClass" :placeholder="fillPlaceholder" v-bind="$attrs" v-on="inputListeners" @blur="validator($event, regex)"/>
+        <input 
+            :type="imputType" 
+            class="form-control" 
+            :class="[objClass, readonlyClass]" 
+            :placeholder="fillPlaceholder" 
+            :readonly="readonly" 
+            :aria-readonly="readonly" 
+            v-bind="$attrs" 
+            v-on="inputListeners" 
+            @blur="validator($event, regex)"/>
         <b-info v-if="validInfo || Object.keys($scopedSlots).includes('valid-info')" state="valid"><slot name="valid-info">{{ validInfo }}</slot></b-info>
         <b-info v-if="invalidInfo || Object.keys($scopedSlots).includes('invalid-info')" state="invalid"><slot name="invalid-info">{{ invalidInfo }}</slot></b-info>
     </div>
@@ -14,7 +23,7 @@ import BInfo from './b-form-info'
 export default {
     name: 'b-text',
     inheritAttrs: false,
-    mixins: [ utilities.mixins.form.base, utilities.mixins.form.validator ],
+    mixins: [ utilities.mixins.form.base, utilities.mixins.form.readonly, utilities.mixins.form.validator ],
     components: {  BInfo },
     props: {
         type: {

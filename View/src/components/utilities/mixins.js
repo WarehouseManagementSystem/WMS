@@ -10,10 +10,13 @@ export default {
             props: {
                 color: props.color = { default: 'transparent' },
                 textColor: props.textColor,
+                size: props.size,
             },
             computed: {
                 objClass: function () {
-                    return `bg-${this.color} text-${this.textColor}`
+                    let size = ''
+                    if (this.size) size = `form-control-${this.size}`
+                    return `bg-${this.color} text-${this.textColor} ${size}`
                 },
                 inputListeners: function () {
                     var vm = this
@@ -112,6 +115,16 @@ export default {
                         return false
                     }
                     return true
+                },
+            },
+        },
+        readonly: {
+            props: {
+                readonly: props.readonly,
+            },
+            computed: {
+                readonlyClass: function () { 
+                    return this.readonly ? 'form-control-plaintext' : ''
                 },
             },
         },

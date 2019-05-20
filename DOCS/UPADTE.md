@@ -34,6 +34,10 @@
 [Bootstrap forms]:                           https://getbootstrap.com/docs/4.3/components/forms/
 [formconter]:                               ../View/src/components/base/Bootstrap/FormConter
 
+2019-05-20
+
+* view 控件 [formconter] 添加 readonly attr
+
 2019-05-17
 
 * view 控件 [formconter] 完成 'radio-group'

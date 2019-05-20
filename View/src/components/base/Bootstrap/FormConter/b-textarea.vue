@@ -1,6 +1,17 @@
 <template>
     <div>
-        <textarea ref="textarea" class="form-control" :class="objClass" :style="objStyle" :rows="rows" :cols="cols" v-bind="$attrs" v-on="inputListeners" @input.stop="change" @blur="validator"/>
+        <textarea 
+            class="form-control" 
+            :class="[objClass, readonlyClass]" 
+            :style="objStyle" 
+            :rows="rows" 
+            :cols="cols" 
+            :readonly="readonly" 
+            :aria-readonly="readonly" 
+            v-bind="$attrs" 
+            v-on="inputListeners" 
+            @input.stop="change" 
+            @blur="validator"/>
         <b-info v-if="validInfo || Object.keys($scopedSlots).includes('valid-info')" state="valid"><slot name="valid-info">{{ validInfo }}</slot></b-info>
         <b-info v-if="invalidInfo || Object.keys($scopedSlots).includes('invalid-info')" state="invalid"><slot name="invalid-info">{{ invalidInfo }}</slot></b-info>
         <b-help v-if="showMessage" :message="message"></b-help>
@@ -16,7 +27,7 @@ import BHelp from './b-form-help.vue'
 export default {
     name: 'b-textarea',
     inheritAttrs: false,
-    mixins: [ utilities.mixins.form.base, utilities.mixins.form.validator ],
+    mixins: [ utilities.mixins.form.base, utilities.mixins.form.readonly, utilities.mixins.form.validator ],
     components: {  BInfo, BHelp, },
     data () {
         return {
