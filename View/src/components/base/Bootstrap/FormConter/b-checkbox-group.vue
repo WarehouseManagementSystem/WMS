@@ -2,13 +2,15 @@
     <div>
         <template  v-for="(item, index) in list">
             <checkbox
-                :key="index"
+                :id="item.id"
+                :key="item.key ? item.key : (item.id ? item.id : index)" 
                 v-bind="$attrs" 
+                :color="color" 
+                :text-color="textColor" 
                 :text="item.text" 
                 :value="item.value" 
-                :checked="item.checked" 
+                :checked="checkedValues.includes(item.value)" 
                 :disabled="item.disabled" 
-                :aria-disabled="item.disabled" 
                 v-on="inputListeners" 
                 @change.stop="getCheckedValues">
                 <template v-if="list.length == index && (validInfo || Object.keys($scopedSlots).includes('valid-info'))" #valid-info>
@@ -60,7 +62,6 @@ export default {
     },
     methods: {
         getCheckedValues: function (e) {
-            debugger
             if (e.target.checked) {
                 this.checkedValues.push(e.target.value)
             } else {

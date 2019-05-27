@@ -92,6 +92,9 @@ export default {
     },
     list: {
         type: Array,
+        default: function () { 
+            return []
+        },
     },
     item: {
         type: Object,

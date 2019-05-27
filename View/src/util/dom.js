@@ -6,6 +6,22 @@ function addAttr (e, attr, value) {
     e.setAttribute && e.setAttribute(attr, value)
     e.createAttribute && e.createAttribute(attr, value)
 }
+function hasAttr(e, attr) { 
+    if (!e) return
+    if (e.attributes) { 
+        return e.hasAttribute && e.hasAttribute(attr)
+    }
+    return e.includes && e.includes(attr)
+}
+function removeAttr(e, attr) { 
+    if (!e) return
+    if (!hasAttr(e, attr)) return
+    if (e.attributes) {
+        e.removeAttribute && e.removeAttribute(attr)
+        return
+    }
+    e.includes && e.splice(e.indexOf(attr), 1)
+}
 function addAttrs (e, attrs) {
     if (!attrs) return
     for (const item of Object.entries(attrs)) {
@@ -48,6 +64,8 @@ function getDOMCoordinate(e) {
 
 export default {
     addAttr,
+    hasAttr,
+    removeAttr,
     addAttrs,
     addElement,
     hasClass,

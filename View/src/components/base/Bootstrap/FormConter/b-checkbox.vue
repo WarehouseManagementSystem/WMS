@@ -4,10 +4,13 @@
             type="checkbox" 
             class="custom-control-input" 
             :id="id" 
+            ref="checkbox" 
             :checked="checked" 
             :aria-checked="checked" 
+            :disabled="disabled" 
+            :aria-disabled="disabled" 
             v-bind="$attrs" 
-            v-on="inputListeners">
+            v-on="inputListeners" >
         <b-info v-if="validInfo || Object.keys($scopedSlots).includes('valid-info')" state="valid"><slot name="valid-info">{{ validInfo }}</slot></b-info>
         <b-info v-if="invalidInfo || Object.keys($scopedSlots).includes('invalid-info')" state="invalid"><slot name="invalid-info">{{ invalidInfo }}</slot></b-info>
         <label class="custom-control-label" :class="objClass" :for="id">{{ text }}</label>
@@ -25,6 +28,10 @@ export default {
     inheritAttrs: false,
     mixins: [ utilities.mixins.form.base, utilities.mixins.form.validator ],
     components: { BInfo },
+    model: {
+        prop: 'checked',
+        event: 'input'
+    },
     props: {
         text: utilities.props.text,
         id: {
@@ -37,13 +44,21 @@ export default {
             type: Boolean,
             default: false,
         },
+        disabled: {
+            type: Boolean,
+            default: false,
+        },
         inline: {
             type: Boolean,
             default: false,
         },
+        indeterminate: {
+            type: Number,
+            default: 0,
+        },
     },
     computed: {
-      inputListeners: function () {
+        inputListeners: function () {
             var vm = this
             // `Object.assign` 将所有的对象合并为一个新对象
             return Object.assign({},
@@ -58,7 +73,10 @@ export default {
                     }
                 }
             )
-        },  
+        },
+    },
+    mounted () {
+        this.setIndeterminate(this.indeterminate)
     },
     methods: {
         validator: function (e) {
@@ -69,7 +87,25 @@ export default {
             util.dom.removeClass(e.target, 'is-invalid')
             this.$emit('valid')
         },
+        setIndeterminate: function (val) {
+            if (!val) return
+            if (val == 0) {
+                if (this.$refs.checkbox.indeterminate) this.$refs.checkbox.indeterminate = false
+                this.$refs.checkbox.checked = false
+            } else if (val == 1) {
+                util.dom.addAttr(this.$refs.checkbox, 'indeterminate', 'true')
+            } else {
+                if (this.$refs.checkbox.indeterminate) this.$refs.checkbox.indeterminate = false
+                this.$refs.checkbox.checked = true
+            }
+        }
+        
     },
+    watch: {
+        indeterminate: function (val) {
+            this.setIndeterminate(val)
+        },
+    }
 }
 </script>
 

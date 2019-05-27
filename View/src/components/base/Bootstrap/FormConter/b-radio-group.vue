@@ -6,7 +6,8 @@
                 v-bind="$attrs" 
                 :text="item.text" 
                 :value="item.value" 
-                :checked="item.checked" 
+                :checked="value == item.value" 
+                :aria-checked="value == item.value" 
                 :disabled="item.disabled" 
                 :aria-disabled="item.disabled" 
                 v-on="inputListeners">
@@ -37,6 +38,9 @@ export default {
     },
     props: {
         list: utilities.props.list,
+        value: {
+            type: String,
+        },
     },
     computed: {
         inputListeners: function () {
