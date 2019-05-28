@@ -10,11 +10,10 @@
                 v-bind="$attrs" 
                 :color="color" 
                 :text-color="textColor" 
-                :text="item.text" 
                 :value="item.value" 
-                :checked="checked" 
-                :disabled="item.disabled" 
-                :aria-disabled="item.disabled" 
+                :text="item.text ? item.text : item.value" 
+                :checked="isChecked" 
+                :disabled="disabled ? disabled : item.disabled" 
                 :indeterminate="indeterminate" 
                 v-on="inputListeners" 
                 @change.stop="change"></checkbox>
@@ -23,10 +22,12 @@
             <item 
                 class="mx-4" 
                 v-for="(child, index) in item.children" 
-                :key="index"
-                v-show="open" 
+                :key="index" 
+                ref="child"
                 :item="child" 
-                :checkAll="isCheckAll" 
+                :checked="isChecked" 
+                :disabled="disabled ? disabled : item.disabled" 
+                v-show="showFirstNode ? showFirstNode : open" 
                 v-model="checkedValues" ></item>
         </template>
     </div> 
@@ -54,7 +55,15 @@ export default {
     },
     props: {
         item: utilities.props.item,
-        checkAll: {
+        checked: {
+            type: Boolean,
+            default: false,
+        },
+        disabled: {
+            type: Boolean,
+            default: false,
+        },
+        showFirstNode: {
             type: Boolean,
             default: false,
         },
@@ -64,37 +73,26 @@ export default {
         isFolder: function () {
             return this.item.children && this.item.children.length && this.item.children.length > 0
         },
-        itemCheckedValues: function () {
-            debugger
-            let values = []
-            if (!this.isFolder) return values
-            for (const child of this.item.children) {
-                if (this.checkedValues.includes(child.value)) values.push(child.value)
-            }
-            return values
+        isChecked: function () {
+            return this.checkedValues.includes(this.item.value) || this.checked
         },
         indeterminate: function () {
-            if (!this.itemCheckedValues || this.itemCheckedValues.length == 0) {
-                return 0 // 未选择
-            } else if (this.itemCheckedValues.length == this.item.children.length) {
-                return 2 // 全选
-            } else {
-                return 1 // 部分选择
-            }
-        },
-        isCheckAll: function () {
+            // 0 - 未 选 择
+            // 1 - 部分选择
+            // 2 - 全选
+            if (this.isChecked) return 2
             if (this.isFolder) {
-                if (this.checkedValues.includes(this.item.value)) {
-                    for (const child of this.item.children) {
-                        util.array.push(this.checkedValues, child.value)
+                let n = 0
+                for (const child of this.item.children) {
+                    if (this.checkedValues.includes(child.value)) {
+                        n++
                     }
                 }
-                return this.checkedValues.includes(this.item.value)
+                if (n == 0) return 0
+                else if (n == this.item.children.length) return 2
+                else return 1
             }
-            return false
-        },
-        checked: function () {
-            return this.checkAll ? true : this.checkedValues.includes(this.item.value)
+            return 0
         },
         inputListeners: function () {
             var vm = this
@@ -115,26 +113,7 @@ export default {
     },
     methods: {
         change: function (e) {
-            this.getCheckedValues(e)
-        },
-        getCheckedValues: function (e) {
-            if (e.target.checked) {
-                if (!this.isFolder) {
-                    this.checkedValues.push(e.target.value)
-                } else {
-                    util.array.splice(this.checkedValues, e.target.value)
-                    for (const child of this.item.children) {
-                        util.array.push(this.checkedValues, child.value)
-                    }
-                }
-            } else {
-                util.array.splice(this.checkedValues, e.target.value)
-                if (this.isFolder) {
-                    for (const child of this.item.children) {
-                        util.array.splice(this.checkedValues, child.value)
-                    }
-                }
-            }
+            //this.getCheckedValues(e)
         },
     },
 }

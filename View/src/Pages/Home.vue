@@ -27,10 +27,12 @@
         <b-hidden></b-hidden>
         <b-redio-group :list="list1" name="abc" inline></b-redio-group>
         <b-checkbox-group :list="list1" v-model="value2" name="abcd"></b-checkbox-group>
-        <b-checkbox-tree :list="list" v-model="value3"></b-checkbox-tree>
+        <b-checkbox-tree :list="list" v-model="value3" ></b-checkbox-tree>
+        <b-select :list="list1" required></b-select>
         {{ value1 }}<br />
         {{ value2 }}<br />
         {{ value3 }}<br />
+        {{ selected }}<br />
       </div>
     </form>
   </div>
@@ -51,6 +53,7 @@ import BHidden from '@/components/base/Bootstrap/FormConter/b-hidden.vue'
 import BRedioGroup from '@/components/base/Bootstrap/FormConter/b-radio-group.vue'
 import BCheckboxGroup from '@/components/base/Bootstrap/FormConter/b-checkbox-group.vue'
 import BCheckboxTree from '@/components/base/Bootstrap/FormConter/b-checkbox-tree.vue'
+import BSelect from '@/components/base/Bootstrap/FormConter/b-select.vue'
 
 export default {
   name: 'HomePage',
@@ -67,47 +70,68 @@ export default {
     BRedioGroup,
     BCheckboxGroup,
     BCheckboxTree,
+    BSelect,
   },
   data () {
     return {
       value1: true,
       value2: ['1-b',],
-      value3: ['1-b', '2-a', '2-b', '2-c', '2-d', '1-c', '4-c'],
+      value3: ['A','A-1-1-1', 'B-1-1', 'C-1', 'D'],
+      selected: '1-a',
       message: '',
       list: [
-        { text: '1-a', value: '1-a', 
+        { value: 'A', text: 'A', 
           children: [
-            { text: '2-a', value: '2-a', },
-            { text: '2-b', value: '2-b', },
-            { text: '2-c', value: '2-c', },
-            { text: '2-d', value: '2-d', },
-          ],},
-        { text: '1-b', value: '1-b', 
+            { value: 'A-1', text: 'A-1',
+              children: [
+                { value: 'A-1-1', text: 'A-1-1', 
+                  children: [
+                    { value: 'A-1-1-1', text: 'A-1-1-1', },
+                    { value: 'A-1-1-2', text: 'A-1-1-2', },
+                    { value: 'A-1-1-3', text: 'A-1-1-3', },
+                    { value: 'A-1-1-4', text: 'A-1-1-4', },
+                  ]},
+                { value: 'A-1-2', text: 'A-1-2', },
+                { value: 'A-1-3', text: 'A-1-3', },
+                { value: 'A-1-4', text: 'A-1-4', },
+            ]},
+            { value: 'A-2', text: 'A-2', 
+              children: [
+                { value: 'A-2-1', text: 'A-2-1', },
+                { value: 'A-2-2', text: 'A-2-2', },
+                { value: 'A-2-3', text: 'A-2-3', },
+                { value: 'A-2-4', text: 'A-2-4', },
+              ]},
+            { value: 'A-3', text: 'A-3', },
+            { value: 'A-4', text: 'A-4', },
+          ]},
+        { va4ue: 'B', text: 'B', 
           children: [
-            { text: '3-a', value: '3-a', },
-            { text: '3-b', value: '3-b', 
-            children: [
-              { text: '3-1-a', value: '3-1-a', },
-              { text: '3-1-b', value: '3-1-b', },
-              { text: '3-1-c', value: '3-1-c', },
-              { text: '3-1-d', value: '3-1-d', },
+            { value: 'B-1', text: 'B-1', 
+              children: [
+                { value: 'B-1-1', text: 'B-1-1', },
+                { value: 'B-1-2', text: 'B-1-2', },
+                { value: 'B-1-3', text: 'B-1-3', },
+                { value: 'B-1-4', text: 'B-1-4', },
+              ]},
+            { value: 'B-2', text: 'B-2', },
+            { value: 'B-3', text: 'B-3', },
+            { value: 'B-4', text: 'B-4', },
           ]},
-            { text: '3-c', value: '3-c', },
-            { text: '3-d', value: '3-d', },
+        { va4ue: 'C', text: 'C', 
+          children: [
+            { value: 'C-1', text: 'C-1', },
+            { value: 'C-2', text: 'C-2', },
+            { value: 'C-3', text: 'C-3', },
+            { value: 'C-4', text: 'C-4', },
           ]},
-        { text: '1-c', value: '1-c', },
-        { text: '1-d', value: '1-d', children: [
-            { text: '4-a', value: '4-a', },
-            { text: '4-b', value: '4-b', },
-            { text: '4-c', value: '4-c', },
-            { text: '4-d', value: '4-d', },
-          ]},
+        { value: 'D', text: 'D', },
       ],
       list1: [
-        { text: '1-a', value: '1-a' },
-        { text: '1-b', value: '1-b' },
-        { text: '1-c', value: '1-c' },
-        { text: '1-d', value: '1-d' },
+        { value: '1-a', text: '1-a', },
+        { value: '1-b', text: '1-b', },
+        { value: '1-c', text: '1-c', },
+        { value: '1-d', text: '1-d', disabled: true},
       ],
     }
   },

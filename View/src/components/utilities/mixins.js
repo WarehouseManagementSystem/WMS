@@ -84,7 +84,7 @@ export default {
                 // 非空验证（验证通过返回 true）
                 validateRequired: function (value) {
                     // required 为 false 不做校验直接返回 true
-                    if (this.required && value == 0) {
+                    if (this.required && value.length == 0) {
                         this.$emit('invalid', 'required')
                         return false
                     }
