@@ -37,6 +37,7 @@
 2019-05-29
 
 * view 解决 bug 2019-05-28
+* view 组件 formconter 完成 'dropdownlist'
 
 2019-05-28
 

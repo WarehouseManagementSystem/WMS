@@ -29,6 +29,7 @@
         <b-checkbox-group :list="list1" v-model="value2" name="abcd"></b-checkbox-group>
         <b-checkbox-tree :list="list" v-model="value3" ></b-checkbox-tree>
         <b-select :list="list1" v-model="selected" required></b-select>
+        <b-dropdownlist trigger="a" :list="list1" v-model="selected"></b-dropdownlist>
         {{ value1 }}<br />
         {{ value2 }}<br />
         {{ value3 }}<br />
@@ -54,6 +55,7 @@ import BRedioGroup from '@/components/base/Bootstrap/FormConter/b-radio-group.vu
 import BCheckboxGroup from '@/components/base/Bootstrap/FormConter/b-checkbox-group.vue'
 import BCheckboxTree from '@/components/base/Bootstrap/FormConter/b-checkbox-tree.vue'
 import BSelect from '@/components/base/Bootstrap/FormConter/b-select.vue'
+import BDropdownlist from '@/components/base/Bootstrap/FormConter/b-dropdownlist.vue'
 
 export default {
   name: 'HomePage',
@@ -71,13 +73,14 @@ export default {
     BCheckboxGroup,
     BCheckboxTree,
     BSelect,
+    BDropdownlist,
   },
   data () {
     return {
       value1: true,
       value2: ['1-b',],
       value3: ['A','A-1-1-1', 'B-1-1', 'C-1', 'D'],
-      selected: '1-a',
+      selected: 'v-1-a',
       message: '',
       list: [
         { value: 'A', text: 'A', 
@@ -128,10 +131,10 @@ export default {
         { value: 'D', text: 'D', },
       ],
       list1: [
-        { value: '1-a', text: '1-a', },
-        { value: '1-b', text: '1-b', },
-        { value: '1-c', text: '1-c', },
-        { value: '1-d', text: '1-d', disabled: true},
+        { value: 'v-1-a', text: '1-a', },
+        { value: 'v-1-b', text: '1-b', },
+        { value: 'v-1-c', text: '1-c', },
+        { value: 'v-1-d', text: '1-d', disabled: true},
       ],
     }
   },

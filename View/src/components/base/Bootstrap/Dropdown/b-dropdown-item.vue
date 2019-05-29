@@ -1,6 +1,6 @@
 <template>
-    <a v-if="href" class="dropdown-item" :class="{active: active}" :disabled="disabled" :href="href">{{ text }}</a>
-    <button v-else class="dropdown-item" :class="{active: active}" :disabled="disabled" type="button">{{ text }}</button>
+    <a v-if="showA" class="dropdown-item" :class="{active: active}" :aria-selected="active" :disabled="disabled" :aria-disabled="disabled" :href="href">{{ text }}</a>
+    <button v-else class="dropdown-item" :class="{active: active}" :aria-selected="active" :disabled="disabled" :aria-disabled="disabled" type="button">{{ text }}</button>
 </template>
 <script>
 import utilities from '@/components/utilities/index.js'
@@ -13,5 +13,10 @@ export default {
         active: utilities.props.active,
         disabled: utilities.props.disabled,
     },
+    computed: {
+        showA: function () {
+            return this.href != utilities.props.href.default
+        }
+    }
 }
 </script>

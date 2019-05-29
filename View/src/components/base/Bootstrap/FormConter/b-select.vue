@@ -91,7 +91,6 @@ export default {
     },
     methods: {
         isSelected: function (val) {
-            debugger
             return this.multiple ? this.isSelectedValue.includes(val) : this.isSelectedValue == val
         },
         change: function (event) {
