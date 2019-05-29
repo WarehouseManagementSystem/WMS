@@ -28,7 +28,7 @@
         <b-redio-group :list="list1" name="abc" inline></b-redio-group>
         <b-checkbox-group :list="list1" v-model="value2" name="abcd"></b-checkbox-group>
         <b-checkbox-tree :list="list" v-model="value3" ></b-checkbox-tree>
-        <b-select :list="list1" required></b-select>
+        <b-select :list="list1" v-model="selected" required></b-select>
         {{ value1 }}<br />
         {{ value2 }}<br />
         {{ value3 }}<br />

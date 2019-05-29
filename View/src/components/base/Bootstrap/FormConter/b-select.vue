@@ -41,6 +41,11 @@ export default {
         prop: 'value',
         event: 'change'
     },
+    data () {
+        return {
+            isSelectedValue: this.value,
+        }
+    },
     props: {
         list: utilities.props.list,
         value: {
@@ -78,7 +83,7 @@ export default {
                 {
                     // 这里确保组件配合 `v-model` 的工作
                     change: function () {
-                        vm.$emit('change', vm.value)
+                        vm.$emit('change', vm.isSelectedValue)
                     }
                 }
             )
@@ -86,17 +91,18 @@ export default {
     },
     methods: {
         isSelected: function (val) {
-            return this.multiple ? this.value.includes(val) : this.value == val
+            debugger
+            return this.multiple ? this.isSelectedValue.includes(val) : this.isSelectedValue == val
         },
         change: function (event) {
-            this.value = this.multiple 
-                ? Array.prototype.filter.call(event.target.options,(o) => o.selected ).map((o) => "_value" in o ? o._value : o.value)
+            this.isSelectedValue = this.multiple 
+                ? Array.prototype.filter.call(event.target.options,(o) => o.selected && o.value ).map((o) => "_value" in o ? o._value : o.value)
                 : event.target.value
             this.validator(event)
         },
         validator: function (e) {
             // 非空验证（required 为 false 不做校验直接返回 true，验证通过返回 true）
-            if (!this.validateRequired(this.value)) { util.dom.addClass(e.target, 'is-invalid'); return }
+            if (!this.validateRequired(this.isSelectedValue)) { util.dom.addClass(e.target, 'is-invalid'); return }
             util.dom.removeClass(e.target, 'is-invalid')
             this.$emit('valid')
         },

@@ -34,10 +34,14 @@
 [Bootstrap forms]:                           https://getbootstrap.com/docs/4.3/components/forms/
 [formconter]:                               ../View/src/components/base/Bootstrap/FormConter
 
+2019-05-29
+
+* view 解决 bug 2019-05-28
+
 2019-05-28
 
 * view 控件 [formconter] 添加 select 
-* view bug [Vue warn]: Avoid mutating a prop directly since the value will be overwritten whenever the parent component re-renders. Instead, use a data or computed property based on the prop's value. Prop being mutated: "value"
+* view bug [Vue warn]: Avoid mutating a prop directly since the value will be overwritten whenever the parent component re-renders. Instead, use a data or computed property based on the prop's value. Prop being mutated: "value" **(已解决 2019-05-29)**
 
 2019-05-20
 
