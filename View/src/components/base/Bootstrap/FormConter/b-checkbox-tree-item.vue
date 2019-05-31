@@ -15,8 +15,7 @@
                 :checked="isChecked" 
                 :disabled="disabled ? disabled : item.disabled" 
                 :indeterminate="indeterminate" 
-                v-on="inputListeners" 
-                @change.stop="change"></checkbox>
+                v-on="inputListeners" ></checkbox>
         </div>
         <template v-if="item.children">
             <item 
@@ -34,7 +33,6 @@
 </template>
 
 <script>
-import util from '@/util/index.js'
 import utilities from '@/components/utilities/index.js'
 
 import checkbox from './b-checkbox'
@@ -109,11 +107,6 @@ export default {
                     }
                 }
             )
-        },
-    },
-    methods: {
-        change: function (e) {
-            //this.getCheckedValues(e)
         },
     },
 }

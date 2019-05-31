@@ -12,7 +12,7 @@
         </b-text>
         <b-text type="search" size="lg"></b-text>
         <b-text type="password"></b-text>
-        <b-text type="email" required></b-text>
+        <b-text type="email" required ></b-text>
         <b-text type="tel"></b-text>
         <b-text type="phone"></b-text>
         <b-text type="url" required></b-text>
@@ -30,10 +30,12 @@
         <b-checkbox-tree :list="list" v-model="value3" ></b-checkbox-tree>
         <b-select :list="list1" v-model="selected" required></b-select>
         <b-dropdownlist trigger="a" :list="list1" v-model="selected"></b-dropdownlist>
+        <b-number v-model="valuen" :step="Number(0.001)" :precision="Number(2)"></b-number>
         {{ value1 }}<br />
         {{ value2 }}<br />
         {{ value3 }}<br />
         {{ selected }}<br />
+        {{ valuen }}<br />
       </div>
     </form>
   </div>
@@ -56,6 +58,7 @@ import BCheckboxGroup from '@/components/base/Bootstrap/FormConter/b-checkbox-gr
 import BCheckboxTree from '@/components/base/Bootstrap/FormConter/b-checkbox-tree.vue'
 import BSelect from '@/components/base/Bootstrap/FormConter/b-select.vue'
 import BDropdownlist from '@/components/base/Bootstrap/FormConter/b-dropdownlist.vue'
+import BNumber from '@/components/base/Bootstrap/FormConter/b-number.vue'
 
 export default {
   name: 'HomePage',
@@ -74,6 +77,7 @@ export default {
     BCheckboxTree,
     BSelect,
     BDropdownlist,
+    BNumber,
   },
   data () {
     return {
@@ -81,6 +85,7 @@ export default {
       value2: ['1-b',],
       value3: ['A','A-1-1-1', 'B-1-1', 'C-1', 'D'],
       selected: 'v-1-a',
+      valuen: 0,
       message: '',
       list: [
         { value: 'A', text: 'A', 
@@ -144,12 +149,6 @@ export default {
   methods: {
   
   },
-  watch: {
-    value: function (val) {
-      
-      console.log(val)
-    }
-  }
 }
 
 </script>

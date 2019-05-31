@@ -41,6 +41,14 @@ export default {
             return v.base.set.default.includes(value)
         },
     },
+    setX: {
+        type: String,
+        default: 'left',
+        validator: (value) => {
+            // 这个值必须匹配下列字符串中的一个
+            return v.base.set.x.includes(value)
+        },
+    },
     position: {
         type: String,
         default: 'top-center',

@@ -31,7 +31,7 @@ export default {
             default: 'text',
             validator: (value) => {
                 // 这个值必须匹配下列字符串中的一个
-                return ['text', 'password', 'search', 'email', 'url', 'tel', 'phone'].includes(value)
+                return ['text', 'password', 'search', 'email', 'url', 'tel', 'phone', 'number'].includes(value)
             },
         },
         placeholder: {
@@ -60,3 +60,14 @@ export default {
     },
 }
 </script>
+<style scoped>
+/* 隐藏数字控件的默认上下箭头 */
+input[type="number"]::-webkit-inner-spin-button, 
+input[type="number"]::-webkit-outer-spin-button { 
+    -webkit-appearance: none; 
+    margin: 0; 
+}
+input[type="number"] { 
+    -moz-appearance: test-field; 
+}
+</style>

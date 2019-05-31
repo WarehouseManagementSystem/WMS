@@ -9,7 +9,7 @@ const textColor = [ ...baseColors, 'body', 'muted', 'black-50', 'white-50' ]
 // size
 const size = [ '', 'lg', 'sm' ]
 // set
-const setX = [ 'left', 'right' ]
+const setX = ['left', 'right', 'center' ]
 const setY = [ 'up', 'down' ]
 const set = [ ...setX, ...setY ]
 // position

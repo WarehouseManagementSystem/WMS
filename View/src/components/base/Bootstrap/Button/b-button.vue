@@ -4,10 +4,11 @@
         :class="objClass" 
         :href="href" 
         :aria-pressed="active" 
+        :disabled="disabled" 
         :aria-disabled="disabled"
         :tabindex="objTabindex" 
         :autocomplete="autocomplete" 
-        @click="onClick($event)"
+        @click.stop="onClick($event)"
         data-toggle="button" 
         role="button">
         {{ value }}
@@ -20,9 +21,10 @@
         :value="value" 
         :aria-pressed="active" 
         :disabled="disabled" 
+        :aria-disabled="disabled"
         :tabindex="objTabindex" 
         :autocomplete="autocomplete" 
-        @click="onClick($event)" 
+        @click.stop="onClick($event)" 
         data-toggle="button" />
     <button class="btn" 
         v-else 
@@ -30,9 +32,10 @@
         :type="type" 
         :aria-pressed="active" 
         :disabled="disabled" 
+        :aria-disabled="disabled" 
         :tabindex="objTabindex" 
         :autocomplete="autocomplete" 
-        @click="onClick($event)" 
+        @click.stop="onClick($event)" 
         data-toggle="button">
         {{ value }}
         <sr-message>{{ fillSrMessage }}</sr-message>

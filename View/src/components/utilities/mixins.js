@@ -8,15 +8,25 @@ export default {
     form: {
         base: {
             props: {
-                color: props.color = { default: 'transparent' },
+                color: {
+                    ...props.color,
+                    default: 'transparent',
+                },
                 textColor: props.textColor,
+                textAlign: props.setX,
                 size: props.size,
+                border: {
+                    type: Boolean,
+                    default: true,
+                },
             },
             computed: {
                 objClass: function () {
                     let size = ''
+                    let border = ''
                     if (this.size) size = `form-control-${this.size}`
-                    return `bg-${this.color} text-${this.textColor} ${size}`
+                    border = !this.border ? 'border-0' : ''
+                    return `bg-${this.color} text-${this.textColor} ${size} ${border} text-${this.textAlign}`
                 },
                 inputListeners: function () {
                     var vm = this
@@ -70,6 +80,7 @@ export default {
             },
             methods: {
                 validator: function (e, regex = this.pattern) {
+                    if (this.readonly) return // readonly 时不校验
                     // 验证函数不会对传入的数据进行处理
                     const value = e.target ? e.target.value.trim() : e.value.trim()
                     // 非空验证（required 为 false 不做校验直接返回 true，验证通过返回 true）
