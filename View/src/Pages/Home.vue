@@ -30,12 +30,14 @@
         <b-checkbox-tree :list="list" v-model="value3" ></b-checkbox-tree>
         <b-select :list="list1" v-model="selected" required></b-select>
         <b-dropdownlist trigger="a" :list="list1" v-model="selected"></b-dropdownlist>
-        <b-number v-model="valuen" :step="Number(0.001)" :precision="Number(2)"></b-number>
+        <b-number v-model="valuen" ></b-number>
+        <b-year v-model="year"></b-year>
         {{ value1 }}<br />
         {{ value2 }}<br />
         {{ value3 }}<br />
         {{ selected }}<br />
         {{ valuen }}<br />
+        {{ year }}<br />
       </div>
     </form>
   </div>
@@ -60,6 +62,8 @@ import BSelect from '@/components/base/Bootstrap/FormConter/b-select.vue'
 import BDropdownlist from '@/components/base/Bootstrap/FormConter/b-dropdownlist.vue'
 import BNumber from '@/components/base/Bootstrap/FormConter/b-number.vue'
 
+import BYear from '@/components/base/Bootstrap/FormConter/b-year-list.vue'
+
 export default {
   name: 'HomePage',
   components: {
@@ -78,6 +82,8 @@ export default {
     BSelect,
     BDropdownlist,
     BNumber,
+
+    BYear,
   },
   data () {
     return {
@@ -85,8 +91,9 @@ export default {
       value2: ['1-b',],
       value3: ['A','A-1-1-1', 'B-1-1', 'C-1', 'D'],
       selected: 'v-1-a',
-      valuen: 0,
+      valuen: 10,
       message: '',
+      year: 2018,
       list: [
         { value: 'A', text: 'A', 
           children: [

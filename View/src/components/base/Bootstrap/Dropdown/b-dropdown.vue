@@ -1,13 +1,13 @@
 <template>
     <div :id="'div-' + guid" :class="dropClass" ref="divDropdown">
-        <div class="row">
+        <div class="row" @click="click">
             <span class="col align-middle">
                 <slot v-if="Object.keys($scopedSlots).includes('trigger')" name="trigger"></slot>
                 <font v-else style="cursor: default;">{{ trigger }}</font>
             </span>
             <i v-if="!hideToggle" class="fas fa-caret-down col-auto align-middle"></i>
         </div>
-        <div class="dropdown-menu" :class="menuClass" :aria-labelledby="guid">
+        <div ref="menu" class="dropdown-menu overflow-auto" :class="menuClass" :style="{height: menuHeight}" :aria-labelledby="guid">
             <slot name="menu"></slot>
         </div>
     </div>
@@ -18,6 +18,11 @@ import utilities from '@/components/utilities/index.js'
 
 export default {
     name: 'b-dropdown',
+    data () {
+        return {
+            menuStyle: 0,
+        }
+    },
     props: {
         set: utilities.props.set,
         trigger: utilities.props.text,
@@ -37,6 +42,14 @@ export default {
             type: Boolean,
             default: false,
         },
+        'menu-height': {
+            type: String,
+            default: '300px',
+        },
+        scroll: {
+            type: Number,
+            default: 0,
+        },
     },
     computed: {
         guid: function () {
@@ -53,7 +66,6 @@ export default {
     mounted () {
         const el = this.$refs.divDropdown
         if (!el) return
-        //let node = el.firstChild
         let node = el
         if (!node) return
         util.dom.addAttrs(node, 
@@ -61,6 +73,14 @@ export default {
              'data-toggle': 'dropdown', 
              'aria-haspopup': 'true', 
              'aria-expanded': 'false'})
-    }
+    },
+    methods: {
+        click: async function () {
+            let { $refs, scroll } = this
+            // 使用延时以等待 menu 显示后设置 scrollTop ,否则无效
+            setTimeout(() => $refs.menu.scrollTop = scroll, 100);
+            
+        },
+    },
 }
 </script>

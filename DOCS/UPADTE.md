@@ -34,9 +34,13 @@
 [Bootstrap forms]:                           https://getbootstrap.com/docs/4.3/components/forms/
 [formconter]:                               ../View/src/components/base/Bootstrap/FormConter
 
+2019-06-06
+
+* view 组件 [formconter] 完成 'year-list'
+
 2019-05-31
 
-* view 组件 [formconter] 完成 'number'
+* view 组件 [formconter] 完成 'numberc'
 
 2019-05-29
 

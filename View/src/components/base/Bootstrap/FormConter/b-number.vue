@@ -1,5 +1,5 @@
 <template>
-    <div class="form-control" :class="objClass">
+    <div class="form-control" :class="[objClass, readonlyClass]">
         <div class="row" style="margin-top: -7px">
             <b-button v-if="!readonly" class="col-auto" style="margin-right: -15px" :disabled="subbuttomdisabled" @click="subn" outline value="-" />
             <b-text 

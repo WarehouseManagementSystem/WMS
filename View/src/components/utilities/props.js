@@ -79,15 +79,15 @@ export default {
         },
     },
     text: {
-        type: String,
+        type: [String, Number,],
         default: '',
     },
     value: {
-        type: String,
+        type: [String, Number,],
         default: ''
     },
     label: {
-        type: String,
+        type: [String, Number,],
     },
     message: {
         type: String,
