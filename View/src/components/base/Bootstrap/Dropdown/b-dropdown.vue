@@ -7,7 +7,7 @@
             </span>
             <i v-if="!hideToggle" class="fas fa-caret-down col-auto align-middle"></i>
         </div>
-        <div ref="menu" class="dropdown-menu overflow-auto" :class="menuClass" :style="{height: menuHeight}" :aria-labelledby="guid">
+        <div ref="menu" class="dropdown-menu overflow-auto" :class="menuClass" :style="{'max-height': menuHeight}" :aria-labelledby="guid">
             <slot name="menu"></slot>
         </div>
     </div>

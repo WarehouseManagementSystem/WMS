@@ -33,6 +33,19 @@
 [b-dropdown]:                               ../View/src/components/base/Bootstrap/Dropdown
 [Bootstrap forms]:                           https://getbootstrap.com/docs/4.3/components/forms/
 [formconter]:                               ../View/src/components/base/Bootstrap/FormConter
+[dropdownlist]:                             ../View/src/components/base/Bootstrap/Dropdownlist
+[dropDownPicker]:                           ../View/src/components/base/Bootstrap/DropDownPicker
+[dateTime]:                                 ../View/src/components/base/Bootstrap/DateTime
+
+2019-05-07 ~ 2019-06-19
+
+* view 组件 [dropdownlist] 完成 'b-dropdownlist'
+* view 组件 [dropDownPicker] 完成 'b-dropDownPicker'
+* view 组件 [dateTime] 完成 'b-year-list'
+* view 组件 [dateTime] 完成 'b-month-list'
+* view 组件 [dateTime] 完成 'b-quarter-list'
+* view 组件 [dateTime] 完成 'b-year-picker'
+* view 组件 [dateTime] 完成 'b-month-picker'
 
 2019-06-06
 

@@ -4,24 +4,23 @@
             <i class="fas fa-bars align-self-center px-1"></i>
             <font class="align-self-center px-1">menu</font>
         </a>
-        <transition name="fade">
+        <tran-drop>
             <dropdown-menu-tooltip id="dropdownMenuTooltip" v-show="show"></dropdown-menu-tooltip>
-        </transition>
+        </tran-drop>
     </div>
 </template>
 
 <script>
 import DropdownMenuTooltip from './Nav/nav.vue'
+import tranDrop from '@/components/transition/tran-drop.vue'
 
 export default {
     name: 'dropdown-menu',
+    components: { DropdownMenuTooltip, tranDrop },
     data () {
         return {
             show: false,
         }
-    },
-    components: {
-        DropdownMenuTooltip,
     },
     methods: {
         bindHindeEvents: function () {
@@ -52,13 +51,3 @@ export default {
     }
 }
 </script>
-
-<style lang="scss">
-
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .5s;
-}
-.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-  opacity: 0;
-}
-</style>

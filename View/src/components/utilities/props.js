@@ -123,6 +123,9 @@ export default {
         type: Boolean,
         default: false,
     },
+    function: {
+        type: Function,
+    },
     SrMessage: {
         type: String,
         default: '',

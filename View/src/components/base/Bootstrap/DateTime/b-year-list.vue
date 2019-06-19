@@ -2,7 +2,7 @@
     <dropdownList v-model="selectValue" :list="list" @change="change" hide-null></dropdownList>
 </template>
 <script>
-import dropdownList from './b-dropdownlist'
+import dropdownList from '@/components/base/Bootstrap/Dropdownlist/b-dropdownlist.vue'
 
 export default {
     name: 'b-year-list',
@@ -22,7 +22,19 @@ export default {
             default: function () {
                 return new Date().getFullYear()
             },
-            valide: function (value) {
+            validator: function (value) {
+                return /^[1-9]\d*$/.test(value)
+            },
+        },
+        start: {
+            type: Number,
+            validator: function (value) {
+                return /^[1-9]\d*$/.test(value)
+            },
+        },
+        end: {
+            type: Number,
+            validator: function (value) {
                 return /^[1-9]\d*$/.test(value)
             },
         },
@@ -33,7 +45,11 @@ export default {
             let list = []
             for (let n = 0; n < 100; n++) {
                 year ++
-                list.push({text: year, value: year, })
+                list.push(
+                    (year < this.start || year > this.end) 
+                        ? {text: year, value: year, disabled: true,} 
+                        : {text: year, value: year, }
+                )
             }
             return list
         },

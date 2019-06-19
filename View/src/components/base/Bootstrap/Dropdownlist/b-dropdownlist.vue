@@ -2,7 +2,7 @@
     <div class="form-group">
         <drop class="form-control" :class="objClass" ref="dropdownlist" :menu-height="menuHeight" menu-weight :trigger="trigger" :scroll="scroll">
             <template #menu>
-                <drop-item v-if="hideNull" ref="item" value="" text="<Pleace select...>" @click.native="click"></drop-item>
+                <drop-item v-if="!hideNull" ref="item" value="" text="<Pleace select...>" @click.native="click"></drop-item>
                 <drop-item 
                     v-for="item in list" 
                     :key="item.value" 
@@ -26,7 +26,7 @@ import utilities from '@/components/utilities/index.js'
 import drop from '@/components/base/Bootstrap/Dropdown/b-dropdown.vue'
 import dropItem from '@/components/base/Bootstrap/Dropdown/b-dropdown-item.vue'
 
-import BInfo from './b-form-info'
+import BInfo from '@/components/base/Bootstrap/FormConter/b-form-info'
 
 export default {
     name: 'b-dropdownlist',

@@ -8,10 +8,10 @@
         :aria-disabled="disabled"
         :tabindex="objTabindex" 
         :autocomplete="autocomplete" 
-        @click.stop="onClick($event)"
+        @click="onClick($event)"
         data-toggle="button" 
         role="button">
-        {{ value }}
+        <slot>{{ value }}</slot>
         <sr-message>{{ fillSrMessage }}</sr-message>
     </a>
     <input class="btn" 
@@ -24,7 +24,7 @@
         :aria-disabled="disabled"
         :tabindex="objTabindex" 
         :autocomplete="autocomplete" 
-        @click.stop="onClick($event)" 
+        @click="onClick($event)" 
         data-toggle="button" />
     <button class="btn" 
         v-else 
@@ -35,9 +35,9 @@
         :aria-disabled="disabled" 
         :tabindex="objTabindex" 
         :autocomplete="autocomplete" 
-        @click.stop="onClick($event)" 
+        @click="onClick($event)" 
         data-toggle="button">
-        {{ value }}
+        <slot>{{ value }}</slot>
         <sr-message>{{ fillSrMessage }}</sr-message>
     </button>
 </template>
@@ -76,7 +76,7 @@ export default {
             },
         },
         value: {
-            type: String,
+            ...utilities.props.value,
             default: function () {
                 return `${this.type.substring(0, 1).toUpperCase()}${this.type.substring(1)}`
             },
