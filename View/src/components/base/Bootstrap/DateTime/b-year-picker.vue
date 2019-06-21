@@ -1,5 +1,5 @@
 <template>
-    <picker placeholder="YYYY" :value="selectValue" :info="info" :disabled="disabled" :hide="hide">
+    <picker placeholder="YYYY" :value="selectValue" :info="info" :disabled="disabled">
         <template #icon>
             <i class="far fa-calendar-alt col-auto"></i>
         </template>
@@ -34,7 +34,6 @@ export default {
     },
     data () {
         return {
-            hide: false,
             total: 10, 
             colCount: 4,
             start: 2001,
@@ -67,11 +66,8 @@ export default {
             },
             set: function (val) {this.start = val}
         },
-        end: function () {
-            return this.start + this.total
-        },
         hearderText: function () {
-            return `${this.start} - ${this.end - 1}`
+            return `${this.start} - ${this.start + this.total - 1}`
         },
         info: function () {
             if (this.dateMin == 'Invalid Date' && this.max == 'Invalid Date') return ``

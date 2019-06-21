@@ -1,34 +1,30 @@
 <template>
-    <picker placeholder="YYYY-MM" :value="selectValue" :info="info" :disabled="disabled">
-        <template #icon>
-            <i class="far fa-calendar-alt col-auto"></i>
-        </template>
-        <header>
-            <font class="row text-center mx-1">
-                <base-button class="col font-weight-bold border-0 bg-white text-body h5" style="height: 2.5em" :value="hearderText" @click.stop=""></base-button>
-                <base-button class="fas fa-angle-left border-0 bg-white text-muted" style="height: 2.5em" :disabled="disabled" value="" @click.stop="forward"></base-button>
-                <base-button class="fas fa-circle border-0 bg-white text-muted" style="height: 2.5em" :disabled="disabled || nowDisabled" value="" @click.stop="checknow"></base-button>
-                <base-button class="fas fa-angle-right border-0 bg-white text-muted" style="height: 2.5em" :disabled="disabled"  value="" @click.stop="backward"></base-button>
-            </font>
-        </header>
+    <div>
+        <pickerHeader 
+            :hearderText="hearderText" 
+            :disabled="disabled" 
+            :nowDisabled="nowDisabled" 
+            @clickHeader="clickHeader" 
+            @forward="forward" 
+            @checknow="checknow" 
+            @backward="backward" ></pickerHeader>
         <hr>
         <div class="text-center mx-3">
             <picker-row v-for="(items, index) in lists" :key="index" :items="items" :colCount="colCount" :disabled="disabled" @click="click"></picker-row>
         </div>
-    </picker>
+    </div>
 </template>
 
 <script>
 import util from '@/util/index.js'
 import utilities from '@/components/utilities/index.js'
 
-import picker from '@/components/base/Bootstrap/DropDownPicker/b-dropdownpicker.vue'
+import pickerHeader from './date-picker-header'
 import pickerRow from '@/components/base/Bootstrap/DropDownPicker/b-dropdownpicker-row.vue'
-import BaseButton from '@/components/base/Bootstrap/Button/b-button.vue'
 
 export default {
-    name: 'b-month-picker',
-    components: { picker, pickerRow, BaseButton, },
+    name: 'date-month-picker',
+    components: { pickerHeader, pickerRow, },
     model: {
         prop: 'value',
         event: 'change'
@@ -37,7 +33,6 @@ export default {
         return {
             total: 12,
             colCount: 3,
-            pickertType: 'month',
             selectValue: null,
             year: null,
             month: null,
@@ -45,40 +40,27 @@ export default {
     },
     props: {
         value: {
-            type: [String, Date, ],
+            type: [String, Number, Date, ],
             default: () => new Date(new Date().getFullYear() + '-' + util.string.padStart(new Date().getMonth()) , 2)
         },
         min: {
-            type: [String, Date, ],
+            type: Date,
         },
         max: {
-            type: [String, Date, ],
+            type: Date,
         },
         disabled: utilities.props.disabled,
     },
     computed: {
+        now: () => new Date(),
         rowCount: function () { 
             return Math.ceil(this.total / this.colCount)
         },
         hearderText: function () {
             return this.year
         },
-        info: function () {
-            if (this.dateMin == 'Invalid Date' && this.dateMax == 'Invalid Date') return ``
-            if (this.dateMin.toString() != 'Invalid Date' && this.max.toString() != 'Invalid Date') return `${this.min}~${this.max}`
-            if (this.dateMin == 'Invalid Date') return `...~${this.max}`
-            if (this.dateMax == 'Invalid Date') return `${this.min}~...`
-            return ''
-        },
-        dateMin: function () {
-            return new Date(this.min)
-        },
-        dateMax: function () {
-            return new Date(this.max)
-        },
         nowDisabled: function () {
-            let d = new Date()
-            return d < this.dateMin || d > this.dateMax
+            return this.now < this.min || this.now > this.max
         },
         lists: function () {
             if (!this.year || isNaN*(this.year)) return
@@ -90,7 +72,7 @@ export default {
                 for (let n = 0; n < max; n++) {
                     let value = 0 + i * this.colCount + n
                     let date = new Date(this.formatMonth(this.year, value))
-                    arr.push({ value: value, text: util.string.padStart(value + 1, 2), select: value == new Date(this.selectValue).getMonth() && selectYear == this.year, disabled: date < this.dateMin || date > this.dateMax })
+                    arr.push({ value: value, text: util.string.padStart(value + 1, 2), select: value == new Date(this.selectValue).getMonth() && selectYear == this.year, disabled: date < this.min || date > this.max })
                 }
                 arrs.push(arr)
             }
@@ -99,12 +81,14 @@ export default {
         },
     },
     mounted () {
-        let d = !isNaN(new Date(this.value).getFullYear()) ? new Date(this.value) : new Date()
-        this.year = d.getFullYear()
-        this.month = d.getMonth()
+        this.year = this.value.getFullYear()
+        this.month = this.value.getMonth()
         this.selectValue = this.formatMonth(this.year, this.month)
     },
     methods: {
+        clickHeader: function () {
+            this.$emit('month2Year', this.selectValue)
+        },
         click: function (value) {
             this.selectValue = this.formatMonth(this.year, value)
         },
