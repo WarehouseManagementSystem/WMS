@@ -1,6 +1,6 @@
 <template>
     <div class="form-group" :id="id">
-        <div class="form-control" :class="[objClass, readonlyClass]" ref="dropdownpicker" :readonly="disabled" @click="show = disabled ? !disabled : !show">
+        <div class="form-control" :class="[objClass, readonlyClass]" ref="dropdownpicker" :readonly="disabled" @click="isShow = disabled ? !disabled : !isShow">
             <div class="row">
                 <font class="col" :class="fontClass">
                     {{ text }}
@@ -12,11 +12,11 @@
             </div>
         </div>
         <tran-drop>
-            <div v-show="!isHide || show" class="position-absolute bg-white border rounded text-center my-1 p-1" style="min-width: 300px; z-index: 1000;">
+            <div v-show="isShow" class="position-absolute bg-white border rounded shadow-sm text-center my-1 p-1" style="min-width: 300px; z-index: 1000;">
                 <slot>No Data</slot>
-                <hr>
-                <footer class="text-right">
-                    <base-button :disabled="disabled" value="关 闭" @click.stop="show = false" outline></base-button>
+                <footer v-show="showFooter" class="text-right">
+                    <hr>
+                    <base-button :disabled="disabled || !canHide" value="确 定" @click.stop="isShow = false" outline></base-button>
                 </footer>
             </div>
         </tran-drop>
@@ -36,8 +36,7 @@ export default {
     components: { tranDrop, BaseButton, },
     data () {
         return {
-            show: false,
-            isHide: true,
+            isShow: false,
         }
     },
     props: {
@@ -51,6 +50,12 @@ export default {
             ...utilities.props.text,
             required: true,
         },
+        show: Boolean,
+        canHide: {
+            type: Boolean,
+            default: true,
+        },
+        showFooter: Boolean,
         info: utilities.props.text,
         value: [String, Number, Date, ],
         disabled: utilities.props.disabled,
@@ -71,17 +76,20 @@ export default {
         },
         isChild: function (e, id) {
             if (this.disabled) return
-            if (!(e || e.nodeName) || ['#document', 'HTML', 'BODY'].includes(e.nodeName)) return this.show = false
+            if (!(e || e.nodeName) || ['#document', 'HTML', 'BODY'].includes(e.nodeName)) return this.canHide ? this.isShow = false : null
             e = e.parentNode
             if (e.id && e.id == id) return
             this.isChild(e, id)
         },
     },
     watch: {
-        show: function (newValue) {
+        isShow: function (newValue) {
             newValue 
                 ? document.body.addEventListener('mousedown', this.hindeMenu ) 
-                : document.body.removeEventListener('mousedown', this.hindeMenu )
+                : this.canHide ? document.body.removeEventListener('mousedown', this.hindeMenu ) : null
+        },
+        show: function (value) {
+            this.isShow = value
         },
     }
 }

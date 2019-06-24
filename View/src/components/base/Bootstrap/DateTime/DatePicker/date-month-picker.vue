@@ -63,16 +63,18 @@ export default {
             return this.now < this.min || this.now > this.max
         },
         lists: function () {
-            if (!this.year || isNaN*(this.year)) return
+            if (!this.year || isNaN(this.year)) return
             let arrs = []
             for (let i = 0; i < this.rowCount; i++) {
                 let arr = []
                 const max = this.total < this.colCount * (i + 1) ? this.total % this.colCount : this.colCount
-                const selectYear = new Date(this.selectValue).getFullYear()
+                const d = new Date(this.selectValue)
+                const selectYeaer = d.getFullYear()
+                const selectMonth = d.getMonth()
                 for (let n = 0; n < max; n++) {
                     let value = 0 + i * this.colCount + n
                     let date = new Date(this.formatMonth(this.year, value))
-                    arr.push({ value: value, text: util.string.padStart(value + 1, 2), select: value == new Date(this.selectValue).getMonth() && selectYear == this.year, disabled: date < this.min || date > this.max })
+                    arr.push({ value: value, text: util.string.padStart(value + 1, 2), select: value == selectMonth && selectYeaer == this.year, disabled: date < this.min || date > this.max })
                 }
                 arrs.push(arr)
             }
@@ -91,14 +93,14 @@ export default {
         },
         click: function (value) {
             this.selectValue = this.formatMonth(this.year, value)
+            this.$emit('month2Date', this.selectValue)
         },
         forward: function () {
             this.year -= 1
         },
         checknow: function () {
-            let d = new Date()
-            this.year = d.getFullYear()
-            this.month = d.getMonth()
+            this.year = this.now.getFullYear()
+            this.month = this.now.getMonth()
             this.selectValue = this.formatMonth(this.year, this.month)
         },
         backward: function () {

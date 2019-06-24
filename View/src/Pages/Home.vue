@@ -4,10 +4,12 @@
       <div class="my-1">
         <b-dropdownpicker placeholder="年" ></b-dropdownpicker>
         <b-year-picker type="year" v-model="year" min="2015" max="2020"></b-year-picker>
-        <b-year-picker type="month" v-model="month" min="1950-0" max="2018-12"></b-year-picker>
+        <b-year-picker type="month" v-model="month" min="1950-0" max="2019-12"></b-year-picker>
+        <b-year-picker type="date" v-model="date" min="1950-0" max="2019-12-31"></b-year-picker>
         <!-- <b-month-picker v-model="month" min="1950-0" max="2018-12"></b-month-picker> -->
         {{ year }}<br />
         {{ month }}<br />
+        {{ date }}<br />
       </div>
     </form>
   </div>
@@ -31,6 +33,7 @@ export default {
     return {
       year: 2000,
       month: '2019-02',
+      date: '2012-02'
     }
   },
   computed: {

@@ -1,5 +1,5 @@
 <template>
-    <base-button class="rounded-pill text-monospace bg-white my-1" :class="objClass" :disabled="disabled" @click="$emit('click', value)" :value="value">{{ text }}</base-button>
+    <base-button class="rounded-pill text-monospace bg-white my-1" :class="objClass" style="min-width: 3em" :disabled="disabled" @click="$emit('click', value)" :value="value">{{ text }}</base-button>
 </template>
 
 <script>
