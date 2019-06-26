@@ -37,6 +37,11 @@
 [dropDownPicker]:                           ../View/src/components/base/Bootstrap/DropDownPicker
 [dateTime]:                                 ../View/src/components/base/Bootstrap/DateTime
 [dateTime/DatePicker]:                      ../View/src/components/base/Bootstrap/DateTime/DatePicker
+[dateTime/Time]:                            ../View/src/components/base/Bootstrap/DateTime/Time
+
+2019-06-26
+
+* view 组件 [dateTime/Time] 完成 'b-time'
 
 2019-06-24
 

@@ -6,10 +6,17 @@
         <b-year-picker type="year" v-model="year" min="2015" max="2020"></b-year-picker>
         <b-year-picker type="month" v-model="month" min="1950-0" max="2019-12"></b-year-picker>
         <b-year-picker type="date" v-model="date" min="1950-0" max="2019-12-31"></b-year-picker>
-        <!-- <b-month-picker v-model="month" min="1950-0" max="2018-12"></b-month-picker> -->
+        <b-time type="hh:mm" v-model="time1"></b-time>
+        <b-time type="mm:ss" v-model="time2"></b-time>
+        <b-time type="hh:mm:ss" v-model="time3"></b-time>
+        
+        <b-time></b-time>
         {{ year }}<br />
         {{ month }}<br />
         {{ date }}<br />
+        {{ time1 }}<br />
+        {{ time2 }}<br />
+        {{ time3 }}<br />
       </div>
     </form>
   </div>
@@ -20,20 +27,23 @@
 
 import BDropdownpicker from '@/components/base/Bootstrap/DropDownPicker/b-dropdownpicker.vue'
 import BYearPicker from '@/components/base/Bootstrap/DateTime/DatePicker/b-date-picker.vue'
-// import BMonthPicker from '@/components/base/Bootstrap/DateTime/b-month-picker.vue'
+import BTime from '@/components/base/Bootstrap/DateTime/Time/b-time.vue'
 
 export default {
   name: 'HomePage',
   components: {
     BDropdownpicker,
     BYearPicker,
-    // BMonthPicker,
+    BTime,
   },
   data () {
     return {
       year: 2000,
       month: '2019-02',
-      date: '2012-02'
+      date: '2012-02',
+      time1: '30:50',
+      time2: '30:50',
+      time3: '01:03:05',
     }
   },
   computed: {
