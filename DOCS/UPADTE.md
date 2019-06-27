@@ -31,30 +31,41 @@
 [b-carousel]:                               ../View/src/components/base/Bootstrap/Carousel
 [bootstrap dropdown]:                       https://getbootstrap.com/docs/4.3/components/dropdowns/
 [b-dropdown]:                               ../View/src/components/base/Bootstrap/Dropdown
-[Bootstrap forms]:                           https://getbootstrap.com/docs/4.3/components/forms/
+[Bootstrap forms]:                          https://getbootstrap.com/docs/4.3/components/forms/
 [formconter]:                               ../View/src/components/base/Bootstrap/FormConter
 [dropdownlist]:                             ../View/src/components/base/Bootstrap/Dropdownlist
 [dropDownPicker]:                           ../View/src/components/base/Bootstrap/DropDownPicker
 [dateTime]:                                 ../View/src/components/base/Bootstrap/DateTime
-[dateTime/DatePicker]:                      ../View/src/components/base/Bootstrap/DateTime/DatePicker
+[date]:                                     ../View/src/components/base/Bootstrap/DateTime/Date
+[dateList]:                                 ../View/src/components/base/Bootstrap/DateTime/Date/DateList
+[DatePicker]:                               ../View/src/components/base/Bootstrap/DateTime/Date/DatePicker
+[time]:                                     ../View/src/components/base/Bootstrap/DateTime/Time
+
+2019-06-27
+
+* 调整 [DateTime] 目录结构
+
+2019-06-26
+
+* view 组件 [time] 完成 'b-time'
 
 2019-06-24
 
-* view 组件 [dateTime/DatePicker] 完成 'b-date-picker'
+* view 组件 [DatePicker] 完成 'b-date-picker'
 
 2019-06-21
 
-* view 组件 [dateTime/DatePicker] 完成部分 'b-date-picker'
+* view 组件 [DatePicker] 完成部分 'b-date-picker'
 
 2019-05-07 ~ 2019-06-19
 
 * view 组件 [dropdownlist] 完成 'b-dropdownlist'
 * view 组件 [dropDownPicker] 完成 'b-dropDownPicker'
-* view 组件 [dateTime] 完成 'b-year-list'
-* view 组件 [dateTime] 完成 'b-month-list'
-* view 组件 [dateTime] 完成 'b-quarter-list'
-* view 组件 [dateTime] 完成 'b-year-picker'
-* view 组件 [dateTime] 完成 'b-month-picker'
+* view 组件 [dateList] 完成 'b-year-list'
+* view 组件 [dateList] 完成 'b-month-list'
+* view 组件 [dateList] 完成 'b-quarter-list'
+* view 组件 [date] 完成 'b-year-picker'
+* view 组件 [date] 完成 'b-month-picker'
 
 2019-06-06
 

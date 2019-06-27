@@ -1,7 +1,7 @@
 <template>
-    <div class="form-control" :class="[objClass, readonlyClass]">
+    <div class="form-control" :class="[objClass, readonlyClass, { 'px-0' : hideButton}]">
         <div class="row" style="margin-top: -7px">
-            <b-button v-if="!readonly" class="col-auto" style="margin-right: -15px" :disabled="subbuttomdisabled" @click="subn" outline value="-" />
+            <b-button v-if="!readonly && !hideButton" class="col-auto" style="margin-right: -15px" :disabled="subbuttomdisabled" @click="subn" outline value="-" />
             <b-text 
                 class="col border-0" 
                 :border='Boolean(false)'
@@ -13,10 +13,11 @@
                 v-model.number="number"
                 :disabled="readonly" 
                 v-on="inputListeners"
+                v-bind="$attrs"
                 @click="click($event)" 
                 @change="change" 
                 @blur="blur($event)"></b-text>
-            <b-button v-if="!readonly" class="col-auto" style="margin-left: -15px" :disabled="addbuttondisabled" @click="add" outline value="+" />
+            <b-button v-if="!readonly && !hideButton" class="col-auto" style="margin-left: -15px" :disabled="addbuttondisabled" @click="add" outline value="+" />
         </div>
     </div>
 </template>
@@ -61,7 +62,7 @@ export default {
             },
             validator: function (value) {
                 // 这个值必须匹配下列字符串中的一个
-                return /^[1-9]\d*$/.test(value) && value >= 0
+                return /^[0-9]\d*$/.test(value) && value >= 0
             },
         },
         value: {
@@ -69,6 +70,10 @@ export default {
             default: function (value) {
                 return value ? value : this.min
             },
+        },
+        hideButton: {
+            type: Boolean,
+            default: false,
         },
     },
     computed: {
@@ -112,7 +117,7 @@ export default {
     },
     methods: {
         formatNumber: function (value) {
-            return Number.parseFloat(value).toFixed(this.getPrecision)
+            return Number.parseFloat(value).toFixed(this.precision)
         },
         click: function (event) {
             if (this.number == 0) event.target.value = ''
