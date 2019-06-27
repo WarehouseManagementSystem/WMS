@@ -1,12 +1,11 @@
 <template>
     <dropdownList v-model="selectValue" :list="list" @change="change" hide-null></dropdownList>
 </template>
-
 <script>
 import dropdownList from '@/components/base/Bootstrap/Dropdownlist/b-dropdownlist.vue'
 
 export default {
-    name: 'b-hour-list',
+    name: 'b-year-list',
     components: { dropdownList },
     model: {
         prop: 'value',
@@ -21,34 +20,35 @@ export default {
         value: {
             type: Number,
             default: function () {
-                return new Date().getHours()
+                return new Date().getFullYear()
             },
             validator: function (value) {
-                return /^[1-9]\d*$/.test(value) && value > 0 && value < 23
+                return /^[1-9]\d*$/.test(value)
             },
         },
         start: {
             type: Number,
             validator: function (value) {
-                return /^[1-9]\d*$/.test(value) && value > 0 && value < 23
+                return /^[1-9]\d*$/.test(value)
             },
         },
         end: {
             type: Number,
             validator: function (value) {
-                return /^[1-9]\d*$/.test(value) && value > 0 && value < 23
+                return /^[1-9]\d*$/.test(value)
             },
         },
     },
     computed: {
         list: function () {
+            let year = new Date().getFullYear() - 50
             let list = []
-            for (let n = 0; n < 23; n++) {
-                let hour = n + 1
+            for (let n = 0; n < 100; n++) {
+                year ++
                 list.push(
-                    (hour < this.start || hour > this.end) 
-                        ? {text: hour, value: hour, disabled: true } 
-                        : {text: hour, value: hour, }
+                    (year < this.start || year > this.end) 
+                        ? {text: year, value: year, disabled: true,} 
+                        : {text: year, value: year, }
                 )
             }
             return list
@@ -59,6 +59,6 @@ export default {
             // 配合 v-model
             this.$emit('change', this.selectValue)
         },
-    },
+    }
 }
 </script>

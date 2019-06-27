@@ -6,7 +6,7 @@
 import dropdownList from '@/components/base/Bootstrap/Dropdownlist/b-dropdownlist.vue'
 
 export default {
-    name: 'b-hour-list',
+    name: 'b-minutes-list',
     components: { dropdownList },
     model: {
         prop: 'value',
@@ -21,34 +21,34 @@ export default {
         value: {
             type: Number,
             default: function () {
-                return new Date().getHours()
+                return new Date().getMinutes()
             },
             validator: function (value) {
-                return /^[1-9]\d*$/.test(value) && value > 0 && value < 23
+                return /^[1-9]\d*$/.test(value) && value > 0 && value < 59
             },
         },
         start: {
             type: Number,
             validator: function (value) {
-                return /^[1-9]\d*$/.test(value) && value > 0 && value < 23
+                return /^[1-9]\d*$/.test(value) && value > 0 && value < 59
             },
         },
         end: {
             type: Number,
             validator: function (value) {
-                return /^[1-9]\d*$/.test(value) && value > 0 && value < 23
+                return /^[1-9]\d*$/.test(value) && value > 0 && value < 59
             },
         },
     },
     computed: {
         list: function () {
             let list = []
-            for (let n = 0; n < 23; n++) {
-                let hour = n + 1
+            for (let n = 0; n < 59; n++) {
+                let minutes = n + 1
                 list.push(
-                    (hour < this.start || hour > this.end) 
-                        ? {text: hour, value: hour, disabled: true } 
-                        : {text: hour, value: hour, }
+                    (minutes < this.start || minutes > this.end) 
+                        ? {text: minutes, value: minutes, disabled: true } 
+                        : {text: minutes, value: minutes, }
                 )
             }
             return list

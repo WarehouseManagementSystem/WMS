@@ -40,10 +40,12 @@
 [dateList]:                                 ../View/src/components/base/Bootstrap/DateTime/Date/DateList
 [DatePicker]:                               ../View/src/components/base/Bootstrap/DateTime/Date/DatePicker
 [time]:                                     ../View/src/components/base/Bootstrap/DateTime/Time
+[timeList]:                                 ../View/src/components/base/Bootstrap/DateTime/Time/TimeList
 
 2019-06-27
 
 * 调整 [DateTime] 目录结构
+* 调整 [timeList] 完成 ‘b-hour-list’, b-minutes-list’, b-second-list’
 
 2019-06-26
 

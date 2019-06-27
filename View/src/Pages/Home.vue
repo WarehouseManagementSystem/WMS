@@ -9,8 +9,9 @@
         <b-time type="hh:mm" v-model="time1"></b-time>
         <b-time type="mm:ss" v-model="time2"></b-time>
         <b-time type="hh:mm:ss" v-model="time3"></b-time>
-        
-        <b-time></b-time>
+        <b-hour></b-hour>
+        <b-minutes></b-minutes>
+        <b-second></b-second>
         {{ year }}<br />
         {{ month }}<br />
         {{ date }}<br />
@@ -28,6 +29,9 @@
 import BDropdownpicker from '@/components/base/Bootstrap/DropDownPicker/b-dropdownpicker.vue'
 import BYearPicker from '@/components/base/Bootstrap/DateTime/DatePicker/b-date-picker.vue'
 import BTime from '@/components/base/Bootstrap/DateTime/Time/b-time.vue'
+import BHour from '@/components/base/Bootstrap/DateTime/Time/TimeList/b-hour-list.vue'
+import BMinutes from '@/components/base/Bootstrap/DateTime/Time/TimeList/b-minutes-list.vue'
+import BSecond from '@/components/base/Bootstrap/DateTime/Time/TimeList/b-second-list.vue'
 
 export default {
   name: 'HomePage',
@@ -35,6 +39,9 @@ export default {
     BDropdownpicker,
     BYearPicker,
     BTime,
+    BHour,
+    BMinutes,
+    BSecond,
   },
   data () {
     return {

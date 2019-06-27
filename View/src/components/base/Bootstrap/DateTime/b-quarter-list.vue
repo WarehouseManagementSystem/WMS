@@ -6,7 +6,7 @@
 import dropdownList from '@/components/base/Bootstrap/Dropdownlist/b-dropdownlist.vue'
 
 export default {
-    name: 'b-hour-list',
+    name: 'b-quarter-list',
     components: { dropdownList },
     model: {
         prop: 'value',
@@ -21,34 +21,37 @@ export default {
         value: {
             type: Number,
             default: function () {
-                return new Date().getHours()
+                let month = new Date().getMonth()
+                return [0, 1, 2].includes(month) ? 1
+                : [3, 4, 5].includes(month) ? 2
+                : [6, 7, 8].includes(month) ? 3
+                : 4
             },
             validator: function (value) {
-                return /^[1-9]\d*$/.test(value) && value > 0 && value < 23
+                return /^[1-9]\d*$/.test(value) && value > 0 && value < 5
             },
         },
         start: {
             type: Number,
             validator: function (value) {
-                return /^[1-9]\d*$/.test(value) && value > 0 && value < 23
+                return /^[1-9]\d*$/.test(value) && value > 0 && value < 5
             },
         },
         end: {
             type: Number,
             validator: function (value) {
-                return /^[1-9]\d*$/.test(value) && value > 0 && value < 23
+                return /^[1-9]\d*$/.test(value) && value > 0 && value < 5
             },
         },
     },
     computed: {
         list: function () {
             let list = []
-            for (let n = 0; n < 23; n++) {
-                let hour = n + 1
+            for (let n = 1; n < 5; n++) {
                 list.push(
-                    (hour < this.start || hour > this.end) 
-                        ? {text: hour, value: hour, disabled: true } 
-                        : {text: hour, value: hour, }
+                    (n < this.start || n > this.end) 
+                        ? {text: `第 ${n} 季度`, value: n, disabled: true } 
+                        : {text: `第 ${n} 季度`, value: n, }
                 )
             }
             return list
