@@ -100,9 +100,7 @@ export default {
         },
         value: {
             type: String,
-            validator: function (value) {
-                return [2, 5, 7].includes(value.length)
-            },
+            
         },
     },
     computed: {
