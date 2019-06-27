@@ -36,7 +36,6 @@
 [dropdownlist]:                             ../View/src/components/base/Bootstrap/Dropdownlist
 [dropDownPicker]:                           ../View/src/components/base/Bootstrap/DropDownPicker
 [dateTime]:                                 ../View/src/components/base/Bootstrap/DateTime
-<<<<<<< HEAD
 [date]:                                     ../View/src/components/base/Bootstrap/DateTime/Date
 [dateList]:                                 ../View/src/components/base/Bootstrap/DateTime/Date/DateList
 [DatePicker]:                               ../View/src/components/base/Bootstrap/DateTime/Date/DatePicker
@@ -46,14 +45,11 @@
 2019-06-27
 
 * 调整 [DateTime] 目录结构
-* 调整 [timeList] 完成 ‘b-hour-list’, b-minutes-list’, b-second-list’
+* view 组件 [timeList] 完成 ‘b-hour-list’, b-minutes-list’, b-second-list’
 
 2019-06-26
 
 * view 组件 [time] 完成 'b-time'
-=======
-[dateTime/DatePicker]:                      ../View/src/components/base/Bootstrap/DateTime/DatePicker
->>>>>>> e4c1047eb496b54c71402e0d1c183fa3738334f7
 
 2019-06-24
 
