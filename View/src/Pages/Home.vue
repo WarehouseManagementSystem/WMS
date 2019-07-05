@@ -6,15 +6,15 @@
         <b-year-picker type="year" v-model="year" min="2015" max="2020"></b-year-picker>
         <b-year-picker type="month" v-model="month" min="1950-0" max="2019-12"></b-year-picker>
         <b-year-picker type="date" v-model="date" min="1950-0" max="2019-12-31"></b-year-picker>
-        <b-time type="hh:mm" v-model="time1"></b-time>
-        <b-time type="mm:ss" v-model="time2"></b-time>
-        <b-time type="hh:mm:ss" v-model="time3"></b-time>
+        
         <b-hour></b-hour>
         <b-minutes></b-minutes>
         <b-second></b-second>
+        <b-time type="hh:mm:ss" v-model='time'></b-time>
         {{ year }}<br />
         {{ month }}<br />
         {{ date }}<br />
+        {{ time }}<br />
       </div>
     </form>
   </div>
@@ -25,7 +25,7 @@
 
 import BDropdownpicker from '@/components/base/Bootstrap/DropDownPicker/b-dropdownpicker.vue'
 import BYearPicker from '@/components/base/Bootstrap/DateTime/DatePicker/b-date-picker.vue'
-import BTime from '@/components/base/Bootstrap/DateTime/Time/TimeInput/b-time.vue'
+import BTime from '@/components/base/Bootstrap/DateTime/Time/b-time.vue'
 import BHour from '@/components/base/Bootstrap/DateTime/Time/TimeList/b-hour-list.vue'
 import BMinutes from '@/components/base/Bootstrap/DateTime/Time/TimeList/b-minutes-list.vue'
 import BSecond from '@/components/base/Bootstrap/DateTime/Time/TimeList/b-second-list.vue'
@@ -45,6 +45,7 @@ export default {
       year: 2000,
       month: '2019-02',
       date: '2012-02',
+      time: '10:11:21',
       time1: '30:50',
       time2: '30:50',
       time3: '01:03:05',

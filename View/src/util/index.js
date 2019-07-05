@@ -8,6 +8,7 @@ import string from './string'
 import regex from './regex'
 import obj from './object'
 import array from './array'
+import documents from './document'
 import { clone } from './clone'
 import circularJSON from 'circular-json'
 
@@ -34,4 +35,5 @@ export default {
     regex: regex,
     obj: obj,
     array: array,
+    document: documents,
 }

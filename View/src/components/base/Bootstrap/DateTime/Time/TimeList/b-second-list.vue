@@ -24,27 +24,27 @@ export default {
                 return new Date().getSeconds()
             },
             validator: function (value) {
-                return /^[1-9]\d*$/.test(value) && value > 0 && value < 59
+                return /^[0-9]\d*$/.test(value) && value >= 0 && value < 60
             },
         },
         start: {
             type: Number,
             validator: function (value) {
-                return /^[1-9]\d*$/.test(value) && value > 0 && value < 59
+                return /^[0-9]\d*$/.test(value) && value >= 0 && value < 60
             },
         },
         end: {
             type: Number,
             validator: function (value) {
-                return /^[1-9]\d*$/.test(value) && value > 0 && value < 59
+                return /^[0-9]\d*$/.test(value) && value >= 0 && value < 60
             },
         },
     },
     computed: {
         list: function () {
             let list = []
-            for (let n = 0; n < 59; n++) {
-                let second = n + 1
+            for (let n = 0; n < 60; n++) {
+                let second = n
                 list.push(
                     (second < this.start || second > this.end) 
                         ? {text: second, value: second, disabled: true } 
