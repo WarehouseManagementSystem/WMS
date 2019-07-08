@@ -42,6 +42,10 @@
 [time]:                                     ../View/src/components/base/Bootstrap/DateTime/Time
 [timeList]:                                 ../View/src/components/base/Bootstrap/DateTime/Time/TimeList
 
+2019-07-08
+
+* view 组件 [time] 完成 ‘b-time’ update
+
 2019-07-05
 
 * view 组件 [time] 完成 ‘b-time’
