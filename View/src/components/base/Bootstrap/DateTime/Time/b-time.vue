@@ -73,7 +73,6 @@ export default {
         },
     },
     mounted () {
-        debugger
         this.time = this.value
         let d = new Date('1970-01-01T' + this.time.split(':').map((e) => util.string.padStart(e, 2, '0')).join(':'))
         d = d.toString() == 'Invalid Date' ? this.now : d
@@ -94,10 +93,7 @@ export default {
             return s + util.string.padStart(call, 2, '0')
         },
         formatData: function (value, type) {
-            if (value < 0) value = 0
-            if (value > 59) value = 59
             if (type == 'hh') {
-                if (value > 23) value = 23
                 let dateMinHours = this.dateMin.getHours(), dateMaxHours = this.dateMax.getHours()
                 if (value < dateMinHours) value = dateMinHours
                 if (value > dateMaxHours) value = dateMaxHours
@@ -119,7 +115,7 @@ export default {
             } else if (start >= this.selectArea.two.start && start <= this.selectArea.two.end) {
                 util.document.setCursorPos(element, this.selectArea.two.start, this.selectArea.two.end)
             } else if (start >= this.selectArea.three.start) {
-                util.document.setCursorPos(element, this.selectArea.three.start, this.value.length)
+                util.document.setCursorPos(element, this.selectArea.three.start, this.time.length)
             }
         },
         setSelectAreaStart: function (element, type = 'left') {
@@ -143,38 +139,37 @@ export default {
                 let { value, selectionStart } = vm.$el.children[0]
                 vm.time = value.split(':').map((e) => util.string.padStart(e, 2, '0')).join(':')
                 let start = selectionStart // 记录下一个选择区域的起始点
-                // 输入非法时返回
-                if (new Date('1970-01-01T' + vm.time).toString() == 'Invalid Date') { 
-                    vm.showValue() // 输入非法时，撤销修改
-                    vm.setSelectArea(vm.$el.children[0], start) // 输入非法时，重新选择该区域，以便再次修改
-                    return 
+
+                if (new Date('1970-01-01T' + vm.time).toString() !== 'Invalid Date') { 
+                    let type, str
+                    if (selectionStart <= vm.selectArea.one.end) {
+                        if (vm.types.hh) type = 'hh'
+                        else if (vm.types.mm) type = 'mm'
+                        else type = 'ss'
+                        str = vm.time.substring(vm.selectArea.one.start, vm.selectArea.one.end)
+                        vm.date.hh = vm.formatData(str, type)
+                        start = vm.selectArea.two.start
+                    } else if (selectionStart >= vm.selectArea.two.start && selectionStart <= vm.selectArea.two.end) {
+                        if (vm.types.hh) type = 'mm'
+                        else type = 'ss'
+                        str = vm.time.substring(vm.selectArea.two.start, vm.selectArea.two.end)
+                        vm.date.mm = vm.formatData(str, type)
+                        start = vm.selectArea.three.start
+                    } else if (selectionStart > vm.selectArea.three.start) {
+                        type = 'ss'
+                        str = vm.time.substring(vm.selectArea.three.start)
+                        vm.date.ss = vm.formatData(str, type)
+                        start = -1 // 表示不再选择
+                    }
                 }
-                let type, str
-                if (selectionStart <= vm.selectArea.one.end) {
-                    if (vm.types.hh) type = 'hh'
-                    else if (vm.types.mm) type = 'mm'
-                    else type = 'ss'
-                    str = vm.time.substring(vm.selectArea.one.start, vm.selectArea.one.end)
-                    vm.date.hh = vm.formatData(str, type)
-                    start = vm.selectArea.two.start
-                } else if (selectionStart >= vm.selectArea.two.start && selectionStart <= vm.selectArea.two.end) {
-                    if (vm.types.hh) type = 'mm'
-                    else type = 'ss'
-                    str = vm.time.substring(vm.selectArea.two.start, vm.selectArea.two.end)
-                    vm.date.mm = vm.formatData(str, type)
-                    start = vm.selectArea.three.start
-                } else if (selectionStart > vm.selectArea.three.start) {
-                    type = 'ss'
-                    str = vm.time.substring(vm.selectArea.three.start)
-                    vm.date.ss = vm.formatData(str, type)
-                    start = -1 // 表示不再选择
-                }
-                vm.$el.children[0].value = vm.time
-                vm.setSelectArea(vm.$el.children[0], start)
+                vm.showValue() // 格式正确
+                vm.$el.children[0].value = vm.time // 此处强制修改 value 值，否则选定区域时会导致无法选择
+                vm.setSelectArea(vm.$el.children[0], start) // 选择区域
+                
+                // 配合 v-model
+                vm.$emit('change', vm.time)
             }, 500)
             if (timer !== null) timer = null
-            // 配合 v-model
-            this.$emit('change', this.time)
         },
         left: function () {
             this.setSelectAreaStart(event.target, 'left')
