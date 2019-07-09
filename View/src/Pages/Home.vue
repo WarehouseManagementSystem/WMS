@@ -10,7 +10,7 @@
         <b-hour></b-hour>
         <b-minutes></b-minutes>
         <b-second></b-second>
-        <b-time type="hh:mm:ss" v-model='time'></b-time>
+        <b-time max="15:00" v-model='time'></b-time>
         {{ year }}<br />
         {{ month }}<br />
         {{ date }}<br />

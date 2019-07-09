@@ -29,7 +29,7 @@ export default {
             type: String,
             default: 'hh:mm:ss',
             validator: function (value) {
-                return ['hh', 'mm', 'ss', 'hh:mm', 'mm:ss', 'hh:mm:ss'].includes(value)
+                return ['hh:mm', 'hh:mm:ss'].includes(value)
             },
         },
         value: String,
@@ -64,17 +64,9 @@ export default {
                 three: {start: str0 + 1 + str1 + 1},
             }
         },
-        info: function () {
-            if (this.dateMin.toString() == 'Invalid Date' && this.dateMax.toString() == 'Invalid Date') return ``
-            else if (this.dateMin.toString() != 'Invalid Date' && this.dateMax.toString() != 'Invalid Date') return `${this.min}~${this.max}`
-            else if (this.dateMin.toString() == 'Invalid Date') return `...~${this.max}`
-            else if (this.dateMax.toString() == 'Invalid Date') return `${this.min}~...`
-            return ''
-        },
     },
     mounted () {
-        this.time = this.value
-        let d = new Date('1970-01-01T' + this.time.split(':').map((e) => util.string.padStart(e, 2, '0')).join(':'))
+        let d = new Date('1970-01-01T' + this.value.split(':').map((e) => util.string.padStart(e, 2, '0')).join(':'))
         d = d.toString() == 'Invalid Date' ? this.now : d
         this.date.hh = d.getHours()
         this.date.mm = d.getMinutes()
@@ -84,11 +76,11 @@ export default {
     methods: {
         showValue: function () {
             this.time = ''
-            if (this.types.hh) this.time = this.format(this.time, this.date.hh)
-            if (this.types.mm) this.time += this.format(this.time, this.date.mm)
-            if (this.types.ss) this.time += this.format(this.time, this.date.ss)
+            if (this.types.hh) this.time = this.formatValue(this.time, this.date.hh)
+            if (this.types.mm) this.time += this.formatValue(this.time, this.date.mm)
+            if (this.types.ss) this.time += this.formatValue(this.time, this.date.ss)
         },
-        format: function (value, call) {
+        formatValue: function (value, call) {
             let s = value.length > 0 ? ':' : ''
             return s + util.string.padStart(call, 2, '0')
         },
@@ -115,11 +107,11 @@ export default {
             } else if (start >= this.selectArea.two.start && start <= this.selectArea.two.end) {
                 util.document.setCursorPos(element, this.selectArea.two.start, this.selectArea.two.end)
             } else if (start >= this.selectArea.three.start) {
-                util.document.setCursorPos(element, this.selectArea.three.start, this.time.length)
+                util.document.setCursorPos(element, this.selectArea.three.start, element.value.length)
             }
         },
         setSelectAreaStart: function (element, type = 'left') {
-            let { selectionStart } = event.target
+            let { selectionStart } = element
             let start = selectionStart || 0
             if (selectionStart <= this.selectArea.one.end) {
                 start = type == 'left' ? start : this.selectArea.two.start
@@ -128,54 +120,66 @@ export default {
             } else if (selectionStart >= this.selectArea.three.start) {
                 start = type == 'left' ? this.selectArea.two.start : start
             }
-            this.setSelectArea(event.target, start)
+            return start
         },
         click: function (event) {
-            let { selectionStart } = event.target
-            this.setSelectArea(event.target, selectionStart)
+            this.setSelectArea(event.target, event.target.selectionStart)
         },
         input: function () {
             var timer = setTimeout((vm = this) => {
-                let { value, selectionStart } = vm.$el.children[0]
-                vm.time = value.split(':').map((e) => util.string.padStart(e, 2, '0')).join(':')
+                let { value, selectionStart, selectionEnd } = vm.$el.children[0]
+                if (selectionStart !== selectionEnd) return
+
+                let array = value.split(':').map((e) => util.string.padStart(e, 2, '0'))
+                let d = array.join(':')
                 let start = selectionStart // 记录下一个选择区域的起始点
 
-                if (new Date('1970-01-01T' + vm.time).toString() !== 'Invalid Date') { 
+                if (new Date('1970-01-01T' + d).toString() !== 'Invalid Date') { 
                     let type, str
                     if (selectionStart <= vm.selectArea.one.end) {
                         if (vm.types.hh) type = 'hh'
                         else if (vm.types.mm) type = 'mm'
                         else type = 'ss'
-                        str = vm.time.substring(vm.selectArea.one.start, vm.selectArea.one.end)
+                        str = d.substring(vm.selectArea.one.start, vm.selectArea.one.end)
                         vm.date.hh = vm.formatData(str, type)
                         start = vm.selectArea.two.start
                     } else if (selectionStart >= vm.selectArea.two.start && selectionStart <= vm.selectArea.two.end) {
                         if (vm.types.hh) type = 'mm'
                         else type = 'ss'
-                        str = vm.time.substring(vm.selectArea.two.start, vm.selectArea.two.end)
+                        str = d.substring(vm.selectArea.two.start, vm.selectArea.two.end)
                         vm.date.mm = vm.formatData(str, type)
                         start = vm.selectArea.three.start
                     } else if (selectionStart > vm.selectArea.three.start) {
                         type = 'ss'
-                        str = vm.time.substring(vm.selectArea.three.start)
+                        str = d.substring(vm.selectArea.three.start)
                         vm.date.ss = vm.formatData(str, type)
                         start = -1 // 表示不再选择
                     }
+                } else {
+                    // 输入非法时修正 start，以正确创建选择区域
+                    // 当分段字符数超过 2 时会导致选择区域错误
+                    let str = array.find(function(element) {
+                        return element.toString().length > 2;
+                    });
+                    if (str) start = start - (str.toString().length - 2)
                 }
-                vm.showValue() // 格式正确
-                vm.$el.children[0].value = vm.time // 此处强制修改 value 值，否则选定区域时会导致无法选择
-                vm.setSelectArea(vm.$el.children[0], start) // 选择区域
+
+                vm.showValue()
+                vm.$el.children[0].value = vm.time
+                vm.setSelectArea(vm.$el.children[0], start)
                 
                 // 配合 v-model
-                vm.$emit('change', vm.time)
+                this.$emit('change', vm.time)
             }, 500)
             if (timer !== null) timer = null
         },
         left: function () {
-            this.setSelectAreaStart(event.target, 'left')
+            let start = this.setSelectAreaStart(event.target, 'left')
+            this.setSelectArea(event.target, start)
         },
         right: function () {
-            this.setSelectAreaStart(event.target, 'right')
+            let start = this.setSelectAreaStart(event.target, 'right')
+            this.setSelectArea(event.target, start)
         }
     }
 }
