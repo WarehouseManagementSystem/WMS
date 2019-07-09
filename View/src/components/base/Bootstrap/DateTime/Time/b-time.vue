@@ -80,6 +80,7 @@ export default {
     mounted () {
         let d = this.string2Date(this.value)
         d = d.toString() == 'Invalid Date' ? this.now : d
+        debugger
         this.Date2date(this.formatData(d))
         this.showValue()
     },
@@ -95,17 +96,21 @@ export default {
             return s + util.string.padStart(call, 2, '0')
         },
         formatData: function (value) {
-            value < this.dateMin 
-                ? this.Date2date(this.dateMin)
-                : value > this.dateMax
-                    ? this.Date2date(this.dateMax)
-                    : this.Date2date(value)
-            
+            debugger
+            if (value < this.dateMin) {
+                this.Date2date(this.dateMin)
+            } else if (value > this.dateMax) {
+                this.Date2date(this.dateMax)
+            } else {
+                this.Date2date(value)
+            }
         },
         string2Date: function (str) {
             return new Date(...[1970, 1, 1, ...str.split(':')])
         },
         Date2date: function (d) {
+            debugger
+            if (!d || d === 'Invalid Date') return
             this.date.hh = d.getHours()
             this.date.mm = d.getMinutes()
             this.date.ss = d.getSeconds()
