@@ -1,5 +1,5 @@
 <template>
-    <picker :placeholder="fillPlaceholder" :value="selectValue" :info="info" :show="show" :can-hide="canHide" show-footer :disabled="disabled" @showOrHide="showOrHide">
+    <picker :placeholder="fillPlaceholder" :value="showValue" :info="info" :show="show" :can-hide="canHide" show-footer :disabled="disabled" @showOrHide="showOrHide">
         <template #icon>
             <i class="far fa-calendar-alt col-auto"></i>
         </template>
@@ -66,6 +66,9 @@ export default {
                 }
             }
         },
+        showValue: function () {
+            return this.formatDate(this.selectValue)
+        },
         canHide: function () {
             return this.type == this.pickertType
         },
@@ -85,12 +88,16 @@ export default {
     },
     mounted () {
         this.pickertType = this.type
-        let v = this.value.toString().length < 7 ? this.value + '-1' : this.value
+        let v = this.value.toString().length < 7 ? this.value + '-01' : this.value
         this.date = !isNaN(Date.parse(v)) ? new Date(v) : new Date()
         this.selectValue = this.date
     },
     methods: {
         formatDate: function (value) {
+            if (!value) return
+            value = new Date(value.toString().length < 7 ? value + '-01' : value)
+            if (value == 'Invalid Date') return
+            
             switch (this.type) {
                 case 'year':
                     return value.getFullYear()
@@ -140,9 +147,9 @@ export default {
         },
     },
     watch: {
-        selectValue: function (val) {
+        selectValue: function (value) {
             // 配合 v-model 工作
-            this.$emit('change', val)
+            this.$emit('change', value)
         },
     },
 }

@@ -3,7 +3,7 @@
     <form class="needs-validation" novalidate>
       <div class="my-1">
         <b-dropdownpicker placeholder="年" ></b-dropdownpicker>
-        <b-year-picker type="year" v-model="year" min="2015" max="2020"></b-year-picker>
+        <b-year-picker type="year" v-model="year"></b-year-picker>
         <b-year-picker type="month" v-model="month" min="1950-0" max="2019-12-21"></b-year-picker>
         <b-year-picker type="date" v-model="date" min="1950-1-31" max="2019-12-31"></b-year-picker>
         
