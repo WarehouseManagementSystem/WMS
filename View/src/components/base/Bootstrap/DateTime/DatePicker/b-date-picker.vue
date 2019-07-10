@@ -1,5 +1,5 @@
 <template>
-    <picker :placeholder="fillPlaceholder" :value="showValue" :info="info" :show="show" :can-hide="canHide" show-footer :disabled="disabled" @showOrHide="showOrHide">
+    <picker :placeholder="fillPlaceholder" :value="showValue" :info="info" :show="show" show-footer :disabled="disabled" @showOrHide="showOrHide">
         <template #icon>
             <i class="far fa-calendar-alt col-auto"></i>
         </template>
@@ -95,7 +95,7 @@ export default {
     methods: {
         formatDate: function (value) {
             if (!value) return
-            value = new Date(value.toString().length < 7 ? value + '-01' : value)
+            value = new Date(value.toString().length < 7 ? value + '-' + (this.type == 'year' ? '01' : util.string.padStart(Number(this.date.getMonth() + 1), 2, '0')) : value)
             if (value == 'Invalid Date') return
             
             switch (this.type) {
@@ -147,9 +147,9 @@ export default {
         },
     },
     watch: {
-        selectValue: function (value) {
+        selectValue: function () {
             // 配合 v-model 工作
-            this.$emit('change', value)
+            this.$emit('change', this.showValue)
         },
     },
 }
