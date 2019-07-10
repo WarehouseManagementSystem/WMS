@@ -95,6 +95,7 @@ export default {
         checknow: function () {
             this.selectValue = this.year
             this.start = this.formatStart(this.selectValue)
+            this.$emit('year2Month', this.selectValue)
         },
         backward: function () {
             this.start += this.total

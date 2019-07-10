@@ -50,11 +50,11 @@ export default {
             ...utilities.props.text,
             required: true,
         },
-        show: Boolean,
         canHide: {
             type: Boolean,
             default: true,
         },
+        show: Boolean,
         showFooter: Boolean,
         info: utilities.props.text,
         value: [String, Number, Date, ],
@@ -87,6 +87,7 @@ export default {
             newValue 
                 ? document.body.addEventListener('mousedown', this.hindeMenu ) 
                 : this.canHide ? document.body.removeEventListener('mousedown', this.hindeMenu ) : null
+            this.$emit('showOrHide', newValue)
         },
         show: function (value) {
             this.isShow = value

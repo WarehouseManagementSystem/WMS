@@ -1,5 +1,5 @@
 <template>
-    <picker :placeholder="fillPlaceholder" :value="selectValue" :info="info" :can-hide="canHide" show-footer :disabled="disabled">
+    <picker :placeholder="fillPlaceholder" :value="selectValue" :info="info" :show="show" :can-hide="canHide" show-footer :disabled="disabled" @showOrHide="showOrHide">
         <template #icon>
             <i class="far fa-calendar-alt col-auto"></i>
         </template>
@@ -10,6 +10,7 @@
 </template>
 
 <script>
+import util from '@/util/index.js'
 import utilities from '@/components/utilities/index.js'
 
 import picker from '@/components/base/Bootstrap/DropDownPicker/b-dropdownpicker.vue'
@@ -26,7 +27,7 @@ export default {
     },
     data () {
         return {
-            show: true,
+            show: null,
             date: null,
             pickertType: '',
             selectValue: null,
@@ -58,7 +59,9 @@ export default {
                         return 'yyyy'
                     case 'month':
                         return 'yyyy-MM'
-                    default:
+                    case 'date':
+                        return 'yyyy-MM:dd'
+                    default: 
                         return 'error'
                 }
             }
@@ -74,9 +77,9 @@ export default {
         },
         info: function () {
             if (this.dateMin.toString() == 'Invalid Date' && this.dateMax.toString() == 'Invalid Date') return ``
-            else if (this.dateMin.toString() != 'Invalid Date' && this.dateMax.toString() != 'Invalid Date') return `${this.min}~${this.max}`
-            else if (this.dateMin.toString() == 'Invalid Date') return `...~${this.max}`
-            else if (this.dateMax.toString() == 'Invalid Date') return `${this.min}~...`
+            else if (this.dateMin.toString() != 'Invalid Date' && this.dateMax.toString() != 'Invalid Date') return `${this.formatDate(this.dateMin)}~${this.formatDate(this.dateMax)}`
+            else if (this.dateMin.toString() == 'Invalid Date') return `...~${this.formatDate(this.dateMax)}`
+            else if (this.dateMax.toString() == 'Invalid Date') return `${this.formatDate(this.dateMin)}~...`
             return ''
         },
     },
@@ -87,6 +90,16 @@ export default {
         this.selectValue = this.date
     },
     methods: {
+        formatDate: function (value) {
+            switch (this.type) {
+                case 'year':
+                    return value.getFullYear()
+                case 'month':
+                    return `${value.getFullYear()}-${util.string.padStart(Number(value.getMonth() + 1), 2, '0')}`
+                case 'date':
+                    return `${value.getFullYear()}-${util.string.padStart(Number(value.getMonth() + 1), 2, '0')}-${util.string.padStart(value.getDate(), 2, '0')}`
+            }
+        },
         month2Year: function (value) {
             let d = new Date(value)
             this.date.setFullYear(d.getFullYear())
@@ -95,7 +108,10 @@ export default {
             this.pickertType = 'year'
         },
         year2Month: function (value) {
-            if (this.canHide) return
+            if (this.canHide) {
+                this.show = false
+                return
+            }
             this.date.setFullYear(value)
             this.selectValue = this.date
             this.pickertType = 'month'
@@ -109,12 +125,18 @@ export default {
             this.pickertType = 'month'
         },
         month2Date: function (value) {
-            if (this.canHide) return
+            if (this.canHide) {
+                this.show = false
+                return
+            }
             let d = new Date(value)
             this.date.setFullYear(d.getFullYear())
             this.date.setMonth(d.getMonth())
             this.selectValue = this.date
             this.pickertType = 'date'
+        },
+        showOrHide: function (value) {
+            this.show = value
         },
     },
     watch: {

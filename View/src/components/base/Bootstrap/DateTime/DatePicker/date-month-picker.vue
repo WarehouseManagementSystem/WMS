@@ -102,6 +102,7 @@ export default {
             this.year = this.now.getFullYear()
             this.month = this.now.getMonth()
             this.selectValue = this.formatMonth(this.year, this.month)
+            this.$emit('month2Date', this.selectValue)
         },
         backward: function () {
             this.year += 1

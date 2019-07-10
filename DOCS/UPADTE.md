@@ -42,6 +42,12 @@
 [time]:                                     ../View/src/components/base/Bootstrap/DateTime/Time
 [timeList]:                                 ../View/src/components/base/Bootstrap/DateTime/Time/TimeList
 
+2019-07-10
+
+* view 组件 [time] update ‘b-time’，解决边缘情况下的自动选区错误
+* view 组件 [dropDownPicker] 修改 'b-dropDownPicker'，允许调用者控制面板的显示与隐藏
+* view 组件 [dateTime/DatePicker] 修改 'b-date-picker'，简便交互逻辑，优化体验，菜单会在选择最后一项时自动关闭，无需再点击确定按钮
+
 2019-07-08
 
 * view 组件 [time] 完成 ‘b-time’ update

@@ -65,28 +65,6 @@ export default {
         nowDisabled: function () {
             return this.now < this.min || this.now > this.max
         },
-        // lists: function () {
-        //     if (!this.year || isNaN*(this.year)) return
-        //     if (!this.month || isNaN*(this.month)) return
-        //     let arrs = []
-        //     const d = new Date(this.selectValue)
-        //     const selectYear = d.getFullYear()
-        //     const selectMonth = d.getMonth()
-        //     const selectDate = d.getDate()
-        //     for (let i = 0; i < this.rowCount; i++) {
-        //         let arr = []
-        //         const max = this.total < this.colCount * (i + 1) ? this.total % this.colCount : this.colCount
-
-        //         for (let n = 0; n < max; n++) {
-        //             let value = 0 + i * this.colCount + n + 1
-        //             let date = new Date(this.formatDate(this.year, this.month, value))
-        //             arr.push({ value: value, text: util.string.padStart(value, 2), select: value == selectDate && selectYear == this.year && selectMonth == this.month, disabled: date < this.min || date > this.max })
-        //         }
-        //         arrs.push(arr)
-        //     }
-            
-        //     return arrs
-        // },
         lists: function () {
             if (!this.year || isNaN(this.year)) return
             if (this.month < 0 || isNaN(this.month)) return
@@ -127,7 +105,7 @@ export default {
         },
         click: function (value) {
             this.selectValue = this.formatDate(this.year, this.month, value)
-            this.$emit('dateChecked',)
+            this.$emit('dateChecked')
         },
         forward: function () {
             if (this.month == 0) {
@@ -143,6 +121,7 @@ export default {
             this.month = this.now.getMonth()
             this.date = this.now.getDate()
             this.selectValue = this.formatDate(this.year, this.month, this.date)
+            this.$emit('dateChecked')
         },
         backward: function () {
             if (this.month == 11) {
