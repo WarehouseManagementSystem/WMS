@@ -42,6 +42,10 @@
 [time]:                                     ../View/src/components/base/Bootstrap/DateTime/Time
 [timeList]:                                 ../View/src/components/base/Bootstrap/DateTime/Time/TimeList
 
+2019-07-11
+
+* view 组件 [formconter] 完成 ‘b-colors’
+
 2019-07-10
 
 * view 组件 [time] update ‘b-time’，解决边缘情况下的自动选区错误
