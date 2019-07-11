@@ -141,5 +141,10 @@ export default {
             this.change()
         },
     },
+    watch: {
+        value: function (value) {
+            this.number = value
+        }
+    }
 }
 </script>

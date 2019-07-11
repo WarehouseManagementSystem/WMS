@@ -15,6 +15,8 @@
         {{ month }}<br />
         {{ date }}<br />
         {{ time }}<br />
+
+        <b-color></b-color>
       </div>
     </form>
   </div>
@@ -29,6 +31,7 @@ import BTime from '@/components/base/Bootstrap/DateTime/Time/b-time.vue'
 import BHour from '@/components/base/Bootstrap/DateTime/Time/TimeList/b-hour-list.vue'
 import BMinutes from '@/components/base/Bootstrap/DateTime/Time/TimeList/b-minutes-list.vue'
 import BSecond from '@/components/base/Bootstrap/DateTime/Time/TimeList/b-second-list.vue'
+import BColor from '@/components/base/Bootstrap/FormConter/b-color1.vue'
 
 export default {
   name: 'HomePage',
@@ -39,6 +42,7 @@ export default {
     BHour,
     BMinutes,
     BSecond,
+    BColor,
   },
   data () {
     return {
