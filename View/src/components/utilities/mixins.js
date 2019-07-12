@@ -22,10 +22,8 @@ export default {
             },
             computed: {
                 objClass: function () {
-                    let size = ''
-                    let border = ''
-                    if (this.size) size = `form-control-${this.size}`
-                    border = !this.border ? 'border-0' : ''
+                    let size = this.size ? `form-control-${this.size}` : ''
+                    let border = !this.border ? 'border-0' : ''
                     return `bg-${this.color} text-${this.textColor} ${size} ${border} text-${this.textAlign}`
                 },
                 inputListeners: function () {

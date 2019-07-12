@@ -10,13 +10,14 @@
         <b-hour></b-hour>
         <b-minutes></b-minutes>
         <b-second></b-second>
-        <b-time max="15:00" v-model='time'></b-time>
+        <b-time max="15:00" v-model='time' disabled></b-time>
         {{ year }}<br />
         {{ month }}<br />
         {{ date }}<br />
         {{ time }}<br />
+        {{ color }}<br />
 
-        <b-color></b-color>
+        <b-color v-model="color"></b-color>
       </div>
     </form>
   </div>
@@ -47,6 +48,7 @@ export default {
   data () {
     return {
       year: 2000,
+      color: { r: 50, g: 50, b: 50 },
       month: '2019-02',
       date: '2012-02',
       time: '10:11:21',
