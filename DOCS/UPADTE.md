@@ -41,6 +41,13 @@
 [DatePicker]:                               ../View/src/components/base/Bootstrap/DateTime/Date/DatePicker
 [time]:                                     ../View/src/components/base/Bootstrap/DateTime/Time
 [timeList]:                                 ../View/src/components/base/Bootstrap/DateTime/Time/TimeList
+<!-- pages -->
+[b-text-demo]:                              ../View/src/Pages/Demo/Form/b-text-demo.vue
+[b-textarea-demo]:                          ../View/src/Pages/Demo/Form/b-text-demo.vue
+
+2019-07-15
+
+* view 组件 add [b-text-demo] 和 [b-textarea-demo]
 
 2019-07-11
 
