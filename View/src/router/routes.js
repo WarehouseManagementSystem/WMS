@@ -1,20 +1,20 @@
 import util from './util'
 
 // System
-import aRouters from './Subsystem/a'
+import demoRouters from './Subsystem/Demo'
 import bRouters from './Subsystem/b'
 import cRouters from './Subsystem/c'
 import SystemRouters from './Subsystem/System'
 
 const Modules = [
-    util.GetModels(cRouters),
-    util.GetModels(aRouters),
+    util.GetModels(demoRouters),
     util.GetModels(bRouters),
+    util.GetModels(cRouters),
     util.GetModels(SystemRouters),
 ]
 
 const Routers = [
-    ...util.GetRouters(aRouters),               // a
+    ...util.GetRouters(demoRouters),               // a
     ...util.GetRouters(bRouters),               // b
     ...util.GetRouters(cRouters),               // c
     ...util.GetRouters(SystemRouters),          // System

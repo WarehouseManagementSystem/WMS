@@ -1,11 +1,11 @@
 <template>
-    <small v-show="message" class="form-text text-muted">{{ message }}</small>
+    <small v-if="info" class="form-text text-muted">{{ info }}</small>
 </template>
 <script>
 export default {
     name: 'b-form-help',
     props: {
-        message: {
+        info: {
             type: String,  
         },
     },

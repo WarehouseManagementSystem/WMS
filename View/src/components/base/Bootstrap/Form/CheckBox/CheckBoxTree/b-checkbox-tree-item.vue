@@ -35,7 +35,7 @@
 <script>
 import utilities from '@/components/utilities/index.js'
 
-import checkbox from './b-checkbox'
+import checkbox from '../b-checkbox'
 
 export default {
     name: 'b-checkbox-tree-item',

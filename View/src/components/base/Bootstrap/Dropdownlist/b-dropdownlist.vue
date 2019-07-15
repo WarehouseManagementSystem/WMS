@@ -26,7 +26,7 @@ import utilities from '@/components/utilities/index.js'
 import drop from '@/components/base/Bootstrap/Dropdown/b-dropdown.vue'
 import dropItem from '@/components/base/Bootstrap/Dropdown/b-dropdown-item.vue'
 
-import BInfo from '@/components/base/Bootstrap/FormConter/b-form-info'
+import BInfo from '@/components/base/Bootstrap/Form/Other/b-form-info.vue'
 
 export default {
     name: 'b-dropdownlist',

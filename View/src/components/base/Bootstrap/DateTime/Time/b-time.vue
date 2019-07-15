@@ -5,7 +5,7 @@
 <script>
 import util from '@/util/index.js'
 
-import BText from '@/components/base/Bootstrap/FormConter/b-text.vue'
+import BText from '@/components/base/Bootstrap/Form/b-text.vue'
 
 export default {
     name: 'b-time',

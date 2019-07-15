@@ -10,7 +10,7 @@
 import util from '@/util/index.js'
 import utilities from '@/components/utilities/index.js'
 
-import BInfo from './b-form-info'
+import BInfo from '@/components/base/Bootstrap/Form/Other/b-form-info.vue'
 
 export default {
     name: 'b-file',

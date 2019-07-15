@@ -3,6 +3,7 @@
         v-if="target == 'a'" 
         :class="objClass" 
         :href="href" 
+        :name="fillName" 
         :aria-pressed="active" 
         :disabled="disabled" 
         :aria-disabled="disabled"
@@ -19,6 +20,7 @@
         :class="objClass" 
         :type="type" 
         :value="value" 
+        :name="fillName" 
         :aria-pressed="active" 
         :disabled="disabled" 
         :aria-disabled="disabled"
@@ -30,6 +32,7 @@
         v-else 
         :class="objClass" 
         :type="type" 
+        :name="fillName" 
         :aria-pressed="active" 
         :disabled="disabled" 
         :aria-disabled="disabled" 
@@ -54,6 +57,7 @@ export default {
         color: utilities.props.color,
         href: utilities.props.href,
         size: utilities.props.size,
+        name: utilities.props.value,
         active: utilities.props.active,
         disabled: utilities.props.disabled,
         SrMessage: utilities.props.SrMessage,
@@ -104,6 +108,9 @@ export default {
         },
         objTabindex: function () {
             return this.disabled ? -1 : this.tabindex
+        },
+        fillName: function () {
+            return this.name || this.type
         },
         fillSrMessage: function () {
             if (this.SrMessage) {

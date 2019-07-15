@@ -1,7 +1,9 @@
 // placeholder
 export default {
-    email: 'Place enter your email',
+    search: 'Search',
+    email: 'Place enter your email address',
     tel: 'Place enter your tel number',
     phone: 'Place enter your phone number',
+    ip: 'Place enter your ip address',
     url: 'Place enter your url address',
 }
