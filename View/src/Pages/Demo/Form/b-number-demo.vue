@@ -49,11 +49,11 @@
         </div>
         <div class="row">
             <font class="col-1">info<br/>prompt:</font>
-            <b-number class="col-11" info="info text" prompt></b-number>
+            <b-number class="col-11" info="info text" step="0.1" prompt></b-number>
         </div>
         <div class="row">
             <font class="col-1">v-model:<br />({{ number }})</font>
-            <b-number class="col-11" v-model.number="number" min="Number(5)" ></b-number>
+            <b-number class="col-11" v-model.number="number" ></b-number>
         </div>
         <div class="row">
             <font class="col-1">required:</font>

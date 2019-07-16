@@ -126,9 +126,10 @@ export default {
         }
         this.getPrecision()
         this.number = this.formatNumber(this.toNmuber(this.value, this.dateMin))
+        
         this.message = this.info || ''
         if (this.prompt) {
-            let str = `${this.min}-${this.max},精度: ${this.setPrecision}`
+            let str = `${this.formatNumber(this.min)}-${this.formatNumber(this.max)},精度: ${this.formatNumber(this.step)}`
             this.message += this.info ? `(${str})` : str
         }
     },
