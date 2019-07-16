@@ -4,7 +4,8 @@
             :type="imputType" 
             class="form-control" 
             :class="[objClass, readonlyClass]" 
-            :style="objstyle"
+            :style="objstyle" 
+            :size="Number(length)"
             ref="text" 
             :placeholder="fillPlaceholder" 
             :readonly="readonly" 
@@ -42,6 +43,7 @@ export default {
             },
         },
         placeholder: String,
+        length: [String, Number],
         info: utilities.props.value,
         icon: utilities.props.value,
         hideIcon: Boolean,

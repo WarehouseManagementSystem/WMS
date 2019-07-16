@@ -19,6 +19,14 @@
             <b-textarea class="col-11" placeholder="placeholder text"></b-textarea>
         </div>
         <div class="row">
+            <font class="col-1">cols:</font>
+            <b-textarea class="col-auto" value="cols 10" cols="10"></b-textarea>
+        </div>
+        <div class="row">
+            <font class="col-1">rows:</font>
+            <b-textarea class="col-11" value="rows 2" rows="2"></b-textarea>
+        </div>
+        <div class="row">
             <font class="col-1">prompt:</font>
             <b-textarea class="col-11" prompt></b-textarea>
         </div>

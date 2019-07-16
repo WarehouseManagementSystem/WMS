@@ -21,6 +21,18 @@
             <b-text class="col-11" placeholder="placeholder text"></b-text>
         </div>
         <div class="row">
+            <font class="col-1">size(sm):</font>
+            <b-text class="col-11" value="sm size" size="sm"></b-text>
+        </div>
+        <div class="row">
+            <font class="col-1">size(lg):</font>
+            <b-text class="col-11" value="lg size" size="lg"></b-text>
+        </div>
+        <div class="row">
+            <font class="col-1">length:</font>
+            <b-text class="col-auto" value="10 length" :length="10"></b-text>
+        </div>
+        <div class="row">
             <font class="col-1" for="info">info:</font>
             <b-text class="col-11" info="info" id="info"></b-text>
         </div>

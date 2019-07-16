@@ -6,7 +6,6 @@
             <font class="col-1">default:</font>
             <b-number class="col-11" ></b-number>
         </div>
-
         <div class="row">
             <font class="col-1">readonly:</font>
             <b-number class="col-11" readonly></b-number>
