@@ -59,6 +59,7 @@ export default {
                 : (o && o.value) || null
         },
         fillIcon: function () {
+            if (['number'].includes(this.type)) return
             const o = Object.getOwnPropertyDescriptor(utilities.icon, this.type)
             return this.icon 
                 ? this.icon
@@ -70,9 +71,10 @@ export default {
             return o
         },
         regex: function () {
+            if (['number'].includes(this.type)) return null
             const o = Object.getOwnPropertyDescriptor(util.regex, this.type)
             return this.pattern 
-                ? util.string.toRegExp(this.pattern) 
+                ? util.string.toRegExp(this.pattern.toString()) 
                 : (o && o.value) || null
         },
     },

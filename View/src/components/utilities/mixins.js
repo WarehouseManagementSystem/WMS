@@ -66,7 +66,7 @@ export default {
                         return value >= 0
                     },
                 },
-                pattern: String,
+                pattern: [String, RegExp],
                 validInfo: String,
                 invalidInfo: String,
             },
@@ -120,7 +120,6 @@ export default {
                     // 传入字符串长度为 0、无正则表达式 不做校验直接返回 true
                     if (value.length == 0 || !regex) return true
                     var patternRegex = new RegExp(regex);
-                    debugger
                     if (!value.match(patternRegex)) {
                         this.$emit('invalid', 'regex')
                         return false

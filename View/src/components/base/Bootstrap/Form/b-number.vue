@@ -11,7 +11,8 @@
                 :max="max" 
                 :step="step" 
                 v-model.number="number"
-                :disabled="readonly" 
+                :disabled="disabled" 
+                :readonly="readonly" 
                 v-on="inputListeners"
                 v-bind="$attrs"
                 @click="click($event)" 
@@ -33,7 +34,7 @@ export default {
     components: { BButton, BText },
     model: {
         prop: 'value',
-        event: 'change',
+        event: 'input',
     },
     data () {
         return {
@@ -64,7 +65,7 @@ export default {
             },
         },
         value: {
-            type: [Number, String],
+            type: Number,
             default: function (value) {
                 return value ? value : this.min
             },
@@ -76,10 +77,10 @@ export default {
     },
     computed: {
         subbuttomdisabled: function () {
-            return this.number <= this.min || this.readonly
+            return this.number <= this.min || this.disabled
         },
         addbuttondisabled: function () {
-            return this.number >= this.max || this.readonly
+            return this.number >= this.max || this.disabled
         },
         getStepPrecision: function () {
             let str =  this.step.toString().split('.')
@@ -103,8 +104,8 @@ export default {
                 // 或覆写一些监听器的行为
                 {
                     // 这里确保组件配合 `v-model` 的工作
-                    change: function () {
-                        vm.$emit('change', vm.number)
+                    input: function () {
+                        vm.$emit('input', vm.number || vm.min)
                     }
                 }
             )
@@ -118,6 +119,7 @@ export default {
             return Number.parseFloat(value).toFixed(this.precision)
         },
         click: function (event) {
+            if (this.readonly || this.disabled) return
             if (this.number == 0) event.target.value = ''
         },
         change: function () {
