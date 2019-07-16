@@ -44,6 +44,11 @@
 <!-- pages -->
 [b-text-demo]:                              ../View/src/Pages/Demo/Form/b-text-demo.vue
 [b-textarea-demo]:                          ../View/src/Pages/Demo/Form/b-text-demo.vue
+[b-number-demo]:                            ../View/src/Pages/Demo/Form/b-number-demo.vue
+
+2019-07-16
+
+* view 组件 add [b-number-demo]
 
 2019-07-15
 
