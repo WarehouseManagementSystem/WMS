@@ -47,6 +47,7 @@ export default {
         info: utilities.props.value,
         icon: utilities.props.value,
         hideIcon: Boolean,
+        prompt: Boolean,
     },
     computed: {
         imputType: function () {

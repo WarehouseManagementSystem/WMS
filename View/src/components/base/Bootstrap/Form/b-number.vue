@@ -1,30 +1,29 @@
 <template>
-    <div class="form-control" :class="[objClass, readonlyClass, { 'px-0' : hideButton}]">
-        <div class="row" style="margin-top: -7px">
-            <b-button v-if="!readonly && !hideButton" class="col-auto" style="margin-right: -15px" :disabled="subbuttomdisabled" @click="subn" outline value="-" />
-            <b-text 
-                class="col border-0" 
-                :border='Boolean(false)'
-                text-align="center" 
-                type="number" 
-                :min="min" 
-                :max="max" 
-                :step="step" 
-                v-model.number="number"
-                :disabled="disabled" 
-                :readonly="readonly" 
-                v-on="inputListeners"
-                v-bind="$attrs"
-                @click="click($event)" 
-                @change="change" 
-                @blur="blur($event)"></b-text>
-            <b-button v-if="!readonly && !hideButton" class="col-auto" style="margin-left: -15px" :disabled="addbuttondisabled" @click="add" outline value="+" />
-        </div>
+    <div class="row" @keyup.up="add" @keyup.down="subn">
+        <b-button v-if="!readonly && !hideButton" :size="size" class="col-auto" :style="btnstyle" :disabled="subbuttomdisabled" @click="subn" outline value="-" />
+        <b-text 
+            class="col px-0" 
+            text-align="center" 
+            :min="dateMin" 
+            :max="dateMax" 
+            :step="dateStep" 
+            :size="size" 
+            :info="message" 
+            v-model.number="number" 
+            :disabled="disabled" 
+            :readonly="readonly" 
+            v-on="inputListeners"
+            v-bind="$attrs"
+            @click="click($event)" 
+            @change="change" 
+            @blur="blur($event)"></b-text>
+        <b-button v-if="!readonly && !hideButton" :size="size" class="col-auto" :style="btnstyle" :disabled="addbuttondisabled" @click="add" outline value="+" />
     </div>
 </template>
 
 <script>
 import utilities from '@/components/utilities/index.js'
+
 import BButton from '@/components/base/Bootstrap/Button/b-button.vue'
 import BText from './b-text'
 export default {
@@ -34,65 +33,73 @@ export default {
     components: { BButton, BText },
     model: {
         prop: 'value',
-        event: 'input',
+        event: 'change',
     },
     data () {
         return {
             number: 0,
+            setPrecision: 0,
+            btnstyle: {},
+            message: '',
         }
     },
     props: {
         min: {
-            type: Number,
-            default: 0,
-        },
-        max: {
-            type: Number,
-            default: 100,
-        },
-        step: {
-            type: Number,
-            default: 1,
-        },
-        precision: {
-            type: Number,
+            type: [String, Number],
             default: function () {
-                return this.getStepPrecision
+                return 0
             },
             validator: function (value) {
-                // 这个值必须匹配下列字符串中的一个
-                return /^[0-9]\d*$/.test(value) && value >= 0
+                return Number(value)
+            },
+        },
+        max: {
+            type: [String, Number],
+            default: function () {
+                return 100
+            },
+            validator: function (value) {
+                return Number(value)
+            },
+        },
+        step: {
+            type: [String, Number],
+            default: function () {
+                return 1
+            },
+            validator: function (value) {
+                return Number(value)
             },
         },
         value: {
-            type: Number,
+            type: [String, Number],
             default: function (value) {
-                return value ? value : this.min
+                return Number(value) ? Number(value) : this.min
+            },
+            validator: function (value) {
+                return Number(value)
             },
         },
-        hideButton: {
-            type: Boolean,
-            default: false,
-        },
+        size: utilities.props.size,
+        hideButton: Boolean,
+        prompt: Boolean,
+        info: String,
     },
     computed: {
+        dateStep: function () {
+            return this.toNmuber(this.step)
+        },
+        dateMin: function () {
+            return this.toNmuber(this.min)
+        },
+        dateMax: function () {
+            return this.toNmuber(this.max, 100)
+        },
         subbuttomdisabled: function () {
-            return this.number <= this.min || this.disabled
+            return this.number <= this.dateMin || this.disabled
         },
         addbuttondisabled: function () {
-            return this.number >= this.max || this.disabled
-        },
-        getStepPrecision: function () {
-            let str =  this.step.toString().split('.')
-            return str.length !== 2 ? 0 : str[1].length
-        },
-        getPrecision: function () {
-            if (this.getStepPrecision > this.precision) {
-                console.warn('[Error] [b-number] precision can`t less than step`s precision, Used step`s precision')
-                return this.getStepPrecision
-            } else {
-                return this.precision
-            }
+            return this.number >= this.dateMax || this.disabled
         },
         inputListeners: function () {
             var vm = this
@@ -104,48 +111,72 @@ export default {
                 // 或覆写一些监听器的行为
                 {
                     // 这里确保组件配合 `v-model` 的工作
-                    input: function () {
-                        vm.$emit('input', vm.number || vm.min)
+                    change: function () {
+                        vm.$emit('change', vm.number || vm.dateMin)
                     }
                 }
             )
         },
     },
     mounted () {
-        this.number = this.formatNumber(this.value)
+        // 通过 text 的高度确定 button 的高度
+        if (this.readonly || this.hideButton) return
+            this.btnstyle = {
+            height: this.$vnode.child.$children[1].$refs.text.offsetHeight + 'px'
+        }
+        this.getPrecision()
+        this.number = this.formatNumber(this.toNmuber(this.value, this.dateMin))
+        this.message = this.info || ''
+        if (this.prompt) {
+            let str = `${this.min}-${this.max},精度: ${this.setPrecision}`
+            this.message += this.info ? `(${str})` : str
+        }
     },
     methods: {
+        toNmuber: function (str, n = 0) {
+            return Number(str) || n
+        },
+        getNumberPrecision: function (number) {
+            let str =  number.toString().split('.')
+            return str.length !== 2 ? 0 : str[1].length
+        },
+        getPrecision: function () {
+            // 返回精度最高的
+            this.setPrecision = Math.max(this.getNumberPrecision(this.dateStep), this.getNumberPrecision(this.value))
+        },
         formatNumber: function (value) {
-            return Number.parseFloat(value).toFixed(this.precision)
+            return Number.parseFloat(value).toFixed(this.setPrecision)
         },
         click: function (event) {
             if (this.readonly || this.disabled) return
             if (this.number == 0) event.target.value = ''
         },
         change: function () {
-            if (this.number < this.min) this.number = this.min
-            if (this.number > this.max) this.number = this.max
+            if (this.number < this.dateMin) this.number = this.dateMin
+            if (this.number > this.dateMax) this.number = this.dateMax
             this.number = this.formatNumber(this.number)
-            // 这里确保组件配合 `v-model` 的工作
+            // 配合 v-model
             this.$emit('change', this.number)
         },
         blur: function () {
-            if (!event.target.value) event.target.value = this.formatNumber(this.min)
+            if (!event.target.value) event.target.value = this.formatNumber(this.dateMin)
         },
         subn: function () {
+            if (this.disabled || this.readonly) return
             this.number = Number(this.number)
-            this.number -= this.step
+            this.number -= this.dateStep
             this.change()
         },
         add: function () {
+            if (this.disabled || this.readonly) return
             this.number = Number(this.number)
-            this.number += this.step
+            this.number += this.dateStep
             this.change()
         },
     },
     watch: {
         value: function (value) {
-            this.number = value
+            this.number = this.toNmuber(value)
         }
     }
 }
