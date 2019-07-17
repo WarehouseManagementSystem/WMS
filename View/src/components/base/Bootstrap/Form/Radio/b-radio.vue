@@ -12,7 +12,7 @@
             :disabled="disabled" 
             :aria-disabled="disabled" 
             v-on="inputListeners" />
-        <label class="custom-control-label" :class="objClass" :for="id">{{ label }}</label>
+        <label class="custom-control-label" :for="id">{{ label }}</label>
         <font v-if="inline">   </font>
         <slot></slot>
         <b-help v-if="info" :info="info" />
@@ -28,7 +28,6 @@ import BHelp from '@/components/base/Bootstrap/Form/Other/b-form-help.vue'
 export default {
     name: 'b-radio',
     inheritAttrs: false,
-    mixins: [ utilities.mixins.form.base ],
     components: { BHelp, },
     model: {
         prop: 'checked',

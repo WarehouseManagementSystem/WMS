@@ -8,7 +8,7 @@
         </div>
         <div class="row">
             <font class="col-1">checked:</font>
-            <b-radio class="col-11" checked></b-radio>
+            <b-radio class="col-11" :checked="Boolean(true)"></b-radio>
         </div>
         <div class="row">
             <font class="col-1">disabled:</font>
@@ -91,16 +91,6 @@
                 </template>
             </b-radio-group>
         </div>
-
-         <div class="custom-control custom-radio">
-            <input type="radio" class="custom-control-input" id="customControlValidation2" name="radio-stacked" required>
-            <label class="custom-control-label" for="customControlValidation2">Toggle this custom radio</label>
-        </div>
-        <div class="custom-control custom-radio mb-3">
-            <input type="radio" class="custom-control-input" id="customControlValidation3" name="radio-stacked" required>
-            <label class="custom-control-label" for="customControlValidation3">Or toggle this other custom radio</label>
-            <div class="invalid-feedback">More example invalid feedback text</div>
-        </div>
     </div>
 </template>
 
@@ -117,7 +107,7 @@ export default {
             list: [
                 {value: 'value1', label: 'value1'},
                 {value: 'value2', label: 'value2'},
-                {value: 'disabled radio', label: 'disabled radio', },
+                {value: 'disabled radio', label: 'disabled radio', disabled: true},
             ],
             value: 'value2',
         }
