@@ -91,12 +91,36 @@
                 </template>
             </b-radio-group>
         </div>
+        <!-- <hr>
+        <h2>b-radio-button-group</h2>
+        <hr>
+        <div class="row">
+            <font class="col-1">default:</font>
+            <b-radio-button-group name="default-button-group" :list="buttongrouplist"></b-radio-button-group>
+        </div>
+        <div class="row">
+            <font class="col-1">disabled:</font>
+            <b-radio-button-group name="disabled-button-group" :list="buttongrouplist" disabled></b-radio-button-group>
+        </div>
+        <div class="row">
+            <font class="col-1">value:</font>
+            <b-radio-button-group name="value-button-group" :list="buttongrouplist" value="value1"></b-radio-button-group>
+        </div>
+        <div class="row">
+            <font class="col-1">info:</font>
+            <b-radio-button-group name="info-button-group" :list="buttongrouplist" info="button group info"></b-radio-button-group>
+        </div>
+        <div class="row">
+            <font class="col-1">v-model:<br/>({{buttongroupvalue}})</font>
+            <b-radio-button-group name="v-model-button-group" :list="buttongrouplist" v-model="buttongroupvalue"></b-radio-button-group>
+        </div> -->
     </div>
 </template>
 
 <script>
 import BRadio from '@/components/base/Bootstrap/Form/Radio/b-radio.vue'
 import BRadioGroup from '@/components/base/Bootstrap/Form/Radio/b-radio-group.vue'
+// import BRadioButtonGroup from '@/components/base/Bootstrap/Form/Radio/b-radio-button-group.vue'
 
 export default {
     name: 'b-radio-demo',
@@ -110,7 +134,14 @@ export default {
                 {value: 'disabled radio', label: 'disabled radio', disabled: true},
             ],
             value: 'value2',
+            buttongrouplist: [
+                {value: 'value1', label: 'value1', },
+                {value: 'value2', label: 'value2', },
+                {value: 'value3', label: 'value3', },
+                {value: 'value4', label: 'value4', disabled: true},
+            ],
+            buttongroupvalue: 'value2',
         }
-    }
+    },
 }
 </script>
