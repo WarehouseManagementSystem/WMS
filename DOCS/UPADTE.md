@@ -45,6 +45,7 @@
 [b-text-demo]:                              ../View/src/Pages/Demo/Form/b-text-demo.vue
 [b-textarea-demo]:                          ../View/src/Pages/Demo/Form/b-text-demo.vue
 [b-number-demo]:                            ../View/src/Pages/Demo/Form/b-number-demo.vue
+[b-radio-demo]:                             ../View/src/Pages/Demo/Form/b-radio-demo.vue
 
 2019-07-17
 
