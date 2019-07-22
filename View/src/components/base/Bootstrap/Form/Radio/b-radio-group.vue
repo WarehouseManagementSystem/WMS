@@ -11,8 +11,8 @@
                 :checked="value" 
                 :disabled="item.disabled || disabled" 
                 v-on="inputListeners" 
-                @change="validator($event)">
-                <template v-if="list.length - 1 == index">
+                @input="validator($event)">
+                <template #valid v-if="list.length - 1 == index">
                     <b-info key="valid" v-if="validInfo || Object.keys($scopedSlots).includes('valid-info')" state="valid"><slot name="valid-info">{{ validInfo }}</slot></b-info>
                     <b-info key="invalid" v-if="invalidInfo || Object.keys($scopedSlots).includes('invalid-info')" state="invalid"><slot name="invalid-info">{{ invalidInfo }}</slot></b-info>
                 </template>
@@ -36,7 +36,7 @@ export default {
     components: { redio, BInfo, BHelp },
     model: {
         prop: 'value',
-        event: 'change',
+        event: 'input',
     },
     data () {
         return {
@@ -53,25 +53,7 @@ export default {
             required: true,
         },
     },
-    computed: {
-        inputListeners: function () {
-            var vm = this
-            // `Object.assign` 将所有的对象合并为一个新对象
-            return Object.assign({},
-                // 我们从父级添加所有的监听器
-                this.$listeners,
-                // 然后我们添加自定义监听器，
-                // 或覆写一些监听器的行为
-                {
-                    // 这里确保组件配合 `v-model` 的工作
-                    change: function (e) {
-                        vm.$emit('change', e.target.value)
-                    }
-                }
-            )
-        },
-    },
-     methods: {
+    methods: {
         validator: function (e) {
             if (this.disabled) return // disabled 时不校验
             // 验证函数不会对传入的数据进行处理

@@ -5,16 +5,16 @@
             class="custom-control-input" 
             :class="ValidClass"
             :id="id" 
-            v-bind="$attrs" 
             :value="value" 
             :checked="value ? checked == value : checked" 
             :aria-checked="value ? checked  == value : checked" 
             :disabled="disabled" 
             :aria-disabled="disabled" 
+            v-bind="$attrs" 
             v-on="inputListeners" />
         <label class="custom-control-label" :for="id">{{ label }}</label>
         <font v-if="inline">   </font>
-        <slot></slot>
+        <slot name="valid"></slot>
         <b-help v-if="info" :info="info" />
     </div>
 </template>
@@ -31,7 +31,7 @@ export default {
     components: { BHelp, },
     model: {
         prop: 'checked',
-        event: 'input'
+        event: 'change'
     },
     props: {
         value: utilities.props.text,
@@ -60,8 +60,8 @@ export default {
                 // 或覆写一些监听器的行为
                 {
                     // 这里确保组件配合 `v-model` 的工作
-                    input: function (event) {
-                        vm.$emit('input', event.target.value)
+                    change: function (event) {
+                        vm.$emit('change', event.target.value)
                     }
                 }
             )

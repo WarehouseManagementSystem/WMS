@@ -5,6 +5,7 @@
             class="custom-control-input" 
             :id="id" 
             ref="checkbox" 
+            :value="value" 
             :checked="checked" 
             :aria-checked="checked" 
             :disabled="disabled" 
@@ -13,7 +14,7 @@
             v-on="inputListeners" >
         <b-info v-if="validInfo || Object.keys($scopedSlots).includes('valid-info')" state="valid"><slot name="valid-info">{{ validInfo }}</slot></b-info>
         <b-info v-if="invalidInfo || Object.keys($scopedSlots).includes('invalid-info')" state="invalid"><slot name="invalid-info">{{ invalidInfo }}</slot></b-info>
-        <label class="custom-control-label" :class="objClass" :for="id">{{ text }}</label>
+        <label class="custom-control-label" :for="id">{{ label }}</label>
     </div>
 </template>
 
@@ -33,29 +34,21 @@ export default {
         event: 'input'
     },
     props: {
-        text: utilities.props.text,
+        value: utilities.props.text,
+        label: utilities.props.text,
         id: {
             type: String,
             default: function () {
                 return 'Checkbox-' + util.random.getRandomString()
             }
         },
-        checked: {
-            type: Boolean,
-            default: false,
-        },
-        disabled: {
-            type: Boolean,
-            default: false,
-        },
-        inline: {
-            type: Boolean,
-            default: false,
-        },
         indeterminate: {
             type: Number,
             default: 0,
         },
+        checked: Boolean,
+        disabled: Boolean,
+        inline: Boolean,
     },
     computed: {
         inputListeners: function () {

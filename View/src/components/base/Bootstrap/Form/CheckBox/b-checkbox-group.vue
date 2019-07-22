@@ -6,8 +6,7 @@
                 :key="item.key ? item.key : (item.id ? item.id : index)" 
                 v-bind="$attrs" 
                 :color="color" 
-                :text-color="textColor" 
-                :text="item.text" 
+                :label="item.label" 
                 :value="item.value" 
                 :checked="checkedValues.includes(item.value)" 
                 :disabled="item.disabled" 
@@ -32,7 +31,7 @@ import checkbox from './b-checkbox'
 export default {
     name: 'b-checkbox-group',
     inheritAttrs: false,
-    mixins: [ utilities.mixins.form.base, utilities.mixins.form.validator ],
+    mixins: [ utilities.mixins.form.base, ],
     components: { checkbox },
     model: {
         prop: 'checkedValues',
