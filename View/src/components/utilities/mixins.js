@@ -69,9 +69,11 @@ export default {
                 pattern: [String, RegExp],
                 validInfo: String,
                 invalidInfo: String,
+                unvalid: Boolean,
             },
             methods: {
                 validator: function (e, regex = this.pattern) {
+                    if (this.unvalid) return // 不做验证
                     if (this.readonly) return // readonly 时不校验
                     if (this.disabled) return // disabled 时不校验
                     // 验证函数不会对传入的数据进行处理

@@ -13,7 +13,8 @@
             :disabled="disabled" 
             :readonly="readonly" 
             v-on="inputListeners"
-            v-bind="$attrs"
+            v-bind="$attrs" 
+            unvalid 
             @click="click($event)" 
             @change="change" 
             @blur="blur($event)"></b-text>
