@@ -16,7 +16,7 @@
             @blur="validator"/>
         <b-info v-if="validInfo || Object.keys($scopedSlots).includes('valid-info')" state="valid"><slot name="valid-info">{{ validInfo }}</slot></b-info>
         <b-info v-if="invalidInfo || Object.keys($scopedSlots).includes('invalid-info')" state="invalid"><slot name="invalid-info">{{ invalidInfo }}</slot></b-info>
-        <b-help v-if="message" :info="message" />
+        <b-help :info="message" />
     </div>
 </template>
 <script>

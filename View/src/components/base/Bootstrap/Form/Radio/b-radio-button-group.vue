@@ -20,7 +20,7 @@
                 {{item.label}}
             </label>
         </div>
-        <b-help v-if="info" :info="info" />
+        <b-help :info="info" />
     </div>
 </template>
 

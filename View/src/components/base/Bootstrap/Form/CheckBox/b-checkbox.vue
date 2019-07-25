@@ -3,6 +3,7 @@
         <input 
             type="checkbox" 
             class="custom-control-input" 
+            :class="ValidClass" 
             :id="id" 
             ref="checkbox" 
             :value="value" 
@@ -11,10 +12,12 @@
             :disabled="disabled" 
             :aria-disabled="disabled" 
             v-bind="$attrs" 
-            v-on="inputListeners" >
+            v-on="inputListeners"
+            @change="validator($event)">
+        <label class="custom-control-label" :for="id">{{ label }}</label>
         <b-info v-if="validInfo || Object.keys($scopedSlots).includes('valid-info')" state="valid"><slot name="valid-info">{{ validInfo }}</slot></b-info>
         <b-info v-if="invalidInfo || Object.keys($scopedSlots).includes('invalid-info')" state="invalid"><slot name="invalid-info">{{ invalidInfo }}</slot></b-info>
-        <label class="custom-control-label" :for="id">{{ label }}</label>
+        <b-help :class="{ 'pl-1': inline }" :info="info" />
     </div>
 </template>
 
@@ -23,15 +26,16 @@ import util from '@/util/index.js'
 import utilities from '@/components/utilities/index.js'
 
 import BInfo from '@/components/base/Bootstrap/Form/Other/b-form-info.vue'
+import BHelp from '@/components/base/Bootstrap/Form/Other/b-form-help.vue'
 
 export default {
     name: 'b-checkbox',
     inheritAttrs: false,
     mixins: [ utilities.mixins.form.base, utilities.mixins.form.validator ],
-    components: { BInfo },
+    components: { BInfo, BHelp },
     model: {
         prop: 'checked',
-        event: 'input'
+        event: 'change'
     },
     props: {
         value: utilities.props.text,
@@ -43,15 +47,18 @@ export default {
             }
         },
         indeterminate: {
-            type: Number,
+            type: [Number, String,],
             default: 0,
         },
         checked: Boolean,
-        disabled: Boolean,
         inline: Boolean,
+        disabled: Boolean,
+        ValidClass: String,
+        unvalid: Boolean,
+        info: String,
     },
     computed: {
-        inputListeners: function () {
+      inputListeners: function () {
             var vm = this
             // `Object.assign` 将所有的对象合并为一个新对象
             return Object.assign({},
@@ -61,23 +68,27 @@ export default {
                 // 或覆写一些监听器的行为
                 {
                     // 这里确保组件配合 `v-model` 的工作
-                    input: function (event) {
-                        vm.$emit('input', event.target.checked)
+                    change: function (event) {
+                        vm.$emit('change', event.target.checked)
                     }
                 }
             )
-        },
+        },  
     },
     mounted () {
-        this.setIndeterminate(this.indeterminate)
+        this.setIndeterminate(Number(this.indeterminate) || 0)
     },
     methods: {
         validator: function (e) {
-            // 验证函数不会对传入的数据进行处理
-            const value = e.target ? e.target.value.trim() : e.value.trim()
+            if (this.unvalid) return // unvalid 时不校验
+            if (this.disabled) return // disabled 时不校验
+            if (!this.required) return
+            util.dom.removeClass(e.target, 'is-valid') // 移除可能的 is-valid
             // 非空验证（required 为 false 不做校验直接返回 true，验证通过返回 true）
-            if (!this.validateRequired(value)) { util.dom.addClass(e.target, 'is-invalid'); return }
-            util.dom.removeClass(e.target, 'is-invalid')
+            if (!e.target.checked) { util.dom.addClass(e.target, 'is-invalid'); return }
+            util.dom.removeClass(e.target, 'is-invalid') // 移除可能的 is-invalid
+            // 当存在 valid-info slot 或 validInfo 时 
+            if (Object.keys(this.$scopedSlots).includes('valid-info') || this.validInfo) util.dom.addClass(e.target, 'is-valid')
             this.$emit('valid')
         },
         setIndeterminate: function (val) {
@@ -92,7 +103,6 @@ export default {
                 this.$refs.checkbox.checked = true
             }
         }
-        
     },
     watch: {
         indeterminate: function (val) {

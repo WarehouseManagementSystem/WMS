@@ -17,7 +17,7 @@
             @blur="validator($event, regex)" />
         <b-info v-if="Object.keys($scopedSlots).includes('valid-info') || validInfo" state="valid"><slot name="valid-info">{{ validInfo }}</slot></b-info>
         <b-info v-if="Object.keys($scopedSlots).includes('invalid-info') || invalidInfo" state="invalid"><slot name="invalid-info">{{ invalidInfo }}</slot></b-info>
-        <b-help v-if="info" :info="info" />
+        <b-help :info="info" />
         <i v-if="!this.hideIcon && this.fillIcon" class="text-muted text-center position-absolute" :class="fillIcon" style="top: 0.7em;left:1.5em; width:1em;"></i>
     </div>
 </template>

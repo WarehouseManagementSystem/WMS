@@ -24,10 +24,10 @@
         </div>
         <div class="row">
             <font class="col-1">inline:</font>
-            <b-radio class="col-auto" label="radio1"></b-radio>
-            <b-radio class="col-auto" label="radio2"></b-radio>
-            <b-radio class="col-auto" label="radio3"></b-radio>
-            <b-radio class="col-auto" label="radio4"></b-radio>
+            <b-radio class="col-auto" label="radio1" inline></b-radio>
+            <b-radio class="col-auto" label="radio2" inline></b-radio>
+            <b-radio class="col-auto" label="radio3" inline></b-radio>
+            <b-radio class="col-auto" label="radio4" inline></b-radio>
         </div>
         <div class="row">
             <font class="col-1">name:</font>
@@ -38,7 +38,7 @@
         </div>
         <div class="row">
             <font class="col-1">info:</font>
-            <b-radio class="col-11" label="value" info="a radio help info"></b-radio>
+            <b-radio class="col-11" label="label text" info="a radio help info"></b-radio>
         </div>
         <div class="row">
             <font class="col-1">v-model:<br />({{ checked }})</font>

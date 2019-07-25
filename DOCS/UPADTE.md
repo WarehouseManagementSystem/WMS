@@ -46,6 +46,11 @@
 [b-textarea-demo]:                          ../View/src/Pages/Demo/Form/b-text-demo.vue
 [b-number-demo]:                            ../View/src/Pages/Demo/Form/b-number-demo.vue
 [b-radio-demo]:                             ../View/src/Pages/Demo/Form/b-radio-demo.vue
+[b-checkbox-demo]:                          ../View/src/Pages/Demo/Form/b-checkbox-demo.vue
+
+2019-07-17
+
+* view 组件 add [b-checkbox-demo]
 
 2019-07-17
 

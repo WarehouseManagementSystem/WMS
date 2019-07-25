@@ -15,7 +15,7 @@
         <label class="custom-control-label" :for="id">{{ label }}</label>
         <font v-if="inline">   </font>
         <slot name="valid"></slot>
-        <b-help v-if="info" :info="info" />
+        <b-help :class="{ 'pl-1': inline }" :info="info" />
     </div>
 </template>
 
