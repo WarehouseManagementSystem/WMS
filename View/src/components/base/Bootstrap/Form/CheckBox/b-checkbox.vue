@@ -7,8 +7,8 @@
             :id="id" 
             ref="checkbox" 
             :value="value" 
-            :checked="disabled ? defaultState : checked" 
-            :aria-checked="checked" 
+            :checked="disabled ? defaultState : isChecked" 
+            :aria-checked="disabled ? defaultState : isChecked" 
             :disabled="disabled" 
             :aria-disabled="disabled" 
             v-bind="$attrs" 
@@ -36,6 +36,11 @@ export default {
     model: {
         prop: 'checked',
         event: 'change'
+    },
+    data () {
+        return {
+            isChecked: false,
+        }
     },
     props: {
         value: utilities.props.text,
@@ -74,6 +79,7 @@ export default {
         },  
     },
     mounted () {
+        this.isChecked = this.checked
         if (this.indeterminate)
             this.setIndeterminate(Number(this.indeterminate))
     },
@@ -96,18 +102,22 @@ export default {
             // 2 - 全选
             if (val == 0) {
                 if (this.$refs.checkbox.indeterminate) this.$refs.checkbox.indeterminate = false
-                this.$refs.checkbox.checked = false
+                this.isChecked = false
             } else if (val == 1) {
                 util.dom.addAttr(this.$refs.checkbox, 'indeterminate', 'true')
+                this.isChecked = false
             } else {
                 if (this.$refs.checkbox.indeterminate) this.$refs.checkbox.indeterminate = false
-                this.$refs.checkbox.checked = true
+                this.isChecked = true
             }
         }
     },
     watch: {
         indeterminate: function (val) {
             this.setIndeterminate(val)
+        },
+        checked: function (val) {
+            this.isChecked = val
         },
     }
 }

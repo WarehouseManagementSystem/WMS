@@ -8,7 +8,7 @@
         </div>
         <div class="row">
             <font class="col-1">disabled:</font>
-            <b-checkbox-tree :list="list" disabled></b-checkbox-tree>
+            <b-checkbox-tree :list="list2" disabled></b-checkbox-tree>
         </div>
         {{ values }}
     </div>
@@ -22,12 +22,12 @@ export default {
     components: { BCheckboxTree },
     data () {
         return {
-            values: [ { "value": "2-a", "label": "2-a" }, { "value": "3-a", "label": "3-a" }, { "value": "4-1-b", "label": "4-1-b" }, { value: '3-1-a', label: '3-1-a' } ],
+            values: [ { "value": "3-a", "label": "3-a" }, { "value": "4-1-b", "label": "4-1-b" }, { "value": "3-1-a", "label": "3-1-a" }, { "value": "2-a", "label": "2-a" }, { "value": "2-b", "label": "2-b" },  ],
             list: [
                 { label: '1-a', value: '1-a', 
                 children: [
                     { label: '2-a', value: '2-a', },
-                    { label: '2-b', value: '2-b', },
+                    { label: '2-b', value: '2-b', disabled: true},
                     { label: '2-c', value: '2-c', },
                     { label: '2-d', value: '2-d', },
                 ],},
@@ -306,7 +306,7 @@ export default {
                 ]},
             ],
             list2: [
-                { label: '1-a', value: '1-a', 
+                { label: '1-a', value: '1-a', inline: true,
                 children: [
                     { label: '2-a', value: '2-a', },
                     { label: '2-b', value: '2-b', },

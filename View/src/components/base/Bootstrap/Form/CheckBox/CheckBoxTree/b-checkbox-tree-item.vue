@@ -12,15 +12,16 @@
                 :disabled="disabledCheckbox" 
                 :indeterminate="indeterminate" 
                 :defaultState="defaultState" 
-                v-model="checked" />
+                v-model="checked"
+                @input="changed = true" />
         </div>
         <BCheckboxTree
             class="mx-4" 
-            v-if="isFolder" 
+            v-if="isFolder && (open || changed)" 
             v-show="open" 
             :list="item.children" 
             :checked="checked" 
-            :disabled="disabledCheckboxTree"
+            :disabled="disabledCheckboxTree" 
             v-model="values" />
     </div>
 </template>
@@ -41,6 +42,7 @@ export default {
         return {
             open: false,
             checked: false,
+            changed: false,
             defaultState: false,
         }
     },
@@ -76,7 +78,7 @@ export default {
     mounted () {
         if (this.values && this.values.map && !this.isFolder)
             this.defaultState = this.values.map(e => e.value).includes(this.item.value)
-        this.checked = this.defaultState
+        this.checked = this.defaultState || this.indeterminate == 2
     },
     methods: {
         push: function (arr, item) {
@@ -102,7 +104,7 @@ export default {
                 this.splice(this.values, this.item.value)
             }
             this.$emit('input', this.values)
-        }
+        },
     }
 }
 </script>
