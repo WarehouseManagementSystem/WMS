@@ -84,7 +84,6 @@ export default {
             if (this.disabled) return // disabled 时不校验
             if (!this.required) return
             // 非空验证（required 为 false 不做校验直接返回 true，验证通过返回 true）
-            debugger
             if (!this.values || this.values.length == 0) { this.ValidClass = 'is-invalid'; return }
             this.ValidClass = '' // 移除可能的 is-invalid
             // 当存在 valid-info slot 或 validInfo 时 

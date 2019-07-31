@@ -7,14 +7,14 @@
             :id="id" 
             ref="checkbox" 
             :value="value" 
-            :checked="checked" 
+            :checked="disabled ? defaultState : checked" 
             :aria-checked="checked" 
             :disabled="disabled" 
             :aria-disabled="disabled" 
             v-bind="$attrs" 
             v-on="inputListeners"
             @change="validator($event)">
-        <label class="custom-control-label" :for="id">{{ label }}</label>
+        <label class="custom-control-label" :for="id">{{ label || value }}</label>
         <b-info v-if="validInfo || Object.keys($scopedSlots).includes('valid-info')" state="valid"><slot name="valid-info">{{ validInfo }}</slot></b-info>
         <b-info v-if="invalidInfo || Object.keys($scopedSlots).includes('invalid-info')" state="invalid"><slot name="invalid-info">{{ invalidInfo }}</slot></b-info>
         <b-help :class="{ 'pl-1': inline }" :info="info" />
@@ -46,11 +46,9 @@ export default {
                 return 'Checkbox-' + util.random.getRandomString()
             }
         },
-        indeterminate: {
-            type: [Number, String,],
-            default: 0,
-        },
+        indeterminate: Number,
         checked: Boolean,
+        defaultState: Boolean,
         inline: Boolean,
         disabled: Boolean,
         ValidClass: String,
@@ -76,7 +74,8 @@ export default {
         },  
     },
     mounted () {
-        this.setIndeterminate(Number(this.indeterminate) || 0)
+        if (this.indeterminate)
+            this.setIndeterminate(Number(this.indeterminate))
     },
     methods: {
         validator: function (e) {
@@ -92,7 +91,9 @@ export default {
             this.$emit('valid')
         },
         setIndeterminate: function (val) {
-            if (!val) return
+            // 0 - 未 选 择
+            // 1 - 部分选择
+            // 2 - 全选
             if (val == 0) {
                 if (this.$refs.checkbox.indeterminate) this.$refs.checkbox.indeterminate = false
                 this.$refs.checkbox.checked = false

@@ -17,7 +17,7 @@
         </div>
          <div class="row">
             <font class="col-1">indeterminate:</font>
-            <b-checkbox class="col-11" indeterminate="1" label="0: unchecked, > 0: some checked"></b-checkbox>
+            <b-checkbox class="col-11" indeterminate="1"></b-checkbox>
         </div>
         <div class="row">
             <font class="col-1">value:</font>

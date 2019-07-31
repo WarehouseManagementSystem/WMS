@@ -12,7 +12,7 @@
             :aria-disabled="disabled" 
             v-bind="$attrs" 
             v-on="inputListeners" />
-        <label class="custom-control-label" :for="id">{{ label }}</label>
+        <label class="custom-control-label" :for="id">{{ label || value }}</label>
         <font v-if="inline">   </font>
         <slot name="valid"></slot>
         <b-help :class="{ 'pl-1': inline }" :info="info" />
