@@ -104,6 +104,7 @@ export default {
         },
         validator: function (e) {
             if (this.disabled) return // disabled 时不校验
+            util.dom.removeClass(e.target, 'is-valid') // 移除可能的 is-valid
             // 非空验证（required 为 false 不做校验直接返回 true，验证通过返回 true）
             if (!this.validateRequired(this.isSelectedValue)) { util.dom.addClass(e.target, 'is-invalid'); return }
             util.dom.removeClass(e.target, 'is-invalid') // 移除可能的 is-invalid
