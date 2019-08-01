@@ -51,7 +51,7 @@ export default {
                 return 0
             },
             validator: function (value) {
-                return Number(value)
+                return !isNaN(value)
             },
         },
         max: {
@@ -60,7 +60,7 @@ export default {
                 return 100
             },
             validator: function (value) {
-                return Number(value)
+                return !isNaN(value)
             },
         },
         step: {
@@ -69,16 +69,16 @@ export default {
                 return 1
             },
             validator: function (value) {
-                return Number(value)
+                return !isNaN(value)
             },
         },
         value: {
             type: [String, Number],
             default: function (value) {
-                return Number(value) ? Number(value) : this.min
+                return Number(value) ? Number(value) : Number(this.min)
             },
             validator: function (value) {
-                return Number(value)
+                return !isNaN(value)
             },
         },
         size: utilities.props.size,

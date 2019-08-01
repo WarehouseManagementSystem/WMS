@@ -13,6 +13,7 @@ export default {
                 { path: 'b-checkbox', name: 'b-checkbox', component: async () => await import(/* webpackChunkName: "form" */'@/Pages/Demo/Form/b-checkbox-demo.vue'), },
                 { path: 'b-checkbox-tree', name: 'b-checkbox-tree', component: async () => await import(/* webpackChunkName: "form" */'@/Pages/Demo/Form/b-checkbox-tree-demo.vue'), },
                 { path: 'b-switch', name: 'b-switch', component: async () => await import(/* webpackChunkName: "form" */'@/Pages/Demo/Form/b-switch-demo.vue'), },
+                { path: 'b-range', name: 'b-range', component: async () => await import(/* webpackChunkName: "form" */'@/Pages/Demo/Form/b-range-demo.vue'), },
             ]
         }
     ],

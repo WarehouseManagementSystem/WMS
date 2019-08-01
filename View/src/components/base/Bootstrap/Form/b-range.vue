@@ -5,43 +5,62 @@
             <input type="range" class="custom-range col align-middle" :min="min" :max="max" :step="step" :value="value" v-bind="$attrs" v-on="inputListeners">
             <span class="col-auto text-left">{{ fillMaxValue }}</span>
         </div>
+        <b-help :info="message" />
     </div>
 </template>
 
 <script>
+import utilities from '@/components/utilities/index.js'
+
+import BHelp from '@/components/base/Bootstrap/Form/Other/b-form-help.vue'
 
 export default {
     name: 'b-range',
     inheritAttrs: false,
+    components: { BHelp },
      model: {
         prop: 'value',
         event: 'input'
     },
+    data () {
+        return {
+            select: Number(this.value),
+        }
+    },
     props: {
         min: {
-            type: Number,
+            type: [Number, String,],
             default: 0,
-        },
-        max: {
-            type: Number,
-            default: 100,
-        },
-        step: {
-            type: Number,
-            default: 1,
-        },
-        value: {
-            type: Number,
-            default: function (value) {
-                return value ? value : this.min
+            validator: function (value) {
+                return !isNaN(value)
             },
         },
-        minValue: {
-            type:  String,
+        max: {
+            type: [Number, String,],
+            default: 100,
+            validator: function (value) {
+                return !isNaN(value)
+            },
         },
-        maxValue: {
-            type:  String,
+        step: {
+            type: [Number, String,],
+            default: 1,
+            validator: function (value) {
+                return !isNaN(value)
+            },
         },
+        value: {
+            type: [Number, String,],
+            default: function (value) {
+                return Number(value) ? Number(value) : Number(this.min)
+            },
+            validator: function (value) {
+                return !isNaN(value)
+            },
+        },
+        info: utilities.props.value,
+        minValue: utilities.props.value,
+        maxValue: utilities.props.value,
     },
     computed: {
         inputListeners: function () {
@@ -55,16 +74,20 @@ export default {
                 {
                     // 这里确保组件配合 `v-model` 的工作
                     input: function (event) {
-                        vm.$emit('input', Number(event.target.value))
+                        vm.select = Number(event.target.value)
+                        vm.$emit('input', vm.select)
                     }
                 }
             )
         },
         fillMinValue: function () {
-            return this.minValue ? this.minValue : this.min
+            return this.minValue ? this.minValue : Number(this.min)
         },
         fillMaxValue: function () {
-            return this.maxValue ? this.maxValue : this.max
+            return this.maxValue ? this.maxValue : Number(this.max)
+        },
+        message: function () {
+            return `${this.select} ${this.info}`
         },
     },
 }
