@@ -1,7 +1,8 @@
 <template>
     <div class="custom-control custom-switch">
-        <input type="checkbox" class="custom-control-input" :id="id" v-bind="$attrs" v-on="inputListeners">
+        <input type="checkbox" class="custom-control-input" :id="id" :checked="checked" :aria-checked="checked" v-bind="$attrs" v-on="inputListeners">
         <label class="custom-control-label" :for="id">{{ text }}</label>
+        <b-help :info="info" />
     </div>
 </template>
 
@@ -9,17 +10,21 @@
 import util from '@/util/index.js'
 import utilities from '@/components/utilities/index.js'
 
+import BHelp from '@/components/base/Bootstrap/Form/Other/b-form-help.vue'
+
 export default {
     name: 'b-switch',
     inheritAttrs: false,
+    components: { BHelp, },
     mixins: [ utilities.mixins.form.base, ],
-    data () {
-        return {
-            checked: false,
-        }
+    model: {
+        prop: 'checked',
+        event: 'input'
     },
     props: {
         text: utilities.props.text,
+        info: utilities.props.info,
+        checked: Boolean,
         id: {
             type: String,
             default: function () {
@@ -38,7 +43,7 @@ export default {
                 // 或覆写一些监听器的行为
                 {
                     // 这里确保组件配合 `v-model` 的工作
-                    change: function (event) {
+                    input: function (event) {
                         vm.$emit('input', event.target.checked)
                     }
                 }

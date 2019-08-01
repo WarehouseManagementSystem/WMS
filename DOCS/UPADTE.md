@@ -48,6 +48,11 @@
 [b-radio-demo]:                             ../View/src/Pages/Demo/Form/b-radio-demo.vue
 [b-checkbox-demo]:                          ../View/src/Pages/Demo/Form/b-checkbox-demo.vue
 [b-checkbox-tree-demo]:                     ../View/src/Pages/Demo/Form/b-checkbox-tree-demo.vue
+[b-switch-demo]:                            ../View/src/Pages/Demo/Form/b-switch-demo.vue
+
+2019-08-01
+
+* view 组件 add [b-switch-demo]
 
 2019-07-31
 
