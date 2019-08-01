@@ -6,6 +6,8 @@
             v-bind="$attrs" 
             :multiple="multiple" 
             :size="row" 
+            :disabled="disabled" 
+            :aria-disabled="disabled" 
             @change.stop="change" 
             @blur.stop="validator" 
             v-on="inputListeners" >
@@ -18,11 +20,12 @@
                 :aria-selected="isSelected(item.value)"
                 :disabled="item.disabled"
                 :aria-disabled="item.disabled" >
-                {{ item.text ? item.text : item.value }}
+                {{ item.label ? item.label : item.value }}
             </option>
         </select>
         <b-info v-if="validInfo || Object.keys($scopedSlots).includes('valid-info')" state="valid"><slot name="valid-info">{{ validInfo }}</slot></b-info>
         <b-info v-if="invalidInfo || Object.keys($scopedSlots).includes('invalid-info')" state="invalid"><slot name="invalid-info">{{ invalidInfo }}</slot></b-info>
+        <b-help :info="info" />
     </div>
 </template>
 
@@ -31,12 +34,13 @@ import util from '@/util/index.js'
 import utilities from '@/components/utilities/index.js'
 
 import BInfo from '@/components/base/Bootstrap/Form/Other/b-form-info.vue'
+import BHelp from '@/components/base/Bootstrap/Form/Other/b-form-help.vue'
 
 export default {
     name: 'b-select',
     inheritAttrs: false,
     mixins: [ utilities.mixins.form.base, utilities.mixins.form.validator, ],
-    components: { BInfo },
+    components: { BInfo, BHelp, },
     model: {
         prop: 'value',
         event: 'change'
@@ -48,25 +52,24 @@ export default {
     },
     props: {
         list: utilities.props.list,
+        disabled: utilities.props.disabled,
+        info: utilities.props.value,
         value: {
             type: [String, Array],
             default: function () {
                 return this.multiple ? [] : ''
             }
         },
-        multiple: {
-            type: Boolean,
-            default: false,
-        },
         row: {
-            type: Number,
+            type: [ Number, String, ],
             default: function () {
                 return this.multiple ? this.list.length + 1 : null
             },
             validator: function (val) {
-                return val > 0 && /^\d+$/.test(val)
+                return !isNaN(val) && Number(val) > 0
             }
         },
+        multiple: Boolean,
     },
     computed: {
         sizeClass: function () {
@@ -100,9 +103,12 @@ export default {
             this.validator(event)
         },
         validator: function (e) {
+            if (this.disabled) return // disabled 时不校验
             // 非空验证（required 为 false 不做校验直接返回 true，验证通过返回 true）
             if (!this.validateRequired(this.isSelectedValue)) { util.dom.addClass(e.target, 'is-invalid'); return }
-            util.dom.removeClass(e.target, 'is-invalid')
+            util.dom.removeClass(e.target, 'is-invalid') // 移除可能的 is-invalid
+            // 当存在 valid-info slot 或 validInfo 时 
+            if (Object.keys(this.$scopedSlots).includes('valid-info') || this.validInfo) util.dom.addClass(e.target, 'is-valid')
             this.$emit('valid')
         },
     }

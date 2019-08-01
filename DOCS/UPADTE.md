@@ -50,11 +50,13 @@
 [b-checkbox-tree-demo]:                     ../View/src/Pages/Demo/Form/b-checkbox-tree-demo.vue
 [b-switch-demo]:                            ../View/src/Pages/Demo/Form/b-switch-demo.vue
 [b-range-demo]:                             ../View/src/Pages/Demo/Form/b-range-demo.vue
+[b-select-demo]:                             ../View/src/Pages/Demo/Form/b-select-demo.vue
 
 2019-08-01
 
 * view 组件 add [b-switch-demo]
 * view 组件 add [b-range-demo]
+* view 组件 add [b-select-demo]
 
 2019-07-31
 
