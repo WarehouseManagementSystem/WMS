@@ -58,6 +58,7 @@ export default {
                 return !isNaN(value)
             },
         },
+        prompt: Boolean,
         info: utilities.props.value,
         minValue: utilities.props.value,
         maxValue: utilities.props.value,
@@ -87,7 +88,7 @@ export default {
             return this.maxValue ? this.maxValue : Number(this.max)
         },
         message: function () {
-            return `${this.select} ${this.info}`
+            return this.prompt ? `${this.select} ${this.info}` : this.info
         },
     },
 }

@@ -15,6 +15,14 @@
             <b-range class="col-11" info="info text"></b-range>
         </div>
         <div class="row">
+            <font class="col-1">prompt:</font>
+            <b-range class="col-11" prompt></b-range>
+        </div>
+        <div class="row">
+            <font class="col-1">info<br />prompt:</font>
+            <b-range class="col-11" info="info text" prompt></b-range>
+        </div>
+        <div class="row">
             <font class="col-1">disabled:</font>
             <b-range class="col-11" disabled></b-range>
         </div>
