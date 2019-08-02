@@ -7,17 +7,22 @@
             </span>
             <i v-if="!hideToggle" class="fas fa-caret-down col-auto align-middle"></i>
         </div>
-        <div ref="menu" class="dropdown-menu overflow-auto" :class="menuClass" :style="{'max-height': menuHeight}" :aria-labelledby="guid">
-            <slot name="menu"></slot>
-        </div>
+        <tran-drop>
+            <div ref="menu" class="dropdown-menu overflow-auto shadow-sm" :class="menuClass" :style="{'max-height': menuHeight}" :aria-labelledby="guid">
+                <slot></slot>
+            </div>
+        </tran-drop>
     </div>
 </template>
 <script>
 import util from '@/util/index.js'
 import utilities from '@/components/utilities/index.js'
 
+import tranDrop from '@/components/transition/tran-drop.vue'
+
 export default {
     name: 'b-dropdown',
+    components: { tranDrop, },
     data () {
         return {
             menuStyle: 0,
@@ -25,7 +30,10 @@ export default {
     },
     props: {
         set: utilities.props.set,
-        trigger: utilities.props.text,
+        trigger: {
+            ...utilities.props.text,
+            default: '<Pleace select...>',
+        },
         'hide-toggle':{
             type: Boolean,
             default: false,

@@ -4,6 +4,12 @@ export default {
     SubsystemName: 'Demo',
     Modules: [
         {
+            SubsystemName: 'Base',
+            Modules: [
+                { path: 'b-dropdown', name: 'b-dropdown', component: async () => await import(/* webpackChunkName: "base" */'@/Pages/Demo/Base/b-dropdown-demo.vue'), },
+            ]
+        },
+        {
             SubsystemName: 'Form',
             Modules: [
                 { path: 'b-text', name: 'b-text', component: async () => await import(/* webpackChunkName: "form" */'@/Pages/Demo/Form/b-text-demo.vue'), },

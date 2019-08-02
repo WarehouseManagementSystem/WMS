@@ -50,7 +50,14 @@
 [b-checkbox-tree-demo]:                     ../View/src/Pages/Demo/Form/b-checkbox-tree-demo.vue
 [b-switch-demo]:                            ../View/src/Pages/Demo/Form/b-switch-demo.vue
 [b-range-demo]:                             ../View/src/Pages/Demo/Form/b-range-demo.vue
-[b-select-demo]:                             ../View/src/Pages/Demo/Form/b-select-demo.vue
+[b-select-demo]:                            ../View/src/Pages/Demo/Form/b-select-demo.vue
+[b-dropdown-demo]:                          ../View/src/Pages/Demo/Base/b-dropdown-demo.vue
+
+2019-08-02
+
+* view 组件 add [b-dropdown-demo]
+
+关于 [dropdownlist] trigger 有歧义，暂且保持目前的处理方式
 
 2019-08-01
 
