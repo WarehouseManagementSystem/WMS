@@ -4,7 +4,7 @@ node_js:
 
 cache: npm
 
-script: cd view && npm run build
+script: cd View && npm run build
 
 deploy:
  provider: pages
