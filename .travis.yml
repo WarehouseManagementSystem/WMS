@@ -4,7 +4,7 @@ node_js:
 
 cache: npm
 
-script: cd View && npm run build
+script: cd View && npx vue-cli-service build 
 
 deploy:
  provider: pages
