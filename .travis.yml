@@ -6,7 +6,7 @@ cache: npm
   
 script:
   - cd View
-  - npx vue-cli-service serve
+  - npm run vue@cli --dev-save
   - npm run build
   - cd dist
   - git init
