@@ -4,14 +4,12 @@ node_js:
 
 cache: npm
 
-script: 
- cd view
- npm run build
+script: cd view && npm run build
 
 deploy:
  provider: pages
  skip_cleanup: true
- github_token: 005a19b66e9dd5dfed8fe24c28fd238c2a4bcda3
+ github_token: $travis_ci
  local_dir: view/dist
  on:
    branch: master
