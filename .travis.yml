@@ -3,10 +3,8 @@ node_js:
  - "node"
 
 cache: npm
-
-install: cd View && npm install
   
-script: npx vue-cli-service build 
+script: cd View && npm run build 
 
 deploy:
  provider: pages
