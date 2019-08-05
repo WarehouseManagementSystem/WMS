@@ -4,7 +4,15 @@ node_js:
 
 cache: npm
   
-script: cd View && npm run build 
+script:
+  - cd ./view
+  - set -e
+  - npm run build
+  - cd dist
+  - git init
+  - git add -A
+  - git commit -m 'deploy'
+  - git push -f https://github.com/WarehouseManagementSystem/WMS.git master:gh-pages
 
 deploy:
  provider: pages
