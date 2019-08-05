@@ -1,8 +1,8 @@
 <template>
     <div class="form-group">
-        <drop class="form-control p-0" :class="[objClass, readonlyClass]" ref="dropdownlist" :menu-height="menuHeight" menu-weight :scroll="scroll">
+        <drop class="form-control p-0" :class="[objClass, readonlyClass]" ref="dropdownlist" :trigger="trigger" :menu-height="menuHeight" menu-weight :scroll="scroll">
             <template #trigger v-if="search">
-                <b-text  type="search" :border="false" v-model="searchText"></b-text>
+                <b-text type="search" :border="false" v-model="searchText"></b-text>
             </template>
             <drop-item v-if="!searchText && !hideNull" ref="item" value="" text="<Pleace select...>" @click.native="click" :disabled="disabled"></drop-item>
             <drop-item 
@@ -75,8 +75,8 @@ export default {
     },
     methods: {
         setTrigger: function (value) {
-            if (this.list && this.list.length && this.list.find)  
-            {
+            debugger
+            if (this.list && this.list.length && this.list.find) {
                 let obj = this.list.find(function (e) { if (e.value == value) return e })
                 this.trigger = (obj && obj.text) ?  obj.text : '<Pleace select...>'
             } else {
