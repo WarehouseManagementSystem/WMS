@@ -6,7 +6,7 @@ cache: npm
   
 script:
   - cd View
-  - npm install @vue/cli
+  - npm install @vue/cli --dev-save
   - npm run build
   - cd dist
   - git init
