@@ -60,8 +60,8 @@
             <b-dropdiwnlist class="col-11" :list="list"></b-dropdiwnlist>
         </div>
         <div class="row">
-            <font class="col-1">maintain:</font>
-            <b-dropdiwnlist class="col-11" :list="list" maintain></b-dropdiwnlist>
+            <font class="col-1">search:</font>
+            <b-dropdiwnlist class="col-11" :list="list" search></b-dropdiwnlist>
         </div>
         <div class="row">
             <font class="col-1">value:</font>

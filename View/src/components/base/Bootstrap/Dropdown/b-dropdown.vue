@@ -1,11 +1,11 @@
 <template>
-    <div :id="'div-' + guid" :class="dropClass" ref="divDropdown">
+    <div :id="'div-' + guid" class="py-0 px-1" :class="dropClass" ref="divDropdown">
         <div class="row" @click="click">
-            <span class="col align-middle">
+            <span class="col align-middle" style="line-height: 2em" >
                 <slot v-if="Object.keys($scopedSlots).includes('trigger')" name="trigger"></slot>
                 <font v-else style="cursor: default;">{{ trigger }}</font>
             </span>
-            <i v-if="!hideToggle" class="fas fa-caret-down col-auto align-middle"></i>
+            <i v-if="!hideToggle" class="fas fa-caret-down col-auto align-middle" style="line-height: 2em"></i>
         </div>
         <tran-drop>
             <div ref="menu" class="dropdown-menu overflow-auto shadow-sm" :class="menuClass" :style="{'max-height': menuHeight}" :aria-labelledby="guid">
@@ -83,11 +83,10 @@ export default {
              'aria-expanded': 'false'})
     },
     methods: {
-        click: async function () {
+        click: function () {
             let { $refs, scroll } = this
             // 使用延时以等待 menu 显示后设置 scrollTop ,否则无效
             setTimeout(() => $refs.menu.scrollTop = scroll, 100);
-            
         },
     },
 }
