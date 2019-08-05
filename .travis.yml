@@ -5,8 +5,8 @@ node_js:
 cache: npm
   
 script:
-  - cd ./view
   - set -e
+  - cd view
   - npm run build
   - cd dist
   - git init
