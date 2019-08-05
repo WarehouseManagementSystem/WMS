@@ -6,9 +6,11 @@ cache: npm
   
 script:
   - cd View
-  - npx vue-cli-service build
+  - npm run build
   - cd dist
   - git init
+  - git config user.name "${USER_NAME}"
+  - git config user.email "${USER_EMAIL}"
   - git add -A
   - git commit -m 'deploy'
   - git push -f https://github.com/WarehouseManagementSystem/WMS.git master:gh-pages
