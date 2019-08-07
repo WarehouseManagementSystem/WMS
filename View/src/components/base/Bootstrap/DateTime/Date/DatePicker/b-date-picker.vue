@@ -1,5 +1,5 @@
 <template>
-    <picker :placeholder="fillPlaceholder" :value="showValue" :info="info" :show="show" show-footer :disabled="disabled" @showOrHide="showOrHide">
+    <picker :placeholder="fillPlaceholder" :value="showValue" :info="info" :show="show" show-footer :disabled="disabled" :readonly="readonly" @showOrHide="showOrHide">
         <template #icon>
             <i class="far fa-calendar-alt col-auto"></i>
         </template>
@@ -74,6 +74,9 @@ export default {
                         return 'error'
                 }
             }
+        },
+        readonly: function () {
+            return this.disabled
         },
         showValue: function () {
             return this.formatDate(this.selectValue)

@@ -3,7 +3,7 @@
         <div class="form-control" :class="[objClass, readonlyClass]" ref="dropdownpicker" :readonly="disabled" @click="isShow = disabled ? !disabled : !isShow">
             <div class="row">
                 <font class="col" :class="fontClass">{{ text }}</font>
-                <slot name="icon">
+                <slot name="icon" v-if="!disabled">
                     <i class="fas fa-caret-down col-auto align-middle"></i>
                 </slot>
             </div>
