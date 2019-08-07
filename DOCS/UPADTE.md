@@ -52,6 +52,11 @@
 [b-range-demo]:                             ../View/src/Pages/Demo/Form/b-range-demo.vue
 [b-select-demo]:                            ../View/src/Pages/Demo/Form/b-select-demo.vue
 [b-dropdown-demo]:                          ../View/src/Pages/Demo/Base/b-dropdown-demo.vue
+[b-datetime-demo]:                          ../View/src/Pages/Demo/Base/b-datetime-demo.vue
+
+2019-08-07
+
+* view 组件 add [b-datetime-demo]
 
 2019-08-02
 

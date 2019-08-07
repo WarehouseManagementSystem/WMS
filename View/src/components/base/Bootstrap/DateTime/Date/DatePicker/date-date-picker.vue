@@ -1,6 +1,7 @@
 <template>
     <div>
         <pickerHeader 
+            v-if="!hideHeader" 
             :hearderText="hearderText" 
             :disabled="disabled" 
             :nowDisabled="nowDisabled" 
@@ -43,12 +44,9 @@ export default {
             type: [String, Number, Date, ],
             default: () => new Date(new Date().getFullYear() + '-' + util.string.padStart(new Date().getMonth() , 2) + '-' + util.string.padStart(new Date().getDate() , 2))
         },
-        min: {
-            type: Date,
-        },
-        max: {
-            type: Date,
-        },
+        min: Date,
+        max: Date,
+        hideHeader: Boolean,
         disabled: utilities.props.disabled,
     },
     computed: {
@@ -73,9 +71,9 @@ export default {
             let flag = false
             let day = new Date(this.year, this.month, 1).getDay()
             const d = new Date(this.selectValue)
-            const selectYear = d.getFullYear()
-            const selectMonth = d.getMonth()
-            const selectDate = d.getDate()
+            const selectYear = d.getFullYear && d.getFullYear()
+            const selectMonth = d.getMonth && d.getMonth()
+            const selectDate = d.getDate && d.getDate()
             while (value <= this.total) {
                 let arr = []
                 for (let i = 0; i < this.colCount; i++) {
@@ -94,9 +92,9 @@ export default {
         },
     },
     mounted () {
-        this.year = this.value.getFullYear()
-        this.month = this.value.getMonth()
-        this.date = this.value.getDate()
+        this.year = this.value.getFullYear && this.value.getFullYear()
+        this.month = this.value.getMonth && this.value.getMonth()
+        this.date = this.value.getDate && this.value.getDate()
         this.selectValue = this.formatDate(this.year, this.month, this.date)
     },
     methods: {

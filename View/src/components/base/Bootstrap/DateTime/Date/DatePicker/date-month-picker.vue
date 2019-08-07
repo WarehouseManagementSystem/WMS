@@ -1,6 +1,7 @@
 <template>
     <div>
         <pickerHeader 
+            v-if="!hideHeader" 
             :hearderText="hearderText" 
             :disabled="disabled" 
             :nowDisabled="nowDisabled" 
@@ -43,12 +44,9 @@ export default {
             type: [String, Number, Date, ],
             default: () => new Date(new Date().getFullYear() + '-' + util.string.padStart(new Date().getMonth()) , 2)
         },
-        min: {
-            type: Date,
-        },
-        max: {
-            type: Date,
-        },
+        min: Date,
+        max: Date,
+        hideHeader: Boolean,
         disabled: utilities.props.disabled,
     },
     computed: {

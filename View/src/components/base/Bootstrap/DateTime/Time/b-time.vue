@@ -1,15 +1,17 @@
 <template>
-    <b-text ref="text" v-model="time" @click="click($event)" @input="input" v-on:keyup.left="left" v-on:keyup.right="right"></b-text>
+    <b-text ref="text" v-model="time" @click="click($event)" @input="input" :readonly="readonly" :disabled="disabled" :info="info" v-on:keyup.left="left" v-on:keyup.right="right"></b-text>
 </template>
 
 <script>
 import util from '@/util/index.js'
+import utilities from '@/components/utilities/index.js'
 
 import BText from '@/components/base/Bootstrap/Form/b-text.vue'
 
 export default {
     name: 'b-time',
     components: { BText },
+    mixins: [utilities.mixins.form.readonly,],
     model: {
         prop: 'value',
         event: 'change'
@@ -29,28 +31,29 @@ export default {
             type: String,
             default: 'hh:mm:ss',
             validator: function (value) {
-                return ['hh:mm', 'hh:mm:ss'].includes(value)
+                return ['hh:mm', 'hh:mm:ss',].includes(value)
             },
         },
         value: String,
         min: {
-            type: String,
-            default: '00:00:00',
-            validator: function (value) {
-                return new Date(...[1970, 1, 1, ...value.split(':')]).toString() !== 'Invalid Date'
-            },
+            type: [String, Date, ],
+            // default: '00:00:00',
+            // validator: function (value) {
+            //     return value && !isNaN(Date.parse(...[1970, 1, 1, ...value.split(':')]))
+            // },
         },
         max: {
-            type: String,
-            default: '23:59:59',
-            validator: function (value) {
-                return new Date(...[1970, 1, 1, ...value.split(':')]).toString() !== 'Invalid Date'
-            },
+            type: [String, Date, ],
+            // default: '23:59:59',
+            // validator: function (value) {
+            //     return value && !isNaN(Date.parse(...[1970, 1, 1, ...value.split(':')]))
+            // },
         },
     },
     computed: {
         now: function () {
-            return new Date()
+            const now = new Date()
+            return new Date(...[1970, 1, 1, now.getHours(), now.getMinutes(), now.getSeconds()])
         },
         types: function () {
             let types = this.type.split(':')
@@ -66,6 +69,13 @@ export default {
         dateMax: function () {
             return this.string2Date(this.max)
         },
+        info: function () {
+            if (isNaN(Date.parse(this.dateMin)) && isNaN(Date.parse(this.dateMax))) return ``
+            else if (!isNaN(Date.parse(this.dateMin)) && !isNaN(Date.parse(this.dateMax))) return `${this.showInfo(this.dateMin)}~${this.showInfo(this.dateMax)}`
+            else if (isNaN(Date.parse(this.dateMin))) return `...~${this.showInfo(this.dateMax)}`
+            else if (isNaN(Date.parse(this.dateMax))) return `${this.showInfo(this.dateMin)}~...`
+            return ''
+        },
         selectArea: function () {
             let strs = this.time.split(':')
             let str0 = strs[0] ? strs[0].length : 0
@@ -79,8 +89,8 @@ export default {
     },
     mounted () {
         let d = this.string2Date(this.value)
-        d = d.toString() == 'Invalid Date' ? this.now : d
-        this.Date2date(this.formatData(d))
+        d = !isNaN(Date.parse(d)) ? d : this.now
+        this.Date2date(this.formatDate(d)) // 将 Date 类型数据转换成 date 变量，以便显示
         this.showValue()
     },
     methods: {
@@ -90,11 +100,18 @@ export default {
             if (this.types.mm) this.time += this.formatValue(this.time, this.date.mm)
             if (this.types.ss) this.time += this.formatValue(this.time, this.date.ss)
         },
+        showInfo: function (d) {
+            let time = ''
+            if (this.types.hh) time = this.formatValue(time, d.getHours())
+            if (this.types.mm) time += this.formatValue(time, d.getMinutes())
+            if (this.types.ss) time += this.formatValue(time, d.getSeconds())
+            return time
+        },
         formatValue: function (value, call) {
             let s = value.length > 0 ? ':' : ''
             return s + util.string.padStart(call, 2, '0')
         },
-        formatData: function (value) {
+        formatDate: function (value) {
             if (value < this.dateMin) {
                 this.Date2date(this.dateMin)
             } else if (value > this.dateMax) {
@@ -104,6 +121,7 @@ export default {
             }
         },
         string2Date: function (str) {
+            if (!str) return
             return new Date(...[1970, 1, 1, ...str.split(':')])
         },
         Date2date: function (d) {
@@ -135,6 +153,7 @@ export default {
             return start
         },
         click: function (event) {
+            if (this.readonly) return
             this.setSelectArea(event.target, event.target.selectionStart)
         },
         input: function () {
@@ -153,7 +172,7 @@ export default {
                     } else if (selectionStart > vm.selectArea.three.start) {
                         start = -1 // 表示不再选择
                     }
-                    vm.formatData(d)
+                    vm.formatDate(d)
                 } else {
                     // 输入非法时修正 start，以正确创建选择区域
                     // 当分段字符数超过 2 时会导致选择区域错误

@@ -1,11 +1,8 @@
 <template>
-    <div class="form-group" :id="id">
+    <div :id="id">
         <div class="form-control" :class="[objClass, readonlyClass]" ref="dropdownpicker" :readonly="disabled" @click="isShow = disabled ? !disabled : !isShow">
             <div class="row">
-                <font class="col" :class="fontClass">
-                    {{ text }}
-                    <small v-if="info" class="text-muted"><em>({{ info }})</em></small>
-                </font>
+                <font class="col" :class="fontClass">{{ text }}</font>
                 <slot name="icon">
                     <i class="fas fa-caret-down col-auto align-middle"></i>
                 </slot>
@@ -13,13 +10,14 @@
         </div>
         <tran-drop>
             <div v-show="isShow" class="position-absolute bg-white border rounded shadow-sm text-center my-1 p-1" style="min-width: 300px; z-index: 1000;">
-                <slot>No Data</slot>
+                <slot></slot>
                 <footer v-show="showFooter" class="text-right">
                     <hr>
                     <base-button :disabled="disabled || !canHide" value="确 定" @click.stop="isShow = false" outline></base-button>
                 </footer>
             </div>
         </tran-drop>
+        <b-help :info="info" />
     </div>
 </template>
 
@@ -30,10 +28,12 @@ import utilities from '@/components/utilities/index.js'
 import tranDrop from '@/components/transition/tran-drop.vue'
 import BaseButton from '@/components/base/Bootstrap/Button/b-button.vue'
 
+import BHelp from '@/components/base/Bootstrap/Form/Other/b-form-help.vue'
+
 export default {
     name: 'b-dropdownpicker',
     mixins: [ utilities.mixins.form.base, utilities.mixins.form.readonly, ],
-    components: { tranDrop, BaseButton, },
+    components: { tranDrop, BaseButton, BHelp, },
     data () {
         return {
             isShow: false,
@@ -58,7 +58,6 @@ export default {
         showFooter: Boolean,
         info: utilities.props.text,
         value: [String, Number, Date, ],
-        disabled: utilities.props.disabled,
     },
     computed: {
         text: function () {

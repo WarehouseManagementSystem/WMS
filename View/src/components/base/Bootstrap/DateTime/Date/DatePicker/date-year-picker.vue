@@ -40,12 +40,9 @@ export default {
             type: [String, Number, Date ],
             default: () => new Date().getFullYear(),
         },
-        min: {
-            type: Date,
-        },
-        max: {
-            type: Date,
-        },
+        min: Date,
+        max: Date,
+        hideHeader: Boolean,
         disabled: utilities.props.disabled,
     },
     computed: {

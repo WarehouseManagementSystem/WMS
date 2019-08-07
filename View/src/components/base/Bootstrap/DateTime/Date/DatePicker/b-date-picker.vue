@@ -3,9 +3,11 @@
         <template #icon>
             <i class="far fa-calendar-alt col-auto"></i>
         </template>
-        <year-picker v-if="pickertType === 'year'" v-model="selectValue" :min="dateMin" :max="dateMax" :disabled="disabled" @year2Month="year2Month"></year-picker>
-        <month-picker v-if="pickertType === 'month'" v-model="selectValue" :min="dateMin" :max="dateMax" :disabled="disabled" @month2Year="month2Year" @month2Date="month2Date"></month-picker>
-        <date-picker v-if="pickertType === 'date'" v-model="selectValue" :min="dateMin" :max="dateMax" :disabled="disabled" @date2Month="date2Month" @dateChecked="show = false" ></date-picker>
+        <template v-if="show">
+            <year-picker v-if="pickertType === 'year'" style="min-width: 18em" v-model="selectValue" :min="dateMin" :max="dateMax" :hideHeader="hideHeader" :disabled="disabled" @year2Month="year2Month"></year-picker>
+            <month-picker v-if="pickertType === 'month'" style="min-width: 10em" v-model="selectValue" :min="dateMin" :max="dateMax" :hideHeader="hideHeader" :disabled="disabled" @month2Year="month2Year" @month2Date="month2Date"></month-picker>
+            <date-picker v-if="pickertType === 'date'" style="min-width: 22em" v-model="selectValue" :min="dateMin" :max="dateMax" :hideHeader="hideHeader" :disabled="disabled" @date2Month="date2Month" @dateChecked="show = false" ></date-picker>
+        </template>
     </picker>
 </template>
 
@@ -45,9 +47,16 @@ export default {
             type: [String, Number, Date, ],
             default: () => new Date(),
         },
-        placeholder: utilities.props.value,
+        status: {
+            type: Number,
+            default: 0,
+            validator: function (value) {
+                return [0, 1,].includes(value)
+            },
+        },
         min: [String, Date, ],
         max: [String, Date, ],
+        placeholder: utilities.props.value,
         disabled: utilities.props.disabled,
     },
     computed: {
@@ -72,11 +81,38 @@ export default {
         canHide: function () {
             return this.type == this.pickertType
         },
+        hideHeader: function () {
+            debugger
+            return this.status !== 0
+        },
         dateMin: function () {
-            return new Date(this.min)
+            let time = this.min
+            if (this.status !== 0) {
+                debugger
+                switch (this.type) {
+                    case 'month':
+                        time = '1970-' + this.min
+                        break;
+                    case 'date':
+                        time = '1970-01-' + this.min
+                        break;
+                }
+            }
+            return new Date(time)
         },
         dateMax: function () {
-            return new Date(this.max)
+           let time = this.max
+            if (this.status !== 0) {
+                switch (this.type) {
+                    case 'month':
+                        time = '1970-' + this.max
+                        break;
+                    case 'date':
+                        time = '1970-01-' + this.max
+                        break;
+                }
+            }
+            return new Date(time)
         },
         info: function () {
             if (this.dateMin.toString() == 'Invalid Date' && this.dateMax.toString() == 'Invalid Date') return ``
@@ -88,7 +124,7 @@ export default {
     },
     mounted () {
         this.pickertType = this.type
-        let v = this.value.toString().length < 7 ? this.value + '-01' : this.value
+        let v = this.value && this.value.toString().length < 7 ? this.value + '-01' : this.value
         this.date = !isNaN(Date.parse(v)) ? new Date(v) : new Date()
         this.selectValue = this.date
     },
@@ -102,9 +138,13 @@ export default {
                 case 'year':
                     return value.getFullYear()
                 case 'month':
-                    return `${value.getFullYear()}-${util.string.padStart(Number(value.getMonth() + 1), 2, '0')}`
+                    return this.status === 0 
+                        ? `${value.getFullYear()}-${util.string.padStart(Number(value.getMonth() + 1), 2, '0')}`
+                        : `${util.string.padStart(Number(value.getMonth() + 1), 2, '0')}`
                 case 'date':
-                    return `${value.getFullYear()}-${util.string.padStart(Number(value.getMonth() + 1), 2, '0')}-${util.string.padStart(value.getDate(), 2, '0')}`
+                    return this.status === 0 
+                        ? `${value.getFullYear()}-${util.string.padStart(Number(value.getMonth() + 1), 2, '0')}-${util.string.padStart(value.getDate(), 2, '0')}`
+                        : `${util.string.padStart(value.getDate(), 2, '0')}`
             }
         },
         month2Year: function (value) {
