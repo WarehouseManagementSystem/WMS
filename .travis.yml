@@ -4,7 +4,16 @@ node_js:
 
 cache: npm
   
-script: cd View && npm run build 
+script:
+  - cd View
+  - npx vue-cli-service build
+  - cd dist
+  - git init
+  - git config user.name "${USER_NAME}"
+  - git config user.email "${USER_EMAIL}"
+  - git add -A
+  - git commit -m 'deploy'
+  - git push -f https://github.com/WarehouseManagementSystem/WMS.git master:gh-pages
 
 deploy:
  provider: pages
