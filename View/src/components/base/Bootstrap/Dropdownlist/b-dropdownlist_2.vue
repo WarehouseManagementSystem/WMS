@@ -1,17 +1,19 @@
 <template>
     <div class="form-group">
-        <dropdown-picker class="form-control p-0" :class="[objClass, readonlyClass]" ref="dropdownlist" :value="trigger" :show="show" :disabled="disabled" menu-width :menu-height="menuHeight" :scroll="scroll" @showOrHide="showOrHide">
-            <b-text v-if="search" type="search" class="m-1" :border="false" hideIcon v-model="searchText"></b-text>
-            <drop-item v-if="!searchText && !hideNull" ref="item" value="" text="<Pleace select...>" @click.native="menuClick" :disabled="disabled"></drop-item>
+        <drop class="form-control p-0" :class="[objClass, readonlyClass]" ref="dropdownlist" :trigger="trigger" :menu-height="menuHeight" menu-width :scroll="scroll">
+            <template #trigger v-if="search">
+                <b-text type="search" :border="false" v-model="searchText"></b-text>
+            </template>
+            <drop-item v-if="!searchText && !hideNull" ref="item" value="" text="<Pleace select...>" @click.native="click" :disabled="disabled"></drop-item>
             <drop-item 
                 v-for="item in searchList" 
                 :key="item.value" 
                 :value="item.value" 
                 :text="item.text" 
-                :active="item.value == selectValue" 
+                :active="item.value == value" 
                 :disabled="item.disabled || disabled" 
                 @click.native="menuClick"/>
-        </dropdown-picker>
+        </drop>
         <b-info v-if="validInfo || Object.keys($scopedSlots).includes('valid-info')" state="valid"><slot name="valid-info">{{ validInfo }}</slot></b-info>
         <b-info v-if="invalidInfo || Object.keys($scopedSlots).includes('invalid-info')" state="invalid"><slot name="invalid-info">{{ invalidInfo }}</slot></b-info>
         <b-help :info="info" />
@@ -19,10 +21,12 @@
 </template>
 
 <script>
+// 弃用 2019-08-07
+
 import util from '@/util/index.js'
 import utilities from '@/components/utilities/index.js'
 
-import dropdownPicker from '@/components/base/Bootstrap/DropDownPicker/b-dropdownpicker.vue'
+import drop from '@/components/base/Bootstrap/Dropdown/b-dropdown.vue'
 import dropItem from '@/components/base/Bootstrap/Dropdown/b-dropdown-item.vue'
 import BText from '@/components/base/Bootstrap/Form/b-text.vue'
 
@@ -32,18 +36,16 @@ import BHelp from '@/components/base/Bootstrap/Form/Other/b-form-help.vue'
 export default {
     name: 'b-dropdownlist',
     mixins: [ utilities.mixins.form.base, utilities.mixins.form.readonly, utilities.mixins.form.validator, ],
-    components: { dropdownPicker, dropItem, BText, BInfo, BHelp, },
+    components: { drop, dropItem, BText, BInfo, BHelp, },
     model: {
         prop: 'value',
         event: 'change',
     },
     data () {
         return {
-            show: null,
             scroll: 0,
             searchText: null,
             menuHeight: '0px',
-            selectValue: this.value,
             trigger: '<Pleace select...>',
         }
     },
@@ -64,12 +66,11 @@ export default {
     computed: {
       searchList: function () {
           return this.searchText 
-                ? this.list.filter(e => e.value && (e.value.includes(this.searchText) || e.text.includes(this.searchText)))
-                : this.list
+                    ? this.list.filter(e => e.value && (e.value.includes(this.searchText) || e.text.includes(this.searchText)))
+                    : this.list
       },  
     },
     mounted: function () {
-        debugger
         this.menuHeight = this.row * 32 + 10 + 'px'
         this.getScroll()
         this.setTrigger(this.value)
@@ -85,15 +86,10 @@ export default {
         },
         menuClick: function (event) {
             this.getScroll()
-            this.selectValue = event.target.value
-            this.setTrigger(this.selectValue)
-            this.$emit('change', this.selectValue)
-            this.validator(this.selectValue)
+            this.setTrigger(event.target.value)
+            this.$emit('change', event.target.value)
+            this.validator(event.target.value)
             this.searchText = null // 清空查询字段
-            this.show = false
-        },
-        showOrHide: function (value) {
-            this.show = value
         },
         getScroll: async function () {
             await this.$nextTick()

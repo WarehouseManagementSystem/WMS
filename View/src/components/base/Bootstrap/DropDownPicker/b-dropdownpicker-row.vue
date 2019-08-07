@@ -1,6 +1,6 @@
 <template>
     <span class="row text-center ">
-        <item v-for="(item, index) in items" :key="index" :value="item.value" :text="item.text" :select="item.select" :disabled="item.disabled || disabled" :colCount="colCount" @click="click"></item>
+        <item class="text-center " v-for="(item, index) in items" :key="index" :value="item.value" :text="item.text" :select="item.select" :disabled="item.disabled || disabled" :colCount="colCount" @click="click"></item>
     </span>
 </template>
 

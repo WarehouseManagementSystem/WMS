@@ -34,10 +34,7 @@ export default {
             ...utilities.props.text,
             default: '<Pleace select...>',
         },
-        'hide-toggle':{
-            type: Boolean,
-            default: false,
-        },
+        'hide-toggle': Boolean,
         'menu-set': {
             type: String,
             default: '',
@@ -46,14 +43,8 @@ export default {
                 return ['', 'left', 'right'].includes(value)
             },
         },
-        'menu-weight': {
-            type: Boolean,
-            default: false,
-        },
-        'menu-height': {
-            type: String,
-            default: '300px',
-        },
+        'menu-Width': Boolean,
+        'menu-height': String,
         scroll: {
             type: Number,
             default: 0,
@@ -68,7 +59,7 @@ export default {
         },
         menuClass: function () {
             return `${this.menuSet ? this.menuSet : ''} 
-                    ${this.menuWeight ? 'w-100' : ''} `
+                    ${this.menuWidth ? 'w-100' : ''} `
         },
     },
     mounted () {

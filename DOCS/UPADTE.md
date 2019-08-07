@@ -57,6 +57,7 @@
 2019-08-07
 
 * view 组件 add [b-datetime-demo]
+* view 组件 change [dropdownlist] base control from dropdown to [dropDownPicker]
 
 2019-08-02
 

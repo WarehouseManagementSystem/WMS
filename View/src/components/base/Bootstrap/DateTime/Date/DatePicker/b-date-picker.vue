@@ -5,7 +5,7 @@
         </template>
         <template v-if="show">
             <year-picker v-if="pickertType === 'year'" style="min-width: 18em" v-model="selectValue" :min="dateMin" :max="dateMax" :hideHeader="hideHeader" :disabled="disabled" @year2Month="year2Month"></year-picker>
-            <month-picker v-if="pickertType === 'month'" style="min-width: 10em" v-model="selectValue" :min="dateMin" :max="dateMax" :hideHeader="hideHeader" :disabled="disabled" @month2Year="month2Year" @month2Date="month2Date"></month-picker>
+            <month-picker v-if="pickertType === 'month'" style="min-width: 15em" v-model="selectValue" :min="dateMin" :max="dateMax" :hideHeader="hideHeader" :disabled="disabled" @month2Year="month2Year" @month2Date="month2Date"></month-picker>
             <date-picker v-if="pickertType === 'date'" style="min-width: 22em" v-model="selectValue" :min="dateMin" :max="dateMax" :hideHeader="hideHeader" :disabled="disabled" @date2Month="date2Month" @dateChecked="show = false" ></date-picker>
         </template>
     </picker>
@@ -85,13 +85,11 @@ export default {
             return this.type == this.pickertType
         },
         hideHeader: function () {
-            debugger
             return this.status !== 0
         },
         dateMin: function () {
             let time = this.min
             if (this.status !== 0) {
-                debugger
                 switch (this.type) {
                     case 'month':
                         time = '1970-' + this.min
