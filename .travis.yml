@@ -29,12 +29,15 @@ node_js:
 
 cache: npm
 
-script: npm run build
+script: 
+  - cd view
+  - npm install @vue/cli
+  - npm run build
 
 deploy:
  provider: pages
  skip_cleanup: true
  github_token: $travis_ci
- local_dir: dist
+ local_dir: vue/dist
  on:
    branch: master
