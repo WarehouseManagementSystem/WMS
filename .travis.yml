@@ -30,7 +30,7 @@ node_js:
 cache: npm
 
 script: 
-  - cd view
+  - cd View
   - npm install @vue/cli
   - npm run build
 
@@ -38,6 +38,6 @@ deploy:
  provider: pages
  skip_cleanup: true
  github_token: $travis_ci
- local_dir: vue/dist
+ local_dir: Vue/dist
  on:
    branch: master
