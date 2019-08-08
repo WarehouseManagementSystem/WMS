@@ -1,24 +1,40 @@
+# language: node_js
+# node_js:
+#  - "node"
+
+# cache: npm
+  
+# script:
+#   - cd View
+#   - npx vue-cli-service build
+#   - cd dist
+#   - git init
+#   - git config user.name "${USER_NAME}"
+#   - git config user.email "${USER_EMAIL}"
+#   - git add -A
+#   - git commit -m 'deploy'
+#   - git push -f https://github.com/WarehouseManagementSystem/WMS.git master:gh-pages
+
+# deploy:
+#  provider: pages
+#  skip_cleanup: true
+#  github_token: $travis_ci
+#  local_dir: view/dist
+#  on:
+#    branch: master
+
 language: node_js
 node_js:
  - "node"
 
 cache: npm
-  
-script:
-  - cd View
-  - npx vue-cli-service build
-  - cd dist
-  - git init
-  - git config user.name "${USER_NAME}"
-  - git config user.email "${USER_EMAIL}"
-  - git add -A
-  - git commit -m 'deploy'
-  - git push -f https://github.com/WarehouseManagementSystem/WMS.git master:gh-pages
+
+script: npm run build
 
 deploy:
  provider: pages
  skip_cleanup: true
- github_token: $travis_ci
- local_dir: view/dist
+ github_token: $GITHUB_TOKEN
+ local_dir: dist
  on:
    branch: master
