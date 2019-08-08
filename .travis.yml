@@ -38,6 +38,6 @@ deploy:
  provider: pages
  skip_cleanup: true
  github_token: $travis_ci
- local_dir: Vue/dist
+ local_dir: View/dist
  on:
    branch: master
