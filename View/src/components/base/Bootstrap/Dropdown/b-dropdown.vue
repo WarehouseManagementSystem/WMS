@@ -1,11 +1,9 @@
 <template>
-    <div :id="'div-' + guid" class="py-0 px-1" :class="dropClass" ref="divDropdown">
-        <div class="row" @click="click">
-            <span class="col align-middle" style="line-height: 2em" >
-                <slot v-if="Object.keys($scopedSlots).includes('trigger')" name="trigger"></slot>
-                <font v-else style="cursor: default;">{{ trigger }}</font>
-            </span>
-            <i v-if="!hideToggle" class="fas fa-caret-down col-auto align-middle" style="line-height: 2em"></i>
+    <div :id="'div-' + guid" class="py-0" :class="dropClass" ref="divDropdown">
+        <div class="d-flex justify-content-between align-items-center px-1" @click="click">
+            <slot v-if="Object.keys($scopedSlots).includes('trigger')" name="trigger"></slot>
+            <font v-else style="cursor: default;">{{ trigger }}</font>
+            <i v-if="!hideToggle" class="fas fa-caret-down px-1"></i>
         </div>
         <tran-drop>
             <div ref="menu" class="dropdown-menu overflow-auto shadow-sm" :class="menuClass" :style="{'max-height': menuHeight}" :aria-labelledby="guid">

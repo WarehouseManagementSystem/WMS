@@ -1,10 +1,10 @@
 <template>
     <div :id="id">
         <div class="form-control" :class="[objClass, readonlyClass]" ref="dropdownpicker" :readonly="disabled" @click="isShow = disabled ? !disabled : !isShow">
-            <div class="row" @click="click">
-                <font class="col" :class="fontClass">{{ text }}</font>
+            <div class="d-flex justify-content-between align-items-center" @click="click">
+                <font :class="fontClass">{{ text }}</font>
                 <slot name="icon" v-if="!disabled">
-                    <i class="fas fa-caret-down col-auto align-middle"></i>
+                    <i class="fas fa-caret-down"></i>
                 </slot>
             </div>
         </div>

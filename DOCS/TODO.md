@@ -5,6 +5,7 @@
 ## 计划
 
 > - [ ] button radio 暂缓（20190410）
+> - [ ] [Collapse] 暂缓（20190809）
 
 ## 设想
 
@@ -13,3 +14,5 @@
 ## 问题
 
 > - [ ] need to do
+
+[Collapse]:                     https://getbootstrap.com/docs/4.3/components/collapse/

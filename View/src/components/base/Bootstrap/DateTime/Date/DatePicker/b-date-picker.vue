@@ -1,7 +1,7 @@
 <template>
     <picker :placeholder="fillPlaceholder" :value="showValue" :info="info" :show="show" show-footer :disabled="disabled" :readonly="readonly" @showOrHide="showOrHide">
         <template #icon>
-            <i class="far fa-calendar-alt col-auto"></i>
+            <i class="far fa-calendar-alt"></i>
         </template>
         <template v-if="show">
             <year-picker v-if="pickertType === 'year'" style="min-width: 18em" v-model="selectValue" :min="dateMin" :max="dateMax" :hideHeader="hideHeader" :disabled="disabled" @year2Month="year2Month"></year-picker>
