@@ -23,18 +23,11 @@
 #  on:
 #    branch: master
 
+sudo: required
 language: node_js
-node_js:
- - "node"
-
+node_js: stable
 cache: npm
-
-script: npm run build
-
-deploy:
- provider: pages
- skip_cleanup: true
- github_token: $travis_ci
- local_dir: dist
- on:
-   branch: master
+script: bash ./deploy.sh
+branches:
+  only:
+  - master
