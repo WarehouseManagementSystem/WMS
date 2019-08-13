@@ -41,6 +41,7 @@
 [DatePicker]:                               ../View/src/components/base/Bootstrap/DateTime/Date/DatePicker
 [time]:                                     ../View/src/components/base/Bootstrap/DateTime/Time
 [timeList]:                                 ../View/src/components/base/Bootstrap/DateTime/Time/TimeList
+[b-list]:                                   ../View/src/components/base/Bootstrap/List
 <!-- pages -->
 [b-text-demo]:                              ../View/src/Pages/Demo/Form/b-text-demo.vue
 [b-textarea-demo]:                          ../View/src/Pages/Demo/Form/b-text-demo.vue
@@ -53,6 +54,11 @@
 [b-select-demo]:                            ../View/src/Pages/Demo/Form/b-select-demo.vue
 [b-dropdown-demo]:                          ../View/src/Pages/Demo/Base/b-dropdown-demo.vue
 [b-datetime-demo]:                          ../View/src/Pages/Demo/Base/b-datetime-demo.vue
+[b-list-demo]:                              ../View/src/Pages/Demo/Base/b-list-demo.vue
+
+2019-08-13
+
+* view 组件 add [b-list] [b-list-demo]
 
 2019-08-07
 

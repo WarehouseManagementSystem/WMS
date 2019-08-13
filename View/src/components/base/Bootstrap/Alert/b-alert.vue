@@ -14,7 +14,7 @@
                <slot>
                    <!-- <alert-link>{{countDownSec}}</alert-link> -->
                </slot>
-               <sr-message>{{ fillSrMessage }}</sr-message>
+               <sr-message>{{ fillsrMessage }}</sr-message>
             </div>
             <alert-footer><slot name="footer"></slot></alert-footer>
             <button type="button" class="close" v-show="showDismisLable" data-dismiss="alert" aria-label="Close">
@@ -27,7 +27,7 @@
 // import AlertLink from './b-alert-link'
 import AlertHeader from './b-alert-header'
 import AlertFooter from './b-alert-footer'
-import SrMessage from '@/components/base/Bootstrap/SrOney/b-sr-only.vue'
+import srMessage from '@/components/base/Bootstrap/SrOney/b-sr-only.vue'
 import utilities from '@/components/utilities/index.js'
 
 export default {
@@ -36,7 +36,7 @@ export default {
         // AlertLink,
         AlertHeader,
         AlertFooter,
-        SrMessage,
+        srMessage,
     },
     data () {
         return {
@@ -49,7 +49,7 @@ export default {
         color: utilities.props.color,
         width: utilities.props.width,
         position: utilities.props.position,
-        SrMessage: utilities.props.SrMessage,
+        srMessage: utilities.props.srMessage,
         dismissible: {
             type: Boolean,
             default: false,
@@ -94,11 +94,11 @@ export default {
             // return (!this.countDownDisdismis || this.dismissible)
             return this.dismissible
         },
-        fillSrMessage: function () {
-            if (this.SrMessage) {
+        fillsrMessage: function () {
+            if (this.srMessage) {
                 return this.variant
             }
-            return this.SrMessage
+            return this.srMessage
         },
     },
     created () {

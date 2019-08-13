@@ -33,7 +33,7 @@
 <script>
 
 import item from './b-carousel-item'
-import SrMessage from '@/components/base/Bootstrap/SrOney/b-sr-only.vue'
+import srMessage from '@/components/base/Bootstrap/SrOney/b-sr-only.vue'
 import util from '@/util/index.js'
 import utilities from '@/components/utilities/index.js'
 
@@ -41,7 +41,7 @@ export default {
     name: 'b-carousel',
     components: {
         item,
-        SrMessage,
+        srMessage,
     },
     data () {
         return {

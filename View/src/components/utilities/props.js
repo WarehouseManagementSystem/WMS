@@ -126,7 +126,7 @@ export default {
     function: {
         type: Function,
     },
-    SrMessage: {
+    srMessage: {
         type: String,
         default: '',
         validator: function () {

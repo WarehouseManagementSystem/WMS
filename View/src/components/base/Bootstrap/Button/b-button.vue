@@ -13,7 +13,7 @@
         data-toggle="button" 
         role="button">
         <slot>{{ value }}</slot>
-        <sr-message>{{ fillSrMessage }}</sr-message>
+        <sr-message>{{ fillsrMessage }}</sr-message>
     </a>
     <input class="btn" 
         v-else-if="target == 'input'" 
@@ -41,17 +41,17 @@
         @click="onClick($event)" 
         data-toggle="button">
         <slot>{{ value }}</slot>
-        <sr-message>{{ fillSrMessage }}</sr-message>
+        <sr-message>{{ fillsrMessage }}</sr-message>
     </button>
 </template>
 <script>
-import SrMessage from '@/components/base/Bootstrap/SrOney/b-sr-only.vue'
+import srMessage from '@/components/base/Bootstrap/SrOney/b-sr-only.vue'
 import utilities from '@/components/utilities/index.js'
 
 export default {
     name: 'b-button',
     components: {
-        SrMessage,
+        srMessage,
     },
     props: {
         color: utilities.props.color,
@@ -60,7 +60,7 @@ export default {
         name: utilities.props.value,
         active: utilities.props.active,
         disabled: utilities.props.disabled,
-        SrMessage: utilities.props.SrMessage,
+        srMessage: utilities.props.srMessage,
         outline: {
             type: Boolean,
             default: false,
@@ -112,11 +112,11 @@ export default {
         fillName: function () {
             return this.name || this.type
         },
-        fillSrMessage: function () {
-            if (this.SrMessage) {
+        fillsrMessage: function () {
+            if (this.srMessage) {
                 return this.variant
             }
-            return this.SrMessage
+            return this.srMessage
         },
     },
     methods: {
