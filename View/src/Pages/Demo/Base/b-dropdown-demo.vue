@@ -4,6 +4,18 @@
         <hr>
         <div class="row">
             <font class="col-1">default:</font>
+            <b-dropdown class="col-auto" :list="list2" ></b-dropdown>
+        </div>
+        <div class="row">
+            <font class="col-1">disabled:</font>
+            <b-dropdown class="col-auto" :list="list2" disabled></b-dropdown>
+        </div>
+        <div class="row">
+            <font class="col-1">select:</font>
+            <b-dropdown class="col-auto" :list="list2" select="value"></b-dropdown>
+        </div>
+        <div class="row">
+            <font class="col-1">slot:</font>
             <b-dropdown class="col-auto">
                 <b-dropdown-header text="header text"></b-dropdown-header>
                 <b-dropdown-divider></b-dropdown-divider>
@@ -123,8 +135,19 @@ export default {
                 { value: 'value5', text: "text5", },
                 { value: 'value6', text: "disabled", disabled: true},
             ],
+            list2: [
+                { header: 'header text', divider: true,  text: "text", item: 'item', },
+                { divider: true, text: "text", item: 'item', },
+                { text: "text", item: 'item', },
+                { value: 'value', },
+                { value: 'a item', href: "#" },
+                { value: 'btuuon active item', active: true,},
+                { value: 'btuuon disabled item', disabled: true,},
+                { value: 'a active', href: "#", active: true, },
+                { value: 'a disabled', href: "#", disabled: true, },
+            ],
             value1: 'value1',
         }
-    }
+    },
 }
 </script>

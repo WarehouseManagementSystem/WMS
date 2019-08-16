@@ -7,7 +7,8 @@
         </div>
         <tran-drop>
             <div ref="menu" class="dropdown-menu overflow-auto shadow-sm" :class="menuClass" :style="{'max-height': menuHeight}" :aria-labelledby="guid">
-                <slot></slot>
+                <slot v-if="$slots.default"></slot>
+                <drop-menu v-else :list="list" :select="select" :disabled="disabled" @click="$emit('menuClick', $event)"></drop-menu>
             </div>
         </tran-drop>
     </div>
@@ -17,16 +18,20 @@ import util from '@/util/index.js'
 import utilities from '@/components/utilities/index.js'
 
 import tranDrop from '@/components/transition/tran-drop.vue'
+import DropMenu from './b-dropdown-menu'
 
 export default {
     name: 'b-dropdown',
-    components: { tranDrop, },
+    components: { tranDrop, DropMenu },
     data () {
         return {
             menuStyle: 0,
         }
     },
     props: {
+        list: utilities.props.list,
+        select: utilities.props.value,
+        disabled: utilities.props.disabled,
         set: utilities.props.set,
         trigger: {
             ...utilities.props.text,

@@ -2,7 +2,6 @@
     <div>
         <h2>b-list</h2>
         <hr>
-        <div class="popover" role="tooltip"><div class="arrow"></div><h3 class="popover-header"></h3><div class="popover-body"></div></div>
         <div class="row py-1">
             <font class="col-1">default:</font>
             <b-list class="col-11" :list="list"></b-list>

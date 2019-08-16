@@ -31,7 +31,7 @@ export default {
             ...utilities.props.color,
             default: 'white',
         },
-        select: [String, Number, Array,],
+        select: [String, Number,],
         disabled: utilities.props.disabled,
         flush: Boolean,
         inline: Boolean,

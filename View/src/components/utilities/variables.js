@@ -28,6 +28,8 @@ const border0 = borders.map(e => `${e}-0`)
 const borderColor = colors.map(e => `border-${e}` )
 const borderRadius = ['rounded', 'rounded-circle', 'rounded-pill', 'rounded-0', ...[set.map(e => `rounded-${e}`)]]
 const borderRadiusSize = size.map(e => `rounded-${e}`)
+// justify
+const justify = ['', 'start', 'center', 'end', 'between', 'around']
 
 export default {
     base: {
@@ -60,5 +62,6 @@ export default {
             radius: borderRadius,
             rediussize: borderRadiusSize,
         },
+        justify: justify,
     },
 }

@@ -69,7 +69,6 @@ export default {
       },  
     },
     mounted: function () {
-        debugger
         this.menuHeight = this.row * 32 + 10 + 'px'
         this.getScroll()
         this.setTrigger(this.value)

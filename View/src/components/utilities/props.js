@@ -57,6 +57,14 @@ export default {
             return v.base.position.default.includes(value)
         },
     },
+    justify: {
+        type: String,
+        default: '',
+        validator: (value) => {
+            // 这个值必须匹配下列字符串中的一个
+            return v.base.justify.includes(value)
+        },
+    },
     width: {
         type: Number,
         default: 50,
