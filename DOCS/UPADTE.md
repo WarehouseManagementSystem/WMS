@@ -42,6 +42,7 @@
 [time]:                                     ../View/src/components/base/Bootstrap/DateTime/Time
 [timeList]:                                 ../View/src/components/base/Bootstrap/DateTime/Time/TimeList
 [b-list]:                                   ../View/src/components/base/Bootstrap/List
+[b-nav]:                                    ../View/src/components/base/Bootstrap/Navigation/Nav/b-nav.vue
 <!-- pages -->
 [b-text-demo]:                              ../View/src/Pages/Demo/Form/b-text-demo.vue
 [b-textarea-demo]:                          ../View/src/Pages/Demo/Form/b-text-demo.vue
@@ -55,6 +56,11 @@
 [b-dropdown-demo]:                          ../View/src/Pages/Demo/Base/b-dropdown-demo.vue
 [b-datetime-demo]:                          ../View/src/Pages/Demo/Base/b-datetime-demo.vue
 [b-list-demo]:                              ../View/src/Pages/Demo/Base/b-list-demo.vue
+[b-nav-demo]:                               ../View/src/Pages/Demo/Base/b-nav-demo.vue
+
+2019-08-16
+
+* view 组件 add [b-nav] [b-nav-demo]
 
 2019-08-13
 
