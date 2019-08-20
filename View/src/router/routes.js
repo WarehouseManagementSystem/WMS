@@ -4,7 +4,7 @@ import util from './util'
 import demoRouters from './Subsystem/Demo'
 import bRouters from './Subsystem/b'
 import cRouters from './Subsystem/c'
-import SystemRouters from './Subsystem/System'
+import SystemRouters from './Subsystem/system'
 
 const Modules = [
     util.GetModels(demoRouters),

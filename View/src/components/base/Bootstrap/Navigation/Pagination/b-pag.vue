@@ -4,12 +4,12 @@
             <item :disabled="startDisabled" @click.native="startClick"><slot name="start"><i class="fas fa-step-backward"></i></slot></item>
             <item :disabled="previousDisabled" @click.native="previousClick" ><slot name="previous"><i class="fas fa-caret-left"></i></slot></item>
             <item 
-                v-for="item in list" 
-                :key="item" 
-                :value="item" 
-                :active="select == item" 
-                :disabled="separator === item" 
-                @click.native="itemClick(item)" 
+                v-for="(value, index) in list" 
+                :key="index" 
+                :value="value" 
+                :active="select == value" 
+                :disabled="separator === value" 
+                @click.native="itemClick(value)" 
             />
             <item :disabled="nextDisabled" @click.native="nextClick" ><slot name="next"><i class="fas fa-caret-right"></i></slot></item>
             <item :disabled="endDisabled" @click.native="endClick" ><slot name="end"><i class="fas fa-step-forward"></i></slot></item>
@@ -24,6 +24,10 @@ import item from './b-pag-item'
 
 export default {
     name: 'b-pag',
+    model: {
+        prop: 'active',
+        event: 'change',
+    },
     components: { item, },
     data () {
         return {
@@ -34,56 +38,83 @@ export default {
         label: utilities.props.label,
         separator: {
             type: String,
-            default: '...',
+            default: '-',
         },
         active: {
-            type: Number,
+            type: [Number, String,],
             default: 1,
             validator: function (val) {
-                return val > 0 && val % 1 == 0
+                return !isNaN(val) && Number(val) > 0 && Number(val) % 1 == 0
             },
         },
         start: {
-            type: Number,
+            type: [Number, String,],
             default: 1,
             validator: function (val) {
-                return val > 0 && val % 1 == 0
+                return !isNaN(val) && Number(val) > 0 && Number(val) % 1 == 0
             },
         },
         end: {
-            type: Number,
+            type: [Number, String,],
             validator: function (val) {
-                return val > 0 && val % 1 == 0
+                return !isNaN(val) && Number(val) > 0 && Number(val) % 1 == 0
             },
             required: true,
         },
         total: {
-            type: Number,
+            type: [Number, String,],
             default: 10,
             validator: function (val) {
-                return val >= 6 && val % 1 == 0
+                return !isNaN(val) && Number(val) >= 10 && Number(val) % 1 == 0
             },
         },
     },
     computed: {
         list: function () {
-            const length = this.end - this.start + 1
-            let left = this.total / 2
-            if (this.select < this.total / 2 * 3) left = this.total - this.select
-            const right = this.total - left
-            return length > this.total 
-            ? [
-                ...Array.from({ length: left }, (v, i) => this.select + i ),
-                this.separator,
-                ...Array.from({ length: right }, (v, i) => this.end - i ).sort(),
-            ]
-            : Array.from({ length: length }, (v, i) => this.start + i ) 
+            let arr = []
+            debugger
+            const start = Number(this.start), end = Number(this.end), total = Number(this.total)
+            const length = end - start + 1
+            if (length <= total) return Array.from({ length: length }, (v, i) => start + i )
+ 
+            if (this.select < start + total) {
+                if (end - 3 < start + total) {
+                    arr = Array.from({ length: length}, (v, i) => start + i )
+                } else {
+                    arr = [
+                        ...Array.from({ length: total}, (v, i) => start + i ),
+                        this.separator,
+                        ...Array.from({ length: 3}, (v, i) => end - i ).sort((a, b) => a - b),
+                    ]
+                }
+            } else if (this.select > end - total) {
+                if (start + 3 > end - total) {
+                    arr = Array.from({ length: length}, (v, i) => start + i )
+                } else {
+                    arr = [
+                        ...Array.from({ length: 3}, (v, i) => start + i ),
+                        this.separator,
+                        ...Array.from({ length: total}, (v, i) => end - i ).sort((a, b) => a - b),
+                    ]
+                }
+            } else {
+                arr = [
+                    ...Array.from({ length: 3}, (v, i) => start + i ),
+                    this.separator,
+                    ...Array.from({ length: total - 4}, (v, i) => this.select - Math.floor((total - 4) / 2) + i ),
+                    this.separator,
+                    ...Array.from({ length: 3}, (v, i) => end - i ).sort((a, b) => a - b),
+                ]
+            }
+                
+            
+            return arr
         },
         startDisabled: function () {
-            return this.select == this.start
+            return this.select == Number(this.start)
         },
         endDisabled: function () {
-            return this.select == this.end
+            return this.select == Number(this.end)
         },
         previousDisabled: function () {
             return this.startDisabled
@@ -95,11 +126,11 @@ export default {
     methods: {
         startClick: function () {
             if (this.startDisabled) return
-            this.select = this.start
+            this.select = Number(this.start)
         },
         endClick: function () {
             if (this.endDisabled) return
-            this.select = this.end
+            this.select = Number(this.end)
         },
         previousClick: function () {
             if (this.previousDisabled) return
@@ -109,10 +140,15 @@ export default {
             if (this.nextDisabled) return
             this.select ++
         },
-        itemClick: function (item) {
-            this.select = item
+        itemClick: function (value) {
+            if (this.separator == value) return
+            this.select = value
         },
-        
+    },
+    watch: {
+        select: function (value) {
+            this.$emit('change', value)
+        },
     }
 }
 </script>
