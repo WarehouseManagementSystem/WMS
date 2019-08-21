@@ -42,8 +42,15 @@
 [time]:                                     ../View/src/components/base/Bootstrap/DateTime/Time
 [timeList]:                                 ../View/src/components/base/Bootstrap/DateTime/Time/TimeList
 [b-list]:                                   ../View/src/components/base/Bootstrap/List
+[Bootstrap list Group]:                     https://getbootstrap.com/docs/4.3/components/list-group/
 [b-nav]:                                    ../View/src/components/base/Bootstrap/Navigation/Nav
+[Bootstrap navs]:                           https://getbootstrap.com/docs/4.3/components/navs/
 [b-pag]:                                    ../View/src/components/base/Bootstrap/Navigation/Pagination
+[Bootstrap pagination]:                     https://getbootstrap.com/docs/4.3/components/pagination/
+<!-- directive -->
+[v-tip]:                                    ../View/src/components/utilities/directives.js
+[Bootstrap popovers]:                       https://getbootstrap.com/docs/4.3/components/popovers/
+[Bootstrap tooltips]:                       https://getbootstrap.com/docs/4.3/components/tooltips/
 <!-- pages -->
 [b-text-demo]:                              ../View/src/Pages/Demo/Form/b-text-demo.vue
 [b-textarea-demo]:                          ../View/src/Pages/Demo/Form/b-text-demo.vue
@@ -59,18 +66,23 @@
 [b-list-demo]:                              ../View/src/Pages/Demo/Base/b-list-demo.vue
 [b-nav-demo]:                               ../View/src/Pages/Demo/Base/b-nav-demo.vue
 [b-pag-demo]:                               ../View/src/Pages/Demo/Base/b-pag-demo.vue
+[b-tooltip-demo]:                           ../View/src/Pages/Demo/Directive/b-tooltip-demo.vue
+
+2019-08-21
+
+* view directive add [v-tip] [b-tooltip-demo] [Bootstrap popovers] [Bootstrap tooltips]
 
 2019-08-20
 
-* view 组件 add [b-pag] [b-pag-demo]
+* view 组件 add [b-pag] [b-pag-demo] [Bootstrap pagination]
 
 2019-08-16
 
-* view 组件 add [b-nav] [b-nav-demo]
+* view 组件 add [b-nav] [b-nav-demo] [Bootstrap navs]
 
 2019-08-13
 
-* view 组件 add [b-list] [b-list-demo]
+* view 组件 add [b-list] [b-list-demo] [Bootstrap list Group]
 
 2019-08-07
 

@@ -27,6 +27,13 @@ export default {
                 { path: 'b-select', name: 'b-select', component: async () => await import(/* webpackChunkName: "form" */'@/Pages/Demo/Form/b-select-demo.vue'), },
                 // { path: 'b-hidden', name: 'b-hidden', component: async () => await import(/* webpackChunkName: "form" */'@/Pages/Demo/Form/b-hidden-demo.vue'), },
             ]
-        }
+        },
+        {
+            SubsystemName: 'Directive',
+            Modules: [
+                { path: 'v-tip', name: 'v-tip', component: async () => await import(/* webpackChunkName: "directive" */'@/Pages/Demo/Directive/b-tooltip-demo.vue'), },
+            ]
+        },
+        
     ],
 }

@@ -1,11 +1,13 @@
-import jQuert from 'jquery'
-import 'bootstrap/dist/js/bootstrap.min.js'
+import jQuery from 'jquery'
+import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 import './scss/custom.scss'
 
 // use Popovers
-jQuert(function () {
-    jQuert('[data-toggle="popover"]').popover()
-})
+// jQuery(function () {
+//     jQuery('[data-toggle="tooltip"]').tooltip({ container: '#main-content' })
+//     jQuery('[data-toggle="popover"]').popover({ container: '#main-content' })
+// })
+
 
 // $('[data-toggle="popover"]').each(function () {
 //     $(this).popover({

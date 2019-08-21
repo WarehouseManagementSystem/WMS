@@ -27,6 +27,6 @@ export default {
         return {
             value: 5,
         }
-    }
+    },
 }
 </script>

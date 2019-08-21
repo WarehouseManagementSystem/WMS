@@ -1,5 +1,5 @@
 <template>
-    <nav id="nav" class="position-absolute container bg-light border border-dark rounded-lg shadow-lg w-50 h-75 m-1" style="min-width: 425px; max-width: 720px; z-index:1000;">
+    <nav id="nav" class="position-absolute container bg-light border border-dark rounded-lg shadow-lg w-50 h-75 m-1" style="min-width: 425px; max-width: 720px; z-index:1070;">
       <div class="row overflow-auto border rounded-lg h-100 p-1">
           <ul class="list-group col-4 d-inline-block overflow-auto bg-dark border border-dark rounded-lg h-100 p-0">
             <!-- 建议不多于七个汉子，超出部分会被隐藏 -->
