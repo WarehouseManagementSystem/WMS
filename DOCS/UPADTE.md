@@ -12,7 +12,8 @@
 <!-- links -->
 [Font Awesome]:                             https://fontawesome.com
 [circular-json]:                            https://github.com/WebReflection/circular-json
-
+[gsap]:                                     https://greensock.com/docs/
+[velocity-animate]:                         https://github.com/julianshapiro/velocity
 <!-- bootstrap 组件 -->
 [bootstrap alert]:                          https://getbootstrap.com/docs/4.3/components/alerts/
 [b-alert]:                                  ../View/src/components/base/Bootstrap/Alert
@@ -75,6 +76,7 @@
 
 * view 组件 add [b-progress] [b-progress-demo] [Bootstrap progress]
 * view bug 解决 [dropdownpicker] [dropdown-menu] 点击 body 之外的区域 无法关闭的问题
+* installed [gsap] and [velocity-animate] js 动画库
 
 2019-08-21
 

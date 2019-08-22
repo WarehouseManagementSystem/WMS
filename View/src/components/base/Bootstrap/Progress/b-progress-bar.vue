@@ -1,12 +1,18 @@
 <template>
-    <div class="progress-bar" :class="obbjClass" role="progressbar" :style="`width: ${value}%`" :aria-valuenow="value" :aria-valuemin="min" :aria-valuemax="max">{{ showValue ? `${value}%` : '' }}</div>
+    <div class="progress-bar" :class="obbjClass" role="progressbar" :style="`width: ${tweenedNumber}%`" :aria-valuenow="value" :aria-valuemin="min" :aria-valuemax="max">{{ showValue ? `${value}%` : '' }}</div>
 </template>
 
 <script>
 import utilities from '@/components/utilities/index.js'
+import TweenLite from "gsap/TweenLite";
 
 export default {
     name: 'b-progress-bar',
+    data () {
+        return {
+            tweenedNumber: 0
+        }
+    },
     props: {
         value: {
             type: [Number, String],
@@ -42,6 +48,20 @@ export default {
             
             return c
         },
+    },
+    mounted () {
+        this.showAnimat(this.value)
+    },
+    methods: {
+        showAnimat: function (number, oldNumber) {
+            this.tweenedNumber = oldNumber
+            TweenLite.to(this.$data, .5, { tweenedNumber: number });
+        }
+    },
+    watch: {
+        value: function (val, old) {
+            this.showAnimat(val, old)
+        }
     }
 }
 </script>
