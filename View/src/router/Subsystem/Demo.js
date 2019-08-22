@@ -11,6 +11,7 @@ export default {
                 { path: 'b-datetime', name: 'b-datetime', component: async () => await import(/* webpackChunkName: "base" */'@/Pages/Demo/Base/b-datetime-demo.vue'), },
                 { path: 'b-nav', name: 'b-nav', component: async () => await import(/* webpackChunkName: "base" */'@/Pages/Demo/Base/b-nav-demo.vue'), },
                 { path: 'b-pagination', name: 'b-pagination', component: async () => await import(/* webpackChunkName: "base" */'@/Pages/Demo/Base/b-pagination-demo.vue'), },
+                { path: 'b-progress', name: 'b-progress', component: async () => await import(/* webpackChunkName: "base" */'@/Pages/Demo/Base/b-progress-demo.vue'), },
             ]
         },
         {

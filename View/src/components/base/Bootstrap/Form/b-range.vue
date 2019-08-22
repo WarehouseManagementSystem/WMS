@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="row">
+        <div class="row mx-1">
             <span class="col-auto text-right">{{ fillMinValue }}</span>
             <input type="range" class="custom-range col align-middle" :min="min" :max="max" :step="step" :value="value" v-bind="$attrs" v-on="inputListeners">
             <span class="col-auto text-left">{{ fillMaxValue }}</span>

@@ -47,6 +47,8 @@
 [Bootstrap navs]:                           https://getbootstrap.com/docs/4.3/components/navs/
 [b-pag]:                                    ../View/src/components/base/Bootstrap/Navigation/Pagination
 [Bootstrap pagination]:                     https://getbootstrap.com/docs/4.3/components/pagination/
+[b-progress]:                               ../View/src/components/base/Bootstrap/Progress/
+[Bootstrap progress]:                       https://getbootstrap.com/docs/4.3/components/progress/
 <!-- directive -->
 [v-tip]:                                    ../View/src/components/utilities/directives.js
 [Bootstrap popovers]:                       https://getbootstrap.com/docs/4.3/components/popovers/
@@ -67,6 +69,11 @@
 [b-nav-demo]:                               ../View/src/Pages/Demo/Base/b-nav-demo.vue
 [b-pag-demo]:                               ../View/src/Pages/Demo/Base/b-pag-demo.vue
 [b-tooltip-demo]:                           ../View/src/Pages/Demo/Directive/b-tooltip-demo.vue
+[b-progress-demo]:                          ../View/src/Pages/Demo/Base/b-progress-demo.vue
+
+2019-09-22
+
+* view 组件 add [b-progress] [b-progress-demo] [Bootstrap progress]
 
 2019-08-21
 
