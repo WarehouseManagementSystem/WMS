@@ -25,6 +25,7 @@ git commit -m 'deploy'
 # 部署到 https://<USERNAME>.github.io/<REPO>
 # git push -f "https://github.com/${travis_ci}/WMS.git" master:gh-pages
 
-git push -f "https://${travis_ci}@github.com/WarehouseManagementSystem/WMS.git" master:gh-pages
+git push -f https://github.com/WarehouseManagementSystem/WMS.git master:gh-pages
+# git push -f "git@github.com/WarehouseManagementSystem/WMS.git" master:gh-pages
 
 cd -
