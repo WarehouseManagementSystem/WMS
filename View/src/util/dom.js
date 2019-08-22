@@ -1,5 +1,6 @@
 function addAttr (e, attr, value) {
     if (!e) return
+    if (hasAttr(e, attr)) removeAttr(e, attr)
     e[attr] = value
     e.attr = value
     e.attributes[attr] = value

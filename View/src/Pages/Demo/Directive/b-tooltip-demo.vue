@@ -6,7 +6,8 @@
             <font class="col-1">default:</font>
             <b-button class="col-auto" v-tip>nothing</b-button>
             <font class="col-1">tooltip:</font>
-            <b-button class="col-auto" v-tip:tooltip="'default is tooltip'">hover to show tooltip</b-button>
+            <b-button class="col-auto" v-tip:tooltip="text">hover to show tooltip</b-button>
+            <input v-model='text' /> {{ text }}
             <font class="col-1">popover:</font>
             <b-button class="col-auto" v-tip:popover="'this is popover'">click to show popover</b-button>
         </div>
@@ -23,24 +24,24 @@
                 <div class="row py-1">
                     <font class="col-1">tooltip:</font>
                     <font class="col-1">top:</font>
-                    <b-button class="col-1" v-tip:tooltip="{placement: 'top', content: 'default placement is top'}">hover</b-button>
+                    <b-button class="col-1" v-tip:tooltip.top="{content: 'default placement is top'}">hover</b-button>
                     <font class="col-1">bottom:</font>
-                    <b-button class="col-1" v-tip:tooltip="{placement: 'bottom', content: 'placement is bottom'}">hover</b-button>
+                    <b-button class="col-1" v-tip:tooltip.bottom="{content: 'placement is bottom'}">hover</b-button>
                     <font class="col-1">left:</font>
-                    <b-button class="col-1" v-tip:tooltip="{placement: 'left', content: 'placement is left'}">hover</b-button>
+                    <b-button class="col-1" v-tip:tooltip.left="{content: 'placement is left'}">hover</b-button>
                     <font class="col-1">right:</font>
-                    <b-button class="col-1" v-tip:tooltip="{placement: 'right', content: 'placement is right'}">hover</b-button>
+                    <b-button class="col-1" v-tip:tooltip.right="{content: 'placement is right'}">hover</b-button>
                 </div>
                 <div class="row py-1">
                     <font class="col-1">popover:</font>
                     <font class="col-1">top:</font>
-                    <b-button class="col-1" v-tip:popover="{placement: 'top', content: 'default placement is top'}">click</b-button>
+                    <b-button class="col-1" v-tip:popover.top="{content: 'default placement is top'}">click</b-button>
                     <font class="col-1">bottom:</font>
-                    <b-button class="col-1" v-tip:popover="{placement: 'bottom', content: 'placement is bottom'}">click</b-button>
+                    <b-button class="col-1" v-tip:popover.bottom="{content: 'placement is bottom'}">click</b-button>
                     <font class="col-1">left:</font>
-                    <b-button class="col-1" v-tip:popover="{placement: 'left', content: 'placement is left'}">click</b-button>
+                    <b-button class="col-1" v-tip:popover.left="{content: 'placement is left'}">click</b-button>
                     <font class="col-1">right:</font>
-                    <b-button class="col-1" v-tip:popover="{placement: 'right', content: 'placement is right'}">click</b-button>
+                    <b-button class="col-1" v-tip:popover.right="{ content: 'placement is right'}">click</b-button>
                 </div>
             </div>
         </div>
@@ -52,7 +53,7 @@
         <div class="row py-1">
             <font class="col-1">trigger:</font>
             <font class="col-1">popover(only):</font>
-            <b-button class="col-auto" v-tip:popover="{trigger: 'focus', content: 'this is popover`s content'}">click to show popover</b-button>
+            <a tabindex="0" class="btn btn-primary" role="button" v-tip:popover="{trigger: 'focus', content: 'this is popover`s content just for <a>'}">Dismissible popover</a>
         </div>
         <div class="row py-1">
             <font class="col-1">disabled tag:</font>
@@ -70,5 +71,11 @@ import BButton from '@/components/base/Bootstrap/Button/b-button.vue'
 export default {
     name: 'b-tooltip-demo',
     components: { BButton, },
+    data () {
+        return {
+            text: 'disabled value'
+        }
+    }
+    
 }
 </script>
