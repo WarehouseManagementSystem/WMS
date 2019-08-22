@@ -96,8 +96,8 @@ export default {
     watch: {
         isShow: function (newValue) {
             newValue 
-                ? document.body.addEventListener('mousedown', this.hindeMenu ) 
-                : this.canHide ? document.body.removeEventListener('mousedown', this.hindeMenu ) : null
+                ? document.addEventListener('mousedown', this.hindeMenu ) 
+                : this.canHide ? document.removeEventListener('mousedown', this.hindeMenu ) : null
             this.$emit('showOrHide', newValue)
         },
         show: function (value) {

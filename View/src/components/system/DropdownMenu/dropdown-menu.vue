@@ -24,12 +24,12 @@ export default {
     },
     methods: {
         bindHindeEvents: function () {
-            document.body.addEventListener('mousedown', this.hindeMenu )
-            document.body.addEventListener('mousewheel', this.hindeMenu )
+            document.addEventListener('mousedown', this.hindeMenu )
+            document.addEventListener('mousewheel', this.hindeMenu )
         },
         unbindHindeEvents: function () {
-            document.body.removeEventListener('mousedown', this.hindeMenu )
-            document.body.removeEventListener('mousewheel', this.hindeMenu )
+            document.removeEventListener('mousedown', this.hindeMenu )
+            document.removeEventListener('mousewheel', this.hindeMenu )
         },
         hindeMenu: function (event) {
             const e = event.target

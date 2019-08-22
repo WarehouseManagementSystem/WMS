@@ -74,6 +74,7 @@
 2019-09-22
 
 * view 组件 add [b-progress] [b-progress-demo] [Bootstrap progress]
+* view bug 解决 [dropdownpicker] [dropdown-menu] 点击 body 之外的区域 无法关闭的问题
 
 2019-08-21
 
