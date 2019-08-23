@@ -142,4 +142,27 @@ export default {
             },
         },
     },
+    loading: {
+        props: {
+            color: {
+                ...props.textColor,
+                default: '',
+            },
+            status: {
+                type: String,
+                default: 'border',
+                validator: function (val) {
+                    return ['border', 'grow'].includes(val)
+                },
+            },
+            size: props.size,
+        },
+        computed: {
+            objClass: function () {
+                let color = this.color ? `text-${this.color}` : ''
+                let size = this.size ? `spinner-border-${this.size}` : ''
+                return `spinner-${this.status} ${color} ${size}`
+            },
+        },
+    },
 }

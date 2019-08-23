@@ -4,7 +4,7 @@
 
 <script>
 import utilities from '@/components/utilities/index.js'
-import TweenLite from "gsap/TweenLite";
+import TweenLite from "gsap/TweenLite"
 
 export default {
     name: 'b-progress-bar',

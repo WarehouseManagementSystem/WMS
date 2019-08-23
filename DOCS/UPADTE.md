@@ -50,6 +50,8 @@
 [Bootstrap pagination]:                     https://getbootstrap.com/docs/4.3/components/pagination/
 [b-progress]:                               ../View/src/components/base/Bootstrap/Progress/
 [Bootstrap progress]:                       https://getbootstrap.com/docs/4.3/components/progress/
+[b-loading]:                                ../View/src/components/base/Bootstrap/Loading/
+[Bootstrap spinners]:                       https://getbootstrap.com/docs/4.3/components/spinners/
 <!-- directive -->
 [v-tip]:                                    ../View/src/components/utilities/directives.js
 [Bootstrap popovers]:                       https://getbootstrap.com/docs/4.3/components/popovers/
@@ -71,8 +73,13 @@
 [b-pag-demo]:                               ../View/src/Pages/Demo/Base/b-pag-demo.vue
 [b-tooltip-demo]:                           ../View/src/Pages/Demo/Directive/b-tooltip-demo.vue
 [b-progress-demo]:                          ../View/src/Pages/Demo/Base/b-progress-demo.vue
+[b-loading-demo]:                           .../View/src/Pages/Demo/Base/b-loading-demo.vue
 
-2019-09-22
+2019-08-23
+
+* view 组件 add [b-loading] [b-loading-demo] [Bootstrap spinners]
+
+2019-08-22
 
 * view 组件 add [b-progress] [b-progress-demo] [Bootstrap progress]
 * view bug 解决 [dropdownpicker] [dropdown-menu] 点击 body 之外的区域 无法关闭的问题
