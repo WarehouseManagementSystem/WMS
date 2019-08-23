@@ -33,16 +33,16 @@
         <div class="row py-1">
             <font class="col-1">show-value:</font>
             <font class="col-1">one:</font>
-            <b-progress class="col-4" value="80" show-value></b-progress>
+            <b-progress class="col-4" value="5" show-value></b-progress>
             <font class="col-1">list:</font>
             <b-progress class="col-4" :list="list" show-value></b-progress>
         </div>
         <div class="row py-1">
             <font class="col-1">info:</font>
             <font class="col-1">one:</font>
-            <b-progress class="col-4" value="80" info="info"></b-progress>
+            <b-progress class="col-4" value="80" info="info text"></b-progress>
             <font class="col-1">list:</font>
-            <b-progress class="col-4" :list="list" info="info"></b-progress>
+            <b-progress class="col-4" :list="list" info="info text"></b-progress>
         </div>
         <div class="row py-1">
             <font class="col-1">color:</font>

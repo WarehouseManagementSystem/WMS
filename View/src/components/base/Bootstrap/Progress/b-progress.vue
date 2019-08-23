@@ -9,6 +9,7 @@
                     :color="item.color || color" 
                     :striped="striped" 
                     :animated="animated" 
+                    @animating="animating" 
                 ></b-progress-bar>
                 <span v-if="showValue" class="text-white position-absolute" :style="spanStyle">{{ `${sum}%` }}</span>
             </template>
@@ -19,6 +20,8 @@
 </template>
 
 <script>
+import TweenLite from "gsap/TweenLite"
+
 import utilities from '@/components/utilities/index.js'
 
 import BProgressBar from '@/components/base/Bootstrap/Progress/b-progress-bar.vue'
@@ -29,8 +32,8 @@ export default {
     components: { BProgressBar, BHelp, },
     data () {
         return {
-            spanStyle: {},
-            now: this.value
+            now: this.value,
+            offsetWidth: 0,
         }
     },
     props: {
@@ -53,22 +56,28 @@ export default {
             return this.list && this.list.length > 0 
                     ? this.list.map( el => isNaN(el.value) ? 0 : Number(el.value) ).reduce((acc, cur) => acc + cur, 0)
                     : this.now
-        }
-    },
-    mounted () {
-       this.setSpanStyle()
+        },
+        spanStyle: function () {
+            return this.offsetWidth == 0 ? {} : {
+                left: this.offsetWidth / 2 - 6 + 'px'
+            }
+        },
     },
     methods: {
-        setSpanStyle: function () {
-             const nodes = this.$el.children[0].childNodes
+        getOffsetWidth: function () {
             let offsetWidth = 0
+            const nodes = this.$el.children[0].childNodes
             for (var i = 0; i < nodes.length - 1; i++) {
                 offsetWidth += nodes[i].offsetWidth
             }
-            this.spanStyle = offsetWidth == 0 ? {} : {
-                left: offsetWidth / 2 - 6 + 'px'
-            }
-        }
+            return offsetWidth
+        },
+        showAnimat: function (number) {
+            TweenLite.to(this.$data, .5, { offsetWidth: number });
+        },
+        animating: function () {
+            this.showAnimat(this.getOffsetWidth())
+        },
     },
 }
 </script>

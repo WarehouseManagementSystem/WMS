@@ -61,6 +61,9 @@ export default {
     watch: {
         value: function (val, old) {
             this.showAnimat(val, old)
+        },
+        tweenedNumber: function () {
+            this.$emit('animating')
         }
     }
 }
