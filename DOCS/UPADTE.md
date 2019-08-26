@@ -14,6 +14,7 @@
 [circular-json]:                            https://github.com/WebReflection/circular-json
 [gsap]:                                     https://greensock.com/docs/
 [velocity-animate]:                         https://github.com/julianshapiro/velocity
+[moment]:                                   
 <!-- bootstrap 组件 -->
 [bootstrap alert]:                          https://getbootstrap.com/docs/4.3/components/alerts/
 [b-alert]:                                  ../View/src/components/base/Bootstrap/Alert
@@ -52,6 +53,9 @@
 [Bootstrap progress]:                       https://getbootstrap.com/docs/4.3/components/progress/
 [b-loading]:                                ../View/src/components/base/Bootstrap/Loading/
 [Bootstrap spinners]:                       https://getbootstrap.com/docs/4.3/components/spinners/
+[b-toast]:                                  ../View/src/components/base/Bootstrap/toast/
+[b-toasts]:                                 ../View/src/components/base/Bootstrap/toast/
+[Bootstrap Toasts]:                         https://getbootstrap.com/docs/4.3/components/toasts/
 <!-- directive -->
 [v-tip]:                                    ../View/src/components/utilities/directives.js
 [Bootstrap popovers]:                       https://getbootstrap.com/docs/4.3/components/popovers/
@@ -74,6 +78,12 @@
 [b-tooltip-demo]:                           ../View/src/Pages/Demo/Directive/b-tooltip-demo.vue
 [b-progress-demo]:                          ../View/src/Pages/Demo/Base/b-progress-demo.vue
 [b-loading-demo]:                           .../View/src/Pages/Demo/Base/b-loading-demo.vue
+[b-toast-demo]:                             ../View/src/Pages/Demo/Base/b-toast-demo.vue
+2019-08-02
+
+* installed [moment] 时间
+* view 调整 config
+* view 组件 add [b-toast] [b-toasts] [b-toast-demo] [Bootstrap Toasts]
 
 2019-08-23
 

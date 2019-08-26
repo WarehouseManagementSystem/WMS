@@ -23,6 +23,7 @@
 </template>
 <script>
 import util from '@/util/index.js'
+import config from '@/config/index.js'
 import utilities from '@/components/utilities/index.js'
 
 import BInfo from '@/components/base/Bootstrap/Form/Other/b-form-info.vue'
@@ -56,14 +57,14 @@ export default {
             return this.type
         },
         fillPlaceholder: function () {
-            const o = Object.getOwnPropertyDescriptor(utilities.placeholder, this.type)
+            const o = Object.getOwnPropertyDescriptor(config.ui.forms.placeholder, this.type)
             return this.placeholder 
                 ? this.placeholder
                 : (o && o.value) || null
         },
         fillIcon: function () {
             if (['number'].includes(this.type)) return
-            const o = Object.getOwnPropertyDescriptor(utilities.icon, this.type)
+            const o = Object.getOwnPropertyDescriptor(config.ui.icon, this.type)
             return this.icon 
                 ? this.icon
                 : (o && o.value) || null
@@ -75,7 +76,7 @@ export default {
         },
         regex: function () {
             if (['number'].includes(this.type)) return null
-            const o = Object.getOwnPropertyDescriptor(util.regex, this.type)
+            const o = Object.getOwnPropertyDescriptor(config.regex, this.type)
             return this.pattern 
                 ? util.string.toRegExp(this.pattern.toString()) 
                 : (o && o.value) || null

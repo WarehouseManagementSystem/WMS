@@ -1,4 +1,8 @@
 // system configs
+import icon from './icon'
+import regex from './regex'
+import status from './status'
+import placeholder from './placeholder'
 
 export default {
     lang: {
@@ -32,7 +36,12 @@ export default {
         forms: {
             // b-form-info type: 'feedback'、'tooltip'
             validInfoType: 'feedback',
+            placeholder: placeholder, // placeholder
         }, // forms
+        icon: icon, // icon
+        status: status, // status
     }, // UI config
+    
+    regex: regex, // regex
     // routes: routes, // routes config
 }

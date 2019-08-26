@@ -5,7 +5,6 @@ import serviceWorker from './serviceWorker/serviceWorker'
 import random from './random'
 import dom from './dom'
 import string from './string'
-import regex from './regex'
 import obj from './object'
 import array from './array'
 import documents from './document'
@@ -32,7 +31,6 @@ export default {
     random: random,
     dom: dom,
     string: string,
-    regex: regex,
     obj: obj,
     array: array,
     document: documents,

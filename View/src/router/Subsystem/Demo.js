@@ -13,6 +13,7 @@ export default {
                 { path: 'b-pagination', name: 'b-pagination', component: async () => await import(/* webpackChunkName: "base" */'@/Pages/Demo/Base/b-pagination-demo.vue'), },
                 { path: 'b-progress', name: 'b-progress', component: async () => await import(/* webpackChunkName: "base" */'@/Pages/Demo/Base/b-progress-demo.vue'), },
                 { path: 'b-loading', name: 'b-loading', component: async () => await import(/* webpackChunkName: "base" */'@/Pages/Demo/Base/b-loading-demo.vue'), },
+                { path: 'b-toast', name: 'b-toast', component: async () => await import(/* webpackChunkName: "base" */'@/Pages/Demo/Base/b-toast-demo.vue'), },
             ]
         },
         {
