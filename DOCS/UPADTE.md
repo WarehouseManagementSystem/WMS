@@ -79,7 +79,8 @@
 [b-progress-demo]:                          ../View/src/Pages/Demo/Base/b-progress-demo.vue
 [b-loading-demo]:                           .../View/src/Pages/Demo/Base/b-loading-demo.vue
 [b-toast-demo]:                             ../View/src/Pages/Demo/Base/b-toast-demo.vue
-2019-08-02
+
+2019-08-26
 
 * installed [moment] 时间
 * view 调整 config
