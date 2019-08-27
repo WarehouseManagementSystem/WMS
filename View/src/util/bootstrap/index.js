@@ -1,4 +1,4 @@
-import jQuery from 'jquery'
+import 'jquery'
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 import './scss/custom.scss'
 
