@@ -15,6 +15,7 @@ export default {
                 { path: 'b-loading', name: 'b-loading', component: async () => await import(/* webpackChunkName: "base" */'@/Pages/Demo/Base/b-loading-demo.vue'), },
                 { path: 'b-toast', name: 'b-toast', component: async () => await import(/* webpackChunkName: "base" */'@/Pages/Demo/Base/b-toast-demo.vue'), },
                 { path: 'b-modal', name: 'b-modal', component: async () => await import(/* webpackChunkName: "base" */'@/Pages/Demo/Base/b-modal-demo.vue'), },
+                { path: 'b-media', name: 'b-media', component: async () => await import(/* webpackChunkName: "base" */'@/Pages/Demo/Base/b-media-demo.vue'), },
             ]
         },
         {

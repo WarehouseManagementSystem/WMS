@@ -58,6 +58,8 @@
 [Bootstrap Toasts]:                         https://getbootstrap.com/docs/4.3/components/toasts/
 [b-modal]:                                  ../View/src/components/base/Bootstrap/Modal/
 [Bootstrap Modal]:                          https://getbootstrap.com/docs/4.3/components/modal/
+[b-media]:                                  ../View/src/components/base/Bootstrap/Media/
+[Bootstrap Media]:                          https://getbootstrap.com/docs/4.3/components/media-object/
 
 <!-- directive -->
 [v-tip]:                                    ../View/src/components/utilities/directives.js
@@ -83,6 +85,11 @@
 [b-loading-demo]:                           .../View/src/Pages/Demo/Base/b-loading-demo.vue
 [b-toast-demo]:                             ../View/src/Pages/Demo/Base/b-toast-demo.vue
 [b-modal-demo]:                             ../View/src/Pages/Demo/Base/b-modal-demo.vue
+[b-media-demo]:                             ../View/src/Pages/Demo/Base/b-media-demo.vue
+
+2019-08-28
+
+* view 组件 add [b-media] [b-media-demo] [Bootstrap Media]
 
 2019-08-27
 
