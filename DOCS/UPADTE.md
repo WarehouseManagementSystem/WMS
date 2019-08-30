@@ -60,6 +60,10 @@
 [Bootstrap Modal]:                          https://getbootstrap.com/docs/4.3/components/modal/
 [b-media]:                                  ../View/src/components/base/Bootstrap/Media/
 [Bootstrap Media]:                          https://getbootstrap.com/docs/4.3/components/media-object/
+[b-collapse]:                               ../View/src/components/base/Bootstrap/Collapse
+[Bootstrap Collapse]:                       https://getbootstrap.com/docs/4.3/components/collapse/
+[box-accordion]:                            ../View/src/components/Box/Accordion
+[box-accordion-list]:                       ../View/src/components/Box/Accordion
 
 <!-- directive -->
 [v-tip]:                                    ../View/src/components/utilities/directives.js
@@ -86,6 +90,12 @@
 [b-toast-demo]:                             ../View/src/Pages/Demo/Base/b-toast-demo.vue
 [b-modal-demo]:                             ../View/src/Pages/Demo/Base/b-modal-demo.vue
 [b-media-demo]:                             ../View/src/Pages/Demo/Base/b-media-demo.vue
+[b-collapse-demo]:                          ../View/src/Pages/Demo/Base/b-collapse-demo.vue
+[box-accordion-demo]:                       ../View/src/Pages/Demo/Box/box-accordion-demo.vue
+
+2019-08-30
+
+* view 组件 add [b-collapse] [b-collapse-demo] [Bootstrap Collapse] [box-accordion] [box-accordion-list] [box-accordion-demo]
 
 2019-08-28
 

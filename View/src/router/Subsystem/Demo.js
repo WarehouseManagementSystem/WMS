@@ -16,6 +16,7 @@ export default {
                 { path: 'b-toast', name: 'b-toast', component: async () => await import(/* webpackChunkName: "base" */'@/Pages/Demo/Base/b-toast-demo.vue'), },
                 { path: 'b-modal', name: 'b-modal', component: async () => await import(/* webpackChunkName: "base" */'@/Pages/Demo/Base/b-modal-demo.vue'), },
                 { path: 'b-media', name: 'b-media', component: async () => await import(/* webpackChunkName: "base" */'@/Pages/Demo/Base/b-media-demo.vue'), },
+                { path: 'b-collapse', name: 'b-collapse', component: async () => await import(/* webpackChunkName: "base" */'@/Pages/Demo/Base/b-collapse-demo.vue'), },
             ]
         },
         {
@@ -31,6 +32,12 @@ export default {
                 { path: 'b-range', name: 'b-range', component: async () => await import(/* webpackChunkName: "form" */'@/Pages/Demo/Form/b-range-demo.vue'), },
                 { path: 'b-select', name: 'b-select', component: async () => await import(/* webpackChunkName: "form" */'@/Pages/Demo/Form/b-select-demo.vue'), },
                 // { path: 'b-hidden', name: 'b-hidden', component: async () => await import(/* webpackChunkName: "form" */'@/Pages/Demo/Form/b-hidden-demo.vue'), },
+            ]
+        },
+        {
+            SubsystemName: 'Box',
+            Modules: [
+                { path: 'box-accordion', name: 'box-accordion', component: async () => await import(/* webpackChunkName: "box" */'@/Pages/Demo/Box/box-accordion-demo.vue'), },
             ]
         },
         {
