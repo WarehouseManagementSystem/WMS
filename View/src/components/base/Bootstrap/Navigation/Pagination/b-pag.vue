@@ -72,7 +72,6 @@ export default {
     computed: {
         list: function () {
             let arr = []
-            debugger
             const start = Number(this.start), end = Number(this.end), total = Number(this.total)
             const length = end - start + 1
             if (length <= total) return Array.from({ length: length }, (v, i) => start + i )

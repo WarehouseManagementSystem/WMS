@@ -2,10 +2,10 @@
     <div class="card">
         <div class="card-header d-flex justify-content-between">
             <h4 class="mb-0">{{ title }}</h4>
-            <i v-if="isShow" class="fas fa-chevron-up mb-0" v-coll:[id].show="'#' + id" @click="isShow = false"></i>
-            <i v-else class="fas fa-chevron-down collapsed mb-0" v-coll:[id]="'#' + id" @click="isShow = true"></i>
+            <i v-if="isShow" class="fas fa-chevron-up mb-0" role="button" v-coll:[id].show="'#' + id" @click="isShow = false"></i>
+            <i v-else class="fas fa-chevron-down collapsed mb-0" role="button" v-coll:[id]="'#' + id" @click="isShow = true"></i>
         </div>
-        <div :id="id" class="collapse" :class="{ show: show }" >
+        <div :id="id" class="collapse" :class="{ show: show }" :data-parent="parent" >
             <div class="card-body">
                 <slot>{{ content }}</slot>
             </div>
@@ -29,6 +29,7 @@ export default {
         title: String,
         content: String,
         control: String,
+        parent: String,
         show: Boolean,
     },
     computed: {

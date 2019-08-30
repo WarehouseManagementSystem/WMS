@@ -5,8 +5,9 @@
             :key="index" 
             :title="item.title" 
             :content="item.content" 
-            :control="item.control"
-            :show="item.show"
+            :control="item.control" 
+            :show="item.show" 
+            :parent="parent" 
         />
     </div>
     
@@ -22,6 +23,7 @@ export default {
     components: { BoxAccordion },
     props: {
         list: utilities.props.list,
+        parent: String,
     },
 }
 </script>

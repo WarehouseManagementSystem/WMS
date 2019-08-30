@@ -5,7 +5,6 @@
 ## 计划
 
 > - [ ] button radio 暂缓（20190410）
-> - [ ] [Collapse] 暂缓（20190809）
 
 ## 设想
 
@@ -15,6 +14,5 @@
 
 > - [ ] need to do
 
-[Collapse]:                                 https://getbootstrap.com/docs/4.3/components/collapse/
 [Jumbotron]:                                https://getbootstrap.com/docs/4.3/components/jumbotron/
 [Scrollspy]:                                https://getbootstrap.com/docs/4.3/components/scrollspy/
