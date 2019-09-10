@@ -2,11 +2,13 @@
   <main id="main-content">
     <!-- 路由出口 -->
     <!-- 路由匹配到的组件将渲染在这里 -->
-    <transition name="component-fade" mode="out-in">
-      <div class="border rounded p-1 m-1">
-        <router-view></router-view>
-      </div>
-    </transition>
+    
+    <div class="border rounded p-1 m-1">
+      <transition name="component-fade" mode="out-in">
+        <router-view style="min-height: 1000px"></router-view>
+      </transition>
+    </div>
+   
   </main>
 </template>
 

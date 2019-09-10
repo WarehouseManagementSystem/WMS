@@ -64,6 +64,8 @@
 [Bootstrap Collapse]:                       https://getbootstrap.com/docs/4.3/components/collapse/
 [box-accordion]:                            ../View/src/components/Box/Accordion
 [box-accordion-list]:                       ../View/src/components/Box/Accordion
+[b-navbar]:                                 ../View/src/components/base/Bootstrap/Navigation/Navbar/
+[Bootstrap Navbar]:                         https://getbootstrap.com/docs/4.3/components/navbar/
 
 <!-- directive -->
 [v-tip]:                                    ../View/src/components/utilities/directives.js
@@ -92,6 +94,10 @@
 [b-media-demo]:                             ../View/src/Pages/Demo/Base/b-media-demo.vue
 [b-collapse-demo]:                          ../View/src/Pages/Demo/Base/b-collapse-demo.vue
 [box-accordion-demo]:                       ../View/src/Pages/Demo/Box/box-accordion-demo.vue
+
+2019-09-10
+
+* view 组件 add [b-navbar] [Bootstrap Navbar]
 
 2019-08-30
 

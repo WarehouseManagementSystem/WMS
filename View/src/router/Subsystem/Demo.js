@@ -17,6 +17,8 @@ export default {
                 { path: 'b-modal', name: 'b-modal', component: async () => await import(/* webpackChunkName: "base" */'@/Pages/Demo/Base/b-modal-demo.vue'), },
                 { path: 'b-media', name: 'b-media', component: async () => await import(/* webpackChunkName: "base" */'@/Pages/Demo/Base/b-media-demo.vue'), },
                 { path: 'b-collapse', name: 'b-collapse', component: async () => await import(/* webpackChunkName: "base" */'@/Pages/Demo/Base/b-collapse-demo.vue'), },
+                { path: 'b-scrollspy', name: 'b-scrollspy', component: async () => await import(/* webpackChunkName: "base" */'@/Pages/Demo/Base/b-scrollspy-demo.vue'), },
+                
             ]
         },
         {

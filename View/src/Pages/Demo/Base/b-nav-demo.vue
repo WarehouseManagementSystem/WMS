@@ -55,15 +55,26 @@
             <font class="col-1">justified:</font>
             <b-nav class="col-11" :list="list2" tabs justified></b-nav>
         </div>
+        <h2>b-navbar</h2>
+        <hr>
+        <div class="row py-1">
+            <font class="col-1">default:</font>
+            <b-navbar class="col-11 navbar-expand-lg navbar-light bg-light" :list="list"></b-navbar>
+        </div>
+        <div class="row py-1">
+            <font class="col-1">brand:</font>
+            <b-navbar class="col-11 navbar-expand-lg navbar-light bg-light" brand="Brand Text" :list="list"></b-navbar>
+        </div>
     </div>
 </template>
 
 <script>
 import BNav from '@/components/base/Bootstrap/Navigation/Nav/b-nav.vue'
+import BNavbar from '@/components/base/Bootstrap/Navigation/Navbar/b-navbar.vue'
 
 export default {
     name: 'b-nav-demo',
-    components: { BNav,},
+    components: { BNav, BNavbar, },
     data () {
         return {
             list: [
