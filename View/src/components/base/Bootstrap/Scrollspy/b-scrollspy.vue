@@ -17,11 +17,12 @@
             <div v-show="showArtical && $slots.default" :id="articleBoxId" class="overflow-auto p-1" :class="{'col-10': column}" style="max-height: 730px;" data-offset="20" :data-target="'#' + scrollspyId" data-spy="scroll"><slot></slot></div>
             <b-scrollspy-nav v-if="set == 'right'" :id="scrollspyId" :set="set" :class="{'col-2': column}" column :list="contents" />
         </article>
-        <footer>
-            <slot v-if="$slots.header" name="footer"></slot>
-            <div class="p-2">
-                <font>info</font>
-            </div>
+        <footer v-if="info || $slots.footer">
+            <slot name="footer">
+                <div class="p-2">
+                    <font>{{ info }}</font>
+                </div>
+            </slot>
         </footer>
     </article>
     
@@ -59,6 +60,7 @@ export default {
         title: String,
         author: String,
         time: [ Date, String, ],
+        info: String,
     },
     computed: {
         column: function () {
