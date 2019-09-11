@@ -1,6 +1,6 @@
 <template>
     <li class="nav-item">
-        <a class="nav-link" :class="objClass" :href="href" :tabindex="disabled ? -1 : ''" :aria-disabled="disabled"><slot>{{ text }}</slot></a>
+        <a class="nav-link text-truncate" :class="objClass" :href="href" :tabindex="disabled ? -1 : ''" :aria-disabled="disabled"><slot>{{ text }}</slot></a>
     </li>
 </template>
 

@@ -66,7 +66,8 @@
 [box-accordion-list]:                       ../View/src/components/Box/Accordion
 [b-navbar]:                                 ../View/src/components/base/Bootstrap/Navigation/Navbar/
 [Bootstrap Navbar]:                         https://getbootstrap.com/docs/4.3/components/navbar/
-
+[b-scrollspy]:                              ../View/src/components/base/Bootstrap/Scrollspy
+[Bootstrap Scrollspy]:                      https://getbootstrap.com/docs/4.3/components/scrollspy/
 <!-- directive -->
 [v-tip]:                                    ../View/src/components/utilities/directives.js
 [Bootstrap popovers]:                       https://getbootstrap.com/docs/4.3/components/popovers/
@@ -94,6 +95,11 @@
 [b-media-demo]:                             ../View/src/Pages/Demo/Base/b-media-demo.vue
 [b-collapse-demo]:                          ../View/src/Pages/Demo/Base/b-collapse-demo.vue
 [box-accordion-demo]:                       ../View/src/Pages/Demo/Box/box-accordion-demo.vue
+[b-scrollspy-demo]:                         ../View/src/Pages/Demo/Base/b-scrollspy-demo.vue
+
+2019-09-11
+
+* view 组件 add [b-scrollspy] [b-scrollspy-demo] [Bootstrap Scrollspy]
 
 2019-09-10
 

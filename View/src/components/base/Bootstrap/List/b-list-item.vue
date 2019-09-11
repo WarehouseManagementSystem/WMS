@@ -1,6 +1,6 @@
 <template>
     <a v-if="href" :href="href" class="list-group-item list-group-item-action" :class="objClass" :tabindex="disabled ? -1 : ''" :aria-disabled="disabled"><slot>{{ text }}</slot><sr-message>{{ srMessage || color }}</sr-message></a>
-    <li v-else class="list-group-item" :class="objClass" :aria-disabled="disabled"><slot>{{ text }}</slot><sr-message>{{ srMessage }}</sr-message></li>
+    <li v-else class="list-group-item text-truncate" :class="objClass" :aria-disabled="disabled"><slot>{{ text }}</slot><sr-message>{{ srMessage }}</sr-message></li>
 </template>
 
 <script>

@@ -1,35 +1,34 @@
 <template>
-    <b-nav 
-        class="overflow-auto" 
-        tabs 
-        :column="column" >
-        <b-nav-item
-            v-for="(item, index) in list" 
-            :key="index" 
-            :href="item.href" 
-            :text="item.text" >
-            <b-scrollspy-nav 
-                v-if="item.children"
-                class="overflow-auto" 
-                tabs 
-                :column="column" 
-                :list="item.children" />
-        </b-nav-item>
-    </b-nav>
+    <div class="bg-light overflow-auto rounded p-0">
+        <b-navbar v-if="set == 'top'" class="navbar-expand-lg navbar-light" :brand="brand" :list="list" />
+        <b-navbar v-else class="navbar-light bg-light" :brand="brand" hideToggler>
+            <b-scrollspy-nav-item :list="list" column />
+        </b-navbar>
+    </div>
 </template>
 
 <script>
 import utilities from '@/components/utilities/index.js'
 
-import BNav from '@/components/base/Bootstrap/Navigation/Nav/b-nav.vue'
-import BNavItem from '@/components/base/Bootstrap/Navigation/Nav/b-nav-item.vue'
+import BNavbar from '@/components/base/Bootstrap/Navigation/Navbar/b-navbar.vue'
 
 export default {
     name: 'b-scrollspy-nav',
-    components: { BScrollspyNav: () => import('./b-scrollspy-nav'), BNav, BNavItem, },
+    components: { BScrollspyNavItem: () => import('./b-scrollspy-nav-item'), BNavbar, },
     props: {
         column: Boolean,
         list: utilities.props.list,
+        brand: {
+            ...utilities.props.value,
+            default: 'Contents',
+        },
+        set: {
+            type: String,
+            default: 'top',
+            validator: function (val) {
+                return ['top', 'left', 'right'].includes(val)
+            },
+        },
     },
 }
 </script>

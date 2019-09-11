@@ -1,23 +1,23 @@
 <template>
     <article>
-        <header class="px-2">
+        <header class="mx-2">
             <slot v-if="$slots.header" name="header"></slot>
             <div v-else>
-                <h1 class="pb-1">}title</h1>
+                <h1 class="pb-1">{{ title || 'Title' }}</h1>
                 <div>
-                    <span>Author: author</span>
+                    <span>Author: {{ author || 'Author' }}</span>
                     <br />
-                    <span>Time: <time>time</time></span>
+                    <span>Time: <time>{{ time || 'Time' }}</time></span>
                 </div>
             </div>
         </header>
-        <article :class="{row: set != 'top'}">
-            <b-nav v-if="['top', 'left'].includes(set)" :id="scrollspyId" :class="{'col-2': column}" column :list="contents" />
-            <div v-if="$slots.default" :id="articleBoxId" class="overflow-auto mt-3" :class="{'col-10': column}" style="max-height: 800px;" :data-offset="offset" :data-target="'#' + scrollspyId" data-spy="scroll"><slot></slot></div>
-            <b-nav v-if="set == 'right'" :id="scrollspyId" :class="{'col-2': column}" column :list="contents" />
+        <article class="border rounded m-1" :class="{row: set != 'top'}" style="max-height: 800px;">
+            <b-scrollspy-nav v-if="set == 'top'" :id="scrollspyId" :set="set" :list="contents" />
+            <b-scrollspy-nav v-if="set == 'left'" :id="scrollspyId" :set="set" :class="{'col-2': column}" column :list="contents" />
+            <div v-show="showArtical && $slots.default" :id="articleBoxId" class="overflow-auto p-1" :class="{'col-10': column}" style="max-height: 730px;" data-offset="20" :data-target="'#' + scrollspyId" data-spy="scroll"><slot></slot></div>
+            <b-scrollspy-nav v-if="set == 'right'" :id="scrollspyId" :set="set" :class="{'col-2': column}" column :list="contents" />
         </article>
         <footer>
-            <hr />
             <slot v-if="$slots.header" name="footer"></slot>
             <div class="p-2">
                 <font>info</font>
@@ -30,13 +30,14 @@
 <script>
 import util from '@/util/index.js'
 
-import BNav from './ScrollspyNav/b-scrollspy-nav'
+import BScrollspyNav from './ScrollspyNav/b-scrollspy-nav'
 
 export default {
     name: 'b-scrollspy',
-    components: { BNav, },
+    components: { BScrollspyNav, },
     data () {
         return {
+            showArtical: false,
             contents: [],
             map: { h1: 1, h2: 2, h3: 3, h4: 4, h5: 5, h6: 6, }
         }
@@ -55,13 +56,9 @@ export default {
                 return ['top', 'left', 'right'].includes(val)
             },
         },
-        offset: {
-            type: [String, Number,],
-            default: 0,
-            validator: function (val) {
-                return !isNaN(val) && Number(val) >= 0
-            }
-        },
+        title: String,
+        author: String,
+        time: [ Date, String, ],
     },
     computed: {
         column: function () {
@@ -73,13 +70,15 @@ export default {
         articleBoxId: function () {
             return 'Article-Box-' + this.id
         },
-        
     },
     mounted () {
         const node = this.getArticleNode()
         const arrs = this.getHTarget(node)
         this.contents = this.getContents(arrs)
-        
+        // 目录计算完成后显示文章，否则无法完成目录与文章的联动
+        setTimeout(() => {
+            this.showArtical = true
+        }, 100);
     },
     methods: {
         getArticleNode: function () {
@@ -114,41 +113,28 @@ export default {
                 if (e.target == lastTarget) {
                     contents.push(this.HTarget2Content(e))
                     Object.assign(array[index], {added: true})
-                }
-                else if (e.target > lastTarget) {
-                    if (contents.length == 0) return
-                    let a = array.filter(e => !e.added)
+                    // array.splice(index, 1)
+                } else if (e.target > lastTarget) {
+                    if (this.set == 'top' || contents.length == 0) return
+                    let a = []
+                    for (let i = 0; i < array.length; i++) {
+                        if (array[i].target <= lastTarget && !array[i].added) break
+                        if (array[i].target > lastTarget && !array[i].added) a.push(array[i])
+                    }
                     if (!a || !a.length) return
                     contents[contents.length - 1].children
                         ? this.getContents(a, contents[contents.length - 1].children, e.target)
                         : this.getContents(a, Object.assign(contents[contents.length - 1], {children: []}).children, e.target)
-                } 
+                }
                 
             })
             return contents
         },
-        // getContents: function (arrs, contents = [], lastTarget = arrs[0].target || this.map.h1) {
-        //     if (!arrs || !arrs.length) return
-            
-        //     contents = arrs.reduce((acc, cur) => {
-        //         debugger
-        //         if (cur.target == lastTarget) acc.push(this.HTarget2Content(cur))
-        //         else if (cur.target > lastTarget) {
-        //             acc[acc.length - 1].children
-        //                 ? acc[acc.length - 1].children.push(...this.getContents([cur], [], cur.target))
-        //                 : Object.assign(contents[contents.length - 1], {children: [...this.getContents([cur], [], cur.target) ]})
-        //         } 
-        //         // else if (e.target < lastTarget) {
-        //         //     contents.push(this.getContents(arrs, contents))
-        //         // }
-        //         return acc
-        //     }, contents)
-        //     return contents
-        // },
         HTarget2Content: function (e) {
             return {text: e.text, href: `#${e.id}`}
-        }
-    }
+        },
+    },
+    
 
 }
 </script>
