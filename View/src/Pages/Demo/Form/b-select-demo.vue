@@ -54,18 +54,18 @@
         <div class="row">
             <font class="col-1">success<br />error(2):</font>
             <b-select class="col-5" :list="list" required>
-                <template #invalid-info>
+                <template #invalid>
                     you can add anlything invalidInfo or DOM
                 </template>
-                <template #valid-info>
+                <template #valid>
                     you can add anlything validInfo or DOM
                 </template>
             </b-select>
             <b-select class="col-5" :list="list" required multiple>
-                <template #invalid-info>
+                <template #invalid>
                     you can add anlything invalidInfo or DOM
                 </template>
-                <template #valid-info>
+                <template #valid>
                     you can add anlything validInfo or DOM
                 </template>
             </b-select>

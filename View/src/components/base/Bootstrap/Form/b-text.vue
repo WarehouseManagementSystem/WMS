@@ -15,8 +15,8 @@
             v-bind="$attrs" 
             v-on="inputListeners" 
             @blur="validator($event, regex)" />
-        <b-valid v-if="$slots.validInfo || validInfo" state="valid"><slot name="valid-info">{{ validInfo }}</slot></b-valid>
-        <b-valid v-if="$slots.invalidInfo || invalidInfo" state="invalid"><slot name="invalid-info">{{ invalidInfo }}</slot></b-valid>
+        <b-valid v-if="$slots.valid || validInfo" state="valid"><slot name="valid">{{ validInfo }}</slot></b-valid>
+        <b-valid v-if="$slots.invalid || invalidInfo" state="invalid"><slot name="invalid">{{ invalidInfo }}</slot></b-valid>
         <b-info :info="info" />
         <i v-if="!this.hideIcon && this.fillIcon" class="text-muted text-center position-absolute" :class="fillIcon" style="top: 0.7em;left:1.5em; width:1em;"></i>
     </div>

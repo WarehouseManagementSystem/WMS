@@ -87,8 +87,8 @@ export default {
                     // 正则校验（传入字符串长度为 0、无正则表达式 不做校验直接返回 true，验证通过返回 true）
                     if (!this.validateRange(value, regex)) { util.dom.addClass(e.target, 'is-invalid'); return }
                     util.dom.removeClass(e.target, 'is-invalid') // 移除可能的 is-invalid
-                    // 当存在 valid-info slot 或 validInfo 时 
-                    if (this.$slots.validInfo || this.validInfo) util.dom.addClass(e.target, 'is-valid')
+                    // 当存在 valid slot 或 validInfo 时 
+                    if (this.$slots.valid || this.validInfo) util.dom.addClass(e.target, 'is-valid')
                     this.$emit('valid')
                 },
                 // 非空验证（验证通过返回 true）

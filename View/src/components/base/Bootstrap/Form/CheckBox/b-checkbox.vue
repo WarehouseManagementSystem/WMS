@@ -15,8 +15,8 @@
             v-on="inputListeners"
             @change="validator($event)">
         <label class="custom-control-label" :for="id">{{ label || value }}</label>
-        <b-valid v-if="validInfo || $slots.validInfo" state="valid"><slot name="valid-info">{{ validInfo }}</slot></b-valid>
-        <b-valid v-if="invalidInfo || $slots.invalidInfo" state="invalid"><slot name="invalid-info">{{ invalidInfo }}</slot></b-valid>
+        <b-valid v-if="validInfo || $slots.valid" state="valid"><slot name="valid">{{ validInfo }}</slot></b-valid>
+        <b-valid v-if="invalidInfo || $slots.invalid" state="invalid"><slot name="invalid">{{ invalidInfo }}</slot></b-valid>
         <b-info :class="{ 'pl-1': inline }" :info="info" />
     </div>
 </template>
@@ -92,8 +92,8 @@ export default {
             // 非空验证（required 为 false 不做校验直接返回 true，验证通过返回 true）
             if (!e.target.checked) { util.dom.addClass(e.target, 'is-invalid'); return }
             util.dom.removeClass(e.target, 'is-invalid') // 移除可能的 is-invalid
-            // 当存在 valid-info slot 或 validInfo 时 
-            if (this.$slots.validInfo || this.validInfo) util.dom.addClass(e.target, 'is-valid')
+            // 当存在 valid slot 或 validInfo 时 
+            if (this.$slots.valid || this.validInfo) util.dom.addClass(e.target, 'is-valid')
             this.$emit('valid')
         },
         setIndeterminate: function (val) {

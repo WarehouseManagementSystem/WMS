@@ -14,8 +14,8 @@
             v-on="inputListeners" 
             @input.stop="change" 
             @blur="validator"/>
-        <b-valid v-if="validInfo || $slots.validInfo" state="valid"><slot name="valid-info">{{ validInfo }}</slot></b-valid>
-        <b-valid v-if="invalidInfo || $slots.invalidInfo" state="invalid"><slot name="invalid-info">{{ invalidInfo }}</slot></b-valid>
+        <b-valid v-if="validInfo || $slots.valid" state="valid"><slot name="valid">{{ validInfo }}</slot></b-valid>
+        <b-valid v-if="invalidInfo || $slots.invalid" state="invalid"><slot name="invalid">{{ invalidInfo }}</slot></b-valid>
         <b-info :info="message" />
     </div>
 </template>

@@ -83,10 +83,10 @@
         <div class="row">
             <font class="col-1">success<br />error(2):</font>
             <b-radio-group class="col-11" :list="list" name="group-valide-two" required>
-                <template #invalid-info>
+                <template #invalid>
                     you can add anlything invalidInfo or DOM
                 </template>
-                <template #valid-info>
+                <template #valid>
                     you can add anlything validInfo or DOM
                 </template>
             </b-radio-group>

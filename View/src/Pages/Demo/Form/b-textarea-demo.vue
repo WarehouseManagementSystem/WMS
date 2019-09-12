@@ -66,10 +66,10 @@
         <div class="row">
             <font class="col-1">success<br />error(2):</font>
             <b-textarea class="col-11" :pattern="new RegExp(/^1[0-9]{10}$/)" placeholder="请输入手机号">
-                <template #invalid-info>
+                <template #invalid>
                     you can add anlything invalidInfo or DOM
                 </template>
-                <template #valid-info>
+                <template #valid>
                     you can add anlything validInfo or DOM
                 </template>
             </b-textarea>

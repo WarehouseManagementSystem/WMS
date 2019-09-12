@@ -1,8 +1,8 @@
 <template>
     <div class="custom-file">
         <input type="file" class="custom-file-input" :id="id" v-bind="$attrs" v-on="$listeners" @change="fileChaged">
-        <b-valid v-if="validInfo || $slots.validInfo" state="valid"><slot name="valid-info">{{ validInfo }}</slot></b-valid>
-        <b-valid v-if="invalidInfo || $slots.invalidInfo" state="invalid"><slot name="invalid-info">{{ invalidInfo }}</slot></b-valid>
+        <b-valid v-if="validInfo || $slots.valid" state="valid"><slot name="valid">{{ validInfo }}</slot></b-valid>
+        <b-valid v-if="invalidInfo || $slots.invalid" state="invalid"><slot name="invalid">{{ invalidInfo }}</slot></b-valid>
         <label class="custom-file-label" :class="objClass" :for="id" data-browse="选择文件">{{ fillText }}</label>
     </div>
 </template>
