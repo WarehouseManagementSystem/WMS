@@ -7,16 +7,14 @@
                 v-if="item.dropdown"
                 :key="index" 
                 :list="item.list" 
-                :text="item.text"  
-            ></nav-item-dropdown>
+                :text="item.text" />
             <nav-item 
                 v-else 
                 :key="index" 
                 :text="item.text" 
                 :href="item.href" 
                 :disabled="item.disabled" 
-                :active="select ? select == item.text : item.active"
-            ></nav-item>
+                :active="select ? select == item.text : item.active" />
         </template>
     </ul>
 </template>

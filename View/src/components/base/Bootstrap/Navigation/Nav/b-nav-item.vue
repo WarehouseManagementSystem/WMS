@@ -1,6 +1,6 @@
 <template>
     <li class="nav-item">
-        <a class="nav-link text-truncate" :class="objClass" :href="href" :tabindex="disabled ? -1 : ''" :aria-disabled="disabled"><slot>{{ text }}</slot></a>
+        <a class="nav-link text-truncate" :class="objClass" v-bind="$attrs" :href="href" :tabindex="disabled ? -1 : ''" :aria-disabled="disabled"><slot>{{ text }}</slot></a>
     </li>
 </template>
 
@@ -9,6 +9,7 @@ import utilities from '@/components/utilities/index.js'
 
 export default {
     name: 'b-nav-item',
+    inheritAttrs: false,
     props: {
         href: utilities.props.href,
         text: utilities.props.text,

@@ -78,9 +78,7 @@ export default {
         const arrs = this.getHTarget(node)
         this.contents = this.getContents(arrs)
         // 目录计算完成后显示文章，否则无法完成目录与文章的联动
-        setTimeout(() => {
-            this.showArtical = true
-        }, 100);
+        this.$nextTick(this.showArtical = true)
     },
     methods: {
         getArticleNode: function () {
