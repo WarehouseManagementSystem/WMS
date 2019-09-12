@@ -12,9 +12,9 @@
                 :disabled="item.disabled || disabled" 
                 @click.native="menuClick"/>
         </dropdown-picker>
-        <b-info v-if="validInfo || Object.keys($scopedSlots).includes('valid-info')" state="valid"><slot name="valid-info">{{ validInfo }}</slot></b-info>
-        <b-info v-if="invalidInfo || Object.keys($scopedSlots).includes('invalid-info')" state="invalid"><slot name="invalid-info">{{ invalidInfo }}</slot></b-info>
-        <b-help :info="info" />
+        <b-valid v-if="validInfo || $slots.validInfo" state="valid"><slot name="valid-info">{{ validInfo }}</slot></b-valid>
+        <b-valid v-if="invalidInfo || $slots.invalidInfo" state="invalid"><slot name="invalid-info">{{ invalidInfo }}</slot></b-valid>
+        <b-info :info="info" />
     </div>
 </template>
 
@@ -26,13 +26,13 @@ import dropdownPicker from '@/components/base/Bootstrap/DropDownPicker/b-dropdow
 import dropItem from '@/components/base/Bootstrap/Dropdown/b-dropdown-item.vue'
 import BText from '@/components/base/Bootstrap/Form/b-text.vue'
 
+import BValid from '@/components/base/Bootstrap/Form/Other/b-form-valid.vue'
 import BInfo from '@/components/base/Bootstrap/Form/Other/b-form-info.vue'
-import BHelp from '@/components/base/Bootstrap/Form/Other/b-form-help.vue'
 
 export default {
     name: 'b-dropdownlist',
     mixins: [ utilities.mixins.form.base, utilities.mixins.form.readonly, utilities.mixins.form.validator, ],
-    components: { dropdownPicker, dropItem, BText, BInfo, BHelp, },
+    components: { dropdownPicker, dropItem, BText, BValid, BInfo, },
     model: {
         prop: 'value',
         event: 'change',
@@ -110,7 +110,7 @@ export default {
             if (!this.validateRequired(value)) { util.dom.addClass(e, 'is-invalid'); return }
             util.dom.removeClass(e, 'is-invalid') // 移除可能的 is-invalid
             // 当存在 valid-info slot 或 validInfo 时 
-            if (Object.keys(this.$scopedSlots).includes('valid-info') || this.validInfo) util.dom.addClass(e, 'is-valid')
+            if (this.$slots.validInfo || this.validInfo) util.dom.addClass(e, 'is-valid')
             this.$emit('valid')
         },
     },

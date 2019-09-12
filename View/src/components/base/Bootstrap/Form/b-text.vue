@@ -15,9 +15,9 @@
             v-bind="$attrs" 
             v-on="inputListeners" 
             @blur="validator($event, regex)" />
-        <b-info v-if="Object.keys($scopedSlots).includes('valid-info') || validInfo" state="valid"><slot name="valid-info">{{ validInfo }}</slot></b-info>
-        <b-info v-if="Object.keys($scopedSlots).includes('invalid-info') || invalidInfo" state="invalid"><slot name="invalid-info">{{ invalidInfo }}</slot></b-info>
-        <b-help :info="info" />
+        <b-valid v-if="$slots.validInfo || validInfo" state="valid"><slot name="valid-info">{{ validInfo }}</slot></b-valid>
+        <b-valid v-if="$slots.invalidInfo || invalidInfo" state="invalid"><slot name="invalid-info">{{ invalidInfo }}</slot></b-valid>
+        <b-info :info="info" />
         <i v-if="!this.hideIcon && this.fillIcon" class="text-muted text-center position-absolute" :class="fillIcon" style="top: 0.7em;left:1.5em; width:1em;"></i>
     </div>
 </template>
@@ -26,14 +26,14 @@ import util from '@/util/index.js'
 import config from '@/config/index.js'
 import utilities from '@/components/utilities/index.js'
 
+import BValid from '@/components/base/Bootstrap/Form/Other/b-form-valid.vue'
 import BInfo from '@/components/base/Bootstrap/Form/Other/b-form-info.vue'
-import BHelp from '@/components/base/Bootstrap/Form/Other/b-form-help.vue'
 
 export default {
     name: 'b-text',
     inheritAttrs: false,
     mixins: [ utilities.mixins.form.base, utilities.mixins.form.readonly, utilities.mixins.form.validator ],
-    components: {  BInfo, BHelp, },
+    components: {  BValid, BInfo, },
     props: {
         type: {
             type: String,

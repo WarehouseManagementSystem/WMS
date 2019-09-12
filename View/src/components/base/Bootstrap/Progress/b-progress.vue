@@ -9,13 +9,12 @@
                     :color="item.color || color" 
                     :striped="striped" 
                     :animated="animated" 
-                    @animating="animating" 
-                ></b-progress-bar>
+                    @animating="animating" />
                 <span v-if="showValue" class="text-white position-absolute" :style="spanStyle">{{ `${sum}%` }}</span>
             </template>
             <b-progress-bar v-else :color="color" :value="now" :showValue="showValue" :striped="striped" :animated="animated"></b-progress-bar>
         </div>
-        <b-help :info="info" />
+        <b-info :info="info" />
     </div>
 </template>
 
@@ -25,11 +24,11 @@ import TweenLite from "gsap/TweenLite"
 import utilities from '@/components/utilities/index.js'
 
 import BProgressBar from '@/components/base/Bootstrap/Progress/b-progress-bar.vue'
-import BHelp from '@/components/base/Bootstrap/Form/Other/b-form-help.vue'
+import BInfo from '@/components/base/Bootstrap/Form/Other/b-form-info.vue'
 
 export default {
     name: 'b-progress',
-    components: { BProgressBar, BHelp, },
+    components: { BProgressBar, BInfo, },
     data () {
         return {
             now: this.value,

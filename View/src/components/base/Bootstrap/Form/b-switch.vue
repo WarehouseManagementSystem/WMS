@@ -2,7 +2,7 @@
     <div class="custom-control custom-switch">
         <input type="checkbox" class="custom-control-input" :id="id" :checked="checked" :aria-checked="checked" v-bind="$attrs" v-on="inputListeners">
         <label class="custom-control-label" :for="id">{{ text }}</label>
-        <b-help :info="info" />
+        <b-info :info="info" />
     </div>
 </template>
 
@@ -10,12 +10,12 @@
 import util from '@/util/index.js'
 import utilities from '@/components/utilities/index.js'
 
-import BHelp from '@/components/base/Bootstrap/Form/Other/b-form-help.vue'
+import BInfo from '@/components/base/Bootstrap/Form/Other/b-form-info.vue'
 
 export default {
     name: 'b-switch',
     inheritAttrs: false,
-    components: { BHelp, },
+    components: { BInfo, },
     mixins: [ utilities.mixins.form.base, ],
     model: {
         prop: 'checked',

@@ -1,8 +1,8 @@
 <template>
     <div class="custom-file">
         <input type="file" class="custom-file-input" :id="id" v-bind="$attrs" v-on="$listeners" @change="fileChaged">
-        <b-info v-if="validInfo || Object.keys($scopedSlots).includes('valid-info')" state="valid"><slot name="valid-info">{{ validInfo }}</slot></b-info>
-        <b-info v-if="invalidInfo || Object.keys($scopedSlots).includes('invalid-info')" state="invalid"><slot name="invalid-info">{{ invalidInfo }}</slot></b-info>
+        <b-valid v-if="validInfo || $slots.validInfo" state="valid"><slot name="valid-info">{{ validInfo }}</slot></b-valid>
+        <b-valid v-if="invalidInfo || $slots.invalidInfo" state="invalid"><slot name="invalid-info">{{ invalidInfo }}</slot></b-valid>
         <label class="custom-file-label" :class="objClass" :for="id" data-browse="选择文件">{{ fillText }}</label>
     </div>
 </template>
@@ -10,13 +10,13 @@
 import util from '@/util/index.js'
 import utilities from '@/components/utilities/index.js'
 
-import BInfo from '@/components/base/Bootstrap/Form/Other/b-form-info.vue'
+import BValid from '@/components/base/Bootstrap/Form/Other/b-form-valid.vue'
 
 export default {
     name: 'b-file',
     inheritAttrs: false,
     mixins: [ utilities.mixins.form.base, utilities.mixins.form.validator ],
-    components: { BInfo },
+    components: { BValid },
     data () {
         return {
             fillText: 'Choose file...',

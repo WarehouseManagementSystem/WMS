@@ -14,23 +14,23 @@
             v-on="inputListeners" 
             @input.stop="change" 
             @blur="validator"/>
-        <b-info v-if="validInfo || Object.keys($scopedSlots).includes('valid-info')" state="valid"><slot name="valid-info">{{ validInfo }}</slot></b-info>
-        <b-info v-if="invalidInfo || Object.keys($scopedSlots).includes('invalid-info')" state="invalid"><slot name="invalid-info">{{ invalidInfo }}</slot></b-info>
-        <b-help :info="message" />
+        <b-valid v-if="validInfo || $slots.validInfo" state="valid"><slot name="valid-info">{{ validInfo }}</slot></b-valid>
+        <b-valid v-if="invalidInfo || $slots.invalidInfo" state="invalid"><slot name="invalid-info">{{ invalidInfo }}</slot></b-valid>
+        <b-info :info="message" />
     </div>
 </template>
 <script>
 import util from '@/util/index.js'
 import utilities from '@/components/utilities/index.js'
 
+import BValid from '@/components/base/Bootstrap/Form/Other/b-form-valid.vue'
 import BInfo from '@/components/base/Bootstrap/Form/Other/b-form-info.vue'
-import BHelp from '@/components/base/Bootstrap/Form/Other/b-form-help.vue'
 
 export default {
     name: 'b-textarea',
     inheritAttrs: false,
     mixins: [ utilities.mixins.form.base, utilities.mixins.form.readonly, utilities.mixins.form.validator ],
-    components: {  BInfo, BHelp, },
+    components: {  BValid, BInfo, },
     data () {
         return {
             message: '',

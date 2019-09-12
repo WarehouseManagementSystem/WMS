@@ -5,19 +5,19 @@
             <input type="range" class="custom-range col align-middle" :min="min" :max="max" :step="step" :value="value" v-bind="$attrs" v-on="inputListeners">
             <span class="col-auto text-left">{{ fillMaxValue }}</span>
         </div>
-        <b-help :info="message" />
+        <b-info :info="message" />
     </div>
 </template>
 
 <script>
 import utilities from '@/components/utilities/index.js'
 
-import BHelp from '@/components/base/Bootstrap/Form/Other/b-form-help.vue'
+import BInfo from '@/components/base/Bootstrap/Form/Other/b-form-info.vue'
 
 export default {
     name: 'b-range',
     inheritAttrs: false,
-    components: { BHelp },
+    components: { BInfo },
      model: {
         prop: 'value',
         event: 'input'

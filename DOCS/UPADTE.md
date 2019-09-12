@@ -103,6 +103,7 @@
 2019-09-11
 
 * view 组件 add [box-tabs] [box-tabs-demo]
+* view 组件 modified [b-info] to [b-valid] , [b-help] to [b-info]
 
 2019-09-11
 

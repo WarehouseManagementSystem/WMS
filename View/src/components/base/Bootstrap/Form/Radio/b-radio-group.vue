@@ -13,12 +13,12 @@
                 v-on="inputListeners" 
                 @input="validator($event)">
                 <template #valid v-if="list.length - 1 == index">
-                    <b-info key="valid" v-if="validInfo || Object.keys($scopedSlots).includes('valid-info')" state="valid"><slot name="valid-info">{{ validInfo }}</slot></b-info>
-                    <b-info key="invalid" v-if="invalidInfo || Object.keys($scopedSlots).includes('invalid-info')" state="invalid"><slot name="invalid-info">{{ invalidInfo }}</slot></b-info>
+                    <b-valid key="valid" v-if="validInfo || $slots.validInfo" state="valid"><slot name="valid-info">{{ validInfo }}</slot></b-valid>
+                    <b-valid key="invalid" v-if="invalidInfo || $slots.invalidInfo" state="invalid"><slot name="invalid-info">{{ invalidInfo }}</slot></b-valid>
                 </template>
             </redio>
         </template>
-        <b-help :info="info" />
+        <b-info :info="info" />
     </div>
 </template>
 
@@ -26,14 +26,14 @@
 import utilities from '@/components/utilities/index.js'
 
 import redio from './b-radio'
+import BValid from '@/components/base/Bootstrap/Form/Other/b-form-valid.vue'
 import BInfo from '@/components/base/Bootstrap/Form/Other/b-form-info.vue'
-import BHelp from '@/components/base/Bootstrap/Form/Other/b-form-help.vue'
 
 export default {
     name: 'b-radio-group',
     inheritAttrs: false,
     mixins: [ utilities.mixins.form.base, utilities.mixins.form.validator ],
-    components: { redio, BInfo, BHelp },
+    components: { redio, BValid, BInfo },
     model: {
         prop: 'value',
         event: 'input',
@@ -62,7 +62,7 @@ export default {
             if (!this.validateRequired(value)) { this.ValidClass = 'is-invalid'; return }
             this.ValidClass = '' // 移除可能的 is-invalid
             // 当存在 valid-info slot 或 validInfo 时 
-            if (Object.keys(this.$scopedSlots).includes('valid-info') || this.validInfo) this.ValidClass =  'is-valid'
+            if (this.$slots.validInfo || this.validInfo) this.ValidClass =  'is-valid'
             this.$emit('valid')
         },
     },

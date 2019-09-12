@@ -15,4 +15,3 @@
 > - [ ] need to do
 
 [Jumbotron]:                                https://getbootstrap.com/docs/4.3/components/jumbotron/
-[Scrollspy]:                                https://getbootstrap.com/docs/4.3/components/scrollspy/

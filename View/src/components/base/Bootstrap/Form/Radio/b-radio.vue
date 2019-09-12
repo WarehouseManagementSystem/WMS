@@ -15,7 +15,7 @@
         <label class="custom-control-label" :for="id">{{ label || value }}</label>
         <font v-if="inline">   </font>
         <slot name="valid"></slot>
-        <b-help :class="{ 'pl-1': inline }" :info="info" />
+        <b-info :class="{ 'pl-1': inline }" :info="info" />
     </div>
 </template>
 
@@ -23,12 +23,12 @@
 import util from '@/util/index.js'
 import utilities from '@/components/utilities/index.js'
 
-import BHelp from '@/components/base/Bootstrap/Form/Other/b-form-help.vue'
+import BInfo from '@/components/base/Bootstrap/Form/Other/b-form-info.vue'
 
 export default {
     name: 'b-radio',
     inheritAttrs: false,
-    components: { BHelp, },
+    components: { BInfo, },
     model: {
         prop: 'checked',
         event: 'change'

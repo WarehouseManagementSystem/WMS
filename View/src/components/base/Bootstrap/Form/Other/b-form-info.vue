@@ -1,29 +1,13 @@
 <template>
-    <div v-show="$slots.default && state" :class="`${this.state}-${this.type}`"><slot></slot></div>
+    <small v-if="info" class="form-text text-muted">{{ info }}</small>
 </template>
 <script>
-import config from "@/config/index";
+import utilities from '@/components/utilities/index.js'
 
 export default {
     name: 'b-form-info',
     props: {
-        state: {
-            type: String,
-            required: true,
-            validator: function (value) {
-                // 这个值必须匹配下列字符串中的一个
-                return ['valid', 'invalid'].includes(value)
-            },
-        },
-        type: {
-            type: String,
-            default: config.ui.forms.validInfoType,
-            validator: function (value) {
-                // 这个值必须匹配下列字符串中的一个
-                return ['feedback', 'tooltip'].includes(value)
-            },
-        },
+        info: utilities.props.value,
     },
-    
 }
 </script>

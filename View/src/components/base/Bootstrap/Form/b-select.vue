@@ -23,9 +23,9 @@
                 {{ item.label ? item.label : item.value }}
             </option>
         </select>
-        <b-info v-if="validInfo || Object.keys($scopedSlots).includes('valid-info')" state="valid"><slot name="valid-info">{{ validInfo }}</slot></b-info>
-        <b-info v-if="invalidInfo || Object.keys($scopedSlots).includes('invalid-info')" state="invalid"><slot name="invalid-info">{{ invalidInfo }}</slot></b-info>
-        <b-help :info="info" />
+        <b-valid v-if="validInfo || $slots.validInfo" state="valid"><slot name="valid-info">{{ validInfo }}</slot></b-valid>
+        <b-valid v-if="invalidInfo || $slots.invalidInfo" state="invalid"><slot name="invalid-info">{{ invalidInfo }}</slot></b-valid>
+        <b-info :info="info" />
     </div>
 </template>
 
@@ -33,14 +33,14 @@
 import util from '@/util/index.js'
 import utilities from '@/components/utilities/index.js'
 
+import BValid from '@/components/base/Bootstrap/Form/Other/b-form-valid.vue'
 import BInfo from '@/components/base/Bootstrap/Form/Other/b-form-info.vue'
-import BHelp from '@/components/base/Bootstrap/Form/Other/b-form-help.vue'
 
 export default {
     name: 'b-select',
     inheritAttrs: false,
     mixins: [ utilities.mixins.form.base, utilities.mixins.form.validator, ],
-    components: { BInfo, BHelp, },
+    components: { BValid, BInfo, },
     model: {
         prop: 'value',
         event: 'change'
@@ -109,7 +109,7 @@ export default {
             if (!this.validateRequired(this.isSelectedValue)) { util.dom.addClass(e.target, 'is-invalid'); return }
             util.dom.removeClass(e.target, 'is-invalid') // 移除可能的 is-invalid
             // 当存在 valid-info slot 或 validInfo 时 
-            if (Object.keys(this.$scopedSlots).includes('valid-info') || this.validInfo) util.dom.addClass(e.target, 'is-valid')
+            if (this.$slots.validInfo || this.validInfo) util.dom.addClass(e.target, 'is-valid')
             this.$emit('valid')
         },
     }

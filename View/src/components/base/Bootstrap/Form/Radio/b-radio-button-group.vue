@@ -20,19 +20,19 @@
                 {{item.label}}
             </label>
         </div>
-        <b-help :info="info" />
+        <b-info :info="info" />
     </div>
 </template>
 
 <script>
 import utilities from '@/components/utilities/index.js'
 
-import BHelp from '@/components/base/Bootstrap/Form/Other/b-form-help.vue'
+import BInfo from '@/components/base/Bootstrap/Form/Other/b-form-info.vue'
 
 export default {
     name: 'b-radio-button-group',
     inheritAttrs: false,
-    components: { BHelp, },
+    components: { BInfo, },
     model: {
         prop: 'value',
         event: 'input',

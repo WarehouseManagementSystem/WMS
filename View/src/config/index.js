@@ -34,7 +34,7 @@ export default {
     }, // Locale config
     ui: {
         forms: {
-            // b-form-info type: 'feedback'、'tooltip'
+            // b-form-valid type: 'feedback'、'tooltip'
             validInfoType: 'feedback',
             placeholder: placeholder, // placeholder
         }, // forms

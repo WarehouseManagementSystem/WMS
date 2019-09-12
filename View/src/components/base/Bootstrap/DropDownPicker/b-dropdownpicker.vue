@@ -17,7 +17,7 @@
                 </footer>
             </div>
         </tran-drop>
-        <b-help :info="info" />
+        <b-info :info="info" />
     </div>
 </template>
 
@@ -28,12 +28,12 @@ import utilities from '@/components/utilities/index.js'
 import tranDrop from '@/components/transition/tran-drop.vue'
 import BaseButton from '@/components/base/Bootstrap/Button/b-button.vue'
 
-import BHelp from '@/components/base/Bootstrap/Form/Other/b-form-help.vue'
+import BInfo from '@/components/base/Bootstrap/Form/Other/b-form-info.vue'
 
 export default {
     name: 'b-dropdownpicker',
     mixins: [ utilities.mixins.form.base, utilities.mixins.form.readonly, ],
-    components: { tranDrop, BaseButton, BHelp, },
+    components: { tranDrop, BaseButton, BInfo, },
     data () {
         return {
             isShow: false,

@@ -22,7 +22,7 @@
                 </template>
             </checkbox>
         </template>
-        <b-help :info="info" />
+        <b-info :info="info" />
     </div>
 </template>
 
@@ -30,13 +30,13 @@
 import utilities from '@/components/utilities/index.js'
 
 import checkbox from './b-checkbox'
-import BHelp from '@/components/base/Bootstrap/Form/Other/b-form-help.vue'
+import BInfo from '@/components/base/Bootstrap/Form/Other/b-form-info.vue'
 
 export default {
     name: 'b-checkbox-group',
     inheritAttrs: false,
     mixins: [ utilities.mixins.form.base, utilities.mixins.form.validator, ],
-    components: { checkbox, BHelp },
+    components: { checkbox, BInfo },
     model: {
         prop: 'values',
         event: 'change',
@@ -87,7 +87,7 @@ export default {
             if (!this.values || this.values.length == 0) { this.ValidClass = 'is-invalid'; return }
             this.ValidClass = '' // 移除可能的 is-invalid
             // 当存在 valid-info slot 或 validInfo 时 
-            if (Object.keys(this.$scopedSlots).includes('valid-info') || this.validInfo) this.ValidClass ='is-valid'
+            if (this.$slots.validInfo || this.validInfo) this.ValidClass ='is-valid'
             this.$emit('valid')
         },
     }
