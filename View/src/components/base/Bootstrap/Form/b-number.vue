@@ -16,8 +16,8 @@
             v-bind="$attrs" 
             unvalid 
             @click="click($event)" 
-            @change="change" 
-            @blur="blur($event)"></b-text>
+            @input="input" 
+            @blur="blur($event)" />
         <b-button v-if="!readonly && !hideButton" :size="size" class="col-auto" :style="btnstyle" :disabled="addbuttondisabled" @click="add" outline value="+" />
     </div>
 </template>
@@ -34,7 +34,7 @@ export default {
     components: { BButton, BText },
     model: {
         prop: 'value',
-        event: 'change',
+        event: 'input',
     },
     data () {
         return {
@@ -47,39 +47,23 @@ export default {
     props: {
         min: {
             type: [String, Number],
-            default: function () {
-                return 0
-            },
-            validator: function (value) {
-                return !isNaN(value)
-            },
+            default: 0,
+            validator: value => !isNaN(value),
         },
         max: {
             type: [String, Number],
-            default: function () {
-                return 100
-            },
-            validator: function (value) {
-                return !isNaN(value)
-            },
+            default: 100,
+            validator: value => !isNaN(value),
         },
         step: {
             type: [String, Number],
-            default: function () {
-                return 1
-            },
-            validator: function (value) {
-                return !isNaN(value)
-            },
+            default: 1,
+            validator: value => !isNaN(value),
         },
         value: {
             type: [String, Number],
-            default: function (value) {
-                return Number(value) ? Number(value) : Number(this.min)
-            },
-            validator: function (value) {
-                return !isNaN(value)
-            },
+            default: function (value) { return !isNaN(value) ? Number(value) : Number(this.min) },
+            validator: value => !isNaN(value),
         },
         size: utilities.props.size,
         hideButton: Boolean,
@@ -112,8 +96,8 @@ export default {
                 // 或覆写一些监听器的行为
                 {
                     // 这里确保组件配合 `v-model` 的工作
-                    change: function () {
-                        vm.$emit('change', vm.number || vm.dateMin)
+                    input: function () {
+                        vm.$emit('input', !isNaN(vm.number) ? vm.number : vm.dateMin)
                     }
                 }
             )
@@ -144,7 +128,7 @@ export default {
         },
         getPrecision: function () {
             // 返回精度最高的
-            this.setPrecision = Math.max(this.getNumberPrecision(this.dateStep), this.getNumberPrecision(this.value))
+            this.setPrecision = Math.max(this.getNumberPrecision(this.dateStep), this.getNumberPrecision(this.toNmuber(this.value)))
         },
         formatNumber: function (value) {
             return Number.parseFloat(value).toFixed(this.setPrecision)
@@ -153,12 +137,12 @@ export default {
             if (this.readonly || this.disabled) return
             if (this.number == 0) event.target.value = ''
         },
-        change: function () {
+        input: function () {
             if (this.number < this.dateMin) this.number = this.dateMin
             if (this.number > this.dateMax) this.number = this.dateMax
             this.number = this.formatNumber(this.number)
             // 配合 v-model
-            this.$emit('change', this.number)
+            this.$emit('input', this.number)
         },
         blur: function () {
             if (!event.target.value) event.target.value = this.formatNumber(this.dateMin)
@@ -167,13 +151,13 @@ export default {
             if (this.disabled || this.readonly) return
             this.number = Number(this.number)
             this.number -= this.dateStep
-            this.change()
+            this.input()
         },
         add: function () {
             if (this.disabled || this.readonly) return
             this.number = Number(this.number)
             this.number += this.dateStep
-            this.change()
+            this.input()
         },
     },
     watch: {

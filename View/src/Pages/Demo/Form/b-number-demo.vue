@@ -57,7 +57,7 @@
         </div>
         <div class="row">
             <font class="col-1">min<br />max:</font>
-            <b-number class="col-11" :min="Number(5)" :max="Number(10)" placeholder="只能输入 5-10 之间的数" ></b-number>
+            <b-number class="col-11" min="5" max="10" placeholder="只能输入 5-10 之间的数" ></b-number>
         </div>
     </div>
 </template>
