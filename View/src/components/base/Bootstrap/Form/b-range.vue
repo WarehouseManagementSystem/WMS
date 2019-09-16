@@ -2,7 +2,15 @@
     <div>
         <div class="row mx-1">
             <span class="col-auto text-right">{{ fillMinValue }}</span>
-            <input type="range" class="custom-range col align-middle" :min="min" :max="max" :step="step" :value="value" v-bind="$attrs" v-on="inputListeners">
+            <input 
+                type="range" 
+                class="custom-range col align-middle" 
+                :min="min" 
+                :max="max" 
+                :step="step" 
+                :value="select" 
+                v-bind="$attrs" 
+                v-on="inputListeners" />
             <span class="col-auto text-left">{{ fillMaxValue }}</span>
         </div>
         <b-info :info="message" />
@@ -31,32 +39,22 @@ export default {
         min: {
             type: [Number, String,],
             default: 0,
-            validator: function (value) {
-                return !isNaN(value)
-            },
+            validator: value => !isNaN(value),
         },
         max: {
             type: [Number, String,],
             default: 100,
-            validator: function (value) {
-                return !isNaN(value)
-            },
+            validator: value => !isNaN(value),
         },
         step: {
             type: [Number, String,],
             default: 1,
-            validator: function (value) {
-                return !isNaN(value)
-            },
+            validator: value => !isNaN(value),
         },
         value: {
             type: [Number, String,],
-            default: function (value) {
-                return Number(value) ? Number(value) : Number(this.min)
-            },
-            validator: function (value) {
-                return !isNaN(value)
-            },
+            default: function (value) { return !isNaN(value) ? Number(value) : Number(this.min) },
+            validator: value => !isNaN(value),
         },
         prompt: Boolean,
         info: utilities.props.value,
@@ -75,7 +73,7 @@ export default {
                 {
                     // 这里确保组件配合 `v-model` 的工作
                     input: function (event) {
-                        vm.select = Number(event.target.value)
+                        vm.select = event.target.value
                         vm.$emit('input', vm.select)
                     }
                 }

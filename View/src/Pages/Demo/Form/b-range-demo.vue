@@ -8,7 +8,7 @@
         </div>
         <div class="row">
             <font class="col-1">value:</font>
-            <b-range class="col-11" :value="15"></b-range>
+            <b-range class="col-11" value="15"></b-range>
         </div>
         <div class="row">
             <font class="col-1">info:</font>
@@ -32,11 +32,11 @@
         </div>
         <div class="row">
             <font class="col-1">min<br />max<br />step:</font>
-            <b-range class="col-11" :min="Number(-10)" :max="Number(10)" :step="5"></b-range>
+            <b-range class="col-11" min="-10" max="10" step="5"></b-range>
         </div>
         <div class="row">
             <font class="col-1">v-model<br />{{ value }}:</font>
-            <b-range class="col-11" v-model="value"></b-range>
+            <b-range class="col-11" v-model.number="value"></b-range>
         </div>
     </div>
 </template>

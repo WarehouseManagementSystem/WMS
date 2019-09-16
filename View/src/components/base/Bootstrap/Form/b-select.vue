@@ -11,17 +11,19 @@
             @change.stop="change" 
             @blur.stop="validator" 
             v-on="inputListeners" >
-            <option value="" :selected="value.length == 0" :aria-selected="value.length == 0" >&lt;Pleace select...&gt;</option>
-            <option 
-                v-for="item in list" 
-                :key="item.value" 
-                :value="item.value" 
-                :selected="isSelected(item.value)"
-                :aria-selected="isSelected(item.value)"
-                :disabled="item.disabled"
-                :aria-disabled="item.disabled" >
-                {{ item.label ? item.label : item.value }}
-            </option>
+            <slot>
+                <option value="" :selected="value.length == 0" :aria-selected="value.length == 0" >&lt;Pleace select...&gt;</option>
+                <option 
+                    v-for="item in list" 
+                    :key="item.value" 
+                    :value="item.value" 
+                    :selected="isSelected(item.value)"
+                    :aria-selected="isSelected(item.value)"
+                    :disabled="item.disabled"
+                    :aria-disabled="item.disabled" >
+                    {{ item.label ? item.label : item.value }}
+                </option>
+            </slot>
         </select>
         <b-valid v-if="validInfo || $slots.valid" state="valid"><slot name="valid">{{ validInfo }}</slot></b-valid>
         <b-valid v-if="invalidInfo || $slots.invalid" state="invalid"><slot name="invalid">{{ invalidInfo }}</slot></b-valid>
