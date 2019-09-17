@@ -4,7 +4,7 @@
             <div class="d-table-cell" style="width: 15px">
                 <i v-if="isFolder" class="fas" :class="open ? 'fa-caret-down' : 'fa-caret-right'"></i>
             </div>
-            <BCheckbox 
+            <b-checkbox 
                 class="d-table-cell" 
                 ref="checkbox"
                 :value="item.value"
@@ -14,8 +14,9 @@
                 :defaultState="defaultState" 
                 v-model="checked"
                 @input="changed = true" />
+            <b-info v-if="isFolder" class="d-table-cell pl-1" :info="`(${item.children.length})`" />
         </div>
-        <BCheckboxTree
+        <b-checkbox-tree
             class="mx-4" 
             v-if="isFolder && (open || changed)" 
             v-show="open" 
@@ -31,9 +32,11 @@ import utilities from '@/components/utilities/index.js'
 
 import BCheckbox from '@/components/base/Bootstrap/Form/CheckBox/b-checkbox.vue'
 
+import BInfo from '@/components/base/Bootstrap/Form/Other/b-form-info.vue'
+
 export default {
     name: 'b-checkbox-tree-item',
-    components: { BCheckbox, BCheckboxTree: () => import('./b-checkbox-tree') },
+    components: { BCheckbox, BCheckboxTree: () => import('./b-checkbox-tree'), BInfo },
     model: {
         prop: 'values',
         event: 'input',

@@ -20,12 +20,13 @@
 </template>
 
 <script>
+import utilities from '@/components/utilities/index.js'
 
 export default {
     name: 'b-select-option',
     components: { BSelectOption: () => import('./b-select-option.vue') },
     props: {
-        item: Object,
+        item: utilities.props.item,
         isSelectedValue: [ String, Number, Array, ],
         multiple: Boolean,
     },
