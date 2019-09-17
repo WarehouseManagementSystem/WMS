@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="row mx-1">
-            <span class="col-auto text-right">{{ fillMinValue }}</span>
+            <span class="col-auto text-right" v-if="prompt || minValue">{{ fillMinValue }}</span>
             <input 
                 type="range" 
                 class="custom-range col align-middle" 
@@ -11,9 +11,10 @@
                 :value="select" 
                 v-bind="$attrs" 
                 v-on="inputListeners" />
-            <span class="col-auto text-left">{{ fillMaxValue }}</span>
+            <span class="col-auto text-left" v-if="prompt || maxValue">{{ fillMaxValue }}</span>
+            <span class="col-auto text-left" v-if="!showValue">{{ select }}</span>
         </div>
-        <b-info :info="message" />
+        <b-info :info="info" />
     </div>
 </template>
 
@@ -57,6 +58,7 @@ export default {
             validator: value => !isNaN(value),
         },
         prompt: Boolean,
+        hideValue: Boolean,
         info: utilities.props.value,
         minValue: utilities.props.value,
         maxValue: utilities.props.value,
@@ -84,9 +86,6 @@ export default {
         },
         fillMaxValue: function () {
             return this.maxValue ? this.maxValue : Number(this.max)
-        },
-        message: function () {
-            return this.prompt ? `${this.select} ${this.info}` : this.info
         },
     },
 }

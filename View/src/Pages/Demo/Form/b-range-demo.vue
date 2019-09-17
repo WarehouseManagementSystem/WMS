@@ -11,15 +11,15 @@
             <b-range class="col-11" value="15"></b-range>
         </div>
         <div class="row">
+            <font class="col-1">hideValue:</font>
+            <b-range class="col-11" hideValue></b-range>
+        </div>
+        <div class="row">
             <font class="col-1">info:</font>
             <b-range class="col-11" info="info text"></b-range>
         </div>
         <div class="row">
             <font class="col-1">prompt:</font>
-            <b-range class="col-11" prompt></b-range>
-        </div>
-        <div class="row">
-            <font class="col-1">info<br />prompt:</font>
             <b-range class="col-11" info="info text" prompt></b-range>
         </div>
         <div class="row">
