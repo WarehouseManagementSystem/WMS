@@ -13,7 +13,8 @@
             v-on="inputListeners" >
             <slot>
                 <option value="" :selected="value.length == 0" :aria-selected="value.length == 0" >&lt;Pleace select...&gt;</option>
-                <option 
+                <b-select-option v-for="(item, index) in list" :key="index" :item="item" :isSelectedValue="isSelectedValue" :multiple="multiple" />
+                <!-- <option 
                     v-for="item in list" 
                     :key="item.value" 
                     :value="item.value" 
@@ -21,8 +22,8 @@
                     :aria-selected="isSelected(item.value)"
                     :disabled="item.disabled"
                     :aria-disabled="item.disabled" >
-                    {{ item.label ? item.label : item.value }}
-                </option>
+                    {{ item.text || item.value }}
+                </option> -->
             </slot>
         </select>
         <b-valid v-if="validInfo || $slots.valid" state="valid"><slot name="valid">{{ validInfo }}</slot></b-valid>
@@ -35,6 +36,7 @@
 import util from '@/util/index.js'
 import utilities from '@/components/utilities/index.js'
 
+import BSelectOption from './b-select-option.vue'
 import BValid from '@/components/base/Bootstrap/Form/Other/b-form-valid.vue'
 import BInfo from '@/components/base/Bootstrap/Form/Other/b-form-info.vue'
 
@@ -42,7 +44,7 @@ export default {
     name: 'b-select',
     inheritAttrs: false,
     mixins: [ utilities.mixins.form.base, utilities.mixins.form.validator, ],
-    components: { BValid, BInfo, },
+    components: { BSelectOption, BValid, BInfo, },
     model: {
         prop: 'value',
         event: 'change'
