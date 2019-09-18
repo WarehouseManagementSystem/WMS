@@ -50,14 +50,8 @@ export default {
         width: utilities.props.width,
         position: utilities.props.position,
         srMessage: utilities.props.srMessage,
-        dismissible: {
-            type: Boolean,
-            default: false,
-        },
-        countDownDisdismis: {
-            type: Boolean,
-            default: false,
-        },
+        dismissible: Boolean,
+        countDownDisdismis: Boolean,
         countDownSec: {
             type: Number,
             default: 5,
@@ -95,10 +89,7 @@ export default {
             return this.dismissible
         },
         fillsrMessage: function () {
-            if (this.srMessage) {
-                return this.variant
-            }
-            return this.srMessage
+            return this.srMessage ? this.variant | this.srMessage
         },
     },
     created () {
@@ -137,6 +128,9 @@ export default {
             }, 1000)
         }
     },
+    destroyed () {
+        this.clearTimer()
+    }
     watch: {
         show: function (newVal) {
             this.isShow = newVal
