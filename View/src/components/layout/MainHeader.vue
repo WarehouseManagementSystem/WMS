@@ -23,9 +23,14 @@
           </li>
         </ul>
         <ul class="navbar-nav my-2 my-lg-0">
-            <li class="nav-item dropdown">
+          <li class="nav-item dropdown">
               <user-card></user-card>
-          </li> 
+          </li>
+          <li class="nav-item navbar-text">
+            <a href="https://github.com/WarehouseManagementSystem/WMS" target="_bank" >
+               <i class="fab fa-github" style="font-size: 2em"></i>
+            </a>
+          </li>
         </ul>
       </div>
     </div>
