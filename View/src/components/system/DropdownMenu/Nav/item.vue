@@ -6,10 +6,10 @@
             <router-link class="list-group-item bg-light border-top-0 text-dark text-decoration-none" style="cursor: default;" v-if="!model.Modules" :to="model.path">
                 <font class="text-truncate w-100 d-inline-block">{{ model.name }}</font>
             </router-link>
-            <router-link class="list-group-item bg-light border-top-0 text-dark text-decoration-none" style="cursor: default;" to="" v-else>
-                <font class="text-truncate w-75 d-inline-block">{{ model.SubsystemName }}</font>
-                <i class="fas fa-chevron-down w-25 text-right" v-if="!open"></i>
-                <i class="fas fa-chevron-up w-25 text-right" v-else></i>
+            <router-link class="list-group-item bg-light border-top-0 text-dark text-decoration-none d-flex justify-content-between" style="cursor: default;" to="" v-else>
+                <font class="text-truncate">{{ model.SubsystemName }}</font>
+                <i class="fas fa-chevron-down" v-if="!open"></i>
+                <i class="fas fa-chevron-up" v-else></i>
             </router-link>
         </div>
         <ul class="list-group bg-light p-0 pl-3 border-0 w-100" v-show="open" v-if="model.Modules" >

@@ -5,7 +5,7 @@ import router from '@/router/index'
 import store from '@/store'
 import '@/components/utilities/directives.js'
 // 资源文件
-import '@/assets/icon/fontawesome/css/all.css'
+import '@fortawesome/fontawesome-free/css/all.min.css'
 // 第三方库
 import i18n from '@/lang/index.js'
 

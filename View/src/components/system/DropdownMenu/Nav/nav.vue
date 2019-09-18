@@ -4,15 +4,15 @@
           <ul class="list-group col-4 d-inline-block overflow-auto bg-dark border border-dark rounded-lg h-100 p-0">
             <!-- 建议不多于七个汉子，超出部分会被隐藏 -->
             <div v-for="(item, index) in Subsystem" :key="index" @click="InitModules(item)">
-              <router-link class="list-group-item bg-dark text-white text-decoration-none" style="cursor: default;" to="">
-                <font class="text-truncate w-75 d-inline-block">{{ item }}</font>
-                <i class="fas fa-caret-right w-25 text-right"></i>
+              <router-link class="list-group-item bg-dark text-white text-decoration-none d-flex justify-content-between" style="cursor: default;" to="">
+                <font class="text-truncate">{{ item }}</font>
+                <i class="fas fa-caret-right"></i>
               </router-link>
             </div>
           </ul>
           <ul class="list-group col-8 d-inline-block overflow-auto bg-light border border-dark rounded-lg h-100 p-0">
-            <NavItem v-for="(item, index) in Modules" 
-                :key="index" 
+            <NavItem v-for="(item) in Modules" 
+                :key="item" 
                 class="NavItem"
                 :model="item" >
             </NavItem>
