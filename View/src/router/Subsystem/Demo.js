@@ -6,19 +6,18 @@ export default {
         {
             SubsystemName: 'Base',
             Modules: [
-                { path: 'b-list', name: 'b-list', component: async () => await import(/* webpackChunkName: "base" */'@/Pages/Demo/Base/b-list-demo.vue'), },
+                { path: 'b-collapse', name: 'b-collapse', component: async () => await import(/* webpackChunkName: "base" */'@/Pages/Demo/Base/b-collapse-demo.vue'), },
                 { path: 'b-dropdown', name: 'b-dropdown', component: async () => await import(/* webpackChunkName: "base" */'@/Pages/Demo/Base/b-dropdown-demo.vue'), },
                 { path: 'b-datetime', name: 'b-datetime', component: async () => await import(/* webpackChunkName: "base" */'@/Pages/Demo/Base/b-datetime-demo.vue'), },
+                { path: 'b-list', name: 'b-list', component: async () => await import(/* webpackChunkName: "base" */'@/Pages/Demo/Base/b-list-demo.vue'), },
+                { path: 'b-loading', name: 'b-loading', component: async () => await import(/* webpackChunkName: "base" */'@/Pages/Demo/Base/b-loading-demo.vue'), },
+                { path: 'b-modal', name: 'b-modal', component: async () => await import(/* webpackChunkName: "base" */'@/Pages/Demo/Base/b-modal-demo.vue'), },
+                { path: 'b-media', name: 'b-media', component: async () => await import(/* webpackChunkName: "base" */'@/Pages/Demo/Base/b-media-demo.vue'), },
                 { path: 'b-nav', name: 'b-nav', component: async () => await import(/* webpackChunkName: "base" */'@/Pages/Demo/Base/b-nav-demo.vue'), },
                 { path: 'b-pagination', name: 'b-pagination', component: async () => await import(/* webpackChunkName: "base" */'@/Pages/Demo/Base/b-pagination-demo.vue'), },
                 { path: 'b-progress', name: 'b-progress', component: async () => await import(/* webpackChunkName: "base" */'@/Pages/Demo/Base/b-progress-demo.vue'), },
-                { path: 'b-loading', name: 'b-loading', component: async () => await import(/* webpackChunkName: "base" */'@/Pages/Demo/Base/b-loading-demo.vue'), },
                 { path: 'b-toast', name: 'b-toast', component: async () => await import(/* webpackChunkName: "base" */'@/Pages/Demo/Base/b-toast-demo.vue'), },
-                { path: 'b-modal', name: 'b-modal', component: async () => await import(/* webpackChunkName: "base" */'@/Pages/Demo/Base/b-modal-demo.vue'), },
-                { path: 'b-media', name: 'b-media', component: async () => await import(/* webpackChunkName: "base" */'@/Pages/Demo/Base/b-media-demo.vue'), },
-                { path: 'b-collapse', name: 'b-collapse', component: async () => await import(/* webpackChunkName: "base" */'@/Pages/Demo/Base/b-collapse-demo.vue'), },
                 { path: 'b-scrollspy', name: 'b-scrollspy', component: async () => await import(/* webpackChunkName: "base" */'@/Pages/Demo/Base/b-scrollspy-demo.vue'), },
-                
             ]
         },
         {
