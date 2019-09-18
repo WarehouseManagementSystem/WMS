@@ -18,7 +18,7 @@ export default {
     components: { BCollapse,},
     data () {
         return {
-            control: 'control control control'
+            control: 'control info'
         }
     }
 }
