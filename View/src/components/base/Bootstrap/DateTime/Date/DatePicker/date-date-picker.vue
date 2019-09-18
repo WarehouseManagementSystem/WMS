@@ -1,6 +1,6 @@
 <template>
     <div>
-        <pickerHeader 
+        <picker-header 
             v-if="!hideHeader" 
             :hearderText="hearderText" 
             :disabled="disabled" 
@@ -8,7 +8,7 @@
             @clickHeader="clickHeader" 
             @forward="forward" 
             @checknow="checknow" 
-            @backward="backward" ></pickerHeader>
+            @backward="backward" />
         <div class="text-center mx-3">
             <picker-row class="border-bottom border-primary" :items="[{text: '日'},{text: '一'}, {text: '二'}, {text: '三'}, {text: '四'}, {text: '五'}, {text: '六'}]" :colCount="colCount"></picker-row>
             <picker-row v-for="(items, index) in lists" :key="index" :items="items" :colCount="colCount" :disabled="disabled" @click="click"></picker-row>
@@ -21,7 +21,7 @@ import util from '@/util/index.js'
 import utilities from '@/components/utilities/index.js'
 
 import pickerHeader from './date-picker-header'
-import pickerRow from '@/components/base/Bootstrap/DropDownPicker/b-dropdownpicker-row.vue'
+import pickerRow from '@/components/base/Bootstrap/DropdownPicker/b-dropdownpicker-row.vue'
 
 export default {
     name: 'date-date-picker',

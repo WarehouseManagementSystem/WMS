@@ -1,5 +1,5 @@
 <template>
-    <b-text ref="text" v-model="time" @click="click($event)" @input="input" :readonly="readonly" :disabled="disabled" :info="info" v-on:keyup.left="left" v-on:keyup.right="right"></b-text>
+    <b-text ref="text" v-model="time" @click="click($event)" @input="input" :readonly="readonly" :disabled="disabled" :info="message" v-on:keyup.left="left" v-on:keyup.right="right"></b-text>
 </template>
 
 <script>
@@ -30,11 +30,10 @@ export default {
         type: {
             type: String,
             default: 'hh:mm:ss',
-            validator: function (value) {
-                return ['hh:mm', 'hh:mm:ss',].includes(value)
-            },
+            validator: value => ['hh:mm', 'hh:mm:ss',].includes(value),
         },
-        value: String,
+        value: utilities.props.value,
+        info: utilities.props.value,
         min: {
             type: [String, Date, ],
             // default: '00:00:00',
@@ -69,11 +68,17 @@ export default {
         dateMax: function () {
             return this.string2Date(this.max)
         },
-        info: function () {
+        fillInfo: function () {
             if (isNaN(Date.parse(this.dateMin)) && isNaN(Date.parse(this.dateMax))) return ``
             else if (!isNaN(Date.parse(this.dateMin)) && !isNaN(Date.parse(this.dateMax))) return `${this.showInfo(this.dateMin)}~${this.showInfo(this.dateMax)}`
             else if (isNaN(Date.parse(this.dateMin))) return `...~${this.showInfo(this.dateMax)}`
             else if (isNaN(Date.parse(this.dateMax))) return `${this.showInfo(this.dateMin)}~...`
+            return ''
+        },
+        message: function () {
+            if (this.info && this.fillInfo) return `(${this.fillInfo}) ${this.info}`
+            else if (this.fillInfo) return this.fillInfo
+            else if (this.info) return this.info
             return ''
         },
         selectArea: function () {

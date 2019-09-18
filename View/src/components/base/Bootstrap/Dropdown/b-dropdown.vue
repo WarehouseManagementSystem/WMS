@@ -7,8 +7,7 @@
         </div>
         <tran-drop>
             <div ref="menu" class="dropdown-menu overflow-auto shadow-sm" :class="menuClass" :style="{'max-height': menuHeight}" :aria-labelledby="guid">
-                <slot v-if="$slots.default"></slot>
-                <drop-menu v-else :list="list" :select="select" :disabled="disabled" @click="$emit('menuClick', $event)"></drop-menu>
+                <slot><drop-menu :list="list" :select="select" :disabled="disabled" @click="$emit('menuClick', $event)"></drop-menu></slot>
             </div>
         </tran-drop>
     </div>
@@ -37,17 +36,14 @@ export default {
             ...utilities.props.text,
             default: '<Pleace select...>',
         },
-        'hide-toggle': Boolean,
-        'menu-set': {
+        hideToggle: Boolean,
+        menuSet: {
             type: String,
             default: '',
-            validator: function (value) {
-                // 这个值必须匹配下列字符串中的一个
-                return ['', 'left', 'right'].includes(value)
-            },
+            validator: value => ['', 'left', 'right'].includes(value),
         },
-        'menu-Width': Boolean,
-        'menu-height': String,
+        menWidth: Boolean,
+        menuHeight: String,
         scroll: {
             type: Number,
             default: 0,

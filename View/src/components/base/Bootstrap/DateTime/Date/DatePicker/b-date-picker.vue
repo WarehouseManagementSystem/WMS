@@ -1,5 +1,5 @@
 <template>
-    <picker :placeholder="fillPlaceholder" :value="showValue" :info="info" :show="show" show-footer :disabled="disabled" :readonly="readonly" @showOrHide="showOrHide">
+    <dropdown-picker :placeholder="fillPlaceholder" :value="showValue" :info="message" :show="show" show-footer :disabled="disabled" :readonly="readonly" @showOrHide="showOrHide">
         <template #icon>
             <i class="far fa-calendar-alt"></i>
         </template>
@@ -8,21 +8,21 @@
             <month-picker v-if="pickertType === 'month'" style="min-width: 15em" v-model="selectValue" :min="dateMin" :max="dateMax" :hideHeader="hideHeader" :disabled="disabled" @month2Year="month2Year" @month2Date="month2Date"></month-picker>
             <date-picker v-if="pickertType === 'date'" style="min-width: 22em" v-model="selectValue" :min="dateMin" :max="dateMax" :hideHeader="hideHeader" :disabled="disabled" @date2Month="date2Month" @dateChecked="show = false" ></date-picker>
         </template>
-    </picker>
+    </dropdown-picker>
 </template>
 
 <script>
 import util from '@/util/index.js'
 import utilities from '@/components/utilities/index.js'
 
-import picker from '@/components/base/Bootstrap/DropDownPicker/b-dropdownpicker.vue'
+import dropdownPicker from '@/components/base/Bootstrap/DropdownPicker/b-dropdownpicker.vue'
 import yearPicker from './date-year-picker'
 import monthPicker from './date-month-picker'
 import datePicker from './date-date-picker'
 
 export default {
     name: 'b-date-picker',
-    components: { picker, yearPicker, monthPicker, datePicker, },
+    components: { dropdownPicker, yearPicker, monthPicker, datePicker, },
     model: {
         prop: 'value',
         event: 'change'
@@ -39,9 +39,7 @@ export default {
         type: {
             type: String,
             default: 'date',
-            validator: function (value) {
-                return ['year', 'month', 'date', ].includes(value)
-            },
+            validator: value => ['year', 'month', 'date', ].includes(value),
         },
         value: {
             type: [String, Number, Date, ],
@@ -50,12 +48,11 @@ export default {
         status: {
             type: Number,
             default: 0,
-            validator: function (value) {
-                return [0, 1,].includes(value)
-            },
+            validator: value => [0, 1,].includes(value),
         },
         min: [String, Date, ],
         max: [String, Date, ],
+        info: utilities.props.value,
         placeholder: utilities.props.value,
         disabled: utilities.props.disabled,
     },
@@ -115,11 +112,17 @@ export default {
             }
             return new Date(time)
         },
-        info: function () {
+        fillInfo: function () {
             if (this.dateMin.toString() == 'Invalid Date' && this.dateMax.toString() == 'Invalid Date') return ``
             else if (this.dateMin.toString() != 'Invalid Date' && this.dateMax.toString() != 'Invalid Date') return `${this.formatDate(this.dateMin)}~${this.formatDate(this.dateMax)}`
             else if (this.dateMin.toString() == 'Invalid Date') return `...~${this.formatDate(this.dateMax)}`
             else if (this.dateMax.toString() == 'Invalid Date') return `${this.formatDate(this.dateMin)}~...`
+            return ''
+        },
+        message: function () {
+            if (this.info && this.fillInfo) return `(${this.fillInfo}) ${this.info}`
+            else if (this.fillInfo) return this.fillInfo
+            else if (this.info) return this.info
             return ''
         },
     },

@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import BDropPicker from '@/components/base/Bootstrap/DropDownPicker/b-dropdownpicker.vue'
+import BDropPicker from '@/components/base/Bootstrap/DropdownPicker/b-dropdownpicker.vue'
 
 export default {
     name: 'b-color',

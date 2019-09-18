@@ -48,14 +48,14 @@ export default {
             }
         },
         placeholder: utilities.props.text,
-        canHide: {
-            type: Boolean,
-            default: true,
-        },
         show: Boolean,
         showFooter: Boolean,
         menuWidth: Boolean,
         menuHeight: String,
+        canHide: {
+            type: Boolean,
+            default: true,
+        },
         scroll: {
             type: Number,
             default: 0,

@@ -11,6 +11,10 @@
             <b-date-picker class="col-11" disabled></b-date-picker>
         </div>
         <div class="row">
+            <font class="col-1">info:</font>
+            <b-date-picker class="col-11" info="info text"></b-date-picker>
+        </div>
+        <div class="row">
             <font class="col-1">type:</font>
             <font class="col-1">year:</font>
             <b-date-picker class="col-2" type="year"></b-date-picker>
@@ -33,9 +37,9 @@
             <font class="col-1">year:</font>
             <b-date-picker class="col-2" type="year" min="2018" max="2019"></b-date-picker>
             <font class="col-1">month:</font>
-            <b-date-picker class="col-2" type="month" min="2018" max="2019"></b-date-picker>
+            <b-date-picker class="col-2" type="month" min="2018" max="2019-09"></b-date-picker>
             <font class="col-1">date:</font>
-            <b-date-picker class="col-2" type="date" min="2018" max="2019"></b-date-picker>
+            <b-date-picker class="col-2" type="date" min="2018" max="2019-09-30" info="info text"></b-date-picker>
         </div>
         <div class="row">
             <font class="col-1">v-model:</font>
@@ -61,6 +65,10 @@
             <b-time class="col-11" readonly></b-time>
         </div>
         <div class="row">
+            <font class="col-1">info:</font>
+            <b-time class="col-11" info="info text"></b-time>
+        </div>
+        <div class="row">
             <font class="col-1">type:</font>
             <font class="col-1">hh:mm:</font>
             <b-time class="col-4" type="hh:mm"></b-time>
@@ -79,7 +87,7 @@
             <font class="col-1">hh:mm:</font>
             <b-time class="col-4" type="hh:mm" min="09:00" max="15:59"></b-time>
             <font class="col-1">hh:mm:ss:</font>
-            <b-time class="col-4" type="hh:mm:ss" min="09:00" max="15:59:59"></b-time>
+            <b-time class="col-4" type="hh:mm:ss" min="09:00" max="15:59:59" info="info text"></b-time>
         </div>
         <div class="row">
             <font class="col-1">v-model:</font>

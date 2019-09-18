@@ -1,9 +1,9 @@
 <template>
-    <dropdownList v-model="selectValue" :list="list" @change="change" hide-null></dropdownList>
+    <dropdown-list v-model="selectValue" :list="list" @change="change" hide-null></dropdown-list>
 </template>
 
 <script>
-import dropdownList from '@/components/base/Bootstrap/Dropdownlist/b-dropdownlist.vue'
+import dropdownList from '@/components/base/Bootstrap/DropdownList/b-dropdownlist.vue'
 
 export default {
     name: 'b-second-list',
@@ -20,24 +20,16 @@ export default {
     props: {
         value: {
             type: Number,
-            default: function () {
-                return new Date().getSeconds()
-            },
-            validator: function (value) {
-                return /^[0-9]\d*$/.test(value) && value >= 0 && value < 60
-            },
+            default: () => new Date().getSeconds(),
+            validator: value => !isNaN(value) && value >= 0 && value < 60,
         },
         start: {
             type: Number,
-            validator: function (value) {
-                return /^[0-9]\d*$/.test(value) && value >= 0 && value < 60
-            },
+            validator: value => !isNaN(value) && value >= 0 && value < 60,
         },
         end: {
             type: Number,
-            validator: function (value) {
-                return /^[0-9]\d*$/.test(value) && value >= 0 && value < 60
-            },
+            validator: value => !isNaN(value) && value >= 0 && value < 60,
         },
     },
     computed: {

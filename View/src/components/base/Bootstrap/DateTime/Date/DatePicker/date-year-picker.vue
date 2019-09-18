@@ -1,12 +1,12 @@
 <template>
     <div>
-        <pickerHeader 
+        <picker-header 
             :hearderText="hearderText" 
             :disabled="disabled" 
             :nowDisabled="nowDisabled"  
             @forward="forward" 
             @checknow="checknow" 
-            @backward="backward" ></pickerHeader>
+            @backward="backward" />
         <hr>
         <div class="text-center mx-3">
             <picker-row v-for="(items, index) in lists" :key="index" :items="items" :colCount="colCount" :disabled="disabled" @click="click"></picker-row>
@@ -18,7 +18,7 @@
 import utilities from '@/components/utilities/index.js'
 
 import pickerHeader from './date-picker-header'
-import pickerRow from '@/components/base/Bootstrap/DropDownPicker/b-dropdownpicker-row.vue'
+import pickerRow from '@/components/base/Bootstrap/DropdownPicker/b-dropdownpicker-row.vue'
 
 export default {
     name: 'date-year-picker',

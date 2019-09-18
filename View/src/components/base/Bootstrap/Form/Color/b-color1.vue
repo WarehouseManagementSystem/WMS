@@ -18,7 +18,7 @@ import utilities from '@/components/utilities/index.js'
 
 import BNumber from '@/components/base/Bootstrap/FormConter/b-number.vue'
 import BRange from '@/components/base/Bootstrap/FormConter/b-range.vue'
-import BDropPicker from '@/components/base/Bootstrap/DropDownPicker/b-dropdownpicker.vue'
+import BDropPicker from '@/components/base/Bootstrap/DropdownPicker/b-dropdownpicker.vue'
 
 export default {
     name: 'b-color',

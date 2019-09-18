@@ -54,13 +54,11 @@ export default {
         value: utilities.props.value,
         info: utilities.props.value,
         search: Boolean,
-        'hide-null': Boolean,
+        hideNull: Boolean,
         row: {
             type: [String, Number, ],
             default: 10,
-            validator: function (val) {
-                return !isNaN(val) && Number(val) > 0
-            }
+            validator: val => !isNaN(val) && Number(val) > 0,
         },
     },
     computed: {

@@ -1,8 +1,8 @@
 <template>
-    <dropdownList v-model="selectValue" :list="list" @change="change" hide-null></dropdownList>
+    <dropdown-list v-model="selectValue" :list="list" @change="change" hide-null></dropdown-list>
 </template>
 <script>
-import dropdownList from '@/components/base/Bootstrap/Dropdownlist/b-dropdownlist.vue'
+import dropdownList from '@/components/base/Bootstrap/DropdownList/b-dropdownlist.vue'
 
 export default {
     name: 'b-year-list',
@@ -19,24 +19,16 @@ export default {
     props: {
         value: {
             type: Number,
-            default: function () {
-                return new Date().getFullYear()
-            },
-            validator: function (value) {
-                return /^[1-9]\d*$/.test(value)
-            },
+            default: () => new Date().getFullYear(),
+            validator: value => !isNaN(value),
         },
         start: {
             type: Number,
-            validator: function (value) {
-                return /^[1-9]\d*$/.test(value)
-            },
+            validator: value => !isNaN(value),
         },
         end: {
             type: Number,
-            validator: function (value) {
-                return /^[1-9]\d*$/.test(value)
-            },
+            validator: value => !isNaN(value),
         },
     },
     computed: {

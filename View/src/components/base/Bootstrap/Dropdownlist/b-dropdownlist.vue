@@ -22,7 +22,7 @@
 import util from '@/util/index.js'
 import utilities from '@/components/utilities/index.js'
 
-import dropdownPicker from '@/components/base/Bootstrap/DropDownPicker/b-dropdownpicker.vue'
+import dropdownPicker from '@/components/base/Bootstrap/DropdownPicker/b-dropdownpicker.vue'
 import dropItem from '@/components/base/Bootstrap/Dropdown/b-dropdown-item.vue'
 import BText from '@/components/base/Bootstrap/Form/b-text.vue'
 
@@ -52,13 +52,11 @@ export default {
         value: utilities.props.value,
         info: utilities.props.value,
         search: Boolean,
-        'hide-null': Boolean,
+        hideNull: Boolean,
         row: {
             type: [String, Number, ],
             default: 10,
-            validator: function (val) {
-                return !isNaN(val) && Number(val) > 0
-            }
+            validator: val => !isNaN(val) && Number(val) > 0,
         },
     },
     computed: {

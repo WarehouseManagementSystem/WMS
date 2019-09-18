@@ -1,5 +1,5 @@
 <template>
-    <div class="dropdown-divider"></div>
+    <div class="dropdown-divider" />
 </template>
 <script>
 export default {

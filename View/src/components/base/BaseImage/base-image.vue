@@ -14,7 +14,7 @@ export default {
         alt: {
             type: String,
         },
-        'img-list': {
+        imgList: {
             type: Array,
         },
     },

@@ -27,7 +27,7 @@ export default {
     name: 'b-range',
     inheritAttrs: false,
     components: { BInfo },
-     model: {
+    model: {
         prop: 'value',
         event: 'input'
     },

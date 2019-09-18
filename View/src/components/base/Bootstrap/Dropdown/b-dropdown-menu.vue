@@ -10,7 +10,7 @@
                 :href="item.href" 
                 :active="select ? select == item.value : item.active" 
                 :disabled="disabled || item.disabled" 
-                @click.native="$emit('click', $event)"></b-dropdown-item>
+                @click.native="$emit('click', $event)" />
         </div>
     </div>
     

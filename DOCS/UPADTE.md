@@ -36,7 +36,7 @@
 [Bootstrap forms]:                           https://getbootstrap.com/docs/4.3/components/forms/
 [formconter]:                               ../View/src/components/base/Bootstrap/FormConter
 [dropdownlist]:                             ../View/src/components/base/Bootstrap/Dropdownlist
-[dropDownPicker]:                           ../View/src/components/base/Bootstrap/DropDownPicker
+[dropdownPicker]:                           ../View/src/components/base/Bootstrap/dropdownPicker
 [dateTime]:                                 ../View/src/components/base/Bootstrap/DateTime
 [date]:                                     ../View/src/components/base/Bootstrap/DateTime/Date
 [dateList]:                                 ../View/src/components/base/Bootstrap/DateTime/Date/DateList
@@ -160,7 +160,7 @@
 2019-08-07
 
 * view 组件 add [b-datetime-demo]
-* view 组件 change [dropdownlist] base control from dropdown to [dropDownPicker]
+* view 组件 change [dropdownlist] base control from dropdown to [dropdownPicker]
 
 2019-08-02
 
@@ -202,7 +202,7 @@
 2019-07-10
 
 * view 组件 [time] update ‘b-time’，解决边缘情况下的自动选区错误
-* view 组件 [dropDownPicker] 修改 'b-dropDownPicker'，允许调用者控制面板的显示与隐藏
+* view 组件 [dropdownPicker] 修改 'b-dropdownPicker'，允许调用者控制面板的显示与隐藏
 * view 组件 [dateTime/DatePicker] 修改 'b-date-picker'，简便交互逻辑，优化体验，菜单会在选择最后一项时自动关闭，无需再点击确定按钮
 
 2019-07-08
@@ -233,7 +233,7 @@
 2019-05-07 ~ 2019-06-19
 
 * view 组件 [dropdownlist] 完成 'b-dropdownlist'
-* view 组件 [dropDownPicker] 完成 'b-dropDownPicker'
+* view 组件 [dropdownPicker] 完成 'b-dropdownPicker'
 * view 组件 [dateTime] 完成 'b-year-list'
 * view 组件 [dateTime] 完成 'b-month-list'
 * view 组件 [dateTime] 完成 'b-quarter-list'

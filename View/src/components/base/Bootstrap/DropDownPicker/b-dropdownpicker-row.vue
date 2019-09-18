@@ -15,9 +15,7 @@ export default {
     props: {
         items: utilities.props.list,
         disabled: utilities.props.disabled,
-        colCount: {
-            type: Number,
-        },
+        colCount: Number,
     },
     methods: {
         click: function (value) {

@@ -15,9 +15,7 @@ export default {
         text: utilities.props.value,
         select: utilities.props.active,
         disabled: utilities.props.disabled,
-        colCount: {
-            type: Number,
-        },
+        colCount: Number,
     },
     computed: {
         objClass: function () {

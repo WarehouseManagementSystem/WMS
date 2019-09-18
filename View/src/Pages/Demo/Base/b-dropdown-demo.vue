@@ -120,7 +120,7 @@ import BDropdownItem from '@/components/base/Bootstrap/Dropdown/b-dropdown-item.
 import BDropdownItemText from '@/components/base/Bootstrap/Dropdown/b-dropdown-item-text.vue'
 import BDropdownDivider from '@/components/base/Bootstrap/Dropdown/b-dropdown-divider.vue'
 
-import BDropdiwnlist from '@/components/base/Bootstrap/Dropdownlist/b-dropdownlist.vue'
+import BDropdiwnlist from '@/components/base/Bootstrap/DropdownList/b-dropdownlist.vue'
 
 export default {
     name: 'b-dropdown-demo',
