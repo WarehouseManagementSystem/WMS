@@ -6,6 +6,7 @@ export default {
         {
             SubsystemName: 'Base',
             Modules: [
+                { path: 'base-a', name: 'base-a', component: async () => await import(/* webpackChunkName: "base" */'@/Pages/Demo/Base/base-a-demo.vue'), },
                 { path: 'b-collapse', name: 'b-collapse', component: async () => await import(/* webpackChunkName: "base" */'@/Pages/Demo/Base/b-collapse-demo.vue'), },
                 { path: 'b-dropdown', name: 'b-dropdown', component: async () => await import(/* webpackChunkName: "base" */'@/Pages/Demo/Base/b-dropdown-demo.vue'), },
                 { path: 'b-datetime', name: 'b-datetime', component: async () => await import(/* webpackChunkName: "base" */'@/Pages/Demo/Base/b-datetime-demo.vue'), },

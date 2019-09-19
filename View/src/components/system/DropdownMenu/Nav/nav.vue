@@ -11,8 +11,8 @@
             </div>
           </ul>
           <ul class="list-group col-8 d-inline-block overflow-auto bg-light border border-dark rounded-lg h-100 p-0">
-            <NavItem v-for="(item) in Modules" 
-                :key="item" 
+            <NavItem v-for="(item, key) in Modules" 
+                :key="key" 
                 class="NavItem"
                 :model="item" >
             </NavItem>

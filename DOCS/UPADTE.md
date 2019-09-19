@@ -69,6 +69,7 @@
 [b-scrollspy]:                              ../View/src/components/base/Bootstrap/Scrollspy
 [Bootstrap Scrollspy]:                      https://getbootstrap.com/docs/4.3/components/scrollspy/
 [box-tabs]:                                 ../View/src/components/Box/Tabs
+[base-a]:                                   ../View/src/components/base/BaseA
 
 <!-- directive -->
 [v-tip]:                                    ../View/src/components/utilities/directives.js
@@ -99,6 +100,12 @@
 [box-accordion-demo]:                       ../View/src/Pages/Demo/Box/box-accordion-demo.vue
 [b-scrollspy-demo]:                         ../View/src/Pages/Demo/Base/b-scrollspy-demo.vue
 [box-tabs-demo]:                            ../View/src/Pages/Demo/Box/box-tabs-demo.vue
+[base-a-demo]:                              ../View/src/Pages/Demo/Base/base-a-demo.vue
+
+2019-09-11
+
+* view 组件 add [base-a] [base-a-demo]
+* view 修改 [b-dropdown] [b-list] [b-nav] [b-pag] with [base-a]
 
 2019-09-11
 

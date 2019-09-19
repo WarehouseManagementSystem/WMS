@@ -21,10 +21,7 @@ export default {
         color: utilities.props.color,
         href: utilities.props.href,
         srMessage: utilities.props.srMessage,
-        pill: {
-            type: Boolean,
-            default: false,
-        },
+        pill: Boolean,
     },
     computed: {
         objClass: function () {

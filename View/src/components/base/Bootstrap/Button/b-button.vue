@@ -61,23 +61,16 @@ export default {
         active: utilities.props.active,
         disabled: utilities.props.disabled,
         srMessage: utilities.props.srMessage,
-        outline: {
-            type: Boolean,
-            default: false,
-        },
+        outline: Boolean,
         target: {
             type: String,
             default: 'button',
-            validator: function (value) {
-                return ['button', 'a', 'input'].includes(value)
-            },
+            validator: value => ['button', 'a', 'input'].includes(value),
         },
         type: {
             type: String,
             default: 'button',
-            validator: function (value) {
-                return ['button', 'reset', 'submit'].includes(value)
-            },
+            validator: value => ['button', 'reset', 'submit'].includes(value)
         },
         value: {
             ...utilities.props.value,
@@ -85,13 +78,8 @@ export default {
                 return `${this.type.substring(0, 1).toUpperCase()}${this.type.substring(1)}`
             },
         },
-        block: {
-            type: Boolean,
-            default: false,
-        },
-        tabindex: {
-            type: Number,
-        },
+        block: Boolean,
+        tabindex: Number,
         autocomplete: {
             type: String,
             default: 'off'

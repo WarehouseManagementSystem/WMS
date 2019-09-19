@@ -11,13 +11,15 @@
 </template>
 
 <script>
+import utilities from '@/components/utilities/index.js'
+
 export default {
     name: 'b-media-item',
     props: {
-        title: String,
-        href: String,
-        icon: String,
-        content: String,
+        title: utilities.props.value,
+        href: utilities.props.href,
+        icon: utilities.props.value,
+        content: utilities.props.value,
     }
 }
 </script>
