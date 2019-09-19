@@ -12,10 +12,10 @@
             </div>
         </header>
         <article class="border rounded m-1" :class="{row: set != 'top'}" style="max-height: 800px;">
-            <b-scrollspy-nav v-if="set == 'top'" :id="scrollspyId" :set="set" :list="contents" />
-            <b-scrollspy-nav v-if="set == 'left'" :id="scrollspyId" :set="set" :class="{'col-2': column}" column :list="contents" />
-            <div v-show="showArtical && $slots.default" :id="articleBoxId" class="overflow-auto p-1" :class="{'col-10': column}" style="max-height: 730px;" data-offset="20" :data-target="'#' + scrollspyId" data-spy="scroll"><slot></slot></div>
-            <b-scrollspy-nav v-if="set == 'right'" :id="scrollspyId" :set="set" :class="{'col-2': column}" column :list="contents" />
+            <b-scrollspy-nav v-if="showContents && set == 'top'" :id="scrollspyId" :set="set" :list="contents" />
+            <b-scrollspy-nav v-if="showContents &&  set == 'left'" :id="scrollspyId" :set="set" :class="{'col-2': column}" column :list="contents" />
+            <div v-show="$slots.default" :id="articleBoxId" class="overflow-auto p-1" :class="{'col-10': column}" style="max-height: 730px;" data-offset="20" :data-target="'#' + scrollspyId" data-spy="scroll"><slot></slot></div>
+            <b-scrollspy-nav v-if="showContents && set == 'right'" :id="scrollspyId" :set="set" :class="{'col-2': column}" column :list="contents" />
         </article>
         <footer v-if="info || $slots.footer">
             <slot name="footer">
@@ -38,7 +38,7 @@ export default {
     components: { BScrollspyNav, },
     data () {
         return {
-            showArtical: false,
+            showContents: false,
             contents: [],
             map: { h1: 1, h2: 2, h3: 3, h4: 4, h5: 5, h6: 6, }
         }
@@ -78,7 +78,7 @@ export default {
         const arrs = this.getHTarget(node)
         this.contents = this.getContents(arrs)
         // 目录计算完成后显示文章，否则无法完成目录与文章的联动
-        this.$nextTick(this.showArtical = true)
+        this.$nextTick(function () {this.showContents = true})
     },
     methods: {
         getArticleNode: function () {

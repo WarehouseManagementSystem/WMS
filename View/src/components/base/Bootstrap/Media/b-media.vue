@@ -10,9 +10,8 @@
                 :content="item.content" >
                 <template v-if="item.children && item.children.length && item.children.length > 0">
                     <br />
-                     <a href="#" @click="show = !show">
-                         <font v-if="!show">Show More</font>
-                         <font v-else>Hide</font>
+                     <a class="stretched-link" @click="show = !show">
+                         <font>{{show ? 'Hide' : 'Show More'}}</font>
                     </a>
                     <b-media v-if="show" :list="item.children" />
                     <hr v-if="show" />

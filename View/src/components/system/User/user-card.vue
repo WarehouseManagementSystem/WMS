@@ -1,8 +1,8 @@
 <template>
     <div>
-        <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <div class="nav-link"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <Avatar></Avatar>
-        </a>
+        </div>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
             <span class="dropdown-item-text">User Info</span>
             <div class="card dropdown-item m-0" style="width: 18rem;">
@@ -25,9 +25,7 @@
 import Avatar from './avatar.vue'
 export default {
     name: 'user-card',
-    components: {
-        Avatar,
-    },
+    components: { Avatar, },
 }
 </script>
 

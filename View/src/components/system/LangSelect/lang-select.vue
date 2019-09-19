@@ -4,11 +4,11 @@
   <select v-model.lazy="$i18n.locale" @change="lamgChange" :class="form-control">
     <option v-for="lang in langs" :key="lang.code" :value="lang.code">{{ lang.name }}</option>
   </select> -->
-      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <div class="nav-link dropdown-toggle"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         language
-      </a>
+      </div>
       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <a class="dropdown-item" href="#" v-for="lang in langs" :class="{ active: locale === lang.code }" :key="lang.code" :value="lang.code" @click="lamgChange(lang.code)">{{ lang.name }}</a>
+        <font class="dropdown-item"  v-for="lang in langs" :class="{ active: locale === lang.code }" :key="lang.code" :value="lang.code" @click="lamgChange(lang.code)">{{ lang.name }}</font>
       </div>
     </div>
 </template>

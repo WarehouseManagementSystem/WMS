@@ -1,5 +1,5 @@
 <template>
-    <base-a v-if="href" class="dropdown-item" :class="{active: active}" :aria-selected="active" :disabled="disabled" :href="href" :text="text" />
+    <base-a v-if="href" class="dropdown-item" :class="{active: active}" :aria-selected="active" :disabled="disabled" :href="href" :text="text" hideIcon/>
     <button v-else class="dropdown-item" :class="{active: active}" :aria-selected="active" :disabled="disabled" :aria-disabled="disabled" type="button">{{ text }}</button>
 </template>
 <script>
@@ -10,10 +10,7 @@ export default {
     name: 'b-dropdown-item',
     components: { BaseA, },
     props: {
-        href: {
-            ...utilities.props.href,
-            default: '',
-        },
+        href: utilities.props.href,
         text: utilities.props.text,
         active: utilities.props.active,
         disabled: utilities.props.disabled,

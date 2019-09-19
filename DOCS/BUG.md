@@ -6,3 +6,6 @@
 [b-radio-button-group]:             ../View/src/components/base/Bootstrap/Form/Radio/b-radio-button-group.vue
 
 * **2019-07-22** - view 组件 [b-radio-button-group] input radio 无法触发事件
+
+* **2019-09-19** - view 组件 [b-media]
+

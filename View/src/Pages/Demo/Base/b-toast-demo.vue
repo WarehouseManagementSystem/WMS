@@ -22,7 +22,7 @@
             <font class="col-1">icon</font>
             <b-toast class="col-11" autohide title='title text' icon="fas fa-envelope">
                 icon='fas fa-envelope'<br />
-                参考： <base-a href="https://fontawesome.com" target="_block">https://fontawesome.com</base-a>
+                参考： <base-a href="https://fontawesome.com" target="_blank">https://fontawesome.com</base-a>
             </b-toast>
         </div>
         <div class="row py-1">

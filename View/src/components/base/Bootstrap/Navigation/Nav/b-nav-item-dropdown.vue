@@ -1,6 +1,6 @@
 <template>
     <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{ text }}</a>
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ text }}</a>
         <div class="dropdown-menu">
             <d-menu :list="list"></d-menu>
         </div>

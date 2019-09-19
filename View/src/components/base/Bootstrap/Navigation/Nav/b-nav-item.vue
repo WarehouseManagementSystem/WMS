@@ -1,6 +1,6 @@
 <template>
     <li class="nav-item">
-        <base-a class="nav-link text-truncate" :class="objClass" v-bind="$attrs" :href="href" :diabled="diabled"><slot>{{ text }}</slot></base-a>
+        <base-a class="nav-link text-truncate" :class="objClass" v-bind="$attrs" :href="href" :disabled="disabled" hideIcon><slot>{{ text }}</slot></base-a>
     </li>
 </template>
 

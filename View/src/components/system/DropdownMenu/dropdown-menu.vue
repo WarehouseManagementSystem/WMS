@@ -1,9 +1,9 @@
 <template>
     <div id="dropdownMenu" style="cursor: default;" class="border-0" :model="show">
-        <a id="dropdownMenuButton" class="btn btn-dark d-inline-flex" style="cursor: default;" href="#" role="button" @click="show = !show">
+        <button id="dropdownMenuButton" class="btn btn-dark d-inline-flex" style="cursor: default;"  role="button" @click="show = !show">
             <i class="fas fa-bars align-self-center px-1"></i>
             <font class="align-self-center px-1">menu</font>
-        </a>
+        </button>
         <tran-drop>
             <dropdown-menu-tooltip id="dropdownMenuTooltip" v-show="show"></dropdown-menu-tooltip>
         </tran-drop>

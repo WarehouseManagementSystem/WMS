@@ -1,6 +1,6 @@
 <template>
     <li class="page-item text-center" :class="{disabled: disabled, active: active}" style="width: 2.5em" :aria-current="active ? 'page' : ''">
-        <base-a class="page-link text-center px-1" href="#" :disabled="disabled">
+        <base-a class="page-link text-center px-1"  :disabled="disabled" hideIcon>
             <slot>{{value}}</slot>
             <span v-if="active" class="sr-only">(current)</span>
         </base-a>

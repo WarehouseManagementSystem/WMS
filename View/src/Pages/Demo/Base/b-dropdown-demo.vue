@@ -23,7 +23,7 @@
                 <b-dropdown-item text="item text"></b-dropdown-item>
                 <b-dropdown-item text="active text" active></b-dropdown-item>
                 <b-dropdown-item text="disabled text" disabled></b-dropdown-item>
-                <b-dropdown-item text="href text" href="#"></b-dropdown-item>
+                <b-dropdown-item text="href text" ></b-dropdown-item>
             </b-dropdown>
         </div>
         <div class="row">

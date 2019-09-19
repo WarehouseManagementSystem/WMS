@@ -32,7 +32,7 @@
                 </div>
                 <div class="row">
                     <font class="col-2">Anchor point: </font>
-                    <base-a class="px-1" href="#"></base-a>
+                    <base-a class="px-1" ></base-a>
                     <base-a class="px-1" href="#top"></base-a>
                     <base-a class="px-1" href="#1-1"></base-a>
                 </div>

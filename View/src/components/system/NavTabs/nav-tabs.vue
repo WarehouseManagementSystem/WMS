@@ -14,13 +14,13 @@
         <!-- 右键菜单 -->
         <ul class="list-group p-1" v-show="isShow" style="position: absolute; z-index: 1050" :style="{ 'top': top, 'left': left }">
             <li class="list-group-item list-group-item-action btn btn-light p-1" role="button" @mousedown="closeTab(RightClickItem, 'rigthClick')">
-                <a class="text-truncate text-decoration-none text-center text-muted d-inline-block" href="#">Close</a>
+                <font class="text-truncate text-decoration-none text-center text-muted d-inline-block" >Close</font>
             </li>
             <li class="list-group-item list-group-item-action btn btn-light p-1" role="button" @mousedown="closeOthers(RightClickItem)">
-                <a class="text-truncate text-decoration-none text-center text-muted d-inline-block" href="#">Close Others</a>
+                <font class="text-truncate text-decoration-none text-center text-muted d-inline-block" >Close Others</font>
             </li>
             <li class="list-group-item list-group-item-action btn btn-light p-1" role="button" @mousedown="closeAll">
-                <a class="text-truncate text-decoration-none text-center text-muted d-inline-block" href="#">Closs All</a>
+                <font class="text-truncate text-decoration-none text-center text-muted d-inline-block" >Closs All</font>
             </li>
         </ul>
     </div>
