@@ -19,7 +19,7 @@ export default {
     },
     computed: {
         isTop: function () {
-            this.top ? 'card-img-top' : 'card-img'
+            return this.top ? 'card-img-top' : 'card-img'
         }
     }
 }

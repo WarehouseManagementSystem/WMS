@@ -101,6 +101,11 @@
 [b-scrollspy-demo]:                         ../View/src/Pages/Demo/Base/b-scrollspy-demo.vue
 [box-tabs-demo]:                            ../View/src/Pages/Demo/Box/box-tabs-demo.vue
 [base-a-demo]:                              ../View/src/Pages/Demo/Base/base-a-demo.vue
+[b-card-demo]:                              ../View/src/Pages/Demo/Base/b-card-demo.vue
+
+2019-09-20
+
+* view 组件 add [b-card-demo]
 
 2019-09-11
 

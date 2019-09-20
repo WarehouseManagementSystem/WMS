@@ -1,5 +1,5 @@
 <template>
-    <a v-show="text" :href="href" class="card-link">{{ text }}</a>
+    <a :href="href" class="card-link"><slot>{{ text }}</slot></a>
 </template>
 <script>
 import utilities from '@/components/utilities/index.js'
