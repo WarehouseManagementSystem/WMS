@@ -9,8 +9,8 @@
                     :color="item.color || color" 
                     :striped="striped" 
                     :animated="animated" 
-                    @animating="animating" />
-                <span v-if="showValue" class="text-white position-absolute" :style="spanStyle">{{ `${sum}%` }}</span>
+                    :showValue="showValue" />
+                <!-- <span v-if="showValue" class="text-white position-absolute" :style="spanStyle">{{ `${sum}%` }}</span> -->
             </template>
             <b-progress-bar v-else :color="color" :value="now" :showValue="showValue" :striped="striped" :animated="animated"></b-progress-bar>
         </div>
@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import TweenLite from "gsap/TweenLite"
+// import TweenLite from "gsap/TweenLite"
 
 import utilities from '@/components/utilities/index.js'
 
@@ -32,7 +32,7 @@ export default {
     data () {
         return {
             now: this.value,
-            offsetWidth: 0,
+            // offsetWidth: 0,
         }
     },
     props: {
@@ -51,32 +51,32 @@ export default {
         animated: Boolean,
     },
     computed: {
-        sum: function () {
-            return this.list && this.list.length > 0 
-                    ? this.list.map( el => isNaN(el.value) ? 0 : Number(el.value) ).reduce((acc, cur) => acc + cur, 0)
-                    : this.now
-        },
-        spanStyle: function () {
-            return this.offsetWidth == 0 ? {} : {
-                left: this.offsetWidth / 2 - 6 + 'px'
-            }
-        },
+        // sum: function () {
+        //     return this.list && this.list.length > 0 
+        //             ? this.list.map( el => isNaN(el.value) ? 0 : Number(el.value) ).reduce((acc, cur) => acc + cur, 0)
+        //             : this.now
+        // },
+        // spanStyle: function () {
+        //     return this.offsetWidth == 0 ? {} : {
+        //         left: this.offsetWidth / 2 - 6 + 'px'
+        //     }
+        // },
     },
     methods: {
-        getOffsetWidth: function () {
-            let offsetWidth = 0
-            const nodes = this.$el.children[0].childNodes
-            for (var i = 0; i < nodes.length - 1; i++) {
-                offsetWidth += nodes[i].offsetWidth
-            }
-            return offsetWidth
-        },
-        showAnimat: function (number) {
-            TweenLite.to(this.$data, .5, { offsetWidth: number });
-        },
-        animating: function () {
-            this.showAnimat(this.getOffsetWidth())
-        },
+        // getOffsetWidth: function () {
+        //     let offsetWidth = 0
+        //     const nodes = this.$el.children[0].childNodes
+        //     for (var i = 0; i < nodes.length - 1; i++) {
+        //         offsetWidth += nodes[i].offsetWidth
+        //     }
+        //     return offsetWidth
+        // },
+        // showAnimat: function (number) {
+        //     TweenLite.to(this.$data, .5, { offsetWidth: number });
+        // },
+        // animating: function () {
+        //     this.showAnimat(this.getOffsetWidth())
+        // },
     },
 }
 </script>

@@ -33,9 +33,9 @@
         <div class="row py-1">
             <font class="col-1">show-value:</font>
             <font class="col-1">one:</font>
-            <b-progress class="col-4" value="5" show-value></b-progress>
+            <b-progress class="col-4" value="5" showValue></b-progress>
             <font class="col-1">list:</font>
-            <b-progress class="col-4" :list="list" show-value></b-progress>
+            <b-progress class="col-4" :list="list" showValue></b-progress>
         </div>
         <div class="row py-1">
             <font class="col-1">info:</font>
@@ -47,7 +47,7 @@
         <div class="row py-1">
             <font class="col-1">color:</font>
             <div class="col-11">
-                <template v-for="item in colors">{{ item }}: <b-progress :key="item" class="py-1" :color="item" value="100"></b-progress></template>
+                <template v-for="item in colors">{{ item }}: <b-progress :key="item" class="py-1" :color="item" value="100" showValue></b-progress></template>
             </div>
         </div>
     </div>
@@ -71,10 +71,10 @@ export default {
                 {color: 'info', value: 0, showValue: true },
             ],
             list: [
-                {value: 10},
+                {value: 5},
                 {color: 'info', value: 10},
-                {color: 'danger', value: 10, },
-                {color: 'info', value: 10, showValue: true },
+                {color: 'danger', value: 15, },
+                {color: 'info', value: 20, showValue: true },
             ],
             value: 80,
         }
