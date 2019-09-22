@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="px-1">
         <h2>b-list</h2>
         <hr>
         <div class="row py-1">
@@ -47,10 +47,18 @@
                 </b-list-item>
             </b-list>
         </div>
+        <div class="row py-1">
+            <font class="col-1">color:</font>
+            <b-list class="col-11">
+                <b-list-item v-for="item in colors" :key="item" :color="item">{{ item }}</b-list-item>
+            </b-list>
+        </div>
     </div>
 </template>
 
 <script>
+import variables from '@/components/utilities/variables.js'
+
 import BList from '@/components/base/Bootstrap/List/b-list.vue'
 import BListItem from '@/components/base/Bootstrap/List/b-list-item.vue'
 
@@ -59,6 +67,7 @@ export default {
     components: { BList, BListItem, },
     data () {
         return {
+            colors: variables.base.color.bg,
             list: [
                 {text: 'text1'},
                 {text: 'text2', active: true,},

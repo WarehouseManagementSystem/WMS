@@ -24,48 +24,13 @@
             <font class="col-1">color:</font>
             <div class="col-11">
                 <div class="row">
-                    <div class="col-1">
-                        <b-loading color='primary'></b-loading>
-                        <b-loading color='primary' status='grow'></b-loading>
-                    </div>
-                    <div class="col-1">
-                        <b-loading color='secondary'></b-loading>
-                        <b-loading color='secondary' status='grow'></b-loading>
-                    </div>
-                    <div class="col-1">
-                        <b-loading color='success'></b-loading>
-                        <b-loading color='success' status='grow'></b-loading>
-                    </div>
-                    <div class="col-1">
-                        <b-loading color='danger'></b-loading>
-                        <b-loading color='danger' status='grow'></b-loading>
-                    </div>
-                    <div class="col-1">
-                        <b-loading color='warning'></b-loading>
-                        <b-loading color='warning' status='grow'></b-loading>
-                    </div>
-                    <div class="col-1">
-                        <b-loading color='info'></b-loading>
-                        <b-loading color='info' status='grow'></b-loading>
-                    </div>
-                    <div class="col-1">
-                        <b-loading color='light'></b-loading>
-                        <b-loading color='light' status='grow'></b-loading>
-                    </div>
-                    <div class="col-1">
-                        <b-loading color='dark'></b-loading>
-                        <b-loading color='dark' status='grow'></b-loading>
+                    <div class="col-1" v-for="item in colors" :key="item">
+                        <b-loading :color="item"></b-loading>
+                        <b-loading :color="item" status='grow'></b-loading>
                     </div>
                 </div>
                 <div class="row">
-                     <font class="col-1">primary</font>
-                     <font class="col-1">secondary</font>
-                     <font class="col-1">success</font>
-                     <font class="col-1">danger</font>
-                     <font class="col-1">warning</font>
-                     <font class="col-1">info</font>
-                     <font class="col-1">light</font>
-                     <font class="col-1">dark</font>
+                    <font v-for="item in colors" :key="item" class="col-1">{{ item }}</font>
                 </div>
             </div>
         </div>
@@ -73,10 +38,17 @@
 </template>
 
 <script>
+import variables from '@/components/utilities/variables.js'
+
 import BLoading from "@/components/base/Bootstrap/Loading/b-loading.vue"
 
 export default {
     name: 'b-loading-demo',
     components: { BLoading, },
+    data () {
+        return {
+            colors: variables.base.color.bg,
+        }
+    }
 }
 </script>

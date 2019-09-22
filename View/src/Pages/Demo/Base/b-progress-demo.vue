@@ -47,22 +47,15 @@
         <div class="row py-1">
             <font class="col-1">color:</font>
             <div class="col-11">
-                default: <b-progress class="py-1" value="100"></b-progress>
-                primary: <b-progress class="py-1" value="100" color="primary"></b-progress>
-                secondary: <b-progress class="py-1" value="100" color="secondary"></b-progress>
-                success: <b-progress class="py-1" value="100" color="success"></b-progress>
-                danger: <b-progress class="py-1" value="100" color="danger"></b-progress>
-                warning: <b-progress class="py-1" value="100" color="warning"></b-progress>
-                info: <b-progress class="py-1" value="100" color="info"></b-progress>
-                light: <b-progress class="py-1" value="100" color="light"></b-progress>
-                dark: <b-progress class="py-1" value="100" color="dark"></b-progress>
-                white: <b-progress class="py-1" value="100" color="white"></b-progress>
+                <template v-for="item in colors">{{ item }}: <b-progress :key="item" class="py-1" :color="item" value="100"></b-progress></template>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+import variables from '@/components/utilities/variables.js'
+
 import BProgress from '@/components/base/Bootstrap/Progress/b-progress.vue'
 
 export default {
@@ -70,6 +63,7 @@ export default {
     components: { BProgress, },
     data () {
         return {
+            colors: variables.base.color.bg,
             list0: [
                 {value: 0},
                 {color: 'info', value: 0},
