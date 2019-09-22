@@ -3,7 +3,7 @@
 // themes
 const themes = [ 'bright', 'dark' ]
 // color
-const baseColors = [ '', 'primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark', 'white' ]
+const baseColors = [ 'primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark', 'white' ]
 const colors = [ ...baseColors, 'transparent' ]
 const textColor = [ ...baseColors, 'body', 'muted', 'black-50', 'white-50' ]
 // size

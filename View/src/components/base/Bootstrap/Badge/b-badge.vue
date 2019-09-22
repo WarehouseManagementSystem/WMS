@@ -1,38 +1,44 @@
 <template>
-    <span class="badge" :class="objClass" v-show="$slots.default" v-if="!href">
+    <span v-if="!href" class="badge align-self-center" :class="objClass" :style="objStyle">
         <slot></slot>
         <sr-message>{{ fillsrMessage }}</sr-message>
     </span>
-    <a class="badge" :class="objClass" :href="href" v-show="$slots.default" v-else>
+    <base-a v-else class="badge  align-self-center" :class="objClass" :href="href" :style="objStyle">
         <slot></slot>
         <sr-message>{{ fillsrMessage }}</sr-message>
-    </a>
+    </base-a>
 </template>
 <script>
-import srMessage from '@/components/base/Bootstrap/SrOney/b-sr-only.vue'
 import utilities from '@/components/utilities/index.js'
+
+import BaseA from '@/components/base/BaseA/base-a.vue'
+
+import srMessage from '@/components/base/Bootstrap/SrOney/b-sr-only.vue'
 
 export default {
     name: 'b-badge',
-    components: {
-        srMessage
-    },
+    components: { BaseA, srMessage, },
     props: {
-        color: utilities.props.color,
-        href: utilities.props.href,
+        color: {
+            ...utilities.props.color,
+            default: 'danger',
+        },
+        href: {
+            ...utilities.props.href,
+            default: '',
+        },
         srMessage: utilities.props.srMessage,
         pill: Boolean,
     },
     computed: {
         objClass: function () {
-            return `badge-${this.variant} 
-                ${this.pill ? 'badge-pill' : ''}`
+            return `badge-${this.color} ${!this.$slots.default || this.pill ? 'badge-pill' : ''}`
+        },
+        objStyle: function () {
+            return !this.$slots.default ? 'height: 15px' : null
         },
         fillsrMessage: function () {
-            if (this.srMessage) {
-                return this.variant
-            }
-            return this.srMessage
+            return this.srMessage || this.color
         },
     }
 }

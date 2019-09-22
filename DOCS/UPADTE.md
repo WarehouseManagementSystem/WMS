@@ -102,6 +102,11 @@
 [box-tabs-demo]:                            ../View/src/Pages/Demo/Box/box-tabs-demo.vue
 [base-a-demo]:                              ../View/src/Pages/Demo/Base/base-a-demo.vue
 [b-card-demo]:                              ../View/src/Pages/Demo/Base/b-card-demo.vue
+[b-badge-demo]:                             ../View/src/Pages/Demo/Base/b-badge-demo.vue
+
+2019-09-22
+
+* view 组件 add [b-badge-demo]
 
 2019-09-20
 
