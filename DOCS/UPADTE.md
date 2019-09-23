@@ -70,6 +70,9 @@
 [Bootstrap Scrollspy]:                      https://getbootstrap.com/docs/4.3/components/scrollspy/
 [box-tabs]:                                 ../View/src/components/Box/Tabs
 [base-a]:                                   ../View/src/components/base/BaseA
+[b-button]:                                 .../View/src/components/base/Bootstrap/Form/Button
+[b-reset]:                                  .../View/src/components/base/Bootstrap/Form/Button
+[b-submit]:                                 .../View/src/components/base/Bootstrap/Form/Button
 
 <!-- directive -->
 [v-tip]:                                    ../View/src/components/utilities/directives.js
@@ -103,6 +106,11 @@
 [base-a-demo]:                              ../View/src/Pages/Demo/Base/base-a-demo.vue
 [b-card-demo]:                              ../View/src/Pages/Demo/Base/b-card-demo.vue
 [b-badge-demo]:                             ../View/src/Pages/Demo/Base/b-badge-demo.vue
+[b-button-demo]:                            ../View/src/Pages/Demo/Form/b-button-demo.vue
+
+2019-09-23
+
+* view 组件 add [b-button] [b-reset] [b-submit] [b-button-demo]
 
 2019-09-22
 

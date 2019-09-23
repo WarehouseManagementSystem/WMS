@@ -6,7 +6,6 @@
             :class="[objClass, readonlyClass]" 
             :style="objstyle" 
             :size="Number(length)"
-            ref="text" 
             :placeholder="fillPlaceholder" 
             :readonly="readonly" 
             :aria-readonly="readonly" 

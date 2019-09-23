@@ -74,7 +74,7 @@ export default {
     },
     href: {
         type: String,
-        default: 'javascript:null',
+        default: '',
         validator: function () {
             return true
         },

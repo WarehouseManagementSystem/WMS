@@ -3,6 +3,7 @@
 
 import util from '@/util/index.js'
 import props from '@/components/utilities/props.js'
+import filters from '@/components/utilities/filters.js'
 
 export default {
     form: {
@@ -41,6 +42,34 @@ export default {
                             }
                         }
                     )
+                },
+            },
+        },
+        btn: {
+            filters: { ...filters },
+            props: {
+                value: {
+                    ...props.value,
+                    default: `Button`,
+                },
+                color: props.color,
+                size: props.size,
+                href: props.href,
+                active: Boolean,
+                disabled: Boolean,
+                outline: Boolean,
+                block: Boolean,
+            },
+            computed: {
+                objClass: function () {
+                    return `btn-${this.outline ? 'outline-' : ''}${this.color} 
+                        ${this.size ? `btn-${this.size}` : ''} 
+                        ${this.block ? 'btn-block' : ''}
+                        ${this.active ? 'active' : ''}
+                        ${(this.disabled && this.href) ? 'disabled' : ''}`
+                },
+                fillsrMessage: function () {
+                    return this.srMessage ? this.color : this.srMessage
                 },
             },
         },

@@ -23,10 +23,7 @@ export default {
             ...utilities.props.color,
             default: 'danger',
         },
-        href: {
-            ...utilities.props.href,
-            default: '',
-        },
+        href: utilities.props.href,
         srMessage: utilities.props.srMessage,
         pill: Boolean,
     },

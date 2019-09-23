@@ -91,8 +91,7 @@ export default {
             return `btn-${this.outline ? 'outline-' : ''}${this.color} 
                 ${this.size ? `btn-${this.size}` : ''} 
                 ${this.block ? 'btn-block' : ''} 
-                ${this.active ? 'active' : ''} 
-                ${(this.disabled && this.target == 'a') ? 'disabled' : ''}`
+                ${this.active ? 'active' : ''}`
         },
         objTabindex: function () {
             return this.disabled ? -1 : this.tabindex
