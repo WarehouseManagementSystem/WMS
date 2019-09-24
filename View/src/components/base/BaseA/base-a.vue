@@ -38,7 +38,7 @@ export default {
             if (this.href.includes(':')) {
                 const type = this.href.split(':')[0]
                 if (type === 'mailto') return 'email'
-                if (type === 'tel') return 'phone'
+                if (type === 'tel') return 'tel'
                 if (type === 'sms') return 'sms'
             }
             // Anchor point
@@ -60,7 +60,7 @@ export default {
         },
         fillText: function () {
             if (this.text) return this.text
-            if (['email', 'phone', 'sms'].includes(this.kind)) {
+            if (['email', 'tel', 'sms'].includes(this.kind)) {
                 const arr = this.href.split(':')
                 return arr.length > 1 ? arr[1] : null
             }
