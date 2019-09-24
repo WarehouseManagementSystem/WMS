@@ -73,6 +73,7 @@
 [b-button]:                                 .../View/src/components/base/Bootstrap/Form/Button
 [b-reset]:                                  .../View/src/components/base/Bootstrap/Form/Button
 [b-submit]:                                 .../View/src/components/base/Bootstrap/Form/Button
+[b-button-group]:                           https://getbootstrap.com/docs/4.3/components/button-group/
 
 <!-- directive -->
 [v-tip]:                                    ../View/src/components/utilities/directives.js
@@ -107,6 +108,10 @@
 [b-card-demo]:                              ../View/src/Pages/Demo/Base/b-card-demo.vue
 [b-badge-demo]:                             ../View/src/Pages/Demo/Base/b-badge-demo.vue
 [b-button-demo]:                            ../View/src/Pages/Demo/Form/b-button-demo.vue
+
+2019-09-24
+
+* view 组件 add [b-button-group]
 
 2019-09-23
 

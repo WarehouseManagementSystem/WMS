@@ -62,6 +62,59 @@
             <font class="col-1">default:</font>
             <b-submit />
         </div>
+        <h2>button group</h2>
+        <hr>
+        <div class="row py-1">
+            <font class="col-1">default:</font>
+            <b-button-group>
+                <b-button value="button text" />
+                <b-button value="button text" />
+                <b-button value="button text" />
+            </b-button-group>
+        </div>
+        <div class="row py-1">
+            <font class="col-1">vertical:</font>
+            <b-button-group vertical>
+                <b-button value="button text" />
+                <b-button value="button text" />
+                <b-button value="button text" />
+            </b-button-group>
+        </div>
+        <div class="row py-1">
+            <font class="col-1">size:</font>
+            <font class="mx-1">default:</font>
+            <b-button-group>
+                <b-button value="button text" />
+                <b-button value="button text" />
+                <b-button value="button text" />
+            </b-button-group>
+            <font class="mx-1">lg:</font>
+            <b-button-group size="lg">
+                <b-button value="button text" />
+                <b-button value="button text" />
+                <b-button value="button text" />
+            </b-button-group>
+            <font class="mx-1">sm:</font>
+            <b-button-group size="sm">
+                <b-button value="button text" />
+                <b-button value="button text" />
+                <b-button value="button text" />
+            </b-button-group>
+        </div>
+        <h2>button toolbar</h2>
+        <hr>
+        <b-button-toolbar>
+            <b-button-group class="mr-2">
+                <b-button value="button text" />
+                <b-button value="button text" />
+                <b-button value="button text" />
+            </b-button-group>
+            <b-button-group size="lg">
+                <b-button value="button text" />
+                <b-button value="button text" />
+                <b-button value="button text" />
+            </b-button-group>
+        </b-button-toolbar>
     </div>
 </template>
 
@@ -72,13 +125,24 @@ import BButton from '@/components/base/Bootstrap/Form/Button/b-button.vue'
 import BReset from '@/components/base/Bootstrap/Form/Button/b-reset.vue'
 import BSubmit from '@/components/base/Bootstrap/Form/Button/b-submit.vue'
 
+import BButtonGroup from '@/components/base/Bootstrap/ButtonGroup/b-button-group.vue'
+import BButtonToolbar from '@/components/base/Bootstrap/ButtonGroup/b-btn-toolbar.vue'
+
 export default {
     name: 'b-button-demo',
-    components: { BButton, BReset, BSubmit },
+    components: { BButton, BReset, BSubmit, BButtonGroup, BButtonToolbar, },
     data () {
         return {
             colors: variables.base.color.bg,
-            BTextValue: 'BTextValue'
+            BTextValue: 'BTextValue',
+            list: [
+                { value: 'value1', text: "text1", },
+                { value: 'value2', text: "text2", },
+                { value: 'value3', text: "text3", },
+                { value: 'value4', text: "text4", },
+                { value: 'value5', text: "text5", },
+                { value: 'value6', text: "disabled", disabled: true},
+            ],
         }
     }
 }

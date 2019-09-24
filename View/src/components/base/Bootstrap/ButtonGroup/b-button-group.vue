@@ -3,8 +3,7 @@
         v-if="$slots.default"
         class="btn-group"
         :class="objClass" 
-        :role="role" 
-        :aria-label="ariaLabel">
+        role="group" >
         <slot></slot>
     </div>
 </template>
@@ -15,18 +14,7 @@ export default {
     name: 'b-button-group',
     props: {
         size: utilities.props.size,
-        vertical: {
-            type: Boolean,
-            default: false,
-        },
-        role: {
-            type: String,
-            default: 'group',
-        },
-        ariaLabel: {
-            type: String,
-            default: 'Button Group',
-        },
+        vertical: Boolean,
     },
     computed: {
         objClass: function () {
