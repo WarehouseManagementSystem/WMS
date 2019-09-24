@@ -10,39 +10,36 @@
                 @click="activeIndex = index"></li>
         </ol>
         <div class="carousel-inner">
-            <item 
+            <b-carousel-item 
                 v-for="(item, index) in content" 
                 :key="index" :item="item" 
                 :data-interval="interval" 
-                :class="{active: activeIndex == index}"></item>
+                :class="{active: activeIndex == index}" />
         </div>
         <template v-if="control">
-            <a class="carousel-control-prev" :href="'#' + guid" role="button" data-slide="prev" 
+            <base-a class="carousel-control-prev" :href="'#' + guid" role="button" data-slide="prev" 
                 @click="activeIndex < content.length - 1 ? activeIndex++ : 0">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <sr-message>Previous</sr-message>
-            </a>
-            <a class="carousel-control-next" :href="'#' + guid" role="button" data-slide="next" 
+            </base-a>
+            <base-a class="carousel-control-next" :href="'#' + guid" role="button" data-slide="next" 
                 @click="activeIndex > 0 ? activeIndex-- : content.length - 1">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <sr-message>Next</sr-message>
-            </a>
+            </base-a>
         </template>
     </div>
 </template>
 <script>
 
-import item from './b-carousel-item'
+import BCarouselItem from './b-carousel-item'
 import srMessage from '@/components/base/Bootstrap/SrOney/b-sr-only.vue'
 import util from '@/util/index.js'
 import utilities from '@/components/utilities/index.js'
 
 export default {
     name: 'b-carousel',
-    components: {
-        item,
-        srMessage,
-    },
+    components: { BCarouselItem, baseA, srMessage, },
     data () {
         return {
             activeIndex: 0,

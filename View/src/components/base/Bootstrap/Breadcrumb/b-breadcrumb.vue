@@ -7,7 +7,7 @@
                 :aria-current="obj.isActive ? 'page' : ''" 
                 v-for="(obj, index) in content" 
                 :key="index">
-                <slot><a :href="obj.path">{{obj.name}}</a></slot>
+                <slot><base-a :href="obj.path">{{obj.name}}</base-a></slot>
             </li>
         </ol>
     </nav>
@@ -15,8 +15,10 @@
 <script>
 import utilities from '@/components/utilities/index.js'
 
+import BaseA from '@/components/base/BaseA/base-a.vue'
 export default {
     name: 'b-breadcrumb',
+    components: { BaseA, },
     props: {
         content: utilities.props.content,
     },

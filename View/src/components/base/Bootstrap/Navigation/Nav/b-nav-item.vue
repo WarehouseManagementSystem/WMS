@@ -14,7 +14,10 @@ export default {
     inheritAttrs: false,
     components: { BaseA, },
     props: {
-        href: utilities.props.href,
+        href: {
+            ...utilities.props.href,
+            default: '#'
+        },
         text: utilities.props.text,
         active: utilities.props.active,
         disabled: utilities.props.disabled,

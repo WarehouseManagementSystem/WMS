@@ -72,73 +72,23 @@ export default {
             return value > 0 && value <= 100
         }
     },
-    href: {
-        type: String,
-        default: '',
-        validator: function () {
-            return true
-        },
-    },
-    src: {
-        type: String,
-        default: '',
-        validator: function () {
-            return true
-        },
-    },
-    text: {
-        type: [String, Number, Array,],
-        default: '',
-    },
-    value: {
-        type: [String, Number, Array,],
-        default: ''
-    },
-    label: {
-        type: [String, Number, Array,],
-    },
-    message: {
-        type: String,
-    },
-    success: {
-        type: String,
-    },
-    error: {
-        type: String,
-    },
+    href: String,
+    src: String,
+    text: [String, Number, Array,],
+    value: [String, Number, Array,],
+    label: [String, Number, Array,],
+    message: String,
+    success: String,
+    error: String,
     list: {
         type: Array,
-        default: function () { 
-            return []
-        },
+        default: () => [],
     },
-    item: {
-        type: Object,
-    },
-    show: {
-        type: Boolean,
-        default: false,
-    },
-    disabled: {
-        type: Boolean,
-        default: false,
-    },
-    readonly: {
-        type: Boolean,
-        default: false,
-    },
-    active: {
-        type: Boolean,
-        default: false,
-    },
-    function: {
-        type: Function,
-    },
-    srMessage: {
-        type: String,
-        default: '',
-        validator: function () {
-            return true
-        },
-    },
+    item: Object,
+    show: Boolean,
+    disabled: Boolean,
+    readonly: Boolean,
+    active: Boolean,
+    function: Function,
+    srMessage: String,
 }

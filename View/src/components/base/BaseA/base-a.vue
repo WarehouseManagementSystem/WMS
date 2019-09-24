@@ -13,7 +13,10 @@ import utilities from '@/components/utilities/index.js'
 export default {
     name: 'base-a',
     props: {
-        href: utilities.props.href,
+        href: {
+            ...utilities.props.href,
+            required: true,
+        },
         text: utilities.props.value,
         rel: utilities.props.value,
         icon: utilities.props.value,

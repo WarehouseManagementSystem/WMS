@@ -27,14 +27,14 @@
                 <template #header><b-nav class="card-header-tabs" :list="nav" tabs /></template>
                 <b-card-subtitle>Card Subtitle</b-card-subtitle>
                 <b-card-text>Card text</b-card-text>
-                <b-card-link>Card link</b-card-link>
+                <b-card-link href="#">Card link</b-card-link>
             </b-card>
             <div class="col-1" />
             <b-card>
                 <template #header><b-nav class="card-header-pills" :list="list" pills /></template>
                 <b-card-subtitle>Card Subtitle</b-card-subtitle>
                 <b-card-text>Card text</b-card-text>
-                <b-card-link>Card link</b-card-link>
+                <b-card-link href="#">Card link</b-card-link>
             </b-card>
         </div>
         <h3>Body(default)</h3>

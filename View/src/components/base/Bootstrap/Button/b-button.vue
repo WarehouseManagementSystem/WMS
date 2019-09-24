@@ -1,5 +1,5 @@
 <template>
-    <a class="btn" 
+    <base-a class="btn" 
         v-if="target == 'a'" 
         :class="objClass" 
         :href="href" 
@@ -14,7 +14,7 @@
         role="button">
         <slot>{{ value }}</slot>
         <sr-message>{{ fillsrMessage }}</sr-message>
-    </a>
+    </base-a>
     <input class="btn" 
         v-else-if="target == 'input'" 
         :class="objClass" 
@@ -48,11 +48,11 @@
 import srMessage from '@/components/base/Bootstrap/SrOney/b-sr-only.vue'
 import utilities from '@/components/utilities/index.js'
 
+import BaseA from '@/components/base/BaseA/base-a.vue'
+
 export default {
     name: 'b-button',
-    components: {
-        srMessage,
-    },
+    components: { BaseA, srMessage, },
     props: {
         color: utilities.props.color,
         href: utilities.props.href,
