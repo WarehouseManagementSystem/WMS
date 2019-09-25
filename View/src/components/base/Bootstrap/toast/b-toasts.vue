@@ -12,8 +12,7 @@
                 :delay="item.delay" 
                 :status="item.status" 
                 :content="item.content" 
-                :autohide="item.autohide" 
-            />
+                :autohide="item.autohide" />
         </div>
     </div>
 </template>

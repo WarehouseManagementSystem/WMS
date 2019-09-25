@@ -4,8 +4,10 @@
         <div class="toast-header" style="font-size: 1.2em">
             <slot name="header">
                 <slot name="icon"><i class="mr-2" :class="iconClass"></i></slot>
-                <strong v-if="!href" class="mr-auto">{{ fillTitle }}</strong>
-                <strong v-else class="mr-auto"><a class="text-body" :href="href">{{ fillTitle }}</a></strong>
+                <strong class="mr-auto">
+                    <font v-if="!href">{{ fillTitle }}</font>
+                    <a v-else class="text-body" :href="href">{{ fillTitle }}</a>
+                </strong>
                 <small class="text-muted">{{ fillTime }}</small>
             </slot>
             <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close" @click="hide">
@@ -40,15 +42,11 @@ export default {
         delay: {
             type: [Number, String,],
             default: 10000,
-            validator: function (val) {
-                return !isNaN(val) && Number(val) > 0
-            }
+            validator: val => !isNaN(val) && Number(val) > 0,
         },
         status: {
             type: String,
-            validator: function (val) {
-                return ['', 'info', 'system', 'issue' ,'warning', 'error', 'success', 'danger'].includes(val)
-            }
+            validator: val => ['', 'info', 'system', 'issue' ,'warning', 'error', 'success', 'danger'].includes(val),
         },
     },
     computed: {

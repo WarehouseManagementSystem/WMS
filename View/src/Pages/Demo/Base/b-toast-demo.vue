@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="mx-2">
         <h2>b-toast</h2>
         <hr>
         <div class="row py-1">
@@ -66,7 +66,10 @@
                 </div>
             </div>
         </div>
-        <b-toasts :list="list" style="top: 50px; right: 50px;"></b-toasts>
+        <b-toasts :list="list" style="top: 115px; right: 2px;"></b-toasts>
+        <!-- <b-toast class="position-fixed" autohide status="info" content="left-top position-fixed" style="top: 115px; left: 2px;"></b-toast>
+        <b-toast class="position-fixed" autohide status="info" content="left-bottom position-fixed" style="bottom: 2px; left: 2px;"></b-toast>
+        <b-toast class="position-fixed" autohide status="info" content="right-bottom position-fixed" style="bottom: 2px; right: 2px;"></b-toast> -->
     </div>
 </template>
 
