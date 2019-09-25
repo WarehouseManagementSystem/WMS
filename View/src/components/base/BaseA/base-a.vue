@@ -44,8 +44,7 @@ export default {
             // Anchor point
             if (this.href[0] === '#') return 'hash'
             // url
-            const o = Object.getOwnPropertyDescriptor(config.regex, 'url')
-            const regex = o && o.value ? o.value : null
+            const regex = config.regex || null
             if (regex) {
                 if (this.href.match(new RegExp(regex))) return 'url'
             }

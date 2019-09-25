@@ -109,6 +109,10 @@
 [b-badge-demo]:                             ../View/src/Pages/Demo/Base/b-badge-demo.vue
 [b-button-demo]:                            ../View/src/Pages/Demo/Form/b-button-demo.vue
 
+2019-09-25
+
+* view 组件 解决 [b-media] 的 bug
+
 2019-09-24
 
 * view 组件 add [b-button-group]
