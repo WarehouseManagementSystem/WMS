@@ -1,5 +1,5 @@
 <template>
-    <transition name="alert-fade" mode="out-in">
+    <tran-out-in>
         <div 
             class="alert position-absolute" 
             :class="objClass" 
@@ -9,26 +9,29 @@
             @mouseenter="clearTimer()" 
             @mouseleave="countDown()" 
             role="alert">
-            <alert-header><slot name="header"></slot></alert-header>
+            <alert-header v-if="$slots.header"><slot name="header"></slot></alert-header>
             <div class="overflow-auto" style="max-height: 200px;">
                <slot>
                    <!-- <alert-link>{{countDownSec}}</alert-link> -->
                </slot>
                <sr-message>{{ fillsrMessage }}</sr-message>
             </div>
-            <alert-footer><slot name="footer"></slot></alert-footer>
-            <button type="button" class="close" v-show="showDismisLable" data-dismiss="alert" aria-label="Close">
+            <alert-footer v-if="$slots.footer"><slot name="footer"></slot></alert-footer>
+            <button type="button" class="close" v-if="showDismisLable" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
-    </transition>
+    </tran-out-in>
 </template>
 <script>
+import utilities from '@/components/utilities/index.js'
+
 // import AlertLink from './b-alert-link'
 import AlertHeader from './b-alert-header'
 import AlertFooter from './b-alert-footer'
 import srMessage from '@/components/base/Bootstrap/SrOney/b-sr-only.vue'
-import utilities from '@/components/utilities/index.js'
+
+import TranOutIn from '@/components/transition/tran-out-in.vue'
 
 export default {
     name: 'b-alert',
@@ -37,6 +40,7 @@ export default {
         AlertHeader,
         AlertFooter,
         srMessage,
+        TranOutIn,
     },
     data () {
         return {
@@ -53,8 +57,9 @@ export default {
         dismissible: Boolean,
         countDownDisdismis: Boolean,
         countDownSec: {
-            type: Number,
+            type: [ String, Number, ],
             default: 5,
+            validator: value => !isNaN(value)
         },
     },
     computed: {
@@ -85,11 +90,11 @@ export default {
         },
         showDismisLable: function () {
             // 保证在任何时候弹出框都可以关闭
-            // return (!this.countDownDisdismis || this.dismissible)
-            return this.dismissible
+            return !this.countDownDisdismis || this.dismissible
+            //return this.dismissible
         },
         fillsrMessage: function () {
-            return this.srMessage ? this.variant | this.srMessage
+            return this.srMessage || this.variant 
         },
     },
     created () {
@@ -115,10 +120,10 @@ export default {
             if (this.dismissCountDownTimerId) window.clearInterval(this.dismissCountDownTimerId)
         },
         countDown: function () {
-            if (this.countDownSec < 1) return
+            if (Number(this.countDownSec) < 1) return
             // 每一次计时前都会先清空可能存在的计时器
             this.clearTimer()
-            let countDownSec = this.countDownSec
+            let countDownSec = Number(this.countDownSec)
             this.dismissCountDownTimerId = setInterval( () => {
                 if (countDownSec < 1) {
                     this.close()
@@ -130,7 +135,7 @@ export default {
     },
     destroyed () {
         this.clearTimer()
-    }
+    },
     watch: {
         show: function (newVal) {
             this.isShow = newVal
@@ -144,12 +149,3 @@ export default {
     }
 }
 </script>
-<style>
-.alert-fade-enter-active, .alert-fade-leave-active {
-  transition: opacity .3s ease;
-}
-.alert-fade-enter, .alert-fade-leave-to
-/* .component-fade-leave-active for below version 2.1.8 */ {
-  opacity: 0;
-}
-</style>

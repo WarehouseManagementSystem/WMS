@@ -108,6 +108,11 @@
 [b-card-demo]:                              ../View/src/Pages/Demo/Base/b-card-demo.vue
 [b-badge-demo]:                             ../View/src/Pages/Demo/Base/b-badge-demo.vue
 [b-button-demo]:                            ../View/src/Pages/Demo/Form/b-button-demo.vue
+[b-alert-demo]:                             ../View/src/Pages/Demo/Base/b-alert-demo.vue
+
+2019-09-26
+
+* view 组件 add [b-alert-demo]
 
 2019-09-25
 
