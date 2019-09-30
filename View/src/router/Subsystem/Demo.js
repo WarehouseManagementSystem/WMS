@@ -6,7 +6,6 @@ export default {
         {
             SubsystemName: 'Base',
             Modules: [
-                { path: 'base-a', name: 'base-a', component: async () => await import(/* webpackChunkName: "base" */'@/Pages/Demo/Base/base-a-demo.vue'), },
                 { path: 'b-badge', name: 'b-badge', component: async () => await import(/* webpackChunkName: "base" */'@/Pages/Demo/Base/b-badge-demo.vue'), },
                 { path: 'b-card', name: 'b-card', component: async () => await import(/* webpackChunkName: "base" */'@/Pages/Demo/Base/b-card-demo.vue'), },
                 { path: 'b-collapse', name: 'b-collapse', component: async () => await import(/* webpackChunkName: "base" */'@/Pages/Demo/Base/b-collapse-demo.vue'), },
@@ -24,6 +23,14 @@ export default {
                 { path: 'b-alert', name: 'b-alert', component: async () => await import(/* webpackChunkName: "base" */'@/Pages/Demo/Base/b-alert-demo.vue'), },
             ]
         },
+        {
+            SubsystemName: 'Content',
+            Modules: [
+                { path: 'c-a', name: 'c-a', component: async () => await import(/* webpackChunkName: "content" */'@/Pages/Demo/Content/c-a-demo.vue'), },
+                { path: 'c-table', name: 'c-table', component: async () => await import(/* webpackChunkName: "content" */'@/Pages/Demo/Content/c-table-demo.vue'), },
+            ],
+        },
+        
         {
             SubsystemName: 'Form',
             Modules: [

@@ -65,10 +65,10 @@
 </template>
 
 <script>
-import BaseA from '@/components/base/BaseA/base-a.vue'
+import BaseA from '@/components/base/Content/A/c-a.vue'
 
 export default {
-    name: 'base-a-demo',
+    name: 'c-a-demo',
     components: { BaseA, },
 }
 </script>

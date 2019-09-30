@@ -11,7 +11,7 @@ import config from '@/config/index.js'
 import utilities from '@/components/utilities/index.js'
 
 export default {
-    name: 'base-a',
+    name: 'c-a',
     props: {
         href: {
             ...utilities.props.href,

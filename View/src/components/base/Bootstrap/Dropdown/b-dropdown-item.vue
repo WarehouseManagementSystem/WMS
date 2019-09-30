@@ -5,7 +5,7 @@
 <script>
 import utilities from '@/components/utilities/index.js'
 
-import BaseA from '@/components/base/BaseA/base-a.vue'
+import BaseA from '@/components/base/Content/A/c-a.vue'
 export default {
     name: 'b-dropdown-item',
     components: { BaseA, },

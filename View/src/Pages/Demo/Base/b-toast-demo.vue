@@ -76,7 +76,7 @@
 <script>
 import BToast from '@/components/base/Bootstrap/toast/b-toast.vue'
 import BToasts from '@/components/base/Bootstrap/toast/b-toasts.vue'
-import BaseA from '@/components/base/BaseA/base-a.vue'
+import BaseA from '@/components/base/Content/A/c-a.vue'
 
 export default {
     name: 'b-toast-demo',
