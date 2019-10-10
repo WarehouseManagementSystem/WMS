@@ -14,7 +14,7 @@
             v-bind="$attrs" 
             v-on="inputListeners"
             @change="validator($event)">
-        <label class="custom-control-label" :for="id">{{ label || value }}</label>
+        <label class="custom-control-label" :for="id">{{ label }}</label>
         <b-valid v-if="validInfo || $slots.valid" state="valid"><slot name="valid">{{ validInfo }}</slot></b-valid>
         <b-valid v-if="invalidInfo || $slots.invalid" state="invalid"><slot name="invalid">{{ invalidInfo }}</slot></b-valid>
         <b-info :class="{ 'pl-1': inline }" :info="info" />

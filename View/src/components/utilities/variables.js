@@ -1,7 +1,7 @@
 /** base */
 
 // themes
-const themes = [ 'bright', 'dark' ]
+const themes = [ '', 'light', 'dark' ]
 // color
 const baseColors = [ 'primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark', 'white' ]
 const colors = [ ...baseColors, 'transparent' ]

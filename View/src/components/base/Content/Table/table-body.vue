@@ -1,0 +1,103 @@
+<template>
+    <tbody>
+        <table-tr 
+            v-for="(row, rowIndex) in data" 
+            :key="rowIndex" 
+            :row="row" 
+            :colunms="colunms" 
+            :selectStatus="selectStatus" 
+            :selected="isSelected(row)" 
+            :primary-key="primaryKey" 
+            @tr:checked="checked => isChecked(checked, row)" 
+            @click.native="trClick(row)" 
+            @dblclick.native="$emit('tr:dblclick', formatRowData(row))" />
+    </tbody>
+</template>
+
+<script>
+import utilities from '@/components/utilities/index.js'
+
+import tableTr from './table-tr'
+
+export default {
+    name: 'table-body',
+    components: { tableTr, },
+    data () {
+        return {
+            selectedOptions: this.selected,
+        }
+    },
+    props: {
+        data: utilities.props.list,
+        primaryKey: [ String, Number, ], 
+        colunms: {
+            type: Array,
+            default: () => [],
+        },
+        selectStatus: {
+            type: Number,
+            default: 0, // 0: 默认, 1: 单选, 2: 多选
+        },
+        selected: [Array, Object, ],
+        theadCheckboxChecked: Boolean,
+    },
+    methods: {
+        trClick: function (row) {
+            if(this.selectStatus == 1) this.select(row)
+            this.$emit('tr:click', this.formatRowData(row))
+        },
+        select: function (row) {
+            if (this.selectStatus == 0) return
+            let formatRow = this.formatRowData(row)
+            if (this.isSelected(row)) return
+            if (this.selectStatus == 1) {
+                // 单选
+                this.selectedOptions = formatRow
+            } else if (this.selectStatus == 2) {
+                // 多选
+                this.selectedOptions 
+                    ? this.selectedOptions.push(formatRow)
+                    : this.selectedOptions = [formatRow]
+            }
+        },
+        unSelect: function (row) {
+            // 多选（单选时会自动覆盖之前的值）
+            if (this.selectStatus != 2 || !this.selectedOptions || this.selectedOptions.length == 0 ) return
+            let value = row[this.primaryKey].value || row[this.primaryKey]
+            this.selectedOptions.splice(this.selectedOptions.findIndex(e => e[this.primaryKey] && e[this.primaryKey] == value), 1)
+        },
+        formatRowData: function (row) {
+            let o = {}
+            Object.entries(row).map(e => {
+                if (e[0].toString().charAt(0) != '$') {
+                    Object.defineProperty(o, e[0], {value: e[1].value || e[1], writable: false})
+                }
+            })
+            return o
+        },
+        isSelected: function (row) {
+            let value = row[this.primaryKey].value || row[this.primaryKey]
+            if (!this.selectedOptions || this.selectStatus == 0) return
+            if (this.selectStatus == 1) return this.selectedOptions[this.primaryKey] == value
+            else if (this.selectStatus == 2) return this.selectedOptions.some && this.selectedOptions.some(e => e[this.primaryKey] && e[this.primaryKey] == value) 
+        },
+        isChecked: function (checked, row) {
+            checked
+                ? this.select(row)
+                : this.unSelect(row)
+        },
+    },
+    watch: {
+        theadCheckboxChecked: function (value) {
+            this.data.forEach(e => this.isChecked(value, e))
+        },
+        selected: function (value) {
+            this.selectedOptions = value
+        },
+        selectedOptions: function (value) {
+            this.$emit('selected', value)
+        },
+    }
+}
+
+</script>

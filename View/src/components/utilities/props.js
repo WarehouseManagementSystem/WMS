@@ -1,6 +1,14 @@
 import v from './variables'
 
 export default {
+    theme: {
+        type: String,
+        default: '',
+        validator: (value) => {
+            // 这个值必须匹配下列字符串中的一个
+            return v.base.themes.includes(value)
+        }
+    },
     color: {
         type: String,
         default: 'primary',
