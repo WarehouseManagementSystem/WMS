@@ -6,7 +6,7 @@
             :row="row" 
             :colunms="colunms" 
             :selectStatus="selectStatus" 
-            :selected="isSelected(row)" 
+            :selectedOptions="selectedOptions" 
             :primary-key="primaryKey" 
             @tr:checked="checked => isChecked(checked, row)" 
             @click.native="trClick(row)" 
@@ -22,6 +22,10 @@ import tableTr from './table-tr'
 export default {
     name: 'table-body',
     components: { tableTr, },
+    model: {
+        prop: 'selected',
+        event: 'tr:selected'
+    },
     data () {
         return {
             selectedOptions: this.selected,
@@ -32,12 +36,9 @@ export default {
         primaryKey: [ String, Number, ], 
         colunms: {
             type: Array,
-            default: () => [],
+            default: () => []
         },
-        selectStatus: {
-            type: Number,
-            default: 0, // 0: 默认, 1: 单选, 2: 多选
-        },
+        selectStatus: Number, // 0: 默认, 1: 单选, 2: 多选
         selected: [Array, Object, ],
         theadCheckboxChecked: Boolean,
     },
@@ -45,6 +46,7 @@ export default {
         trClick: function (row) {
             if(this.selectStatus == 1) this.select(row)
             this.$emit('tr:click', this.formatRowData(row))
+            this.$emit('tr:selected', this.formatRowData(row))
         },
         select: function (row) {
             if (this.selectStatus == 0) return
@@ -77,9 +79,10 @@ export default {
         },
         isSelected: function (row) {
             let value = row[this.primaryKey].value || row[this.primaryKey]
-            if (!this.selectedOptions || this.selectStatus == 0) return
+            if (!this.selectedOptions || this.selectStatus == 0) return false
             if (this.selectStatus == 1) return this.selectedOptions[this.primaryKey] == value
             else if (this.selectStatus == 2) return this.selectedOptions.some && this.selectedOptions.some(e => e[this.primaryKey] && e[this.primaryKey] == value) 
+            else return false
         },
         isChecked: function (checked, row) {
             checked
@@ -95,7 +98,7 @@ export default {
             this.selectedOptions = value
         },
         selectedOptions: function (value) {
-            this.$emit('selected', value)
+            this.$emit('tr:selected', value)
         },
     }
 }

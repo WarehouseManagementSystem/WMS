@@ -24,8 +24,8 @@
                             :theadCheckboxChecked="theadCheckboxChecked" 
                             :data="data" 
                             @tr:click="row => $emit('tr:click', row)" 
-                            @tr:dbclick="row => $emit('tr:dbclick', row)"
-                            @selected="opt => $emit('selected', opt)" />
+                            @tr:dbclick="row => $emit('tr:dbclick', row)" 
+                            v-model="selectedOptions" />
                     </table>
                 </template>
                 <template v-else>
@@ -62,12 +62,17 @@ import TableFoot from './table-foot'
 export default {
     name: 'c-table',
     components: { TableColgroup, TableHead, TableBody, TableFoot },
+    model: {
+        prop: 'selected',
+        event: 'table:selectedChanged'
+    },
     data () {
         return {
             thead: undefined,
             colgroup: [],
             fieldColunms: [],
             theadCheckboxChecked: false,
+            selectedOptions: this.selected,
         }
     },
     props: {
@@ -77,6 +82,7 @@ export default {
         primaryKey: {
             type: [ String, Number ],
             default: 'id',
+            validator: value => value
         },
         tableSm: Boolean,
         tableHover: Boolean,
@@ -87,10 +93,10 @@ export default {
         theadSticky: Boolean,
         selectStatus: {
             type: [String, Number],
-            default: 0,
+            default: 0, // 0: 默认, 1: 单选, 2: 多选
             validator: value => !isNaN(value) && [0, 1, 2].includes(Number(value)),
         },
-        
+        selected: [Array, Object, ],
     },
     computed: {
         head: function () {
@@ -170,7 +176,7 @@ export default {
             for (let i = 0; i < cells.length; i++) {
                 if (cells[i].dataset.hide) continue
                 this.colgroup.push({class: cells[i].dataset.colClass, style: cells[i].dataset.colStyle} )
-                if (!['select', 'option'].includes(cells[i].dataset.type)) this.fieldColunms.push(cells[i].dataset.field)
+                if (!['select', 'operate'].includes(cells[i].dataset.type)) this.fieldColunms.push(cells[i].dataset.field)
             }
         },
         theadCheckboxChange: function (checked) {
@@ -180,6 +186,12 @@ export default {
     watch: {
         '$parent.$el.offsetHeight': function (val) {
             this.initHeight(val)
+        },
+        selected: function (value) {
+            this.selectedOptions = value
+        },
+        selectedOptions: function (value) {
+            this.$emit('table:selectedChanged', value)
         },
     }
 }

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <c-table striped hover theadSticky tableBordered theadTheme="dark" selectStatus="2" @selected="selected(row)"  :list="list"  />
+        <c-table striped hover theadSticky tableBordered theadTheme="dark" selectStatus="1" v-model="selectedOptions" :list="list"  />
     </div>
     
 </template>
@@ -13,7 +13,7 @@ export default {
     components: { CTable, },
     data () {
         return {
-            opt: [],
+            selectedOptions: null,
             list: {
                 head: [
                     { title: 'id', field: 'id', colClass: 'text-center', colStyle: "width: 58px;", },
@@ -44,15 +44,5 @@ export default {
             }
         }
     },
-    methods: {
-        trClick: function (row) {
-            
-            let json = JSON.stringify(row)
-            alert(json)
-        },
-        selected: function (opt) {
-            this.opt = opt
-        }
-    }
 }
 </script>

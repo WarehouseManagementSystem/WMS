@@ -1,8 +1,8 @@
 <template>
     <tr 
-        :class="[row.$class, {'table-active': selected }]" 
+        :class="[row.$class, {'table-active': isSelected }]" 
         :style="row.$style" 
-        :aria-selected="selected" 
+        :aria-selected="isSelected" 
         :data-primary-key="primaryKey" >
         <table-select-td v-if="selectStatus == 2" v-model="isChecked"/>
         <td 
@@ -26,30 +26,29 @@ import tableSelectTd from './table-select-td'
 export default {
     name: 'table-tr',
     components: { tableSelectTd, },
-    model: {
-        prop: 'selected',
-        event: 'tr:checked',
-    },
     data () {
         return {
-            isChecked: this.selected,
+            isChecked: this.isSelected,
         }
     },
     props: {
         primaryKey: [ String, Number, ], 
         row: Object,
-        colunms: {
-            type: Array,
-            default: () => [],
+        colunms: Array,
+        selectStatus: Number,
+        selectedOptions: [Array, Object],
+    },
+    computed: {
+        isSelected: function () {
+            let value = this.row[this.primaryKey].value || this.row[this.primaryKey]
+            if (!this.selectedOptions || this.selectStatus == 0) return false
+            if (this.selectStatus == 1) return this.selectedOptions[this.primaryKey] == value
+            else if (this.selectStatus == 2) return this.selectedOptions.some && this.selectedOptions.some(e => e[this.primaryKey] && e[this.primaryKey] == value) 
+            else return false
         },
-        selectStatus: {
-            type: Number,
-            default: 0, // 0: 默认, 1: 单选, 2: 多选
-        },
-        selected: Boolean,
     },
     watch: {
-        selected: function (value) {
+        isSelected: function (value) {
             this.isChecked = value
         },
         isChecked: function (value) {
