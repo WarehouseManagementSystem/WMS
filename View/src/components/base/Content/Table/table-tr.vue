@@ -4,28 +4,34 @@
         :style="row.$style" 
         :aria-selected="isSelected" 
         :data-primary-key="primaryKey" >
+        <table-serial-td :hideSerial="hideSerial" :number="index" />
         <table-select-td v-if="selectStatus == 2" v-model="isChecked"/>
-        <td 
-            v-for="(col, colIndex) in colunms"  
-            :key="colIndex" 
-            class="align-middle" 
-            :class="row[col] && row[col].class" 
-            :style="row[col] && row[col].style" 
-            :colspan="row[col] && row[col].colspan" 
-            :aria-colspan="row[col] && row[col].colspan" 
-            :rowspan="row[col] && row[col].rowspan" 
-            :aria-rowspan="row[col] && row[col].rowspan" >
-            {{ row[col].value || row[col] || '-' }}
-        </td>
+        <template v-for="(col, colIndex) in colunms"  >
+            <table-operate-td v-if="col.$operate >= 0" :operate="operate" :key="colIndex" @tr:oper="type => $emit('tr:oper', {type: type, data: row})"  />
+            <td 
+                v-else 
+                :key="colIndex" 
+                class="align-middle" 
+                :class="row[col] && row[col].class" 
+                :style="row[col] && row[col].style" 
+                :colspan="row[col] && row[col].colspan" 
+                :aria-colspan="row[col] && row[col].colspan" 
+                :rowspan="row[col] && row[col].rowspan" 
+                :aria-rowspan="row[col] && row[col].rowspan" >
+                {{ row[col] && (row[col].value || row[col]) || '-' }}
+            </td>
+        </template>
     </tr>
 </template>
 
 <script>
+import tableSerialTd from './table-serial-td'
 import tableSelectTd from './table-select-td'
+import tableOperateTd from './table-operate-td'
 
 export default {
     name: 'table-tr',
-    components: { tableSelectTd, },
+    components: { tableSerialTd, tableSelectTd, tableOperateTd, },
     data () {
         return {
             isChecked: this.isSelected,
@@ -34,7 +40,10 @@ export default {
     props: {
         primaryKey: [ String, Number, ], 
         row: Object,
+        index: Number,
         colunms: Array,
+        operate: Array,
+        hideSerial: Boolean,
         selectStatus: Number,
         selectedOptions: [Array, Object],
     },

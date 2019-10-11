@@ -8,4 +8,10 @@ export default {
     hash: 'fab fa-slack-hash', // a hash （Anchor point）
     sms: 'fas fa-sms', // a sms
     download: 'fas fa-download', // a download
+    check: 'fas fa-mouse-pointer',// table operate check - far fa-check-circle | fas fa-mouse-pointer
+    view: 'fas fa-eye',// table operate view - far fa-eye
+    edit: 'fas fa-pencil-alt', // table operate edit - fas fa-edit | far fa-edit
+    delete: 'fas fa-trash-alt', // table operate edit - far fa-trash-alt
+    flow: 'fas fa-paper-plane' // table operate flow
+
 }

@@ -53,6 +53,7 @@ export default {
                     default: `Button`,
                 },
                 color: props.color,
+                textColor: props.textColor,
                 size: props.size,
                 href: props.href,
                 active: Boolean,
@@ -63,6 +64,7 @@ export default {
             computed: {
                 objClass: function () {
                     return `btn-${this.outline ? 'outline-' : ''}${this.color} 
+                        ${this.textColor ? `text-${this.textColor}` : ''}
                         ${this.size ? `btn-${this.size}` : ''} 
                         ${this.block ? 'btn-block' : ''}
                         ${this.active ? 'active' : ''}

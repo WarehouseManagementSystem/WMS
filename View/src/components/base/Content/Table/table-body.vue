@@ -4,12 +4,16 @@
             v-for="(row, rowIndex) in data" 
             :key="rowIndex" 
             :row="row" 
+            :index="rowIndex + 1" 
+            :operate="operate" 
             :colunms="colunms" 
             :selectStatus="selectStatus" 
             :selectedOptions="selectedOptions" 
             :primary-key="primaryKey" 
+            :hideSerial="hideSerial" 
             @tr:checked="checked => isChecked(checked, row)" 
-            @click.native="trClick(row)" 
+            @click.native="$emit('tr:click', formatRowData(row))" 
+            @tr:oper="data => trOper(data)"
             @dblclick.native="$emit('tr:dblclick', formatRowData(row))" />
     </tbody>
 </template>
@@ -38,15 +42,16 @@ export default {
             type: Array,
             default: () => []
         },
+        operate: Array,
+        hideSerial: Boolean,
         selectStatus: Number, // 0: 默认, 1: 单选, 2: 多选
         selected: [Array, Object, ],
         theadCheckboxChecked: Boolean,
     },
     methods: {
-        trClick: function (row) {
-            if(this.selectStatus == 1) this.select(row)
-            this.$emit('tr:click', this.formatRowData(row))
-            this.$emit('tr:selected', this.formatRowData(row))
+        trOper: function (data) {
+            if(this.selectStatus == 1) this.select(data.data)
+            this.$emit('tr:selected', this.formatRowData(data.data))
         },
         select: function (row) {
             if (this.selectStatus == 0) return

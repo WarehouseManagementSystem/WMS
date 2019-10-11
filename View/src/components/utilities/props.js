@@ -19,7 +19,6 @@ export default {
     },
     textColor: {
         type: String,
-        default: 'body',
         validator: (value) => {
             // 这个值必须匹配下列字符串中的一个
             return v.base.color.text.includes(value)

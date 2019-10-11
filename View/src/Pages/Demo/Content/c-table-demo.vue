@@ -1,6 +1,6 @@
 <template>
     <div>
-        <c-table striped hover theadSticky tableBordered theadTheme="dark" selectStatus="1" v-model="selectedOptions" :list="list"  />
+        <c-table striped hover theadSticky tableBordered theadTheme="dark" selectStatus="0" v-model="selectedOptions" :list="list"  />
     </div>
     
 </template>
@@ -21,6 +21,7 @@ export default {
                     { title: 'sex', field: 'sex', },
                     { title: 'age', field: 'age', },
                 ],
+                operate: { index: 0, value: [ 'check', 'view', 'edit', 'delete', 'flow' ], },
                 data: [
                     { 
                         id: 'id_1',

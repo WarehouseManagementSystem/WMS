@@ -7,8 +7,10 @@
                     <table-colgroup :colgroup="colgroup" />
                     <slot name="head"><table-head 
                         :colunms="showColunms" 
+                        :operate="operate.value" 
+                        :hideSerial="hideSerial" 
                         :selectStatus="Number(selectStatus)"
-                        :head="head"
+                        :head="head" 
                         v-model="theadCheckboxChecked" /></slot>
                 </table>
             </div>
@@ -20,6 +22,8 @@
                         <table-body 
                             :colunms="showColunms" 
                             :primaryKey="primaryKey" 
+                            :operate="operate.value" 
+                            :hideSerial="hideSerial" 
                             :selectStatus="Number(selectStatus)" 
                             :theadCheckboxChecked="theadCheckboxChecked" 
                             :data="data" 
@@ -52,6 +56,7 @@
 
 <script>
 import util from '@/util/index.js'
+import config from '@/config/index.js'
 import utilities from '@/components/utilities/index.js'
 
 import TableColgroup from './table-colgroup'
@@ -68,6 +73,8 @@ export default {
     },
     data () {
         return {
+            status: 'default',
+            operate: {},
             thead: undefined,
             colgroup: [],
             fieldColunms: [],
@@ -84,6 +91,7 @@ export default {
             default: 'id',
             validator: value => value
         },
+        hideSerial: Boolean,
         tableSm: Boolean,
         tableHover: Boolean,
         tableStriped: Boolean,
@@ -100,6 +108,11 @@ export default {
     },
     computed: {
         head: function () {
+            if (this.selectStatus != 2 && this.operate && this.operate.index >= 0 && this.operate.value) {
+                let head = Array.from(this.list.head)
+                head.splice(this.operate.index, 0, {$operate: this.operate.value})
+                return head
+            }
             return this.list.head
         },
         data: function () {
@@ -146,6 +159,8 @@ export default {
     methods: {
         init: async function () {
             await this.initHeight(this.$parent.$el.offsetHeight)
+            await this.initStatus()
+            await this.initOperate()
             await this.getThead()
             await this.initTHead()
             await this.InitColgroupAndColunms()
@@ -158,6 +173,17 @@ export default {
             let TFootHeight = this.$refs.TFoot ? this.$refs.TFoot.offsetHeight : 0
             let TBodyHeight = height - THeadHeight - TFootHeight - 10
             this.$refs.TBody.style.height = TBodyHeight < 0 ? 0 : TBodyHeight + 'px'
+        },
+        initStatus: function () {
+            if (Number(this.selectStatus) != 0) this.status = Number(this.selectStatus)
+        },
+        initOperate: function () {
+            if (this.selectStatus == 2 || !this.list || !this.list.operate) return {}
+            let index = this.list.operate.index >= 0 ? this.list.operate.index : this.list.head.length
+            let value = this.list.operate.value && this.list.operate.value.forEach && this.list.operate.value
+                .filter(e => config.ui.table.operate[e].permissions(this.status)) || []
+            if (index > this.list.head.length) index = this.list.head.length
+            this.operate = { index: index, value: value }
         },
         getThead: function () {
             let dom = document.getElementsByTagName('thead')
@@ -172,11 +198,16 @@ export default {
             if (!this.thead) return
             let cells = this.thead.children[this.thead.children.length - 1].cells
             if (!cells) return
-            
             for (let i = 0; i < cells.length; i++) {
                 if (cells[i].dataset.hide) continue
-                this.colgroup.push({class: cells[i].dataset.colClass, style: cells[i].dataset.colStyle} )
-                if (!['select', 'operate'].includes(cells[i].dataset.type)) this.fieldColunms.push(cells[i].dataset.field)
+                let index = this.hideSerial ? this.operate.index : this.operate.index + 1
+                if (i == index) {
+                    this.colgroup.push({class: 'text-center', style: `width: ${2 * this.operate.value.length < 5 ? 5 : 2 * this.operate.value.length + 1}em;`} )
+                    this.fieldColunms.push({ $operate: this.operate.index })
+                }
+                if (cells[i].dataset.type != 'operate') this.colgroup.push({class: cells[i].dataset.colClass, style: cells[i].dataset.colStyle} )
+                if (!['select', 'operate', 'serial'].includes(cells[i].dataset.type)) this.fieldColunms.push(cells[i].dataset.field)
+                
             }
         },
         theadCheckboxChange: function (checked) {

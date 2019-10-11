@@ -2,6 +2,7 @@
 import icon from './icon'
 import regex from './regex'
 import status from './status'
+import operate from './operate'
 import placeholder from './placeholder'
 
 export default {
@@ -38,6 +39,9 @@ export default {
             validInfoType: 'feedback',
             placeholder: placeholder, // placeholder
         }, // forms
+        table: {
+            operate,
+        },// table
         icon: icon, // icon
         status: status, // status
     }, // UI config

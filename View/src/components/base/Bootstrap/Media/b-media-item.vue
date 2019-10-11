@@ -9,7 +9,7 @@
             {{ item.content }}
             <template v-if="item.children && item.children.length && item.children.length > 0">
                     <br />
-                    <b-button class="border-0 bg-transparent text-primary px-0" @click.native="show = !show">{{show ? 'Hide' : 'Show More...'}}</b-button>
+                    <b-button class="border-0 bg-transparent px-0" text-color="primary" @click.native="show = !show">{{show ? 'Hide' : 'Show More...'}}</b-button>
                     <b-media v-if="show" :list="item.children" />
                     <hr v-if="show" />
                 </template>

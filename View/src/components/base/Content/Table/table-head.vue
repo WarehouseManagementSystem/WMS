@@ -1,18 +1,22 @@
 <template>
     <thead>
         <tr>
+            <table-serial-td :hideSerial="hideSerial">No.</table-serial-td>
             <table-select-td v-if="selectStatus == 2" v-model="checked" />
-            <th 
-                v-for="(col, colIndex) in head" 
-                :key="colIndex" 
-                class="text-center align-middle" 
-                v-show="useColunms ? colunms.includes(col.field) : !col.hide" 
-                :data-hide="useColunms ? !colunms.includes(col.field) : col.hide" 
-                :data-field="col.field"
-                :data-col-class="col.colClass"
-                :data-col-style="col.colStyle" >
-                {{ col.title }}
-            </th>
+            <template v-for="(col, colIndex) in head" >
+                <table-operate-td  v-if="col.$operate" :operate="col.$operate" :key="colIndex" >Operate</table-operate-td>
+                <th 
+                    v-else
+                    :key="colIndex" 
+                    class="text-center align-middle" 
+                    v-show="useColunms ? colunms.includes(col.field) : !col.hide" 
+                    :data-hide="useColunms ? !colunms.includes(col.field) : col.hide" 
+                    :data-field="col.field"
+                    :data-col-class="col.colClass"
+                    :data-col-style="col.colStyle" >
+                    {{ col.title }}
+                </th>
+            </template>
         </tr>
     </thead>
 </template>
@@ -20,11 +24,13 @@
 <script>
 import utilities from '@/components/utilities/index.js'
 
+import tableSerialTd from './table-serial-td'
 import tableSelectTd from './table-select-td'
+import tableOperateTd from './table-operate-td'
 
 export default {
     name: 'table-head',
-    components: { tableSelectTd, },
+    components: { tableSerialTd, tableSelectTd, tableOperateTd, },
     model: {
         prop: 'checked',
         event: 'change'
@@ -40,6 +46,7 @@ export default {
             type: Array,
             default: () => [],
         },
+        hideSerial: Boolean,
         selectStatus: Number,
     },
     computed: {
