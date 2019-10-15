@@ -6,6 +6,7 @@
                 <table class="table m-0" :class="tableClass" style="table-layout: fixed">
                     <table-colgroup :colgroup="colgroup" />
                     <slot name="head"><table-head 
+                        :theadRowCount="theadRowCount" 
                         :colunms="showColunms" 
                         :operate="operate.value" 
                         :hideSerial="hideSerial" 
@@ -78,6 +79,7 @@ export default {
             thead: undefined,
             colgroup: [],
             fieldColunms: [],
+            theadRowCount: 1,
             theadCheckboxChecked: false,
             selectedOptions: this.selected,
         }
@@ -110,10 +112,10 @@ export default {
         head: function () {
             if (this.selectStatus != 2 && this.operate && this.operate.index >= 0 && this.operate.value) {
                 let head = Array.from(this.list.head)
-                head.splice(this.operate.index, 0, {$operate: this.operate.value})
+                head.splice(this.operate.index, 0, {$operate: this.operate.value })
                 return head
             }
-            return this.list.head
+            return this.list.head || []
         },
         data: function () {
             return this.list.data || []
@@ -161,6 +163,7 @@ export default {
             await this.initHeight(this.$parent.$el.offsetHeight)
             await this.initStatus()
             await this.initOperate()
+            this.theadRowCount = await this.getTheadRowCount()
             await this.getThead()
             await this.initTHead()
             await this.InitColgroupAndColunms()
@@ -182,8 +185,14 @@ export default {
             let index = this.list.operate.index >= 0 ? this.list.operate.index : this.list.head.length
             let value = this.list.operate.value && this.list.operate.value.forEach && this.list.operate.value
                 .filter(e => config.ui.table.operate[e].permissions(this.status)) || []
-            if (index > this.list.head.length) index = this.list.head.length
+            if (index > (this.list.head && this.list.head.length)) index = this.list.head.length
             this.operate = { index: index, value: value }
+        },
+         getTheadRowCount: function (arr = this.list.head || [], count = 1) {
+            let vm = this
+            return arr.reduce(
+                (acc, cur) => cur.children ? vm.getTheadRowCount(cur.children, acc + 1) : acc,
+                count)
         },
         getThead: function () {
             let dom = document.getElementsByTagName('thead')

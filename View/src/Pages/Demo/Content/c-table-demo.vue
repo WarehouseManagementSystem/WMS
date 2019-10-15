@@ -17,7 +17,13 @@ export default {
             list: {
                 head: [
                     { title: 'id', field: 'id', colClass: 'text-center', colStyle: "width: 58px;", },
-                    { title: 'name', field: 'name', },
+                    { title: 'name', field: 'name', children: [
+                            { title: 'first name', field: 'first name', },
+                            { title: 'last name', field: 'last name', children: [
+                                { title: 'first name1', field: 'first name1', },
+                                { title: 'last name1', field: 'last name1', },
+                            ]},
+                        ]},
                     { title: 'sex', field: 'sex', },
                     { title: 'age', field: 'age', },
                 ],
