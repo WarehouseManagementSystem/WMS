@@ -7,7 +7,7 @@
                 v-for="(item, index) in oper" 
                 :key="index" 
                 class="border-0 bg-transparent text-primary p-0 mx-1" 
-                style="cursor: pointer; font-size: 1.2em" 
+                style="cursor: pointer; font-size: 1em" 
                 v-tip:tooltip="item.value.tip"
                 @click="$emit('tr:oper', item.type)" >
                 <i :class="item.value.icon"/>

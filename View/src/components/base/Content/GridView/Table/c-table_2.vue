@@ -2,7 +2,7 @@
     <div class="p-0">
         <!-- headr -->
         <div v-if="!hideHead" class="p-0" :class="{'overflow-auto': isActive}" ref="THead">
-            <table class="table m-0" :class="tableClass" style="table-layout: fixed">
+            <table class="table m-0" :class="tableClass" style="table-layout: fixed" @scroll="isActive && $emit('table:scroll', $event, 'activeTableHeader')">
                 <table-colgroup :colgroup="colgroup" />
                 <table-head 
                     :head="head" 
@@ -15,7 +15,7 @@
             </table>
         </div>
         <!-- body -->
-        <div class="p-0 overflow-auto" style="min-height: 98px" ref="TBody">
+        <div class="p-0 overflow-auto" style="min-height: 98px" ref="TBody" @scroll="$emit('table:scroll', $event, isActive ? 'activeTableBody' : 'fixedTableBody' )">
             <template v-if="!hideData">
                 <table class="table m-0" :class="tableClass" style="table-layout: fixed">
                     <table-colgroup :colgroup="colgroup" />
@@ -34,7 +34,7 @@
             </template>
         </div>
         <!-- footer -->
-        <div v-if="!hideFoot" class="p-0" :class="{'overflow-auto': isActive}" ref="TFoot">
+        <div v-if="!hideFoot" class="p-0" :class="{'overflow-auto': isActive}" ref="TFoot" @scroll="isActive && $emit('table:scroll', $event, 'activeTableFooter')">
             <table class="table m-0" :class="tableClass" style="table-layout: fixed">
                 <table-colgroup :colgroup="colgroup" />
                 <table-foot :foot="foot" />
@@ -170,6 +170,7 @@ div::-webkit-scrollbar {
   width: 0; 
   height: 0;
 }
+
 /* table > tbody > tr {
     background-color: rgba(0, 0, 0, .075)
 } */

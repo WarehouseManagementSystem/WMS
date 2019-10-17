@@ -4,6 +4,7 @@
             <div class="row m-0">
                 <c-table 
                     :list="list" 
+                    ref="fixedTable" 
                     :class="{'col-4': fixedNum > 0}" 
                     :tableClass="tableClass" 
                     :theadClass="theadClass" 
@@ -12,19 +13,22 @@
                     :hideFoot="hideFoot" 
                     :hideSerial="hideSerial" 
                     :selected="selected" 
-                    :selectStatus="selectStatus" /> <!-- fixedTableContainer -->
+                    :selectStatus="selectStatus"
+                    @table:scroll="(event, type) => scroll(event, type)" /> <!-- fixedTableContainer -->
                <c-table 
                     v-if="fixedNum > 0" 
                     :list="list" 
                     isActive 
                     hideSerial 
+                    ref="activeTable" 
                     :class="{'col-8': fixedNum > 0}" 
                     :tableClass="tableClass" 
                     :theadClass="theadClass" 
                     :hideHead="hideHead" 
                     :hideData="hideData" 
                     :hideFoot="hideFoot"
-                    selectStatus="0" /><!-- activeTableContainer -->
+                    selectStatus="0" 
+                    @table:scroll="(event, type) => scroll(event, type)" /><!-- activeTableContainer -->
             </div> <!-- tableContainer -->
         </template>
         <template v-else>
@@ -36,6 +40,7 @@
 </template>
 
 <script>
+import util from '@/util/index.js'
 import utilities from '@/components/utilities/index.js'
 
 import CTable from './Table/c-table_2'
@@ -114,6 +119,8 @@ export default {
     methods: {
         init: async function () {
             await this.initHeight()
+            this.injectionHover(this.$refs.fixedTable.$refs.TBody.children[0].children[1], this.$refs.activeTable.$refs.TBody.children[0].children[1])
+            this.injectionHover(this.$refs.activeTable.$refs.TBody.children[0].children[1], this.$refs.fixedTable.$refs.TBody.children[0].children[1])
         },
         initHeight: function () {
             this.$el.style.height = this.$parent.$el.offsetHeight + 'px'
@@ -123,6 +130,12 @@ export default {
             let TFootHeight = this.$refs.TFoot && this.$refs.TFoot[0] ? this.$refs.TFoot[0].offsetHeight : 0
             let TBodyHeight = this.$parent.$el.offsetHeight - THeadHeight - TFootHeight - 10
             this.$refs.TBody.style.height = TBodyHeight < 0 ? 0 : TBodyHeight + 'px'
+        },
+        injectionHover: function (dom1, dom2) {
+            for (let i = 0; i < dom1.children.length; i++) {
+                dom1.childNodes[i].addEventListener('mouseover', () => util.dom.addClass(dom2.children[i], 'hover'), false)
+                dom1.childNodes[i].addEventListener('mouseout', () => util.dom.removeClass(dom2.children[i], 'hover'), false)
+            }
         },
         getTheadRowCount: function (arr = this.head || [], count = 1) {
             let vm = this
@@ -152,13 +165,13 @@ export default {
             this.syncScroll(xCoord, yCoord)
         },
         syncScroll: function (xCoord, yCoord) {
-            if (this.$refs.fixedTableBody && Math.abs(yCoord) > 1) this.$refs.fixedTableBody.scrollTop = yCoord
-            if (this.$refs.activeTableHeader && Math.abs(xCoord) > 1) this.$refs.activeTableHeader.scrollLeft = xCoord
-            if (this.$refs.activeTableBody) {
-                if (Math.abs(xCoord) > 1) this.$refs.activeTableBody.scrollLeft = xCoord
-                if (Math.abs(yCoord) > 1) this.$refs.activeTableBody.scrollTop = yCoord
+            if (this.$refs.fixedTable.$refs.TBody && Math.abs(yCoord) > 1) this.$refs.fixedTable.$refs.TBody.scrollTop = yCoord
+            if (this.$refs.activeTable.$refs.THead && Math.abs(xCoord) > 1) this.$refs.activeTable.$refs.THead.scrollLeft = xCoord
+            if (this.$refs.activeTable.$refs.TBody) {
+                if (Math.abs(xCoord) > 1) this.$refs.activeTable.$refs.TBody.scrollLeft = xCoord
+                if (Math.abs(yCoord) > 1) this.$refs.activeTable.$refs.TBody.scrollTop = yCoord
             }
-            if (this.$refs.activeTableFooter && Math.abs(xCoord) > 1) this.$refs.activeTableFooter.scrollLeft = xCoord
+            if (this.$refs.activeTable.$refs.TFoot && Math.abs(xCoord) > 1) this.$refs.activeTable.$refs.TFoot.scrollLeft = xCoord
         },
     },
     watch: {

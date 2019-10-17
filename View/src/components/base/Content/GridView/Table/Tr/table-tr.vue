@@ -66,3 +66,9 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+.hover {
+    background-color: rgba(0, 0, 0, .075)
+}
+</style>
