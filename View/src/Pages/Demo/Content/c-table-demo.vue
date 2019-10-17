@@ -1,12 +1,12 @@
 <template>
     <div>
-        <c-table striped hover theadSticky tableBordered theadTheme="dark" selectStatus="0" v-model="selectedOptions" :list="list"  />
+        <c-table striped hover theadSticky tableBordered theadTheme="dark" selectStatus="2" v-model="selectedOptions" :list="list"  />
     </div>
     
 </template>
 
 <script>
-import CTable from '@/components/base/Content/Table/c-table.vue'
+import CTable from '@/components/base/Content/GridView/grid-view.vue'
 
 export default {
     name: 'c-table-demo',
@@ -27,7 +27,7 @@ export default {
                     { title: 'sex', field: 'sex', },
                     { title: 'age', field: 'age', },
                 ],
-                operate: { index: 0, value: [ 'check', 'view', 'edit', 'delete', 'flow' ], },
+                operate: { index: 1, value: [ 'check', 'view', 'edit', 'delete', 'flow' ], },
                 data: [
                     { 
                         id: 'id_1',

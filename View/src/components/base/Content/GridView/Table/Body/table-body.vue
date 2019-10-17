@@ -21,7 +21,7 @@
 <script>
 import utilities from '@/components/utilities/index.js'
 
-import tableTr from './table-tr'
+import tableTr from './../Tr/table-tr'
 
 export default {
     name: 'table-body',

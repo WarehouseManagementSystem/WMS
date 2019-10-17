@@ -24,9 +24,9 @@
 <script>
 import utilities from '@/components/utilities/index.js'
 
-import tableSerialTd from './table-serial-td'
-import tableSelectTd from './table-select-td'
-import tableOperateTd from './table-operate-td'
+import tableSerialTd from './../Td/table-serial-td'
+import tableSelectTd from './../Td/table-select-td'
+import tableOperateTd from './../Td/table-operate-td'
 
 export default {
     name: 'table-head',
