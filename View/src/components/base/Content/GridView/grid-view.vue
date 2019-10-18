@@ -145,7 +145,6 @@ export default {
             await this.injectionHover(this.$refs.activeTable.$refs.TBody.children[0].children[1], this.$refs.fixedTable.$refs.TBody.children[0].children[1])
         },
         initHeight: function () {
-            debugger
             this.$refs.fixedTable.$refs.TBody.style.height = 0 + 'px'
             this.$refs.activeTable.$refs.TBody.style.height = 0 + 'px'
             this.$el.style.height = this.$parent.$el.offsetHeight + 'px'
