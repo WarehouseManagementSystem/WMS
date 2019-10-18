@@ -1,8 +1,8 @@
 <template>
     <div class="p-0">
         <!-- headr -->
-        <div v-if="!hideHead" class="p-0" :class="{'overflow-auto': isActive}" ref="THead">
-            <table class="table m-0" :class="tableClass" style="table-layout: fixed" @scroll="isActive && $emit('table:scroll', $event, 'activeTableHeader')">
+        <div v-if="!hideHead" class="p-0" :class="{'overflow-auto': isActive}" ref="THead" @scroll="isActive && $emit('table:scroll', $event, 'activeTableHeader')">
+            <table class="table m-0" :class="tableClass" style="table-layout: fixed">
                 <table-colgroup :colgroup="colgroup" />
                 <table-head 
                     :head="head" 

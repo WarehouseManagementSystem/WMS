@@ -3,7 +3,7 @@
         <template v-if="!hideData">
             <div class="row m-0">
                 <c-table 
-                    :list="list" 
+                    :list="fixedList" 
                     ref="fixedTable" 
                     :class="{'col-4': fixedNum > 0}" 
                     :tableClass="tableClass" 
@@ -17,7 +17,7 @@
                     @table:scroll="(event, type) => scroll(event, type)" /> <!-- fixedTableContainer -->
                <c-table 
                     v-if="fixedNum > 0" 
-                    :list="list" 
+                    :list="activeList" 
                     isActive 
                     hideSerial 
                     hideSelect 
@@ -92,6 +92,21 @@ export default {
         foot: function () {
             return this.list && this.list.foot || []
         },
+        fixedList: function () {
+            return {
+                head: this.head.slice(0, this.fixedNum),
+                operate: this.list.operate,
+                data: this.data,
+                foot: this.foot,
+            }
+        },
+        activeList: function () {
+            return {
+                head: this.head.slice(this.fixedNum),
+                data: this.data,
+                foot: this.foot,
+            }
+        },
         // hide head
         hideHead: function () {
             return !this.head || this.head.length == 0
@@ -126,17 +141,21 @@ export default {
     methods: {
         init: async function () {
             await this.initHeight()
-            this.injectionHover(this.$refs.fixedTable.$refs.TBody.children[0].children[1], this.$refs.activeTable.$refs.TBody.children[0].children[1])
-            this.injectionHover(this.$refs.activeTable.$refs.TBody.children[0].children[1], this.$refs.fixedTable.$refs.TBody.children[0].children[1])
+            await this.injectionHover(this.$refs.fixedTable.$refs.TBody.children[0].children[1], this.$refs.activeTable.$refs.TBody.children[0].children[1])
+            await this.injectionHover(this.$refs.activeTable.$refs.TBody.children[0].children[1], this.$refs.fixedTable.$refs.TBody.children[0].children[1])
         },
         initHeight: function () {
+            debugger
+            this.$refs.fixedTable.$refs.TBody.style.height = 0 + 'px'
+            this.$refs.activeTable.$refs.TBody.style.height = 0 + 'px'
             this.$el.style.height = this.$parent.$el.offsetHeight + 'px'
 
-            if (!this.$refs.TBody) return
-            let THeadHeight = this.$refs.THead && this.$refs.THead[0] ? this.$refs.THead[0].offsetHeight : 0
-            let TFootHeight = this.$refs.TFoot && this.$refs.TFoot[0] ? this.$refs.TFoot[0].offsetHeight : 0
+            if (!this.$refs.fixedTable.$refs.TBody || !this.$refs.activeTable.$refs.TBody) return
+            let THeadHeight = this.$refs.fixedTable.$refs.THead ? this.$refs.fixedTable.$refs.THead.offsetHeight : 0
+            let TFootHeight = this.$refs.fixedTable.$refs.TFoot ? this.$refs.fixedTable.$refs.TFoot.offsetHeight : 0
             let TBodyHeight = this.$parent.$el.offsetHeight - THeadHeight - TFootHeight - 10
-            this.$refs.TBody.style.height = TBodyHeight < 0 ? 0 : TBodyHeight + 'px'
+            this.$refs.fixedTable.$refs.TBody.style.height = TBodyHeight < 0 ? 0 : TBodyHeight + 'px'
+            this.$refs.activeTable.$refs.TBody.style.height = TBodyHeight < 0 ? 0 : TBodyHeight + 'px'
         },
         injectionHover: function (dom1, dom2) {
             for (let i = 0; i < dom1.children.length; i++) {
@@ -151,6 +170,7 @@ export default {
                 count)
         },
         scroll: function (elment, type) {
+            debugger
             if (!elment.target) return
             const e = elment.target
             let xCoord, yCoord = 0
