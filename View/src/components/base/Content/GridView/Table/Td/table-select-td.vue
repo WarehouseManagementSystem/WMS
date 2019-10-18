@@ -1,5 +1,6 @@
 <template>
     <th 
+        v-if="!hideSelect" 
         class="align-middle text-center"
         style="width: 45px;"
         data-type="select" >
@@ -24,6 +25,7 @@ export default {
     },
     props: {
         checked: Boolean,
+        hideSelect: Boolean,
     },
     watch: {
         checked: function (value) {

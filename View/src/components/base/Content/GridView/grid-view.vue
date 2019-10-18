@@ -12,22 +12,24 @@
                     :hideData="hideData" 
                     :hideFoot="hideFoot" 
                     :hideSerial="hideSerial" 
-                    :selected="selected" 
-                    :selectStatus="selectStatus"
+                    v-model="selectedOptions" 
+                    :selectStatus="selectStatus" 
                     @table:scroll="(event, type) => scroll(event, type)" /> <!-- fixedTableContainer -->
                <c-table 
                     v-if="fixedNum > 0" 
                     :list="list" 
                     isActive 
                     hideSerial 
+                    hideSelect 
                     ref="activeTable" 
                     :class="{'col-8': fixedNum > 0}" 
                     :tableClass="tableClass" 
                     :theadClass="theadClass" 
                     :hideHead="hideHead" 
                     :hideData="hideData" 
-                    :hideFoot="hideFoot"
-                    selectStatus="0" 
+                    :hideFoot="hideFoot" 
+                    :selected="selectedOptions" 
+                    :selectStatus="selectStatus" 
                     @table:scroll="(event, type) => scroll(event, type)" /><!-- activeTableContainer -->
             </div> <!-- tableContainer -->
         </template>
@@ -47,6 +49,11 @@ import CTable from './Table/c-table_2'
 export default {
     name: 'grid-view',
     components: { CTable, },
+    data () {
+        return {
+            selectedOptions: this.selected,
+        }
+    },
     props: {
         list: utilities.props.Object,
         tableTheme: utilities.props.theme,
@@ -174,7 +181,5 @@ export default {
             if (this.$refs.activeTable.$refs.TFoot && Math.abs(xCoord) > 1) this.$refs.activeTable.$refs.TFoot.scrollLeft = xCoord
         },
     },
-    watch: {
-    }
 }
 </script>

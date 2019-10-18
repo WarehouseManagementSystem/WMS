@@ -2,7 +2,7 @@
     <thead>
         <tr>
             <table-serial-td :hideSerial="hideSerial">No.</table-serial-td>
-            <table-select-td v-if="selectStatus == 2" v-model="checked" />
+            <table-select-td :hideSelect="hideSelect || selectStatus != 2" v-model="checked" />
             <template v-for="(col, colIndex) in head" >
                 <table-operate-td  v-if="col.$operate" :operate="col.$operate" :key="colIndex" >Operate</table-operate-td>
                 <th 
@@ -47,6 +47,7 @@ export default {
             default: () => [],
         },
         hideSerial: Boolean,
+        hideSelect: Boolean,
         selectStatus: Number,
     },
     computed: {

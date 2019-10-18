@@ -11,6 +11,7 @@
             :selectedOptions="selectedOptions" 
             :primary-key="primaryKey" 
             :hideSerial="hideSerial" 
+            :hideSelect="hideSelect" 
             @tr:checked="checked => isChecked(checked, row)" 
             @click.native="$emit('tr:click', formatRowData(row))" 
             @tr:oper="data => trOper(data)"
@@ -44,6 +45,7 @@ export default {
         },
         operate: Array,
         hideSerial: Boolean,
+        hideSelect: Boolean,
         selectStatus: Number, // 0: 默认, 1: 单选, 2: 多选
         selected: [Array, Object, ],
         theadCheckboxChecked: Boolean,
@@ -77,7 +79,7 @@ export default {
             let o = {}
             Object.entries(row).map(e => {
                 if (e[0].toString().charAt(0) != '$') {
-                    Object.defineProperty(o, e[0], {value: e[1].value || e[1], writable: false})
+                    Object.defineProperty(o, e[0], {value: e[1].value || e[1], writable: true})
                 }
             })
             return o

@@ -1,11 +1,11 @@
 <template>
     <tr 
-        :class="[row.$class, {'table-active': isSelected }]" 
+        :class="[row.$class, {'table-active': isChecked }]" 
         :style="row.$style" 
         :aria-selected="isSelected" 
         :data-primary-key="primaryKey" >
         <table-serial-td :hideSerial="hideSerial" :number="index" />
-        <table-select-td v-if="selectStatus == 2" v-model="isChecked"/>
+        <table-select-td :hideSelect="hideSelect || selectStatus != 2" v-model="isChecked"/>
         <template v-for="(col, colIndex) in colunms"  >
             <table-operate-td v-if="col.$operate >= 0" :operate="operate" :key="colIndex" @tr:oper="type => $emit('tr:oper', {type: type, data: row})"  />
             <td 
@@ -44,6 +44,7 @@ export default {
         colunms: Array,
         operate: Array,
         hideSerial: Boolean,
+        hideSelect: Boolean,
         selectStatus: Number,
         selectedOptions: [Array, Object],
     },

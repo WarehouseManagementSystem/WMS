@@ -1,6 +1,6 @@
 <template>
     <div>
-        <c-table tableStriped tableHover theadSticky tableBordered theadTheme="dark" selectStatus="0" fixed="2" v-model="selectedOptions" :list="list"  />
+        <c-table tableStriped tableHover theadSticky tableBordered theadTheme="dark" selectStatus="1" fixed="2" v-model="selectedOptions" :list="list"  />
     </div>
     
 </template>

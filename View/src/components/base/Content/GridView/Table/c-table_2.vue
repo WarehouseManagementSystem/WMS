@@ -10,6 +10,7 @@
                     :colunms="fieldColunms" 
                     :operate="operate.value" 
                     :hideSerial="hideSerial" 
+                    :hideSelect="hideSelect" 
                     :selectStatus="Number(selectStatus)"
                     v-model="theadCheckboxChecked" />
             </table>
@@ -25,6 +26,7 @@
                         :primaryKey="primaryKey" 
                         :operate="operate.value" 
                         :hideSerial="hideSerial" 
+                        :hideSelect="hideSelect" 
                         :selectStatus="Number(selectStatus)" 
                         :theadCheckboxChecked="theadCheckboxChecked" 
                         @tr:click="row => $emit('tr:click', row)" 
@@ -57,7 +59,7 @@ export default {
     components: { TableColgroup, TableHead, TableBody, TableFoot },
     model: {
         prop: 'selected',
-        event: 'table:selectedChanged'
+        event: 'table:selected'
     },
     data () {
         return {
@@ -85,6 +87,7 @@ export default {
         hideData: Boolean,
         hideFoot: Boolean,
         hideSerial: Boolean,
+        hideSelect: Boolean,
         selectStatus: {
             type: [String, Number],
             default: 0, // 0: 默认, 1: 单选, 2: 多选
@@ -155,7 +158,7 @@ export default {
             this.selectedOptions = value
         },
         selectedOptions: function (value) {
-            this.$emit('table:selectedChanged', value)
+            this.$emit('table:selected', value)
         },
     }
 }
