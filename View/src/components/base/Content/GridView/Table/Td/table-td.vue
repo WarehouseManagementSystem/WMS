@@ -1,8 +1,8 @@
 <template>
     <td 
         class="align-middle" 
-        :class="[cell.class, col.cellStyle && col.cellStyle(value).class]" 
-        :style="[cell.style, col.cellStyle && col.cellStyle(value).style]" 
+        :class="[cell.class, ObjStyle && ObjStyle.class]" 
+        :style="[cell.style, ObjStyle && ObjStyle.style]" 
         style="min-width: 30px;" 
         :colspan="cell.colspan" 
         :aria-colspan="cell.colspan" 
@@ -23,6 +23,13 @@ export default {
        value: function () {
            return this.cell.value || this.cell
        },
+       ObjStyle: function () {
+           debugger
+            return this.col.cellStyle && typeof this.col.cellStyle  == 'function' 
+                ? this.col.cellStyle(this.value)
+                : this.col.cellStyle
+           
+       }
     },
 }
 </script>

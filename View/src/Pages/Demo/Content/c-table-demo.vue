@@ -16,7 +16,7 @@ export default {
             selectedOptions: null,
             list: {
                 head: [
-                    { title: 'id', field: 'id', colClass: 'text-center', colStyle: "width: 58px;", },
+                    { title: 'id', field: 'id', colClass: 'bg-info', colStyle: "width: 58px;", },
                     // { title: 'name', field: 'name', children: [
                     //     { title: 'first name', field: 'first name', },
                     //     { title: 'last name', field: 'last name', children: [
@@ -24,7 +24,7 @@ export default {
                     //         { title: 'last name1', field: 'last name1', },
                     //     ]},
                     // ]},
-                    { title: 'name', field: 'name',colStyle: "width: 100px;", format: value => 'name_' + value},
+                    { title: 'name', field: 'name',colStyle: "width: 100px;", cellStyle: {class: 'text-center'}, format: value => 'name_' + value, },
                     { title: 'sex', field: 'sex', colStyle: "width: 100px;", },
                     
                     { title: 'age', field: 'age', colStyle: "width: 58px;",  cellStyle: value => {return { class: Number(value) ? 'bg-success' : 'bg-danger' }}},
@@ -38,8 +38,8 @@ export default {
                 data: [
                     { id: 'id_1', name: 'mack', sex: 'man', age: 10, },
                     { 
-                        id: { value: 'id_2', class: 'text-info'}, 
-                        name: { value: 'jack', class: 'text-info'}, 
+                        id: { value: 'id_2', class: 'text-info',}, 
+                        name: { value: 'jack', class: 'text-info',}, 
                         sex: 'man',
                         age: 10,
                     },
