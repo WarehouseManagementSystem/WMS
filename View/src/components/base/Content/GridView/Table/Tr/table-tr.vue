@@ -1,37 +1,39 @@
 <template>
     <tr 
-        :class="[row.$class, {'table-active': isChecked }]" 
-        :style="row.$style" 
+        :class="[row.$class, rowStyle.class && rowStyle.class(row), {'table-active': isChecked }]" 
+        :style="[row.$style, rowStyle.style && rowStyle.style(row)]" 
         :aria-selected="isSelected" 
         :data-primary-key="primaryKey" >
         <table-serial-td :hideSerial="hideSerial" :number="index" />
         <table-select-td :hideSelect="hideSelect || selectStatus != 2" v-model="isChecked"/>
         <template v-for="(col, colIndex) in colunms"  >
             <table-operate-td v-if="col.$operate >= 0" :operate="operate" :key="colIndex" @tr:oper="type => $emit('tr:oper', {type: type, data: row})"  />
-            <td 
+            <!-- <td 
                 v-else 
                 :key="colIndex" 
                 class="align-middle" 
-                :class="row[col] && row[col].class" 
-                :style="row[col] && row[col].style" 
-                :colspan="row[col] && row[col].colspan" 
-                :aria-colspan="row[col] && row[col].colspan" 
-                :rowspan="row[col] && row[col].rowspan" 
-                :aria-rowspan="row[col] && row[col].rowspan" >
-                {{ row[col] && (row[col].value || row[col]) || '-' }}
-            </td>
+                :class="row[col.field] && row[col.field].class" 
+                :style="row[col.field] && row[col.field].style" 
+                :colspan="row[col.field] && row[col.field].colspan" 
+                :aria-colspan="row[col.field] && row[col.field].colspan" 
+                :rowspan="row[col.field] && row[col.field].rowspan" 
+                :aria-rowspan="row[col.field] && row[col.field].rowspan" >
+                {{ col.format ? col.format(row[col.field] && (row[col.field].value || row[col.field])) : row[col.field] && (row[col.field].value || row[col.field]) || '-'}}
+            </td> -->
+            <table-td v-else :key="colIndex" :cell="row[col.field] || '-'" :col="col" />
         </template>
     </tr>
 </template>
 
 <script>
+import tableTd from './../Td/table-td'
 import tableSerialTd from './../Td/table-serial-td'
 import tableSelectTd from './../Td/table-select-td'
 import tableOperateTd from './../Td/table-operate-td'
 
 export default {
     name: 'table-tr',
-    components: { tableSerialTd, tableSelectTd, tableOperateTd, },
+    components: { tableTd, tableSerialTd, tableSelectTd, tableOperateTd, },
     data () {
         return {
             isChecked: this.isSelected,
@@ -42,6 +44,7 @@ export default {
         row: Object,
         index: Number,
         colunms: Array,
+        rowStyle: Object,
         operate: Array,
         hideSerial: Boolean,
         hideSelect: Boolean,

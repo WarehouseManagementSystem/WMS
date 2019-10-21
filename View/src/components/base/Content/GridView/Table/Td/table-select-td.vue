@@ -1,10 +1,9 @@
 <template>
     <th 
         v-if="!hideSelect" 
-        class="align-middle text-center"
-        style="width: 45px;"
+        class="align-middle"
         data-type="select" >
-        <b-checkbox v-model="isChecked" />
+        <b-checkbox class="text-center" v-model="isChecked" />
     </th>
 </template>
 

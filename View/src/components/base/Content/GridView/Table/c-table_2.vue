@@ -22,6 +22,7 @@
                     <table-colgroup :colgroup="colgroup" />
                     <table-body 
                         :data="data" 
+                        :rowStyle="rowStyle" 
                         :colunms="fieldColunms" 
                         :primaryKey="primaryKey" 
                         :operate="operate.value" 
@@ -110,6 +111,9 @@ export default {
         foot: function () {
             return this.list && this.list.foot || []
         },
+        rowStyle: function () {
+            return this.list && this.list.rowStyle || {}
+        },
     },
     mounted () {
         this.init()
@@ -138,19 +142,21 @@ export default {
             this.thead = this.$refs.THead && this.$refs.THead.children[0] && this.$refs.THead.children[0].children[1] || undefined
         },
         InitColgroupAndColunms: function () {
-            if (!this.thead) return
-            let cells = this.thead.children[this.thead.children.length - 1].cells
-            if (!cells) return
-            for (let i = 0; i < cells.length; i++) {
-                if (cells[i].dataset.hide) continue
-                let index = this.hideSerial ? this.operate.index : this.operate.index + 1
-                if (i == index) {
-                    this.colgroup.push({class: 'text-center', style: `width: ${2 * this.operate.value.length < 5 ? 5 : 2 * this.operate.value.length + 1}em;`} )
-                    this.fieldColunms.push({ $operate: this.operate.index })
+            let vm = this
+            if (vm.hideHead) return
+
+            if (!vm.hideSerial) vm.colgroup.push({ class: "text-center", style: "width: 58px;" } )
+            if (vm.selectStatus == 2 && !vm.hideSelect) vm.colgroup.push({ class: "text-center", style: "width: 35px;" } )
+            this.head.forEach(e => {
+                if (e.hide) return
+                if (e.$operate) {
+                    vm.colgroup.push({class: 'text-center', style: `width: ${2 * vm.operate.value.length < 5 ? 5 : 1.8 * vm.operate.value.length + 1}em;`} )
+                    vm.fieldColunms.push({ $operate: vm.operate.index })
+                } else {
+                    vm.colgroup.push({class: e.colClass, style: e.colStyle} )
+                    vm.fieldColunms.push({ field: e.field, format: e.format, cellStyle: e.cellStyle, })
                 }
-                if (cells[i].dataset.type != 'operate') this.colgroup.push({class: cells[i].dataset.colClass, style: cells[i].dataset.colStyle} )
-                if (!['select', 'operate', 'serial'].includes(cells[i].dataset.type)) this.fieldColunms.push(cells[i].dataset.field)
-            }
+            })
         },
     },
     watch: {

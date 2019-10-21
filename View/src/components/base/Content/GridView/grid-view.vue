@@ -5,7 +5,7 @@
                 <c-table 
                     :list="fixedList" 
                     ref="fixedTable" 
-                    :class="{'col-4': fixedNum > 0}" 
+                    :class="fixedNum > 0 ? `col-${fixedSizeNum}` : ''" 
                     :tableClass="tableClass" 
                     :theadClass="theadClass" 
                     :hideHead="hideHead" 
@@ -22,7 +22,7 @@
                     hideSerial 
                     hideSelect 
                     ref="activeTable" 
-                    :class="{'col-8': fixedNum > 0}" 
+                    :class="`col-${12 - fixedSizeNum}`" 
                     :tableClass="tableClass" 
                     :theadClass="theadClass" 
                     :hideHead="hideHead" 
@@ -55,18 +55,22 @@ export default {
         }
     },
     props: {
-        list: utilities.props.Object,
+        list: {
+            ...utilities.props.Object,
+        },
         tableTheme: utilities.props.theme,
         colunms: Array,
         primaryKey: {
             type: [ String, Number ],
             default: 'id',
+            // required: true,
             validator: value => value
         },
         fixed: {
             type: [ String, Number ],
             validator: value => !isNaN(value) && Number(value) > 0
         },
+        fixedSize: utilities.props.size,
         tableSm: Boolean,
         tableHover: Boolean,
         tableStriped: Boolean,
@@ -92,19 +96,35 @@ export default {
         foot: function () {
             return this.list && this.list.foot || []
         },
+        rowStyle: function () {
+            return this.list && this.list.rowStyle || {}
+        },
+        fixedNum: function () {
+            return Number(this.fixed)
+        },
+        fixedSizeNum: function () {
+            if (this.fixedNum <= 0) return 12
+            if (this.fixedSize == 'sm') return 4
+            else if (this.fixedSize == '') return 6
+            else if (this.fixedSize == 'lg') return 9
+            else return 12
+        },
         fixedList: function () {
             return {
-                head: this.head.slice(0, this.fixedNum),
+                head: this.fixedNum > 0 ? this.head.slice(0, this.fixedNum) : this.head,
                 operate: this.list.operate,
                 data: this.data,
                 foot: this.foot,
+                rowStyle: this.rowStyle,
             }
         },
         activeList: function () {
+            if (this.fixedNum <= 0) return {}
             return {
                 head: this.head.slice(this.fixedNum),
                 data: this.data,
                 foot: this.foot,
+                rowStyle: this.rowStyle,
             }
         },
         // hide head
@@ -131,8 +151,29 @@ export default {
         theadClass: function () {
             return this.theadTheme ? `thead-${this.theadTheme}` : ''
         },
-        fixedNum: function () {
-            return Number(this.fixed)
+        fixedTable: function () {
+            return this.$refs && this.$refs.fixedTable
+        },
+        fixedTableTHead: function () {
+            return this.fixedTable && this.fixedTable.$refs && this.fixedTable.$refs.Thead
+        },
+        fixedTableTBody: function () {
+            return this.fixedTable && this.fixedTable.$refs && this.fixedTable.$refs.TBody
+        },
+        fixedTableTFoot: function () {
+            return this.fixedTable && this.fixedTable.$refs && this.fixedTable.$refs.TFoot
+        },
+        activeTable: function () {
+            return this.$refs && this.$refs.activeTable
+        },
+        activeTableTHead: function () {
+            return this.activeTable && this.$refs.activeTable.$refs && this.activeTable.$refs.Thead
+        },
+        activeTableTBody: function () {
+            return this.activeTable && this.$refs.activeTable.$refs && this.activeTable.$refs.TBody
+        },
+        activeTableTFoot: function () {
+            return this.activeTable && this.$refs.activeTable.$refs && this.activeTable.$refs.TFoot
         },
     },
     mounted () {
@@ -141,20 +182,22 @@ export default {
     methods: {
         init: async function () {
             await this.initHeight()
-            await this.injectionHover(this.$refs.fixedTable.$refs.TBody.children[0].children[1], this.$refs.activeTable.$refs.TBody.children[0].children[1])
-            await this.injectionHover(this.$refs.activeTable.$refs.TBody.children[0].children[1], this.$refs.fixedTable.$refs.TBody.children[0].children[1])
+            if (this.fixed > 0) {
+                await this.injectionHover(this.fixedTableTBody.children[0].children[1], this.activeTableTBody.children[0].children[1])
+                await this.injectionHover(this.activeTableTBody.children[0].children[1], this.fixedTableTBody.children[0].children[1])
+            }
         },
         initHeight: function () {
-            this.$refs.fixedTable.$refs.TBody.style.height = 0 + 'px'
-            this.$refs.activeTable.$refs.TBody.style.height = 0 + 'px'
+            if (!this.fixedTableTBody && !this.activeTableTBody) return
+            if (this.fixedTableTBody) this.fixedTableTBody.style.height = 0 + 'px'
+            if (this.activeTableTBody) this.activeTableTBody.style.height = 0 + 'px'
             this.$el.style.height = this.$parent.$el.offsetHeight + 'px'
 
-            if (!this.$refs.fixedTable.$refs.TBody || !this.$refs.activeTable.$refs.TBody) return
             let THeadHeight = this.$refs.fixedTable.$refs.THead ? this.$refs.fixedTable.$refs.THead.offsetHeight : 0
             let TFootHeight = this.$refs.fixedTable.$refs.TFoot ? this.$refs.fixedTable.$refs.TFoot.offsetHeight : 0
             let TBodyHeight = this.$parent.$el.offsetHeight - THeadHeight - TFootHeight - 10
-            this.$refs.fixedTable.$refs.TBody.style.height = TBodyHeight < 0 ? 0 : TBodyHeight + 'px'
-            this.$refs.activeTable.$refs.TBody.style.height = TBodyHeight < 0 ? 0 : TBodyHeight + 'px'
+            if (this.fixedTableTBody) this.fixedTableTBody.style.height = TBodyHeight < 0 ? 0 : TBodyHeight + 'px'
+            if (this.activeTableTBody) this.activeTableTBody.style.height = TBodyHeight < 0 ? 0 : TBodyHeight + 'px'
         },
         injectionHover: function (dom1, dom2) {
             for (let i = 0; i < dom1.children.length; i++) {
@@ -169,7 +212,6 @@ export default {
                 count)
         },
         scroll: function (elment, type) {
-            debugger
             if (!elment.target) return
             const e = elment.target
             let xCoord, yCoord = 0
@@ -191,13 +233,13 @@ export default {
             this.syncScroll(xCoord, yCoord)
         },
         syncScroll: function (xCoord, yCoord) {
-            if (this.$refs.fixedTable.$refs.TBody && Math.abs(yCoord) > 1) this.$refs.fixedTable.$refs.TBody.scrollTop = yCoord
-            if (this.$refs.activeTable.$refs.THead && Math.abs(xCoord) > 1) this.$refs.activeTable.$refs.THead.scrollLeft = xCoord
-            if (this.$refs.activeTable.$refs.TBody) {
-                if (Math.abs(xCoord) > 1) this.$refs.activeTable.$refs.TBody.scrollLeft = xCoord
-                if (Math.abs(yCoord) > 1) this.$refs.activeTable.$refs.TBody.scrollTop = yCoord
+            if (this.fixedTableTBody && Math.abs(yCoord) > 1) this.fixedTableTBody.scrollTop = yCoord
+            if (this.activeTableTHead && Math.abs(xCoord) > 1) this.activeTableTHead.scrollLeft = xCoord
+            if (this.activeTableTBody) {
+                if (Math.abs(xCoord) > 1) this.activeTableTBody.scrollLeft = xCoord
+                if (Math.abs(yCoord) > 1) this.activeTableTBody.scrollTop = yCoord
             }
-            if (this.$refs.activeTable.$refs.TFoot && Math.abs(xCoord) > 1) this.$refs.activeTable.$refs.TFoot.scrollLeft = xCoord
+            if (this.activeTableTFoot && Math.abs(xCoord) > 1) this.activeTableTFoot.scrollLeft = xCoord
         },
     },
 }

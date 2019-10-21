@@ -5,6 +5,7 @@
             :key="rowIndex" 
             :row="row" 
             :index="rowIndex + 1" 
+            :rowStyle="rowStyle" 
             :operate="operate" 
             :colunms="colunms" 
             :selectStatus="selectStatus" 
@@ -43,6 +44,7 @@ export default {
             type: Array,
             default: () => []
         },
+        rowStyle: Object,
         operate: Array,
         hideSerial: Boolean,
         hideSelect: Boolean,

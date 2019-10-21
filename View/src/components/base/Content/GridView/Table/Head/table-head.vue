@@ -9,8 +9,8 @@
                     v-else
                     :key="colIndex" 
                     class="text-center align-middle" 
-                    v-show="useColunms ? colunms.includes(col.field) : !col.hide" 
-                    :data-hide="useColunms ? !colunms.includes(col.field) : col.hide" 
+                    v-show="colunms.includes(col.field) || !col.hide" 
+                    :data-hide="!colunms.includes(col.field) || col.hide" 
                     :data-field="col.field"
                     :data-col-class="col.colClass"
                     :data-col-style="col.colStyle" >
@@ -49,11 +49,6 @@ export default {
         hideSerial: Boolean,
         hideSelect: Boolean,
         selectStatus: Number,
-    },
-    computed: {
-        useColunms: function () {
-            return this.colunms && this.colunms.length > 0
-        },
     },
     watch: {
         checked: function (value) {
