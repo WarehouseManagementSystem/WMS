@@ -24,7 +24,6 @@ export default {
            return this.cell.value || this.cell
        },
        ObjStyle: function () {
-           debugger
             return this.col.cellStyle && typeof this.col.cellStyle  == 'function' 
                 ? this.col.cellStyle(this.value)
                 : this.col.cellStyle

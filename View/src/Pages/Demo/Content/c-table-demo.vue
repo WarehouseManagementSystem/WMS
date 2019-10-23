@@ -17,14 +17,27 @@ export default {
             list: {
                 head: [
                     { title: 'id', field: 'id', colClass: 'bg-info', colStyle: "width: 58px;", },
-                    // { title: 'name', field: 'name', children: [
-                    //     { title: 'first name', field: 'first name', },
-                    //     { title: 'last name', field: 'last name', children: [
-                    //         { title: 'first name1', field: 'first name1', },
-                    //         { title: 'last name1', field: 'last name1', },
-                    //     ]},
-                    // ]},
-                    { title: 'name', field: 'name',colStyle: "width: 100px;", cellStyle: {class: 'text-center'}, format: value => 'name_' + value, },
+                    { title: '1', field: '1', children: [
+                        { title: '1-1', field: '1-1', children: [
+                                { title: '1-2-2-1', field: '1-1-1', },
+                                { title: '1-2-2-2', field: '1-1-2', },
+                            ], },
+                        { title: '1-2', field: '1-2', children: [
+                            { title: '1-2-1', field: '1-2-1', children: [
+                                { title: '1-2-1-1', field: '1-2-1-1', },
+                                { title: '1-2-1-2', field: '1-2-1-2', },
+                            ],},
+                            { title: '1-2-2', field: '1-2-2', hildren: [
+                                { title: '1-2-2-1', field: '1-2-2-1', },
+                                { title: '1-2-2-2', field: '1-2-2-2', },
+                            ], },
+                        ], },
+                        { title: '1-3', field: '1-3', children: [
+                            { title: '1-3-1', field: '1-3-1', },
+                            { title: '1-3-2', field: '1-3-2', },
+                        ]},
+                    ]},
+                    // { title: 'name', field: 'name',colStyle: "width: 100px;", cellStyle: {class: 'text-center'}, format: value => 'name_' + value, },
                     { title: 'sex', field: 'sex', colStyle: "width: 100px;", },
                     
                     { title: 'age', field: 'age', colStyle: "width: 58px;",  cellStyle: value => {return { class: Number(value) ? 'bg-success' : 'bg-danger' }}},

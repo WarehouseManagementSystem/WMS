@@ -1,36 +1,34 @@
 <template>
     <thead>
-        <tr>
-            <table-serial-td :hideSerial="hideSerial">No.</table-serial-td>
-            <table-select-td :hideSelect="hideSelect || selectStatus != 2" v-model="checked" />
-            <template v-for="(col, colIndex) in head" >
-                <table-operate-td  v-if="col.$operate" :operate="col.$operate" :key="colIndex" >Operate</table-operate-td>
-                <th 
-                    v-else
-                    :key="colIndex" 
-                    class="text-center align-middle" 
-                    v-show="colunms.includes(col.field) || !col.hide" 
-                    :data-hide="!colunms.includes(col.field) || col.hide" 
-                    :data-field="col.field"
-                    :data-col-class="col.colClass"
-                    :data-col-style="col.colStyle" >
-                    {{ col.title }}
-                </th>
-            </template>
-        </tr>
+        <template v-for="(headRow, index) in headData">
+            <table-head-tr 
+                v-if="index == 0"
+                :key="index"
+                :row="headRow" 
+                :rowCount="rowCount" 
+                :hideSerial="hideSerial"
+                :hideSelect="hideSelect" 
+                :selectStatus="selectStatus"
+                v-model="checked" />
+            <table-head-tr 
+                v-else
+                :key="index"
+                :row="headRow" 
+                hideSerial
+                hideSelect />
+        </template>
+        
     </thead>
 </template>
 
 <script>
 import utilities from '@/components/utilities/index.js'
 
-import tableSerialTd from './../Td/table-serial-td'
-import tableSelectTd from './../Td/table-select-td'
-import tableOperateTd from './../Td/table-operate-td'
+import TableHeadTr from './../Tr/table-head-tr'
 
 export default {
     name: 'table-head',
-    components: { tableSerialTd, tableSelectTd, tableOperateTd, },
+    components: { TableHeadTr, },
     model: {
         prop: 'checked',
         event: 'change'
@@ -38,17 +36,64 @@ export default {
     data () {
         return {
             checked: false,
+            headData: [],
+            rowCount: 1,
         }
     },
     props: {
         head: utilities.props.list,
-        colunms: {
-            type: Array,
-            default: () => [],
-        },
         hideSerial: Boolean,
         hideSelect: Boolean,
         selectStatus: Number,
+    },
+    mounted () {
+        this.getRowCount()
+        this.initHeadData()
+        this.getHeadData()
+    },
+    methods: {
+        getRowCount: function () {
+            this.rowCount = this.getTheadRowCount(this.head)
+        },
+        initHeadData: function (head = this.head) {
+            if (!head || head.length == 0) return []
+            let rowspan = this.getTheadRowCount(head)
+            let vm = this
+            head.forEach(e => {
+                let colspan = vm.getTheadColCount(e)
+                e.colspan = colspan > 1 ? colspan : null
+                if (e.children) {
+                    let c_rowspan = vm.rowCount - rowspan - vm.getTheadRowCount(e.children)
+                    e.rowspan = c_rowspan > 1 ? c_rowspan : null
+                    vm.initHeadData(e.children)
+                } else {
+                    let c_rowspan = vm.rowCount == rowspan ? vm.rowCount : vm.rowCount - rowspan
+                    e.rowspan = c_rowspan > 1 ? c_rowspan : null
+                }
+            })
+        },
+        getHeadData: function (head = this.head) {
+            if (!head || head.length == 0) return []
+            this.headData.push([...head])
+            this.getHeadData(head.filter(e => e.children).map(e => e.children).flat())
+        },
+        getTheadRowCount: function (arr = [], count = 1) {
+            return Math.max(...arr.map(e => e.children ? this.getTheadRowCount(e.children, count + 1) : count))
+            // const vm = this
+            // return arr.reduce(
+            //     (acc, cur) => cur.children ? vm.getTheadRowCount(cur.children, acc + 1) : acc,
+            //     count)
+        },
+        getTheadColCount: function (obj = {}, count = 1) {
+            if (obj.children) {
+                return obj.children.filter(e => !e.children).length + obj.children.filter(e => e.children).reduce( (acc, cur) => acc + this.getTheadColCount(cur), 0) 
+            }
+            return count
+            // const vm = this
+            // return arr.reduce(
+            //     (acc, cur) => cur.children ? vm.getTheadColCount(cur.children, acc + cur.children.length) : 1,
+            //     count)
+        },
     },
     watch: {
         checked: function (value) {

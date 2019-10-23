@@ -4,10 +4,18 @@
         :style="[row.$style, rowStyle.style && rowStyle.style(row)]" 
         :aria-selected="isSelected" 
         :data-primary-key="primaryKey" >
-        <table-serial-td :hideSerial="hideSerial" :number="index" />
-        <table-select-td :hideSelect="hideSelect || selectStatus != 2" v-model="isChecked"/>
+        <table-serial-td 
+            :hideSerial="hideSerial" 
+            :number="index" />
+        <table-select-td 
+            :hideSelect="hideSelect || selectStatus != 2" 
+            v-model="isChecked"/>
         <template v-for="(col, colIndex) in colunms"  >
-            <table-operate-td v-if="col.$operate >= 0" :operate="operate" :key="colIndex" @tr:oper="type => $emit('tr:oper', {type: type, data: row})"  />
+            <table-operate-td 
+                :key="colIndex" 
+                v-if="col.$operate >= 0" 
+                :operate="operate" 
+                @tr:oper="type => $emit('tr:oper', {type: type, data: row})"  />
             <!-- <td 
                 v-else 
                 :key="colIndex" 

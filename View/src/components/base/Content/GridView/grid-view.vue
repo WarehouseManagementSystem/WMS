@@ -127,15 +127,12 @@ export default {
                 rowStyle: this.rowStyle,
             }
         },
-        // hide head
         hideHead: function () {
             return !this.head || this.head.length == 0
         },
-        // hide body
         hideData: function () {
             return !this.data || this.data.length == 0
         },
-        // hide foot
         hideFoot: function () {
             return !this.foot || this.foot.length == 0
         },
@@ -204,12 +201,6 @@ export default {
                 dom1.childNodes[i].addEventListener('mouseover', () => util.dom.addClass(dom2.children[i], 'hover'), false)
                 dom1.childNodes[i].addEventListener('mouseout', () => util.dom.removeClass(dom2.children[i], 'hover'), false)
             }
-        },
-        getTheadRowCount: function (arr = this.head || [], count = 1) {
-            let vm = this
-            return arr.reduce(
-                (acc, cur) => cur.children ? vm.getTheadRowCount(cur.children, acc + 1) : acc,
-                count)
         },
         scroll: function (elment, type) {
             if (!elment.target) return

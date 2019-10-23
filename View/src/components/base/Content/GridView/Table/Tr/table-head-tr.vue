@@ -1,31 +1,37 @@
 <template>
     <tr>
-        <table-serial-td :hideSerial="hideSerial">No.</table-serial-td>
-        <table-select-td :hideSelect="hideSelect || selectStatus != 2" v-model="checked" />
-        <template v-for="(col, colIndex) in tr" >
-            <table-operate-td  v-if="col.$operate" :operate="col.$operate" :key="colIndex" >Operate</table-operate-td>
+        <table-serial-td 
+            :hideSerial="hideSerial"
+            :rowspan="rowCount" 
+            :aria-rowspan="rowCount" >No.</table-serial-td>
+        <table-select-td 
+            :hideSelect="hideSelect || selectStatus != 2" 
+            :rowspan="rowCount" 
+            :aria-rowspan="rowCount" 
+            v-model="isChecked" />
+        <template v-for="(cell, cellIndex) in row" >
+            <table-operate-td  
+                v-if="cell.$operate" 
+                :operate="cell.$operate" 
+                :key="cellIndex" 
+                :rowspan="rowCount" 
+                :aria-rowspan="rowCount" >Operate</table-operate-td>
             <th 
                 v-else
-                :key="colIndex" 
+                :key="cellIndex" 
                 class="text-center align-middle" 
-                v-show="useColunms ? colunms.includes(col.field) : !col.hide" 
-                :data-hide="useColunms ? !colunms.includes(col.field) : col.hide" 
-                :data-field="col.field"
-                :data-col-class="col.colClass"
-                :data-col-style="col.colStyle" >
-                {{ col.title }}
+                :rowspan="cell.rowspan" 
+                :aria-rowspan="cell.rowspan" 
+                :colspan="cell.colspan" 
+                :aria-colspan="cell.colspan" 
+                :data-field="cell.field" >
+                {{ cell.title }}
             </th>
         </template>
     </tr>
 </template>
 
 <script>
-/** 
- * 暂
- * 未  2019-10-18
- * 使  cml
- * 用
- */
 import utilities from '@/components/utilities/index.js'
 
 import tableSerialTd from './../Td/table-serial-td'
@@ -41,26 +47,22 @@ export default {
     },
     data () {
         return {
-            checked: false,
+            isChecked: this.checked,
         }
     },
     props: {
-        tr: utilities.props.list,
-        colunms: {
-            type: Array,
-            default: () => [],
-        },
+        row: utilities.props.list,
+        checked: Boolean,
+        rowCount: Number,
         hideSerial: Boolean,
         hideSelect: Boolean,
         selectStatus: Number,
     },
-    computed: {
-        useColunms: function () {
-            return this.colunms && this.colunms.length > 0
-        },
-    },
     watch: {
         checked: function (value) {
+            this.isChecked = value
+        },
+        isChecked: function (value) {
             this.$emit('change', value)
         },
     }
