@@ -63,11 +63,11 @@ export default {
                 let colspan = vm.getTheadColCount(e)
                 e.colspan = colspan > 1 ? colspan : null
                 if (e.children) {
-                    let c_rowspan = vm.rowCount - rowspan - vm.getTheadRowCount(e.children)
+                    let c_rowspan = vm.rowCount - rowspan - vm.getTheadRowCount(e.children) - 1
                     e.rowspan = c_rowspan > 1 ? c_rowspan : null
                     vm.initHeadData(e.children)
                 } else {
-                    let c_rowspan = vm.rowCount == rowspan ? vm.rowCount : vm.rowCount - rowspan
+                    let c_rowspan = vm.rowCount == rowspan ? vm.rowCount : rowspan == 1 ? vm.rowCount - rowspan : rowspan
                     e.rowspan = c_rowspan > 1 ? c_rowspan : null
                 }
             })
@@ -79,20 +79,11 @@ export default {
         },
         getTheadRowCount: function (arr = [], count = 1) {
             return Math.max(...arr.map(e => e.children ? this.getTheadRowCount(e.children, count + 1) : count))
-            // const vm = this
-            // return arr.reduce(
-            //     (acc, cur) => cur.children ? vm.getTheadRowCount(cur.children, acc + 1) : acc,
-            //     count)
         },
         getTheadColCount: function (obj = {}, count = 1) {
-            if (obj.children) {
-                return obj.children.filter(e => !e.children).length + obj.children.filter(e => e.children).reduce( (acc, cur) => acc + this.getTheadColCount(cur), 0) 
-            }
-            return count
-            // const vm = this
-            // return arr.reduce(
-            //     (acc, cur) => cur.children ? vm.getTheadColCount(cur.children, acc + cur.children.length) : 1,
-            //     count)
+            return obj.children
+                ? obj.children.filter(e => !e.children).length + obj.children.filter(e => e.children).reduce( (acc, cur) => acc + this.getTheadColCount(cur), 0) 
+                : count
         },
     },
     watch: {
