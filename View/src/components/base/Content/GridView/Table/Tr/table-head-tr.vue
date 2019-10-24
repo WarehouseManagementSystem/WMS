@@ -25,8 +25,7 @@
                 :colspan="cell.colspan" 
                 :aria-colspan="cell.colspan" 
                 :data-field="cell.field" >
-                {{ cell.title }}
-            </th>
+                {{ cell.title }} </th>
         </template>
     </tr>
 </template>

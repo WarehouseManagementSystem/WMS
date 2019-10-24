@@ -189,12 +189,13 @@ export default {
             if (this.fixedTableTBody) this.fixedTableTBody.style.height = 0 + 'px'
             if (this.activeTableTBody) this.activeTableTBody.style.height = 0 + 'px'
             this.$el.style.height = this.$parent.$el.offsetHeight + 'px'
-
-            let THeadHeight = this.$refs.fixedTable.$refs.THead ? this.$refs.fixedTable.$refs.THead.offsetHeight : 0
-            let TFootHeight = this.$refs.fixedTable.$refs.TFoot ? this.$refs.fixedTable.$refs.TFoot.offsetHeight : 0
-            let TBodyHeight = this.$parent.$el.offsetHeight - THeadHeight - TFootHeight - 10
-            if (this.fixedTableTBody) this.fixedTableTBody.style.height = TBodyHeight < 0 ? 0 : TBodyHeight + 'px'
-            if (this.activeTableTBody) this.activeTableTBody.style.height = TBodyHeight < 0 ? 0 : TBodyHeight + 'px'
+            this.$nextTick(function () {
+                let THeadHeight = this.$refs.fixedTable.$refs.THead ? this.$refs.fixedTable.$refs.THead.offsetHeight : 0
+                let TFootHeight = this.$refs.fixedTable.$refs.TFoot ? this.$refs.fixedTable.$refs.TFoot.offsetHeight : 0
+                let TBodyHeight = this.$parent.$el.offsetHeight - THeadHeight - TFootHeight - 10
+                if (this.fixedTableTBody) this.fixedTableTBody.style.height = TBodyHeight < 0 ? 0 : TBodyHeight + 'px'
+                if (this.activeTableTBody) this.activeTableTBody.style.height = TBodyHeight < 0 ? 0 : TBodyHeight + 'px'
+            })
         },
         injectionHover: function (dom1, dom2) {
             for (let i = 0; i < dom1.children.length; i++) {

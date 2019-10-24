@@ -3,7 +3,7 @@
         <!-- headr -->
         <div v-if="!hideHead" class="p-0" :class="{'overflow-auto': isActive}" ref="THead" @scroll="isActive && $emit('table:scroll', $event, 'activeTableHeader')">
             <table class="table table-sm m-0" :class="tableClass" style="table-layout: fixed">
-                <!-- <table-colgroup :colgroup="colgroup" /> -->
+                <table-colgroup :colgroup="colgroup" />
                 <table-head 
                     :head="head" 
                     :class="theadClass" 
@@ -64,9 +64,6 @@ export default {
     },
     data () {
         return {
-            status: 'default',
-            operate: {},
-            thead: undefined,
             colgroup: [],
             fieldColunms: [],
             theadRowCount: 1,
@@ -97,13 +94,25 @@ export default {
         selected: [Array, Object, ],
     },
     computed: {
+        status: function () {
+            return !this.isActive && Number(this.selectStatus) != 0 ? Number(this.selectStatus) : 'default'
+        },
+        operate: function () {
+            if (this.isActive || this.selectStatus == 2 || !this.list || !this.list.operate) return {}
+            let index = this.list.operate.index >= 0 ? this.list.operate.index : this.list.head.length
+            let value = this.list.operate.value && this.list.operate.value.forEach && this.list.operate.value
+                .filter(e => config.ui.table.operate[e].permissions(this.status)) || []
+                debugger
+            let n = Math.min(...this.list.head.map((e, index) => { return e.children ? index : Infinity}))
+            if (index > n) index = n
+            return { index: index, value: value }
+        },
         head: function () {
+            let arr = Array.from(this.list && this.list.head || [])
             if (!this.isActive && this.selectStatus != 2 && this.operate && this.operate.index >= 0 && this.operate.value) {
-                let head = Array.from(this.list.head)
-                head.splice(this.operate.index, 0, {$operate: this.operate.value })
-                return head
+                arr.splice(this.operate.index, 0, { $operate: this.operate.value })
             }
-            return this.list && this.list.head || []
+            return arr
         },
         data: function () {
             return this.list && this.list.data || []
@@ -120,26 +129,7 @@ export default {
     },
     methods: {
         init: async function () {
-            if (!this.isActive) {
-                await this.initStatus()
-                await this.initOperate()
-            }
-            await this.getThead()
             await this.InitColgroupAndColunms()
-        },
-        initStatus: function () {
-            if (Number(this.selectStatus) != 0) this.status = Number(this.selectStatus)
-        },
-        initOperate: function () {
-            if (this.selectStatus == 2 || !this.list || !this.list.operate) return {}
-            let index = this.list.operate.index >= 0 ? this.list.operate.index : this.list.head.length
-            let value = this.list.operate.value && this.list.operate.value.forEach && this.list.operate.value
-                .filter(e => config.ui.table.operate[e].permissions(this.status)) || []
-            if (index > (this.list.head && this.list.head.length)) index = this.list.head.length
-            this.operate = { index: index, value: value }
-        },
-        getThead: function () {
-            this.thead = this.$refs.THead && this.$refs.THead.children[0] && this.$refs.THead.children[0].children[1] || undefined
         },
         InitColgroupAndColunms: function () {
             let vm = this
@@ -147,8 +137,9 @@ export default {
 
             if (!vm.hideSerial) vm.colgroup.push({ class: "text-center", style: "width: 58px;" } )
             if (vm.selectStatus == 2 && !vm.hideSelect) vm.colgroup.push({ class: "text-center", style: "width: 35px;" } )
-            this.head.forEach(e => {
-                if (e.hide) return
+            
+            let lastColunms = this.getLastColunms()
+            lastColunms.forEach(e => {
                 if (e.$operate) {
                     vm.colgroup.push({class: 'text-center', style: `width: ${2 * vm.operate.value.length < 5 ? 5 : 1.8 * vm.operate.value.length + 1}em;`} )
                     vm.fieldColunms.push({ $operate: vm.operate.index })
@@ -157,6 +148,13 @@ export default {
                     vm.fieldColunms.push({ field: e.field, format: e.format, cellStyle: e.cellStyle, })
                 }
             })
+        },
+        getLastColunms: function (head = this.head) {
+            let arr = []
+            head.forEach(e => {
+                e.children ? arr.push(...this.getLastColunms(e.children)) : arr.push(e)
+            })
+            return arr
         },
     },
     watch: {

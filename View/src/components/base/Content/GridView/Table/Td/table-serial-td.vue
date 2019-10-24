@@ -1,7 +1,7 @@
 <template>
     <th 
         v-if="!hideSerial" 
-        class="align-middle"
+        class="align-middle text-center"
         data-type="serial">
         <slot>{{ number }}</slot>
     </th>
