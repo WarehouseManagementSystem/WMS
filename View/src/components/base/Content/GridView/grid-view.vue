@@ -34,8 +34,9 @@
             </div> <!-- tableContainer -->
         </template>
         <template v-else>
-            <div class="d-flex h-100 align-items-center justify-content-center">
-                No Data
+            <div class="text-center h-100 align-items-center justify-content-center">
+                <p class="display-4">No Related Data</p>
+                <small class="text-secondary"><i class="text-primary px-1" :class="icon.info"></i>No related data found or Data format error</small>
             </div>
         </template>
     </div> <!-- gridView -->
@@ -43,9 +44,10 @@
 
 <script>
 import util from '@/util/index.js'
+import config from '@/config/index.js'
 import utilities from '@/components/utilities/index.js'
 
-import CTable from './Table/c-table_2'
+import CTable from './Table/c-table'
 export default {
     name: 'grid-view',
     components: { CTable, },
@@ -87,6 +89,9 @@ export default {
         selected: [Array, Object, ],
     },
     computed: {
+        icon: function () {
+            return config.ui.icon
+        },
         head: function () {
             return this.list && this.list.head || []
         },
@@ -131,7 +136,7 @@ export default {
             return !this.head || this.head.length == 0
         },
         hideData: function () {
-            return !this.data || this.data.length == 0
+            return !this.data || this.data.length == 0 || this.hideHead
         },
         hideFoot: function () {
             return !this.foot || this.foot.length == 0

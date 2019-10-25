@@ -55,20 +55,36 @@ export default {
         getRowCount: function () {
             this.rowCount = this.getTheadRowCount(this.head)
         },
-        initHeadData: function (head = this.head) {
+        // initHeadData: function (head = this.head) {
+        //     if (!head || head.length == 0) return []
+        //     let rowspan = this.getTheadRowCount(head)
+        //     let vm = this
+        //     head.forEach(e => {
+        //         let colspan = vm.getTheadColCount(e)
+        //         e.colspan = colspan > 1 ? colspan : null
+        //         if (e.children) {
+        //             let c_rowspan = vm.rowCount - rowspan - vm.getTheadRowCount(e.children) - 1
+        //             e.rowspan = c_rowspan > 1 ? c_rowspan : null
+        //             vm.initHeadData(e.children)
+        //         } else {
+        //             debugger
+        //             let c_rowspan = vm.rowCount == rowspan ? vm.rowCount : vm.rowCount - rowspan + 1 == 1 ? rowspan : vm.rowCount - rowspan + 1// vm.rowCount == rowspan ? vm.rowCount : rowspan == 1 ? vm.rowCount - rowspan : rowspan
+        //             e.rowspan = c_rowspan > 1 ? c_rowspan : null
+        //         }
+        //     })
+        // },
+        initHeadData: function (head = this.head, index = 0) {
             if (!head || head.length == 0) return []
-            let rowspan = this.getTheadRowCount(head)
             let vm = this
+            let count = 0
             head.forEach(e => {
-                let colspan = vm.getTheadColCount(e)
+                let colspan = vm.getCellColCount(e)
+                let rowspan = vm.getCellRowCount(e, index)
                 e.colspan = colspan > 1 ? colspan : null
+                e.rowspan = rowspan > 1 ? rowspan : null
                 if (e.children) {
-                    let c_rowspan = vm.rowCount - rowspan - vm.getTheadRowCount(e.children) - 1
-                    e.rowspan = c_rowspan > 1 ? c_rowspan : null
-                    vm.initHeadData(e.children)
-                } else {
-                    let c_rowspan = vm.rowCount == rowspan ? vm.rowCount : rowspan == 1 ? vm.rowCount - rowspan : rowspan
-                    e.rowspan = c_rowspan > 1 ? c_rowspan : null
+                    count++ // 计算所在的行数
+                    vm.initHeadData(e.children, index + (count == 1 ? 1 : 0))
                 }
             })
         },
@@ -80,9 +96,12 @@ export default {
         getTheadRowCount: function (arr = [], count = 1) {
             return Math.max(...arr.map(e => e.children ? this.getTheadRowCount(e.children, count + 1) : count))
         },
-        getTheadColCount: function (obj = {}, count = 1) {
+        getCellRowCount: function (obj = {}, index) {
+            return obj.children ? this.rowCount - (this.rowCount - index) - this.getTheadRowCount(obj.children) : this.rowCount - index + 2
+        },
+        getCellColCount: function (obj = {}, count = 1) {
             return obj.children
-                ? obj.children.filter(e => !e.children).length + obj.children.filter(e => e.children).reduce( (acc, cur) => acc + this.getTheadColCount(cur), 0) 
+                ? obj.children.filter(e => !e.children).length + obj.children.filter(e => e.children).reduce( (acc, cur) => acc + this.getCellColCount(cur), 0) 
                 : count
         },
     },

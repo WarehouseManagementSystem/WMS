@@ -102,7 +102,6 @@ export default {
             let index = this.list.operate.index >= 0 ? this.list.operate.index : this.list.head.length
             let value = this.list.operate.value && this.list.operate.value.forEach && this.list.operate.value
                 .filter(e => config.ui.table.operate[e].permissions(this.status)) || []
-                debugger
             let n = Math.min(...this.list.head.map((e, index) => { return e.children ? index : Infinity}))
             if (index > n) index = n
             return { index: index, value: value }
