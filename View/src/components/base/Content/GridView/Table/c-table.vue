@@ -7,11 +7,13 @@
                 <table-head 
                     :head="head" 
                     :class="theadClass" 
+                    :sortObj="sortObj" 
                     :colunms="fieldColunms" 
                     :operate="operate.value" 
                     :hideSerial="hideSerial" 
                     :hideSelect="hideSelect" 
-                    :selectStatus="Number(selectStatus)"
+                    :selectStatus="Number(selectStatus)" 
+                    @table:sort="cell => $emit('table:sort', cell)" 
                     v-model="theadCheckboxChecked" />
             </table>
         </div>
@@ -78,6 +80,7 @@ export default {
             default: 'id',
             validator: value => value
         },
+        sortObj: Object,
         tableClass: String,
         theadClass: String,
         isActive: Boolean,

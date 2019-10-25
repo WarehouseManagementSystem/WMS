@@ -81,7 +81,7 @@ export default {
             let o = {}
             Object.entries(row).map(e => {
                 if (e[0].toString().charAt(0) != '$') {
-                    Object.defineProperty(o, e[0], {value: e[1].value || e[1], writable: true})
+                    this.$set(o, e[0], e[1].value || e[1])
                 }
             })
             return o

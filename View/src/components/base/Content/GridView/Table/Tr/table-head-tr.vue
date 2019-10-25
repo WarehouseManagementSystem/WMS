@@ -16,16 +16,12 @@
                 :key="cellIndex" 
                 :rowspan="rowCount" 
                 :aria-rowspan="rowCount" >Operate</table-operate-td>
-            <th 
+            <table-head-th 
                 v-else
                 :key="cellIndex" 
-                class="text-center align-middle" 
-                :rowspan="cell.rowspan" 
-                :aria-rowspan="cell.rowspan" 
-                :colspan="cell.colspan" 
-                :aria-colspan="cell.colspan" 
-                :data-field="cell.field" >
-                {{ cell.title }} </th>
+                :cell="cell" 
+                :sortObj="sortObj" 
+                @table:sort="cell => $emit('table:sort', cell)" />
         </template>
     </tr>
 </template>
@@ -36,10 +32,11 @@ import utilities from '@/components/utilities/index.js'
 import tableSerialTd from './../Td/table-serial-td'
 import tableSelectTd from './../Td/table-select-td'
 import tableOperateTd from './../Td/table-operate-td'
+import tableHeadTh from './../Td/table-head-th'
 
 export default {
     name: 'table-head-tr',
-    components: { tableSerialTd, tableSelectTd, tableOperateTd, },
+    components: { tableSerialTd, tableSelectTd, tableOperateTd, tableHeadTh, },
     model: {
         prop: 'checked',
         event: 'change'
@@ -56,6 +53,7 @@ export default {
         hideSerial: Boolean,
         hideSelect: Boolean,
         selectStatus: Number,
+        sortObj: Object,
     },
     watch: {
         checked: function (value) {

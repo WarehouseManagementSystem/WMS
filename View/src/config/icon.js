@@ -13,6 +13,8 @@ export default {
     view: 'fas fa-eye',// table operate view - far fa-eye
     edit: 'fas fa-pencil-alt', // table operate edit - fas fa-edit | far fa-edit
     delete: 'fas fa-trash-alt', // table operate edit - far fa-trash-alt
-    flow: 'fas fa-paper-plane' // table operate flow
-
+    flow: 'fas fa-paper-plane', // table operate flow
+    sort: 'fas fa-sort', // table sort
+    sortUp: "fas fa-sort-up", // table sort up
+    sortDown: 'fas fa-sort-down', // table sort down
 }

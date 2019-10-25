@@ -18,41 +18,23 @@ export default {
                 head: [
                     { title: 'id', field: 'id', colClass: 'bg-info', colStyle: "width: 58px;", },
                     { title: 'name', field: 'name',colStyle: "width: 100px;", format: value => 'name_' + value, },
-                    { title: 'sex', field: 'sex', colStyle: "width: 100px;", },
+                    { title: 'sex', field: 'sex', colStyle: "width: 100px;", sort: true,},
                     { title: 'age', field: 'age', colStyle: "width: 58px;",  cellStyle: value => {return { class: Number(value) ? 'bg-success' : 'bg-danger' }}},
                     { title: '1', field: '1', children: [
                         { title: '1-1', field: '1-1', children: [
                             { title: '1-1-1', field: '1-1-1', },
                             { title: '1-1-2', field: '1-1-2', },
                         ], },
-                        { title: '1-2', field: '1-2', children: [
-                            { title: '1-2-1', field: '1-2-1', children: [
-                                { title: '1-2-1-1', field: '1-2-1-1', children: [
-                                    { title: '1-2-1-1-1', field: '1-2-1-1-1', },
-                                    { title: '1-2-1-1-2', field: '1-2-1-1-2', children: [
-                                        { title: '1-2-1-3-1', field: '1-2-1-1', },
-                                        { title: '1-2-1-3-1', field: '1-2-1-2', },
-                                    ],},
-                                ],},
-                                { title: '1-2-1-2', field: '1-2-1-2', },
-                            ],},
-                            { title: '1-2-2', field: '1-2-2', children: [
-                                { title: '1-2-2-1', field: '1-2-2-1', },
-                                { title: '1-2-2-2', field: '1-2-2-2', children: [
-                                    { title: '1-2-2-2-1', field: '1-2-2-2-1', },
-                                    { title: '1-2-2-2-2', field: '1-2-2-2-2', },
-                                ],},
-                            ], },
-                        ], },
+                        { title: '1-2', field: '1-2', },
                         { title: '1-3', field: '1-3', hildren: [
                             { title: '1-3-1', field: '1-3-1', },
                             { title: '1-3-2', field: '1-3-2', },
                         ],},
                     ]},
-                    { title: '2', field: '2', children: [
+                    { title: '2', field: '2', sort: true, children: [
                         { title: '2-1', field: '2-1', children: [
-                            { title: '2-1-1', field: '2-1-1', },
-                            { title: '2-1-2', field: '2-1-2', },
+                            { title: '2-1-1', field: '2-1-1', sort: true, },
+                            { title: '2-1-2', field: '2-1-2', sort: true, },
                         ], },
                         { title: '2-2', field: '2-2', children: [
                             { title: '2-2-1', field: '2-2-1',},

@@ -8,14 +8,18 @@
                 :rowCount="rowCount" 
                 :hideSerial="hideSerial"
                 :hideSelect="hideSelect" 
-                :selectStatus="selectStatus"
+                :selectStatus="selectStatus" 
+                :sortObj="sortObj" 
+                @table:sort="cell => $emit('table:sort', cell)"
                 v-model="checked" />
             <table-head-tr 
                 v-else
                 :key="index"
                 :row="headRow" 
                 hideSerial
-                hideSelect />
+                hideSelect 
+                :sortObj="sortObj" 
+                @table:sort="cell => $emit('table:sort', cell)" />
         </template>
         
     </thead>
@@ -45,6 +49,7 @@ export default {
         hideSerial: Boolean,
         hideSelect: Boolean,
         selectStatus: Number,
+        sortObj: Object,
     },
     mounted () {
         this.getRowCount()
@@ -79,12 +84,12 @@ export default {
             let hasChildren = head.some(e => e.children)
             index += hasChildren ? 1 : 0
             head.forEach(e => {
-                debugger
                 let colspan = vm.getCellColCount(e)
                 let rowspan = vm.getCellRowCount(e, hasChildren ? index - 1 : index)
                 e.colspan = colspan > 1 ? colspan : null
                 e.rowspan = rowspan > 1 ? rowspan : null
                 if (e.children) {
+                    if (e.sort) e.sort = false
                     vm.initHeadData(e.children, index)
                 }
             })

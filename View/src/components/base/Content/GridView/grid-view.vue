@@ -6,6 +6,7 @@
                     :list="fixedList" 
                     ref="fixedTable" 
                     :class="fixedNum > 0 ? `col-${fixedSizeNum}` : ''" 
+                    :sortObj="sortObj" 
                     :tableClass="tableClass" 
                     :theadClass="theadClass" 
                     :hideHead="hideHead" 
@@ -14,6 +15,7 @@
                     :hideSerial="hideSerial" 
                     v-model="selectedOptions" 
                     :selectStatus="selectStatus" 
+                    @table:sort="cell => sort(cell)"
                     @table:scroll="(event, type) => scroll(event, type)" /> <!-- fixedTableContainer -->
                <c-table 
                     v-if="fixedNum > 0" 
@@ -23,6 +25,7 @@
                     hideSelect 
                     ref="activeTable" 
                     :class="`col-${12 - fixedSizeNum}`" 
+                    :sortObj="sortObj" 
                     :tableClass="tableClass" 
                     :theadClass="theadClass" 
                     :hideHead="hideHead" 
@@ -30,6 +33,7 @@
                     :hideFoot="hideFoot" 
                     :selected="selectedOptions" 
                     :selectStatus="selectStatus" 
+                    @table:sort="cell => sort(cell)"
                     @table:scroll="(event, type) => scroll(event, type)" /><!-- activeTableContainer -->
             </div> <!-- tableContainer -->
         </template>
@@ -54,6 +58,7 @@ export default {
     data () {
         return {
             selectedOptions: this.selected,
+            sortObj: {},
         }
     },
     props: {
@@ -237,6 +242,10 @@ export default {
                 if (Math.abs(yCoord) > 1) this.activeTableTBody.scrollTop = yCoord
             }
             if (this.activeTableTFoot && Math.abs(xCoord) > 1) this.activeTableTFoot.scrollLeft = xCoord
+        },
+        sort: function (cell) {
+            this.$set(this.sortObj, cell.field, this.sortObj && this.sortObj[cell.field] == 'asc' ? 'desc' : 'asc')
+            this.$emit('table:sort', {sort: this.sortObj, cell: cell} )
         },
     },
 }
