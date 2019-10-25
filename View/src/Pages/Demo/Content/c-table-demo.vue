@@ -27,7 +27,13 @@ export default {
                         ], },
                         { title: '1-2', field: '1-2', children: [
                             { title: '1-2-1', field: '1-2-1', children: [
-                                { title: '1-2-1-1', field: '1-2-1-1', },
+                                { title: '1-2-1-1', field: '1-2-1-1', children: [
+                                    { title: '1-2-1-1-1', field: '1-2-1-1-1', },
+                                    { title: '1-2-1-1-2', field: '1-2-1-1-2', children: [
+                                        { title: '1-2-1-3-1', field: '1-2-1-1', },
+                                        { title: '1-2-1-3-1', field: '1-2-1-2', },
+                                    ],},
+                                ],},
                                 { title: '1-2-1-2', field: '1-2-1-2', },
                             ],},
                             { title: '1-2-2', field: '1-2-2', children: [

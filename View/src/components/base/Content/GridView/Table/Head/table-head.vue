@@ -76,15 +76,16 @@ export default {
         initHeadData: function (head = this.head, index = 0) {
             if (!head || head.length == 0) return []
             let vm = this
-            let count = 0
+            let hasChildren = head.some(e => e.children)
+            index += hasChildren ? 1 : 0
             head.forEach(e => {
+                debugger
                 let colspan = vm.getCellColCount(e)
-                let rowspan = vm.getCellRowCount(e, index)
+                let rowspan = vm.getCellRowCount(e, hasChildren ? index - 1 : index)
                 e.colspan = colspan > 1 ? colspan : null
                 e.rowspan = rowspan > 1 ? rowspan : null
                 if (e.children) {
-                    count++ // 计算所在的行数
-                    vm.initHeadData(e.children, index + (count == 1 ? 1 : 0))
+                    vm.initHeadData(e.children, index)
                 }
             })
         },
@@ -97,7 +98,7 @@ export default {
             return Math.max(...arr.map(e => e.children ? this.getTheadRowCount(e.children, count + 1) : count))
         },
         getCellRowCount: function (obj = {}, index) {
-            return obj.children ? this.rowCount - (this.rowCount - index) - this.getTheadRowCount(obj.children) : this.rowCount - index + 2
+            return obj.children ? 1 : this.rowCount - index
         },
         getCellColCount: function (obj = {}, count = 1) {
             return obj.children
