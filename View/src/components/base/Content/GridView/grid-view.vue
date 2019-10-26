@@ -36,6 +36,9 @@
                     @table:sort="cell => sort(cell)"
                     @table:scroll="(event, type) => scroll(event, type)" /><!-- activeTableContainer -->
             </div> <!-- tableContainer -->
+            <div ref="toolbar" >
+                toolbar
+            </div>
         </template>
         <template v-else>
             <div class="text-center h-100 align-items-center justify-content-center">
@@ -199,28 +202,39 @@ export default {
             if (this.fixedTableTBody) this.fixedTableTBody.style.height = 0 + 'px'
             if (this.activeTableTBody) this.activeTableTBody.style.height = 0 + 'px'
             this.$el.style.height = this.$parent.$el.offsetHeight + 'px'
-            
+
             this.$nextTick(function () {
                 if (this.fixedTable && this.activeTable) {
-                    this.inttTrHeight(this.$refs.fixedTable.$refs.THead.children[0].children[1].children, this.$refs.activeTable.$refs.THead.children[0].children[1].children)
-                    this.inttTrHeight(this.$refs.fixedTable.$refs.TBody.children[0].children[1].children, this.$refs.activeTable.$refs.TBody.children[0].children[1].children)
+                    this.initTrHeight(this.$refs.fixedTable.$refs.THead, this.$refs.activeTable.$refs.THead)
+                    this.initTrHeight(this.$refs.fixedTable.$refs.TBody, this.$refs.activeTable.$refs.TBody)
                 }
                 let THeadHeight = this.$refs.fixedTable.$refs.THead ? this.$refs.fixedTable.$refs.THead.offsetHeight : 0
                 let TFootHeight = this.$refs.fixedTable.$refs.TFoot ? this.$refs.fixedTable.$refs.TFoot.offsetHeight : 0
-                let TBodyHeight = this.$parent.$el.offsetHeight - THeadHeight - TFootHeight - 10
+                let ToolbarHeight = this.$refs.toolbar ? this.$refs.toolbar.offsetHeight : 0
+                let TBodyHeight = this.$parent.$el.offsetHeight - THeadHeight - TFootHeight - ToolbarHeight - 10
                 if (this.fixedTableTBody) this.fixedTableTBody.style.height = TBodyHeight < 0 ? 0 : TBodyHeight + 'px'
                 if (this.activeTableTBody) this.activeTableTBody.style.height = TBodyHeight < 0 ? 0 : TBodyHeight + 'px'
             })
         },
-        inttTrHeight: function (fixedTableTrList, activeTableTrList) {
+        initTrHeight: function (fixedTableTrList, activeTableTrList) {
             if (!fixedTableTrList && !activeTableTrList) return
-            for (let i = 0; i < fixedTableTrList.length; i++) {
-                if (!fixedTableTrList[i] || !activeTableTrList[i]) continue
-                fixedTableTrList[i].offsetHeight > activeTableTrList[i].offsetHeight
-                    ? activeTableTrList[i].style.height = fixedTableTrList[i].offsetHeight + 'px'
-                    : fixedTableTrList[i].style.height = activeTableTrList[i].offsetHeight + 'px'
-            }
+            let fixed = fixedTableTrList.children[0].children[1].children
+            let active = activeTableTrList.children[0].children[1].children
+            let min = Math.min(fixed.length, active.length)
 
+            for (let i = 0; i < min; i++) {
+                if (i == (min - 1) && fixedTableTrList.children[0].children[1].offsetHeight != activeTableTrList.children[0].children[1].offsetHeight) {
+                    fixedTableTrList.children[0].children[1].offsetHeight > activeTableTrList.children[0].children[1].offsetHeight 
+                        ? active[active.length - 1].style.height = Array.from(fixed).slice(min - 1).reduce((acc, cur) => cur.offsetHeight + acc, 0)  + 'px'
+                        : fixed[fixed.length - 1].style.height = Array.from(active).slice(min - 1).reduce((acc, cur) => cur.offsetHeight + acc, 0) + 'px'
+                    return
+                }
+                
+                if (!fixed[i] || !active[i]) continue
+                fixed[i].offsetHeight > active[i].offsetHeight
+                    ? active[i].style.height = fixed[i].offsetHeight + 'px'
+                    : fixed[i].style.height = active[i].offsetHeight + 'px'
+            }
         },
         injectionHover: function (dom1, dom2) {
             for (let i = 0; i < dom1.children.length; i++) {

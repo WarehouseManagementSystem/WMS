@@ -1,5 +1,5 @@
 <template>
-    <c-table tableStriped tableHover theadSticky tableBordered theadTheme="dark" selectStatus="0" v-model="selectedOptions" :list="list"  />
+    <c-table tableStriped tableHover theadSticky tableBordered fixed="4" theadTheme="dark" selectStatus="0" v-model="selectedOptions" :list="list"  />
 </template>
 
 <script>
