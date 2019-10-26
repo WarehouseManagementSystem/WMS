@@ -1,8 +1,5 @@
 <template>
-    <div>
-        <c-table tableStriped tableHover theadSticky tableBordered theadTheme="dark" selectStatus="0" v-model="selectedOptions" :list="list"  />
-    </div>
-    
+    <c-table tableStriped tableHover theadSticky tableBordered theadTheme="dark" selectStatus="0" v-model="selectedOptions" :list="list"  />
 </template>
 
 <script>
@@ -40,10 +37,7 @@ export default {
                             { title: '2-2-1', field: '2-2-1',},
                             { title: '1-2-2', field: '2-2-2', },
                         ], },
-                        { title: '2-3', field: '2-3', hildren: [
-                            { title: '2-3-1', field: '2-3-1', },
-                            { title: '2-3-2', field: '2-3-2', },
-                        ],},
+                        { title: '2-3', field: '2-3', },
                     ]},
                 ],
                 operate: { index: 2, value: [ 'check', 'view', 'edit', 'delete', 'flow' ], },

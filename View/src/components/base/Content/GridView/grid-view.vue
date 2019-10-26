@@ -199,13 +199,28 @@ export default {
             if (this.fixedTableTBody) this.fixedTableTBody.style.height = 0 + 'px'
             if (this.activeTableTBody) this.activeTableTBody.style.height = 0 + 'px'
             this.$el.style.height = this.$parent.$el.offsetHeight + 'px'
+            
             this.$nextTick(function () {
+                if (this.fixedTable && this.activeTable) {
+                    this.inttTrHeight(this.$refs.fixedTable.$refs.THead.children[0].children[1].children, this.$refs.activeTable.$refs.THead.children[0].children[1].children)
+                    this.inttTrHeight(this.$refs.fixedTable.$refs.TBody.children[0].children[1].children, this.$refs.activeTable.$refs.TBody.children[0].children[1].children)
+                }
                 let THeadHeight = this.$refs.fixedTable.$refs.THead ? this.$refs.fixedTable.$refs.THead.offsetHeight : 0
                 let TFootHeight = this.$refs.fixedTable.$refs.TFoot ? this.$refs.fixedTable.$refs.TFoot.offsetHeight : 0
                 let TBodyHeight = this.$parent.$el.offsetHeight - THeadHeight - TFootHeight - 10
                 if (this.fixedTableTBody) this.fixedTableTBody.style.height = TBodyHeight < 0 ? 0 : TBodyHeight + 'px'
                 if (this.activeTableTBody) this.activeTableTBody.style.height = TBodyHeight < 0 ? 0 : TBodyHeight + 'px'
             })
+        },
+        inttTrHeight: function (fixedTableTrList, activeTableTrList) {
+            if (!fixedTableTrList && !activeTableTrList) return
+            for (let i = 0; i < fixedTableTrList.length; i++) {
+                if (!fixedTableTrList[i] || !activeTableTrList[i]) continue
+                fixedTableTrList[i].offsetHeight > activeTableTrList[i].offsetHeight
+                    ? activeTableTrList[i].style.height = fixedTableTrList[i].offsetHeight + 'px'
+                    : fixedTableTrList[i].style.height = activeTableTrList[i].offsetHeight + 'px'
+            }
+
         },
         injectionHover: function (dom1, dom2) {
             for (let i = 0; i < dom1.children.length; i++) {
