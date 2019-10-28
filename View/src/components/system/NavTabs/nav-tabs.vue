@@ -57,11 +57,13 @@ export default {
         }
     },
     created () {
-        // 使用 sessionStorage 保持用户打开的页面数据，防止刷新时丢失，在会话结束时销毁（暂缓）
-        pathList.push(...util.JSON.parse(sessionStorage.getItem('System_NavTabs_PathList')) || [])
+        this.$nextTick(() => // 使用 sessionStorage 保持用户打开的页面数据，防止刷新时丢失，在会话结束时销毁（暂缓）
+            pathList.push(...util.JSON.parse(sessionStorage.getItem('System_NavTabs_PathList')) || [])
+        )
+        
     },
     beforeUpdate () {
-        sessionStorage.setItem('System_NavTabs_PathList', util.JSON.stringify(pathList))
+        this.$nextTick(() => sessionStorage.setItem('System_NavTabs_PathList', util.JSON.stringify(pathList)))
     },
     methods: {
         removePath: function (url) {

@@ -3,9 +3,10 @@
         <input 
             :type="imputType" 
             class="form-control" 
-            :class="[objClass, readonlyClass]" 
+            :class="[objClass, readonlyClass, { 'h-100': !info}]" 
             :style="objstyle" 
-            :size="Number(length)"
+            :size="Number(length)" 
+            ref="text"
             :placeholder="fillPlaceholder" 
             :readonly="readonly" 
             :aria-readonly="readonly" 

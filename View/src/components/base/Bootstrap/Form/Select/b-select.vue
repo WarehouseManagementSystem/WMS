@@ -1,5 +1,5 @@
 <template>
-    <div class="form-group">
+    <div class="form-group my-0">
         <select 
             class="custom-select" 
             :class="[objClass, sizeClass]" 
@@ -12,7 +12,7 @@
             @blur.stop="validator" 
             v-on="inputListeners" >
             <slot>
-                <option value="" :selected="value.length == 0" :aria-selected="value.length == 0" >&lt;Pleace select...&gt;</option>
+                <option v-if="!hideNull" value="" :selected="value.length == 0" :aria-selected="value.length == 0" >&lt;Pleace select...&gt;</option>
                 <b-select-option v-for="(item, index) in list" :key="index" :item="item" :isSelectedValue="isSelectedValue" :multiple="multiple" />
                 <!-- <option 
                     v-for="item in list" 
@@ -58,8 +58,9 @@ export default {
         list: utilities.props.list,
         disabled: utilities.props.disabled,
         info: utilities.props.value,
+        hideNull: Boolean,
         value: {
-            type: [String, Array],
+            type: [String, Number, Array],
             default: function () {
                 return this.multiple ? [] : ''
             }

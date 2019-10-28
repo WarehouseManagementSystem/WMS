@@ -1,12 +1,12 @@
 <template>
     <option 
         v-if="!item.children" 
-        :value="item.value" 
-        :selected="isSelected(item.value)"
-        :aria-selected="isSelected(item.value)"
+        :value="item.value || item" 
+        :selected="isSelected(item.value || item)"
+        :aria-selected="isSelected(item.value || item)"
         :disabled="item.disabled"
         :aria-disabled="item.disabled" >
-        {{ item.text || item.value }}
+        {{ item.text || item.value || item }}
     </option>
     <optgroup
         v-else
@@ -20,13 +20,11 @@
 </template>
 
 <script>
-import utilities from '@/components/utilities/index.js'
-
 export default {
     name: 'b-select-option',
     components: { BSelectOption: () => import('./b-select-option.vue') },
     props: {
-        item: utilities.props.item,
+        item: [ String, Number, Array, Object, ],
         isSelectedValue: [ String, Number, Array, ],
         multiple: Boolean,
     },

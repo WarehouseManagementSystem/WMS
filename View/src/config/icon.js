@@ -17,4 +17,8 @@ export default {
     sort: 'fas fa-sort', // table sort
     sortUp: "fas fa-sort-up", // table sort up
     sortDown: 'fas fa-sort-down', // table sort down
+    backward: 'fas fa-step-backward', // pagination backward
+    forward: 'fas fa-step-forward', // pagination forward
+    caretLeft: 'fas fa-caret-left', // pagination caret-lef
+    caretRight: 'fas fa-caret-right', // pagination caret-right
 }

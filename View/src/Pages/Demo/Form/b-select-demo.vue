@@ -23,6 +23,11 @@
             <b-select class="col-5" :list="list" disabled multiple></b-select>
         </div>
         <div class="row">
+            <font class="col-1">hideNull:</font>
+            <b-select class="col-5" :list="list" hideNull ></b-select>
+            <b-select class="col-5" :list="list" hideNull multiple></b-select>
+        </div>
+        <div class="row">
             <font class="col-1">info:</font>
             <b-select class="col-5" :list="list" info="info text" ></b-select>
             <b-select class="col-5" :list="list" info="info text" multiple></b-select>

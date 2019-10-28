@@ -1,23 +1,26 @@
 <template>
     <nav aria-label="Page navigation">
-        <ul class="pagination">
-            <item :disabled="startDisabled" @click.native="startClick"><slot name="start"><i class="fas fa-step-backward"></i></slot></item>
-            <item :disabled="previousDisabled" @click.native="previousClick" ><slot name="previous"><i class="fas fa-caret-left"></i></slot></item>
-            <item 
-                v-for="(value, index) in list" 
-                :key="index" 
-                :value="value" 
-                :active="select == value" 
-                :disabled="separator === value" 
-                @click.native="itemClick(value)" 
-            />
-            <item :disabled="nextDisabled" @click.native="nextClick" ><slot name="next"><i class="fas fa-caret-right"></i></slot></item>
-            <item :disabled="endDisabled" @click.native="endClick" ><slot name="end"><i class="fas fa-step-forward"></i></slot></item>
+        <ul class="pagination m-0">
+            <item :disabled="startDisabled" @click.native="startClick"><slot name="start"><i :class="icon.backward"></i></slot></item>
+            <item :disabled="previousDisabled" @click.native="previousClick" ><slot name="previous"><i :class="icon.caretLeft"></i></slot></item>
+            <slot>
+                <item 
+                    v-for="(value, index) in list" 
+                    :key="index" 
+                    :value="value" 
+                    :active="select == value" 
+                    :disabled="separator === value" 
+                    @click.native="itemClick(value)" 
+                />
+            </slot>
+            <item :disabled="nextDisabled" @click.native="nextClick" ><slot name="next"><i :class="icon.caretRight"></i></slot></item>
+            <item :disabled="endDisabled" @click.native="endClick" ><slot name="end"><i :class="icon.forward"></i></slot></item>
         </ul>
     </nav>
 </template>
 
 <script>
+import config from '@/config/index.js'
 import utilities from '@/components/utilities/index.js'
 
 import item from './b-pag-item'
@@ -70,6 +73,9 @@ export default {
         },
     },
     computed: {
+        icon: function () {
+            return config.ui.icon
+        },
         list: function () {
             let arr = []
             const start = Number(this.start), end = Number(this.end), total = Number(this.total)
@@ -105,8 +111,6 @@ export default {
                     ...Array.from({ length: 3}, (v, i) => end - i ).sort((a, b) => a - b),
                 ]
             }
-                
-            
             return arr
         },
         startDisabled: function () {

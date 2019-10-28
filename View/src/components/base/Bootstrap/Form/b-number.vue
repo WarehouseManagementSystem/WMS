@@ -2,12 +2,14 @@
     <div class="row" @keyup.up="add" @keyup.down="subn">
         <b-button v-if="!readonly && !hideButton" :size="size" class="col-auto" :style="btnstyle" :disabled="subbuttomdisabled" @click="subn" outline value="-" />
         <b-text 
-            class="col px-0" 
+            class="col h-100 px-0" 
             text-align="center" 
+            ref="textBox"
             :min="dateMin" 
             :max="dateMax" 
             :step="dateStep" 
             :size="size" 
+            :length="length" 
             :info="message" 
             v-model.number="number" 
             :disabled="disabled" 
@@ -66,6 +68,7 @@ export default {
             validator: value => !isNaN(value),
         },
         size: utilities.props.size,
+        length: [String, Number],
         hideButton: Boolean,
         prompt: Boolean,
         info: String,
@@ -104,21 +107,33 @@ export default {
         },
     },
     mounted () {
-        // 通过 text 的高度确定 button 的高度
-        if (this.readonly || this.hideButton) return
-            this.btnstyle = {
-            height: this.$vnode.child.$children[1].$refs.text.offsetHeight + 'px'
-        }
         this.getPrecision()
-        this.number = this.formatNumber(this.toNmuber(this.value, this.dateMin))
-        
-        this.message = this.info || ''
-        if (this.prompt) {
-            let str = `${this.formatNumber(this.min)}-${this.formatNumber(this.max)},精度: ${this.formatNumber(this.step)}`
-            this.message += this.info ? `(${str})` : str
-        }
+        this.innitNumber()
+        this.initInfo()
+        this.initButtonHeight()
     },
     methods: {
+        initButtonHeight: function () {
+            this.$nextTick(function () {
+                debugger
+                // 通过 text 的高度确定 button 的高度
+                if (this.readonly || this.hideButton) return
+                    this.btnstyle = {
+                    height: this.$refs.textBox.$refs.text.offsetHeight + 'px'
+                }
+            })
+            
+        },
+        innitNumber: function () {
+            this.number = this.formatNumber(this.toNmuber(this.value, this.dateMin))
+        },
+        initInfo: function () {
+            this.message = this.info || ''
+            if (this.prompt) {
+                let str = `${this.formatNumber(this.min)}-${this.formatNumber(this.max)},精度: ${this.formatNumber(this.step)}`
+                this.message += this.info ? `(${str})` : str
+            }
+        },
         toNmuber: function (str, n = 0) {
             return Number(str) || n
         },
