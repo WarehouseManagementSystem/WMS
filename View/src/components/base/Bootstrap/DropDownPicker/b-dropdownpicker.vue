@@ -2,8 +2,10 @@
     <div :id="id">
         <div class="form-control" :class="[objClass, readonlyClass]" ref="dropdownpicker" :readonly="disabled" @click="isShow = disabled ? !disabled : !isShow">
             <div class="d-flex justify-content-between align-items-center" @click="click">
-                <font :class="fontClass">{{ text }}</font>
-                <slot name="icon" v-if="!disabled">
+                <slot name="trigger">
+                    <font :class="fontClass">{{ text }}</font>
+                </slot>
+                <slot name="icon" v-if="!hideToggle">
                     <i :class="icon.caretDown" />
                 </slot>
             </div>
@@ -50,6 +52,7 @@ export default {
         },
         placeholder: utilities.props.text,
         show: Boolean,
+        hideToggle: Boolean,
         showFooter: Boolean,
         menuWidth: Boolean,
         menuHeight: String,

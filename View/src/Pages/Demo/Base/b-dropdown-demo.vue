@@ -18,12 +18,18 @@
             <font class="col-1">slot:</font>
             <b-dropdown class="col-auto">
                 <b-dropdown-header text="header text"></b-dropdown-header>
+                <b-dropdown-header text="header text" info="info text"></b-dropdown-header>
                 <b-dropdown-divider></b-dropdown-divider>
                 <b-dropdown-item-text text="text"></b-dropdown-item-text>
+                <b-dropdown-item-text text="text" info="info text"></b-dropdown-item-text>
                 <b-dropdown-item text="item text"></b-dropdown-item>
+                <b-dropdown-item text="item text" info="info text"></b-dropdown-item>
+                <b-dropdown-item href="href text" ></b-dropdown-item>
+                <b-dropdown-item href="href text" info="info text"></b-dropdown-item>
                 <b-dropdown-item text="active text" active></b-dropdown-item>
+                <b-dropdown-item text="active text" info="info text" active></b-dropdown-item>
                 <b-dropdown-item text="disabled text" disabled></b-dropdown-item>
-                <b-dropdown-item text="href text" ></b-dropdown-item>
+                <b-dropdown-item text="disabled text" info="info text" disabled></b-dropdown-item>
             </b-dropdown>
         </div>
         <div class="row">
@@ -42,6 +48,16 @@
             </b-dropdown>
         </div>
         <div class="row">
+            <font class="col-1">toggle:</font>
+            <b-dropdown class="col-3" menu-weight>
+                <template #icon>
+                    you can add anlything
+                </template>
+                <b-dropdown-item text="item text"></b-dropdown-item>
+            </b-dropdown>
+            <font class="col-3">只建议添加图标</font>
+        </div>
+        <div class="row">
             <font class="col-1">hide-toggle:</font>
             <b-dropdown class="col-auto" hide-toggle>
                 <b-dropdown-item text="item text"></b-dropdown-item>
@@ -50,6 +66,17 @@
         <div class="row">
             <font class="col-1">menu-weight:</font>
             <b-dropdown class="col-11" menu-weight>
+                <b-dropdown-item text="item text"></b-dropdown-item>
+            </b-dropdown>
+        </div>
+        <div class="row">
+            <font class="col-1">menu-align:</font>
+            <font class="col-1">left(default)</font>
+            <b-dropdown class="col-3" menu-align="left" menu-weight>
+                <b-dropdown-item text="item text"></b-dropdown-item>
+            </b-dropdown>
+            <font class="col-1">right</font>
+            <b-dropdown class="col-3" menu-align="right" menu-weight>
                 <b-dropdown-item text="item text"></b-dropdown-item>
             </b-dropdown>
         </div>
@@ -128,8 +155,8 @@ export default {
     data () {
         return {
             list: [
-                { value: 'value1', text: "text1", },
-                { value: 'value2', text: "text2", },
+                { value: 'value1', text: "text1", info: 'info text', },
+                { value: 'value2', text: "text2", info: 'info text', },
                 { value: 'value3', text: "text3", },
                 { value: 'value4', text: "text4", },
                 { value: 'value5', text: "text5", },

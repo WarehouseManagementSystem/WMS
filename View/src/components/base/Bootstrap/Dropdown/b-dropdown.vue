@@ -1,9 +1,12 @@
 <template>
     <div class="py-0" :class="dropClass" ref="divDropdown">
         <div :id="guid" class="d-flex justify-content-between align-items-center px-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" @click="click">
-            <slot v-if="$slots.trigger" name="trigger"></slot>
-            <font v-else style="cursor: default;">{{ trigger }}</font>
-            <i v-if="!hideToggle" :class="icon.caretDown" class="px-1" />
+            <slot name="trigger">
+                <font style="cursor: default;">{{ trigger }}</font>
+            </slot>
+            <slot name="icon" v-if="!hideToggle">
+                <i :class="icon.caretDown" class="px-1" />
+            </slot>
         </div>
         <tran-drop>
             <div ref="menu" class="dropdown-menu overflow-auto shadow-sm" :class="menuClass" :style="{'max-height': menuHeight}" :aria-labelledby="guid">
@@ -38,7 +41,7 @@ export default {
             default: '<Pleace select...>',
         },
         hideToggle: Boolean,
-        menuSet: {
+        menuAlign: {
             type: String,
             default: '',
             validator: value => ['', 'left', 'right'].includes(value),
@@ -61,7 +64,7 @@ export default {
             return this.set == 'up' ? 'drop' : 'drop' + this.set
         },
         menuClass: function () {
-            return `${this.menuSet ? `dropdown-menu-${this.menuSet}` : ''} 
+            return `${this.menuAlign ? `dropdown-menu-${this.menuAlign}` : ''} 
                     ${this.menuWidth ? 'w-100' : ''} `
         },
     },

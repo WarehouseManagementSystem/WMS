@@ -4,7 +4,7 @@
             <div ref="toolbar" class="d-flex align-items-center justify-content-between">
                 <div class="m-1 row"><slot name="toolbar" /></div> <!-- tiilbar left -->
                 <div class="m-1 row">
-                    <b-dropdown menuSet="right" hideToggle>
+                    <b-dropdown menuAlign="right" hideToggle>
                         <template #trigger>
                             <b-button color="secondary" size="sm">
                                 <i :class="icon.thList" />
@@ -13,7 +13,7 @@
                         </template>
                         <b-checkbox-tree class="p-2" :list="colunms" />
                     </b-dropdown> <!-- select colunms dropdown -->
-                    <b-dropdown :list="downloadList" menuSet="right" @menuClick="dataExport" hideToggle>
+                    <b-dropdown :list="downloadList" menuAlign="right" @menuClick="dataExport" hideToggle>
                         <template #trigger>
                             <b-button color="secondary" size="sm">
                                 <i :class="icon.download" />
