@@ -1,19 +1,20 @@
 <template>
-    <div :id="'div-' + guid" class="py-0" :class="dropClass" ref="divDropdown">
-        <div class="d-flex justify-content-between align-items-center px-1" @click="click">
-            <slot v-if="Object.keys($scopedSlots).includes('trigger')" name="trigger"></slot>
+    <div class="py-0" :class="dropClass" ref="divDropdown">
+        <div :id="guid" class="d-flex justify-content-between align-items-center px-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" @click="click">
+            <slot v-if="$slots.trigger" name="trigger"></slot>
             <font v-else style="cursor: default;">{{ trigger }}</font>
-            <i v-if="!hideToggle" class="fas fa-caret-down px-1"></i>
+            <i v-if="!hideToggle" :class="icon.caretDown" class="px-1" />
         </div>
         <tran-drop>
             <div ref="menu" class="dropdown-menu overflow-auto shadow-sm" :class="menuClass" :style="{'max-height': menuHeight}" :aria-labelledby="guid">
-                <slot><drop-menu :list="list" :select="select" :disabled="disabled" @click="$emit('menuClick', $event)"></drop-menu></slot>
+                <slot><drop-menu :list="list" :select="select" :disabled="disabled" @click="item => $emit('menuClick', item)"></drop-menu></slot>
             </div>
         </tran-drop>
     </div>
 </template>
 <script>
 import util from '@/util/index.js'
+import config from '@/config/index.js'
 import utilities from '@/components/utilities/index.js'
 
 import tranDrop from '@/components/transition/tran-drop.vue'
@@ -53,11 +54,14 @@ export default {
         guid: function () {
             return 'dropdown-'+ util.random.getRandomString()
         },
+        icon: function () {
+            return config.ui.icon
+        },
         dropClass: function () {
             return this.set == 'up' ? 'drop' : 'drop' + this.set
         },
         menuClass: function () {
-            return `${this.menuSet ? this.menuSet : ''} 
+            return `${this.menuSet ? `dropdown-menu-${this.menuSet}` : ''} 
                     ${this.menuWidth ? 'w-100' : ''} `
         },
     },

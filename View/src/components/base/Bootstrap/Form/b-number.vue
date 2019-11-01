@@ -115,7 +115,6 @@ export default {
     methods: {
         initButtonHeight: function () {
             this.$nextTick(function () {
-                debugger
                 // 通过 text 的高度确定 button 的高度
                 if (this.readonly || this.hideButton) return
                     this.btnstyle = {

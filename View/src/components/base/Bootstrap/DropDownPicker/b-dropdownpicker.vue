@@ -4,7 +4,7 @@
             <div class="d-flex justify-content-between align-items-center" @click="click">
                 <font :class="fontClass">{{ text }}</font>
                 <slot name="icon" v-if="!disabled">
-                    <i class="fas fa-caret-down"></i>
+                    <i :class="icon.caretDown" />
                 </slot>
             </div>
         </div>
@@ -23,6 +23,7 @@
 
 <script>
 import util from '@/util/index.js'
+import config from '@/config/index.js'
 import utilities from '@/components/utilities/index.js'
 
 import tranDrop from '@/components/transition/tran-drop.vue'
@@ -64,6 +65,9 @@ export default {
         value: [String, Number, Date, ],
     },
     computed: {
+        icon: function () {
+            return config.ui.icon
+        },
         text: function () {
             return this.value ? this.value : this.placeholder
         },

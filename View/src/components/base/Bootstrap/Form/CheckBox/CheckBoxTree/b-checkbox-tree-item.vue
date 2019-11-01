@@ -43,17 +43,21 @@ export default {
     },
     data () {
         return {
-            open: false,
+            open: this.item.open,
             checked: false,
             changed: false,
             defaultState: false,
+            selectedValues: this.values
         }
     },
     props: {
         item: utilities.props.item,
         disabled: utilities.props.disabled,
         isChecked: Boolean,
-        values: Array,
+        values: {
+            type: Array,
+            default: () => []
+        },
     },
     computed: {
         isFolder: function () {
@@ -66,7 +70,7 @@ export default {
             return this.disabled || this.item.disabled
         },
         indeterminate: function () {
-            if (!this.isFolder || !this.values) return
+            if (!this.isFolder || !this.selectedValues) return
             if (this.checked) return 2
             const c = this.item.children.map(e => e.value)
             let n = this.valuesMap.filter(e=> c.includes(e)).length
@@ -75,12 +79,12 @@ export default {
             else return 1
         },
         valuesMap: function () {
-            return this.values && this.values.map && this.values.map(e => e.value)
+            return this.selectedValues && this.selectedValues.map && this.selectedValues.map(e => e.value) || []
         },
     },
     mounted () {
-        if (this.values && this.values.map && !this.isFolder)
-            this.defaultState = this.values.map(e => e.value).includes(this.item.value)
+        if (this.selectedValues && this.selectedValues.map && !this.isFolder)
+            this.defaultState = this.selectedValues.map(e => e.value).includes(this.item.value)
         this.checked = this.defaultState || this.indeterminate == 2
     },
     methods: {
@@ -101,12 +105,12 @@ export default {
             if (this.disabledCheckboxTree) return
             if (val) {
                 if (!this.isFolder) {
-                    this.push(this.values, { value: this.item.value, label: this.item.label})
+                    this.push(this.selectedValues, { value: this.item.value, label: this.item.label})
                 }
             } else {
-                this.splice(this.values, this.item.value)
+                this.splice(this.selectedValues, this.item.value)
             }
-            this.$emit('input', this.values)
+            this.$emit('input', this.selectedValues)
         },
     }
 }

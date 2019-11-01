@@ -1,6 +1,28 @@
 <template>
     <div class="border border-dark rounded p-1">
         <template v-if="!hideData">
+            <div ref="toolbar" class="d-flex align-items-center justify-content-between">
+                <div class="m-1 row"><slot name="toolbar" /></div> <!-- tiilbar left -->
+                <div class="m-1 row">
+                    <b-dropdown menuSet="right" hideToggle>
+                        <template #trigger>
+                            <b-button color="secondary" size="sm">
+                                <i :class="icon.thList" />
+                                <i :class="icon.caretDown" class="pl-1" />
+                            </b-button>
+                        </template>
+                        <b-checkbox-tree class="p-2" :list="colunms" />
+                    </b-dropdown> <!-- select colunms dropdown -->
+                    <b-dropdown :list="downloadList" menuSet="right" @menuClick="dataExport" hideToggle>
+                        <template #trigger>
+                            <b-button color="secondary" size="sm">
+                                <i :class="icon.download" />
+                                <i :class="icon.caretDown" class="pl-1" />
+                            </b-button>
+                        </template>
+                    </b-dropdown> <!-- download dropdown -->
+                </div> <!-- tiilbar right -->
+            </div> <!-- toolbar -->
             <div class="border row m-0">
                 <c-table 
                     :list="fixedList" 
@@ -39,15 +61,15 @@
             <div ref="pagination" class="d-flex align-items-end justify-content-between py-1" >
                 <!-- <font>共 {{ count }} 条数据，本页 {{ num }} 条，共 {{ pageCount }} 页，第 {{ pageNumber }} 页，每页 {{ pageSize }} 条，跳转至第 {{ pageNumber }} 页</font> -->
                 <font class="d-flex align-items-center" style="min-width: 550px">
-                    共 {{ dataCount }} 条数据，
-                    本页 {{ dataSize }} 条，
-                    共 {{ pageCount }} 页，
-                    第 {{ pageNumber }} 页，
+                    共 {{ dataCount }} 条&nbsp;&nbsp;
+                    本页 {{ dataSize }} 条&nbsp;&nbsp;
+                    共 {{ pageCount }} 页&nbsp;&nbsp;
+                    第 {{ pageNumber }} 页&nbsp;&nbsp;
                     每页 <b-select class="d-inline-block mx-1" :list="pageSizeList" v-model="pageSize" size="sm" hideNull /> 条
                 </font>
                 <b-pagination start="1" :end="pageCount" v-model.number="pageNumber" >
                     <b-number class="d-flex align-items-center mx-1" length="3" size="sm" min="1" :max="pageCount" v-model.number="pageNumber" hideButton />
-                    <b-button class="mx-1" size="sm" value="跳转" outline />
+                    <!-- <b-button class="mx-1" size="sm" value="跳转" outline /> -->
                 </b-pagination>
             </div>
         </template>
@@ -67,18 +89,30 @@ import utilities from '@/components/utilities/index.js'
 
 import CTable from './Table/c-table'
 
+import BButton from '@/components/base/Bootstrap/Form/Button/b-button.vue'
+import BDropdown from '@/components/base/Bootstrap/Dropdown/b-dropdown.vue'
+import BCheckboxTree from '@/components/base/Bootstrap/Form/CheckBox/CheckBoxTree/b-checkbox-tree.vue'
+
 import BNumber from '@/components/base/Bootstrap/Form/b-number.vue'
 import BSelect from '@/components/base/Bootstrap/Form/Select/b-select.vue'
-import BButton from '@/components/base/Bootstrap/Form/Button/b-button.vue'
 import BPagination from '@/components/base/Bootstrap/Navigation/Pagination/b-pag'
 
 export default {
     name: 'grid-view',
-    components: { CTable, BNumber, BSelect, BButton, BPagination, },
+    components: { CTable, BButton, BDropdown, BCheckboxTree, BNumber, BSelect, BPagination, },
     data () {
         return {
             selectedOptions: this.selected,
+            colunms: [{ label: '选中全部', value: 'all', open: true,  children: [],}, ],
             sortObj: {},
+            downloadList: [
+                { value: 'JSON', type: 'json', },
+                { value: 'XML', type: 'xml', },
+                { value: 'CSV', type: 'csv', },
+                { value: 'TXT', type: 'txt', },
+                { value: 'SQL', type: 'sql', },
+                { value: 'MS-EXCEL', type: 'ms-excel', },
+            ],
             pageSizeList: [10, 25, 50, 75, 100],
             pageNumber: 1, // 页码
             pageSize: 25, // 每页条数
@@ -89,7 +123,6 @@ export default {
             ...utilities.props.Object,
         },
         tableTheme: utilities.props.theme,
-        colunms: Array,
         primaryKey: {
             type: [ String, Number ],
             default: 'id',
@@ -127,8 +160,7 @@ export default {
             return this.list && this.list.data || []
         },
         fillData: function () {
-            debugger
-            return this.data.slice(this.pageSize * this.pageNumber - 1 , this.pageSize * this.pageNumber)
+            return this.data.slice(this.pageSize * (this.pageNumber - 1) , this.pageSize * this.pageNumber)
         },
         foot: function () {
             return this.list && this.list.foot || []
@@ -139,7 +171,6 @@ export default {
         },
         pageCount: function () {
             // 总页数
-            debugger
             return Number.parseInt(this.dataCount / this.pageSize) + (this.dataCount % this.pageSize == 0 ? 0 : 1 )
         },
         dataSize: function () {
@@ -228,11 +259,19 @@ export default {
     },
     methods: {
         init: async function () {
+            this.colunms[0].children = await this.getLastColunms().map(e => {return {value: e.field, label: e.title}})
             await this.initHeight()
             if (this.fixed > 0) {
                 await this.injectionHover(this.fixedTableTBody.children[0].children[1], this.activeTableTBody.children[0].children[1])
                 await this.injectionHover(this.activeTableTBody.children[0].children[1], this.fixedTableTBody.children[0].children[1])
             }
+        },
+        getLastColunms: function (head = this.head) {
+            let arr = []
+            head.forEach(e => {
+                e.children ? arr.push(...this.getLastColunms(e.children)) : arr.push(e)
+            })
+            return arr
         },
         initHeight: function () {
             if (!this.fixedTableTBody && !this.activeTableTBody) return
@@ -244,11 +283,13 @@ export default {
                 if (this.fixedTable && this.activeTable) {
                     this.initTrHeight(this.$refs.fixedTable.$refs.THead, this.$refs.activeTable.$refs.THead)
                     this.initTrHeight(this.$refs.fixedTable.$refs.TBody, this.$refs.activeTable.$refs.TBody)
+                    this.initTrHeight(this.$refs.fixedTable.$refs.TFoot, this.$refs.activeTable.$refs.TFoot)
                 }
+                let ToolbarHeight = this.$refs.toolbar ? this.$refs.toolbar.offsetHeight : 0
                 let THeadHeight = this.$refs.fixedTable.$refs.THead ? this.$refs.fixedTable.$refs.THead.offsetHeight : 0
                 let TFootHeight = this.$refs.fixedTable.$refs.TFoot ? this.$refs.fixedTable.$refs.TFoot.offsetHeight : 0
                 let PaginationHeight = this.$refs.pagination ? this.$refs.pagination.offsetHeight : 0
-                let TBodyHeight = this.$parent.$el.offsetHeight - THeadHeight - TFootHeight - PaginationHeight - 10
+                let TBodyHeight = this.$parent.$el.offsetHeight - ToolbarHeight - THeadHeight - TFootHeight - PaginationHeight - 10
                 if (this.fixedTableTBody) this.fixedTableTBody.style.height = TBodyHeight < 0 ? 0 : TBodyHeight + 'px'
                 if (this.activeTableTBody) this.activeTableTBody.style.height = TBodyHeight < 0 ? 0 : TBodyHeight + 'px'
             })
@@ -258,7 +299,7 @@ export default {
             let fixed = fixedTableTrList.children[0].children[1].children
             let active = activeTableTrList.children[0].children[1].children
             let min = Math.min(fixed.length, active.length)
-
+            
             for (let i = 0; i < min; i++) {
                 if (i == (min - 1) && fixedTableTrList.children[0].children[1].offsetHeight != activeTableTrList.children[0].children[1].offsetHeight) {
                     fixedTableTrList.children[0].children[1].offsetHeight > activeTableTrList.children[0].children[1].offsetHeight 
@@ -308,6 +349,9 @@ export default {
                 if (Math.abs(yCoord) > 1) this.activeTableTBody.scrollTop = yCoord
             }
             if (this.activeTableTFoot && Math.abs(xCoord) > 1) this.activeTableTFoot.scrollLeft = xCoord
+        },
+        dataExport: function (item) {
+            if (!item || !item.type) return
         },
         sort: function (cell) {
             this.$set(this.sortObj, cell.field, this.sortObj && this.sortObj[cell.field] == 'asc' ? 'desc' : 'asc')

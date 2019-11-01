@@ -72,7 +72,6 @@ export default {
         //             e.rowspan = c_rowspan > 1 ? c_rowspan : null
         //             vm.initHeadData(e.children)
         //         } else {
-        //             debugger
         //             let c_rowspan = vm.rowCount == rowspan ? vm.rowCount : vm.rowCount - rowspan + 1 == 1 ? rowspan : vm.rowCount - rowspan + 1// vm.rowCount == rowspan ? vm.rowCount : rowspan == 1 ? vm.rowCount - rowspan : rowspan
         //             e.rowspan = c_rowspan > 1 ? c_rowspan : null
         //         }

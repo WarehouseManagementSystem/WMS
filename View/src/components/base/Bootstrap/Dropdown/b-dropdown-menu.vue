@@ -10,10 +10,9 @@
                 :href="item.href" 
                 :active="select ? select == item.value : item.active" 
                 :disabled="disabled || item.disabled" 
-                @click.native="$emit('click', $event)" />
+                @click.native="$emit('click', item)" />
         </div>
     </div>
-    
 </template>
 
 <script>

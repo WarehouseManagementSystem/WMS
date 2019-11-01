@@ -21,4 +21,13 @@ export default {
     forward: 'fas fa-step-forward', // pagination forward
     caretLeft: 'fas fa-caret-left', // pagination caret-lef
     caretRight: 'fas fa-caret-right', // pagination caret-right
+    caretUp: 'fas fa-caret-up', // dropdown caret-up
+    caretDown: 'fas fa-caret-down', // dropdown caret-down
+    chevronLeft: 'fas fa-chevron-left',
+    chevronRight: 'fas fa-chevron-right',
+    chevronUp: 'fas fa-chevron-up',
+    chevronDown: 'fas fa-chevron-down',
+    list: 'fas fa-list',
+    thList: 'fas fa-th-list',
+    listAlt: 'fas fa-list-alt'
 }

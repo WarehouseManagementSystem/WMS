@@ -140,8 +140,8 @@ export default {
             if (!vm.hideSerial) vm.colgroup.push({ class: "text-center", style: "width: 58px;" } )
             if (vm.selectStatus == 2 && !vm.hideSelect) vm.colgroup.push({ class: "text-center", style: "width: 35px;" } )
             
-            let lastColunms = this.getLastColunms()
-            lastColunms.forEach(e => {
+            let colunms = this.getLastColunms()
+            colunms.forEach(e => {
                 if (e.$operate) {
                     vm.colgroup.push({class: 'text-center', style: `width: ${2 * vm.operate.value.length < 5 ? 5 : 1.8 * vm.operate.value.length + 1}em;`} )
                     vm.fieldColunms.push({ $operate: vm.operate.index })
