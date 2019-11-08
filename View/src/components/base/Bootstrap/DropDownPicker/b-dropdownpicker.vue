@@ -1,6 +1,6 @@
 <template>
     <div :id="id">
-        <div class="form-control" :class="[objClass, readonlyClass]" ref="dropdownpicker" :readonly="disabled" @click="isShow = disabled ? !disabled : !isShow">
+        <div ref="dropdownpicker" :readonly="disabled" @click="isShow = disabled ? !disabled : !isShow">
             <div class="d-flex justify-content-between align-items-center" @click="click">
                 <slot name="trigger">
                     <font :class="fontClass">{{ text }}</font>
@@ -35,7 +35,6 @@ import BInfo from '@/components/base/Bootstrap/Form/Other/b-form-info.vue'
 
 export default {
     name: 'b-dropdownpicker',
-    mixins: [ utilities.mixins.form.base, utilities.mixins.form.readonly, ],
     components: { tranDrop, BaseButton, BInfo, },
     data () {
         return {
@@ -52,6 +51,7 @@ export default {
         },
         placeholder: utilities.props.text,
         show: Boolean,
+        disabled: Boolean,
         hideToggle: Boolean,
         showFooter: Boolean,
         menuWidth: Boolean,

@@ -51,12 +51,18 @@ export default {
         selectStatus: Number,
         sortObj: Object,
     },
+    computed: {
+        
+    },
     mounted () {
-        this.getRowCount()
-        this.initHeadData()
-        this.getHeadData()
+        this.init()
     },
     methods: {
+        init: function () {
+            this.getRowCount()
+            this.initHeadData()
+            this.getHeadData()
+        },
         getRowCount: function () {
             this.rowCount = this.getTheadRowCount(this.head)
         },
@@ -102,7 +108,7 @@ export default {
             return Math.max(...arr.map(e => e.children ? this.getTheadRowCount(e.children, count + 1) : count))
         },
         getCellRowCount: function (obj = {}, index) {
-            return obj.children ? 1 : this.rowCount - index
+            return obj.children && obj.children.length > 0 ? 1 : this.rowCount - index
         },
         getCellColCount: function (obj = {}, count = 1) {
             return obj.children
@@ -111,6 +117,7 @@ export default {
         },
     },
     watch: {
+        
         checked: function (value) {
             this.$emit('change', value)
         },

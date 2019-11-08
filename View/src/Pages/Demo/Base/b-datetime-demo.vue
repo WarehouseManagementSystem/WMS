@@ -2,19 +2,19 @@
     <div class="Form">
         <h2>b-date-picker</h2>
         <hr>
-        <div class="row">
+        <div class="row mx-0">
             <font class="col-1">default:</font>
             <b-date-picker class="col-11"></b-date-picker>
         </div>
-        <div class="row">
+        <div class="row mx-0">
             <font class="col-1">disabled:</font>
             <b-date-picker class="col-11" disabled></b-date-picker>
         </div>
-        <div class="row">
+        <div class="row mx-0">
             <font class="col-1">info:</font>
             <b-date-picker class="col-11" info="info text"></b-date-picker>
         </div>
-        <div class="row">
+        <div class="row mx-0">
             <font class="col-1">type:</font>
             <font class="col-1">year:</font>
             <b-date-picker class="col-2" type="year"></b-date-picker>
@@ -23,7 +23,7 @@
             <font class="col-1">date:</font>
             <b-date-picker class="col-2" type="date"></b-date-picker>
         </div>
-        <div class="row">
+        <div class="row mx-0">
             <font class="col-1">value:</font>
             <font class="col-1">year:</font>
             <b-date-picker class="col-2" type="year" value="2018"></b-date-picker>
@@ -32,7 +32,7 @@
             <font class="col-1">date:</font>
             <b-date-picker class="col-2" type="date" value="2018"></b-date-picker>
         </div>
-        <div class="row">
+        <div class="row mx-0">
             <font class="col-1">min<br />max:</font>
             <font class="col-1">year:</font>
             <b-date-picker class="col-2" type="year" min="2018" max="2019"></b-date-picker>
@@ -41,7 +41,7 @@
             <font class="col-1">date:</font>
             <b-date-picker class="col-2" type="date" min="2018" max="2019-09-30" info="info text"></b-date-picker>
         </div>
-        <div class="row">
+        <div class="row mx-0">
             <font class="col-1">v-model:</font>
             <font class="col-1">year<br />{{ year }}:</font>
             <b-date-picker class="col-2" type="year" v-model='year'></b-date-picker>
@@ -52,44 +52,44 @@
         </div>
         <h2>b-datetime</h2>
         <hr>
-        <div class="row">
+        <div class="row mx-0">
             <font class="col-1">default:</font>
             <b-time class="col-11"></b-time>
         </div>
-        <div class="row">
+        <div class="row mx-0">
             <font class="col-1">disabled:</font>
             <b-time class="col-11" disabled></b-time>
         </div>
-        <div class="row">
+        <div class="row mx-0">
             <font class="col-1">readonly:</font>
             <b-time class="col-11" readonly></b-time>
         </div>
-        <div class="row">
+        <div class="row mx-0">
             <font class="col-1">info:</font>
             <b-time class="col-11" info="info text"></b-time>
         </div>
-        <div class="row">
+        <div class="row mx-0">
             <font class="col-1">type:</font>
             <font class="col-1">hh:mm:</font>
             <b-time class="col-4" type="hh:mm"></b-time>
             <font class="col-1">hh:mm:ss:</font>
             <b-time class="col-4" type="hh:mm:ss"></b-time>
         </div>
-        <div class="row">
+        <div class="row mx-0">
             <font class="col-1">value:</font>
             <font class="col-1">hh:mm:</font>
             <b-time class="col-4" type="hh:mm" value="05:32"></b-time>
             <font class="col-1">hh:mm:ss:</font>
             <b-time class="col-4" type="hh:mm:ss" value="05:32:13"></b-time>
         </div>
-        <div class="row">
+        <div class="row mx-0">
             <font class="col-1">min<br />max:</font>
             <font class="col-1">hh:mm:</font>
             <b-time class="col-4" type="hh:mm" min="09:00" max="15:59"></b-time>
             <font class="col-1">hh:mm:ss:</font>
             <b-time class="col-4" type="hh:mm:ss" min="09:00" max="15:59:59" info="info text"></b-time>
         </div>
-        <div class="row">
+        <div class="row mx-0">
             <font class="col-1">v-model:</font>
             <font class="col-1">hh:mm<br />{{ hhmm }}:</font>
             <b-time class="col-4" type="hh:mm" v-model="hhmm"></b-time>
@@ -98,7 +98,7 @@
         </div>
         <h2>b-year-picker</h2>
         <hr>
-        <div class="row">
+        <div class="row mx-0">
             <font class="col-1">default:</font>
             <b-year-picker class="col-3"></b-year-picker>
             <font class="col-1">disabled:</font>
@@ -106,7 +106,7 @@
             <font class="col-1">value:</font>
             <b-year-picker class="col-3" value="2012"></b-year-picker>
         </div>
-        <div class="row">
+        <div class="row mx-0">
             <font class="col-1">min<br />max:</font>
             <b-year-picker class="col-5" min="2000" max="2020"></b-year-picker>
             <font class="col-1">v-model<br />{{ year1 }}:</font>
@@ -115,7 +115,7 @@
 
         <h2>b-month-picker</h2>
         <hr>
-        <div class="row">
+        <div class="row mx-0">
             <font class="col-1">default:</font>
             <b-month-picker class="col-3"></b-month-picker>
             <font class="col-1">disabled:</font>
@@ -123,7 +123,7 @@
             <font class="col-1">value:</font>
             <b-month-picker class="col-3" value="2012"></b-month-picker>
         </div>
-        <div class="row">
+        <div class="row mx-0">
             <font class="col-1">min<br />max:</font>
             <b-month-picker class="col-5" min="5" max="7"></b-month-picker>
             <font class="col-1">v-model<br />{{ month1 }}:</font>

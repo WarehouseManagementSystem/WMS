@@ -11,9 +11,9 @@
                                 <i :class="icon.caretDown" class="pl-1" />
                             </b-button>
                         </template>
-                        <b-checkbox-tree class="p-2" :list="colunms" />
+                        <b-checkbox-tree class="p-2" :list="lastColunms" v-model="colunms" />
                     </b-dropdown> <!-- select colunms dropdown -->
-                    <b-dropdown :list="downloadList" menuAlign="right" @menuClick="dataExport" hideToggle>
+                    <b-dropdown menuAlign="right" :list="downloadList" @menuClick="dataExport" hideToggle>
                         <template #trigger>
                             <b-button color="secondary" size="sm">
                                 <i :class="icon.download" />
@@ -37,6 +37,7 @@
                     :hideSerial="hideSerial" 
                     v-model="selectedOptions" 
                     :selectStatus="selectStatus" 
+                    :data-primary-key="primaryKey" 
                     @table:sort="cell => sort(cell)"
                     @table:scroll="(event, type) => scroll(event, type)" /> <!-- fixedTableContainer -->
                <c-table 
@@ -55,6 +56,7 @@
                     :hideFoot="hideFoot" 
                     :selected="selectedOptions" 
                     :selectStatus="selectStatus" 
+                    :data-primary-key="primaryKey" 
                     @table:sort="cell => sort(cell)"
                     @table:scroll="(event, type) => scroll(event, type)" /><!-- activeTableContainer -->
             </div> <!-- tableContainer -->
@@ -103,7 +105,8 @@ export default {
     data () {
         return {
             selectedOptions: this.selected,
-            colunms: [{ label: '选中全部', value: 'all', open: true,  children: [],}, ],
+            colunms: [],
+            lastColunms: [{ label: '选中全部', value: 'all', open: true, checked: true, children: [],}, ],
             sortObj: {},
             downloadList: [
                 { value: 'JSON', type: 'json', },
@@ -194,6 +197,7 @@ export default {
             return {
                 head: this.fixedNum > 0 ? this.head.slice(0, this.fixedNum) : this.head,
                 operate: this.list.operate,
+                colunms: this.colunms,
                 data: this.fillData,
                 foot: this.foot,
                 rowStyle: this.rowStyle,
@@ -203,6 +207,7 @@ export default {
             if (this.fixedNum <= 0) return {}
             return {
                 head: this.head.slice(this.fixedNum),
+                colunms: this.colunms,
                 data: this.fillData,
                 foot: this.foot,
                 rowStyle: this.rowStyle,
@@ -259,12 +264,14 @@ export default {
     },
     methods: {
         init: async function () {
-            this.colunms[0].children = await this.getLastColunms().map(e => {return {value: e.field, label: e.title}})
-            await this.initHeight()
+            this.lastColunms[0].children = await this.getLastColunms().map(e => Object.create({value: e.field, label: e.title,}))
+            this.colunms = Array.from(this.lastColunms[0].children) // 默认全选(一定要用这种方式复制数组)
+            
             if (this.fixed > 0) {
                 await this.injectionHover(this.fixedTableTBody.children[0].children[1], this.activeTableTBody.children[0].children[1])
                 await this.injectionHover(this.activeTableTBody.children[0].children[1], this.fixedTableTBody.children[0].children[1])
             }
+            await this.$nextTick(await this.initHeight())
         },
         getLastColunms: function (head = this.head) {
             let arr = []

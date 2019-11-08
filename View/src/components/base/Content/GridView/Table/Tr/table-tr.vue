@@ -2,8 +2,7 @@
     <tr 
         :class="[row.$class, rowStyle.class && rowStyle.class(row), {'table-active': isChecked }]" 
         :style="[row.$style, rowStyle.style && rowStyle.style(row)]" 
-        :aria-selected="isSelected" 
-        :data-primary-key="primaryKey" >
+        :aria-selected="isSelected" >
         <table-serial-td 
             :hideSerial="hideSerial" 
             :number="index" />
@@ -16,18 +15,6 @@
                 v-if="col.$operate >= 0" 
                 :operate="operate" 
                 @tr:oper="type => $emit('tr:oper', {type: type, data: row})"  />
-            <!-- <td 
-                v-else 
-                :key="colIndex" 
-                class="align-middle" 
-                :class="row[col.field] && row[col.field].class" 
-                :style="row[col.field] && row[col.field].style" 
-                :colspan="row[col.field] && row[col.field].colspan" 
-                :aria-colspan="row[col.field] && row[col.field].colspan" 
-                :rowspan="row[col.field] && row[col.field].rowspan" 
-                :aria-rowspan="row[col.field] && row[col.field].rowspan" >
-                {{ col.format ? col.format(row[col.field] && (row[col.field].value || row[col.field])) : row[col.field] && (row[col.field].value || row[col.field]) || '-'}}
-            </td> -->
             <table-td v-else :key="colIndex" :cell="row[col.field] || '-'" :col="col" />
         </template>
     </tr>

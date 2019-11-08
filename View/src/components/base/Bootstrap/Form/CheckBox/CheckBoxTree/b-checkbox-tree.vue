@@ -4,7 +4,6 @@
             v-for="(item, index) in list"
             :key="index" 
             :item="item" 
-            :isChecked="checked" 
             :disabled="disabled" 
             v-model="values" />
     </div>
@@ -23,7 +22,6 @@ export default {
     props: {
         list: utilities.props.list,
         disabled: utilities.props.disabled,
-        checked: Boolean,
         values: Array,
     },
     watch: {
