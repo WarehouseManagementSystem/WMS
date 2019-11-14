@@ -100,6 +100,7 @@ export default {
                 {
                     // 这里确保组件配合 `v-model` 的工作
                     input: function () {
+                        if (vm.number === '') return
                         vm.$emit('input', !isNaN(vm.number) ? vm.number : vm.dateMin)
                     }
                 }
@@ -152,6 +153,7 @@ export default {
             if (this.number == 0) event.target.value = ''
         },
         input: function () {
+            if (this.number === '') return
             if (this.number < this.dateMin) this.number = this.dateMin
             if (this.number > this.dateMax) this.number = this.dateMax
             this.number = this.formatNumber(this.number)

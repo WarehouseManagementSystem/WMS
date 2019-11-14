@@ -4,15 +4,6 @@
             <div ref="toolbar" class="d-flex align-items-center justify-content-between">
                 <div class="m-1 row"><slot name="toolbar" /></div> <!-- tiilbar left -->
                 <div class="m-1 row">
-                    <b-dropdown menuSet="right" hideToggle>
-                        <template #trigger>
-                            <b-button color="secondary" size="sm">
-                                <i :class="icon.thList" />
-                                <i :class="icon.caretDown" class="pl-1" />
-                            </b-button>
-                        </template>
-                        <b-checkbox-tree class="p-2" :list="colunms" />
-                    </b-dropdown> <!-- select colunms dropdown -->
                     <b-dropdown :list="downloadList" menuSet="right" @menuClick="dataExport" hideToggle>
                         <template #trigger>
                             <b-button color="secondary" size="sm">
@@ -61,16 +52,16 @@
             <div ref="pagination" class="d-flex align-items-end justify-content-between py-1" >
                 <!-- <font>共 {{ count }} 条数据，本页 {{ num }} 条，共 {{ pageCount }} 页，第 {{ pageNumber }} 页，每页 {{ pageSize }} 条，跳转至第 {{ pageNumber }} 页</font> -->
                 <font class="d-flex align-items-center" style="min-width: 550px">
-                    共 {{ dataCount }} 条&nbsp;&nbsp;
-                    本页 {{ dataSize }} 条&nbsp;&nbsp;
-                    共 {{ pageCount }} 页&nbsp;&nbsp;
-                    第 {{ pageNumber }} 页&nbsp;&nbsp;
-                    每页 <b-select class="d-inline-block mx-1" :list="pageSizeList" v-model="pageSize" size="sm" hideNull /> 条
+                    {{ dataSize }} / 
+                    {{ dataCount }} 条&nbsp;&nbsp;
+                    {{ pageNumber }} / 
+                    {{ pageCount }} 页&nbsp;&nbsp;
+                    每页 <b-select class="d-inline-block mx-1" :list="pageSizeList" v-model="pageSize" size="sm" hideNull /> 条&nbsp;&nbsp;
+                    <b-pagination start="1" :end="pageCount" v-model.number="pageNumber" >
+                        <b-number class="d-flex align-items-center mx-1" length="3" size="sm" min="1" :max="pageCount" v-model.number="pageNumber" hideButton />
+                        <!-- <b-button class="mx-1" size="sm" value="跳转" outline /> -->
+                    </b-pagination>
                 </font>
-                <b-pagination start="1" :end="pageCount" v-model.number="pageNumber" >
-                    <b-number class="d-flex align-items-center mx-1" length="3" size="sm" min="1" :max="pageCount" v-model.number="pageNumber" hideButton />
-                    <!-- <b-button class="mx-1" size="sm" value="跳转" outline /> -->
-                </b-pagination>
             </div>
         </template>
         <template v-else>
@@ -91,7 +82,6 @@ import CTable from './Table/c-table'
 
 import BButton from '@/components/base/Bootstrap/Form/Button/b-button.vue'
 import BDropdown from '@/components/base/Bootstrap/Dropdown/b-dropdown.vue'
-import BCheckboxTree from '@/components/base/Bootstrap/Form/CheckBox/CheckBoxTree/b-checkbox-tree.vue'
 
 import BNumber from '@/components/base/Bootstrap/Form/b-number.vue'
 import BSelect from '@/components/base/Bootstrap/Form/Select/b-select.vue'
@@ -99,11 +89,10 @@ import BPagination from '@/components/base/Bootstrap/Navigation/Pagination/b-pag
 
 export default {
     name: 'grid-view',
-    components: { CTable, BButton, BDropdown, BCheckboxTree, BNumber, BSelect, BPagination, },
+    components: { CTable, BButton, BDropdown, BNumber, BSelect, BPagination, },
     data () {
         return {
             selectedOptions: this.selected,
-            colunms: [{ label: '选中全部', value: 'all', open: true,  children: [],}, ],
             sortObj: {},
             downloadList: [
                 { value: 'JSON', type: 'json', },
@@ -259,19 +248,11 @@ export default {
     },
     methods: {
         init: async function () {
-            this.colunms[0].children = await this.getLastColunms().map(e => {return {value: e.field, label: e.title}})
             await this.initHeight()
             if (this.fixed > 0) {
                 await this.injectionHover(this.fixedTableTBody.children[0].children[1], this.activeTableTBody.children[0].children[1])
                 await this.injectionHover(this.activeTableTBody.children[0].children[1], this.fixedTableTBody.children[0].children[1])
             }
-        },
-        getLastColunms: function (head = this.head) {
-            let arr = []
-            head.forEach(e => {
-                e.children ? arr.push(...this.getLastColunms(e.children)) : arr.push(e)
-            })
-            return arr
         },
         initHeight: function () {
             if (!this.fixedTableTBody && !this.activeTableTBody) return

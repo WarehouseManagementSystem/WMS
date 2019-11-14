@@ -149,6 +149,9 @@ export default {
         },
     },
     watch: {
+        active: function (value) {
+            this.select = value
+        },
         select: function (value) {
             this.$emit('change', value)
         },
