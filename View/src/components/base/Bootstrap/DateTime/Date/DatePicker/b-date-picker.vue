@@ -1,5 +1,5 @@
 <template>
-    <dropdown-picker :placeholder="fillPlaceholder" :value="showValue" :info="message" :show="show" show-footer :disabled="disabled" :readonly="readonly" @showOrHide="showOrHide">
+    <dropdown-picker class="form-control" :class="[objClass, readonlyClass]" :placeholder="fillPlaceholder" :value="showValue" :info="message" :show="show" show-footer :disabled="disabled" @showOrHide="showOrHide">
         <template #icon>
             <i class="far fa-calendar-alt"></i>
         </template>
@@ -23,6 +23,7 @@ import datePicker from './date-date-picker'
 export default {
     name: 'b-date-picker',
     components: { dropdownPicker, yearPicker, monthPicker, datePicker, },
+        mixins: [ utilities.mixins.form.base, utilities.mixins.form.readonly, ],
     model: {
         prop: 'value',
         event: 'change'
@@ -54,7 +55,6 @@ export default {
         max: [String, Date, ],
         info: utilities.props.value,
         placeholder: utilities.props.value,
-        disabled: utilities.props.disabled,
     },
     computed: {
         fillPlaceholder: function () {
@@ -71,9 +71,6 @@ export default {
                         return 'error'
                 }
             }
-        },
-        readonly: function () {
-            return this.disabled
         },
         showValue: function () {
             return this.formatDate(this.selectValue)

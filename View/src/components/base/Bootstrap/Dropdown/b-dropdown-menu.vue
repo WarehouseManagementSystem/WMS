@@ -1,16 +1,17 @@
 <template>
     <div>
         <div v-for="(item, index) in list" :key="index">
-            <b-dropdown-header v-if="item.header" :text="item.header"></b-dropdown-header>
+            <b-dropdown-header v-if="item.header" :text="item.header" :info="item.info"></b-dropdown-header>
             <b-dropdown-divider v-else-if="item.divider" ></b-dropdown-divider>
-            <b-dropdown-item-text v-else-if="item.text" :text="item.text"></b-dropdown-item-text>
             <b-dropdown-item 
                 v-else-if="item.value" 
                 :text="item.value" 
                 :href="item.href" 
+                :info="item.info" 
                 :active="select ? select == item.value : item.active" 
                 :disabled="disabled || item.disabled" 
                 @click.native="$emit('click', item)" />
+            <b-dropdown-item-text v-else-if="item.text" :text="item.text" :info="item.info"></b-dropdown-item-text>
         </div>
     </div>
 </template>

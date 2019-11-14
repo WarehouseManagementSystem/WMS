@@ -1,16 +1,29 @@
 <template>
     <div class="form-group">
         <dropdown-picker class="form-control p-0" :class="[objClass, readonlyClass]" ref="dropdownlist" :value="trigger" :show="show" :disabled="disabled" menu-width :menu-height="menuHeight" :scroll="scroll" @showOrHide="showOrHide">
-            <b-text v-if="search" type="search" class="m-1" :border="false" hideIcon v-model="searchText"></b-text>
-            <drop-item v-if="!searchText && !hideNull" ref="item" value="" text="<Pleace select...>" @click.native="menuClick" :disabled="disabled"></drop-item>
+            <b-text 
+                v-if="search" 
+                type="search" 
+                class="m-1" 
+                :border="false" 
+                hideIcon 
+                v-model="searchText" />
+            <drop-item 
+                v-if="!searchText && !hideNull" 
+                ref="item" 
+                value="" 
+                text="<Pleace select...>" 
+                @click.native="menuClick" 
+                :disabled="disabled" />
             <drop-item 
                 v-for="item in searchList" 
                 :key="item.value" 
                 :value="item.value" 
-                :text="item.text" 
+                :text="item.value" 
+                :info="item.info" 
                 :active="item.value == selectValue" 
                 :disabled="item.disabled || disabled" 
-                @click.native="menuClick"/>
+                @click.native="menuClick(item)"/>
         </dropdown-picker>
         <b-valid v-if="validInfo || $slots.valid" state="valid"><slot name="valid">{{ validInfo }}</slot></b-valid>
         <b-valid v-if="invalidInfo || $slots.invalid" state="invalid"><slot name="invalid">{{ invalidInfo }}</slot></b-valid>
@@ -80,9 +93,9 @@ export default {
                 this.trigger = '<Pleace select...>'
             }
         },
-        menuClick: function (event) {
+        menuClick: function (item) {
             this.getScroll()
-            this.selectValue = event.target.value
+            this.selectValue = item.value
             this.setTrigger(this.selectValue)
             this.$emit('change', this.selectValue)
             this.validator(this.selectValue)

@@ -8,7 +8,7 @@
                     :head="head" 
                     :class="theadClass" 
                     :sortObj="sortObj" 
-                    :colunms="fieldColunms" 
+                    :colunms="colunms" 
                     :operate="operate.value" 
                     :hideSerial="hideSerial" 
                     :hideSelect="hideSelect" 
@@ -116,6 +116,9 @@ export default {
             }
             return arr
         },
+        colunms: function () {
+            return this.list && this.list.colunms && this.list.colunms.map && this.list.colunms.map(e => e.value) || []
+        },
         data: function () {
             return this.list && this.list.data || []
         },
@@ -130,24 +133,26 @@ export default {
         this.init()
     },
     methods: {
-        init: async function () {
-            await this.InitColgroupAndColunms()
+        init: function () {
+            this.InitColgroupAndColunms()
         },
         InitColgroupAndColunms: function () {
-            let vm = this
-            if (vm.hideHead) return
+            if (this.hideHead) return
+            this.colgroup = [], this.fieldColunms = []
+            if (!this.hideSerial) this.colgroup.push({ class: "text-center", style: "width: 58px;" } )
+            if (this.selectStatus == 2 && !this.hideSelect) this.colgroup.push({ class: "text-center", style: "width: 35px;" } )
 
-            if (!vm.hideSerial) vm.colgroup.push({ class: "text-center", style: "width: 58px;" } )
-            if (vm.selectStatus == 2 && !vm.hideSelect) vm.colgroup.push({ class: "text-center", style: "width: 35px;" } )
-            
-            let colunms = this.getLastColunms()
-            colunms.forEach(e => {
+            let lastColunms = this.getLastColunms().filter(e => this.colunms.includes(e.field))
+            if (this.operate && this.operate.value && this.operate.value.length > 0) lastColunms.splice(this.operate.index, 0, { $operate: this.operate.value, })
+            // let lastColunms = this.getLastColunms()
+
+            lastColunms.forEach(e => {
                 if (e.$operate) {
-                    vm.colgroup.push({class: 'text-center', style: `width: ${2 * vm.operate.value.length < 5 ? 5 : 1.8 * vm.operate.value.length + 1}em;`} )
-                    vm.fieldColunms.push({ $operate: vm.operate.index })
+                    this.colgroup.push({class: 'text-center', style: `width: ${2 * this.operate.value.length < 5 ? 5 : 1.8 * this.operate.value.length + 1}em;`} )
+                    this.fieldColunms.push({ $operate: this.operate.index })
                 } else {
-                    vm.colgroup.push({class: e.colClass, style: e.colStyle} )
-                    vm.fieldColunms.push({ field: e.field, format: e.format, cellStyle: e.cellStyle, })
+                    this.colgroup.push({class: e.colClass, style: e.colStyle} )
+                    this.fieldColunms.push({ field: e.field, format: e.format, cellStyle: e.cellStyle, })
                 }
             })
         },
@@ -160,6 +165,9 @@ export default {
         },
     },
     watch: {
+        'colunms.length': function () {
+            this.InitColgroupAndColunms()
+        },
         selected: function (value) {
             this.selectedOptions = value
         },

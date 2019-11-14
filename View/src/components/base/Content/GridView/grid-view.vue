@@ -28,6 +28,7 @@
                     :hideSerial="hideSerial" 
                     v-model="selectedOptions" 
                     :selectStatus="selectStatus" 
+                    :data-primary-key="primaryKey" 
                     @table:sort="cell => sort(cell)"
                     @table:scroll="(event, type) => scroll(event, type)" /> <!-- fixedTableContainer -->
                <c-table 
@@ -46,6 +47,7 @@
                     :hideFoot="hideFoot" 
                     :selected="selectedOptions" 
                     :selectStatus="selectStatus" 
+                    :data-primary-key="primaryKey" 
                     @table:sort="cell => sort(cell)"
                     @table:scroll="(event, type) => scroll(event, type)" /><!-- activeTableContainer -->
             </div> <!-- tableContainer -->
@@ -183,6 +185,7 @@ export default {
             return {
                 head: this.fixedNum > 0 ? this.head.slice(0, this.fixedNum) : this.head,
                 operate: this.list.operate,
+                colunms: this.colunms,
                 data: this.fillData,
                 foot: this.foot,
                 rowStyle: this.rowStyle,
@@ -192,6 +195,7 @@ export default {
             if (this.fixedNum <= 0) return {}
             return {
                 head: this.head.slice(this.fixedNum),
+                colunms: this.colunms,
                 data: this.fillData,
                 foot: this.foot,
                 rowStyle: this.rowStyle,
@@ -253,6 +257,7 @@ export default {
                 await this.injectionHover(this.fixedTableTBody.children[0].children[1], this.activeTableTBody.children[0].children[1])
                 await this.injectionHover(this.activeTableTBody.children[0].children[1], this.fixedTableTBody.children[0].children[1])
             }
+            await this.$nextTick(await this.initHeight())
         },
         initHeight: function () {
             if (!this.fixedTableTBody && !this.activeTableTBody) return
