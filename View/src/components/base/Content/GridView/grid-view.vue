@@ -252,7 +252,6 @@ export default {
     },
     methods: {
         init: async function () {
-            await this.initHeight()
             if (this.fixed > 0) {
                 await this.injectionHover(this.fixedTableTBody.children[0].children[1], this.activeTableTBody.children[0].children[1])
                 await this.injectionHover(this.activeTableTBody.children[0].children[1], this.fixedTableTBody.children[0].children[1])

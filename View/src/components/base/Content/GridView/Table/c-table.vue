@@ -67,7 +67,7 @@ export default {
     data () {
         return {
             colgroup: [],
-            fieldColunms: [],
+            colunms: [],
             theadRowCount: 1,
             theadCheckboxChecked: false,
             selectedOptions: this.selected,
@@ -116,9 +116,6 @@ export default {
             }
             return arr
         },
-        colunms: function () {
-            return this.list && this.list.colunms && this.list.colunms.map && this.list.colunms.map(e => e.value) || []
-        },
         data: function () {
             return this.list && this.list.data || []
         },
@@ -142,11 +139,11 @@ export default {
             if (!this.hideSerial) this.colgroup.push({ class: "text-center", style: "width: 58px;" } )
             if (this.selectStatus == 2 && !this.hideSelect) this.colgroup.push({ class: "text-center", style: "width: 35px;" } )
 
-            let lastColunms = this.getLastColunms().filter(e => this.colunms.includes(e.field))
-            if (this.operate && this.operate.value && this.operate.value.length > 0) lastColunms.splice(this.operate.index, 0, { $operate: this.operate.value, })
-            // let lastColunms = this.getLastColunms()
+            // let lastColunms = this.getLastColunms().filter(e => this.colunms.includes(e.field))
+            // if (this.operate && this.operate.value && this.operate.value.length > 0) lastColunms.splice(this.operate.index, 0, { $operate: this.operate.value, })
+            let colunms = this.getLastColunms()
 
-            lastColunms.forEach(e => {
+            colunms.forEach(e => {
                 if (e.$operate) {
                     this.colgroup.push({class: 'text-center', style: `width: ${2 * this.operate.value.length < 5 ? 5 : 1.8 * this.operate.value.length + 1}em;`} )
                     this.fieldColunms.push({ $operate: this.operate.index })
