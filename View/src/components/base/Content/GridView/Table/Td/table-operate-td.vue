@@ -1,6 +1,6 @@
 <template>
     <th 
-        class="align-middle text-center mx-1" 
+        class="d-print-none align-middle text-center mx-1" 
         data-type="operate" >
         <slot>
             <span 

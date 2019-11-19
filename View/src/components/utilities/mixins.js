@@ -44,7 +44,7 @@ export default {
                     )
                 },
             },
-        },
+        }, // base
         btn: {
             filters: { ...filters },
             props: {
@@ -74,7 +74,7 @@ export default {
                     return this.srMessage ? this.color : this.srMessage
                 },
             },
-        },
+        }, // btn
         validator: {
             props: {
                 required: {
@@ -160,7 +160,7 @@ export default {
                     return true
                 },
             },
-        },
+        }, // validator
         readonly: {
             props: {
                 readonly: props.readonly,
@@ -171,8 +171,8 @@ export default {
                     return this.readonly ? 'form-control-plaintext' : ''
                 },
             },
-        },
-    },
+        }, // readonly
+    }, // form
     loading: {
         props: {
             color: {
@@ -195,5 +195,5 @@ export default {
                 return `spinner-${this.status} ${color} ${size}`
             },
         },
-    },
+    }, // loading
 }

@@ -3,6 +3,7 @@
 export default {
     SubsystemName: 'Demo',
     Modules: [
+        { path: 'base-icon', name: 'base-icon', component: async () => await import(/* webpackChunkName: "base" */'@/Pages/Demo/Base/base-icon.vue'), },
         {
             SubsystemName: 'Base',
             Modules: [

@@ -3,6 +3,7 @@ import Vue from 'vue'
 import App from '@/App.vue'
 import router from '@/router/index'
 import store from '@/store'
+
 import '@/components/utilities/directives.js'
 // 资源文件
 import '@fortawesome/fontawesome-free/css/all.min.css'

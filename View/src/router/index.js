@@ -10,7 +10,7 @@ export default new Router({
     base: process.env.BASE_URL,
     routes: [
         // 主页（默认页面）
-        { path: '/', name: 'home', component: async () => await import(/* webpackChunkName: "Home" */'@/Pages/Home.vue'), hide: true },
+        { path: '/', name: 'home', component: async () => await import(/* webpackChunkName: "Home" */'@/Pages/Home.vue'), hide: true, },
         // 添加子系统
         ...Subsystem,
         // 放在最后

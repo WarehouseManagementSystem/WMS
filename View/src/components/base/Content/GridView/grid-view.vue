@@ -1,20 +1,39 @@
 <template>
     <div class="border border-dark rounded p-1">
         <template v-if="!hideData">
-            <div ref="toolbar" class="d-flex align-items-center justify-content-between">
+            <div ref="toolbar" class="d-flex d-print-none align-items-center justify-content-between">
                 <div class="m-1 row"><slot name="toolbar" /></div> <!-- tiilbar left -->
                 <div class="m-1 row">
-                    <b-dropdown :list="downloadList" menuAlign="right" @menuClick="dataExport" hideToggle>
-                        <template #trigger>
-                            <b-button color="secondary" size="sm">
-                                <i :class="icon.download" />
-                                <i :class="icon.caretDown" class="pl-1" />
+                    <b-button-toolbar>
+                        <b-button-group>
+                             <b-button color="secondary" size="sm">
+                                <i :class="icon.search" />
                             </b-button>
-                        </template>
-                    </b-dropdown> <!-- download dropdown -->
+                            <b-button color="secondary" size="sm">
+                                <i :class="icon.searchPlus" />
+                            </b-button>
+                            <b-button color="secondary" size="sm">
+                                <i :class="icon.sort" />
+                            </b-button>
+                            <b-button color="secondary" size="sm">
+                                <i :class="icon.sync" />
+                            </b-button>
+                            <b-button color="secondary" size="sm" @click.native="print">
+                                <i :class="icon.print" />
+                            </b-button>
+                        </b-button-group>
+                        <b-dropdown :list="downloadList" menuAlign="right" @menuClick="dataExport" hideToggle>
+                            <template #trigger>
+                                <b-button color="secondary" size="sm">
+                                    <i :class="icon.fileExport" />
+                                    <i :class="icon.caretDown" class="pl-1" />
+                                </b-button>
+                            </template>
+                        </b-dropdown> <!-- download dropdown -->
+                    </b-button-toolbar>
                 </div> <!-- tiilbar right -->
             </div> <!-- toolbar -->
-            <div class="border row m-0">
+            <div class="border row m-0" id="printWrap">
                 <c-table 
                     :list="fixedList" 
                     ref="fixedTable" 
@@ -51,7 +70,7 @@
                     @table:sort="cell => sort(cell)"
                     @table:scroll="(event, type) => scroll(event, type)" /><!-- activeTableContainer -->
             </div> <!-- tableContainer -->
-            <div ref="pagination" class="d-flex align-items-end justify-content-between py-1" >
+            <div ref="pagination" class="d-flex d-print-none align-items-end justify-content-between py-1" >
                 <!-- <font>共 {{ count }} 条数据，本页 {{ num }} 条，共 {{ pageCount }} 页，第 {{ pageNumber }} 页，每页 {{ pageSize }} 条，跳转至第 {{ pageNumber }} 页</font> -->
                 <font class="d-flex align-items-center" style="min-width: 550px">
                     {{ dataSize }} / 
@@ -67,7 +86,7 @@
             </div>
         </template>
         <template v-else>
-            <div class="text-center h-100 align-items-center justify-content-center">
+            <div class="d-print-none text-center h-100 align-items-center justify-content-center">
                 <p class="display-4">No Related Data</p>
                 <small class="text-secondary"><i class="text-primary px-1" :class="icon.info"></i>No related data found or Data format error</small>
             </div>
@@ -79,10 +98,14 @@
 import util from '@/util/index.js'
 import config from '@/config/index.js'
 import utilities from '@/components/utilities/index.js'
+// 参考： https://printjs.crabbly.com/
+import printJS from 'print-js'
 
 import CTable from './Table/c-table'
 
 import BButton from '@/components/base/Bootstrap/Form/Button/b-button.vue'
+import BButtonGroup from '@/components/base/Bootstrap/ButtonGroup/b-button-group.vue'
+import BButtonToolbar from '@/components/base/Bootstrap/ButtonGroup/b-btn-toolbar.vue'
 import BDropdown from '@/components/base/Bootstrap/Dropdown/b-dropdown.vue'
 
 import BNumber from '@/components/base/Bootstrap/Form/b-number.vue'
@@ -91,7 +114,7 @@ import BPagination from '@/components/base/Bootstrap/Navigation/Pagination/b-pag
 
 export default {
     name: 'grid-view',
-    components: { CTable, BButton, BDropdown, BNumber, BSelect, BPagination, },
+    components: { CTable, BButton, BButtonGroup, BButtonToolbar, BDropdown, BNumber, BSelect, BPagination, },
     data () {
         return {
             selectedOptions: this.selected,
@@ -139,6 +162,7 @@ export default {
             validator: value => !isNaN(value) && [0, 1, 2].includes(Number(value)),
         },
         selected: [Array, Object, ],
+        printTitle: String,
     },
     computed: {
         icon: function () {
@@ -185,7 +209,6 @@ export default {
             return {
                 head: this.fixedNum > 0 ? this.head.slice(0, this.fixedNum) : this.head,
                 operate: this.list.operate,
-                colunms: this.colunms,
                 data: this.fillData,
                 foot: this.foot,
                 rowStyle: this.rowStyle,
@@ -195,7 +218,6 @@ export default {
             if (this.fixedNum <= 0) return {}
             return {
                 head: this.head.slice(this.fixedNum),
-                colunms: this.colunms,
                 data: this.fillData,
                 foot: this.foot,
                 rowStyle: this.rowStyle,
@@ -341,6 +363,22 @@ export default {
         sort: function (cell) {
             this.$set(this.sortObj, cell.field, this.sortObj && this.sortObj[cell.field] == 'asc' ? 'desc' : 'asc')
             this.$emit('table:sort', {sort: this.sortObj, cell: cell} )
+        },
+        getLastColunms: function (head = this.head) {
+            let arr = []
+            head.forEach(e => {
+                e.children ? arr.push(...this.getLastColunms(e.children)) : arr.push(e)
+            })
+            return arr
+        },
+        print: function () {
+            printJS({
+                type: 'json',
+                printable: this.data,
+                repeatTableHeader: true,
+                properties: this.getLastColunms().map(e => ({field: e.field, displayName: e.title})),
+                header: this.printTitle ? '<h3 class="text-center">'+ this.printTitle +'</h3>' : null,
+            })
         },
     },
 }

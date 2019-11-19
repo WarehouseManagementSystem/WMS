@@ -1,8 +1,14 @@
 <template>
   <div id="app" class="mx-auto min-vw-100">
-    <main-header></main-header>
-    <main-content></main-content>
-    <main-footer></main-footer>
+    <template v-if="show">
+      <!-- Load Plugin Page -->
+      <router-view></router-view>
+    </template>
+    <template v-else>
+      <main-header></main-header>
+      <main-content></main-content>
+      <main-footer></main-footer>
+    </template>
   </div>
 </template>
 
@@ -16,6 +22,11 @@ export default {
     MainHeader,
     MainContent,
     MainFooter
+  },
+  computed: {
+    show: function () {
+      return this.$route.fullPath.includes('/Plugin-')
+    },
   }
 };
 </script>

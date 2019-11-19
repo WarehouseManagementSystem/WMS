@@ -14,7 +14,8 @@
 [circular-json]:                            https://github.com/WebReflection/circular-json
 [gsap]:                                     https://greensock.com/docs/
 [velocity-animate]:                         https://github.com/julianshapiro/velocity
-[moment]:                                   
+[moment]:                                   http://momentjs.cn/
+[print]:                                    https://printjs.crabbly.com/
 <!-- bootstrap 组件 -->
 [bootstrap alert]:                          https://getbootstrap.com/docs/4.3/components/alerts/
 [b-alert]:                                  ../View/src/components/base/Bootstrap/Alert

@@ -8,7 +8,7 @@
                     :head="head" 
                     :class="theadClass" 
                     :sortObj="sortObj" 
-                    :colunms="colunms" 
+                    :colunms="fieldColunms" 
                     :operate="operate.value" 
                     :hideSerial="hideSerial" 
                     :hideSelect="hideSelect" 
@@ -67,7 +67,7 @@ export default {
     data () {
         return {
             colgroup: [],
-            colunms: [],
+            fieldColunms: [],
             theadRowCount: 1,
             theadCheckboxChecked: false,
             selectedOptions: this.selected,
@@ -162,9 +162,6 @@ export default {
         },
     },
     watch: {
-        'colunms.length': function () {
-            this.InitColgroupAndColunms()
-        },
         selected: function (value) {
             this.selectedOptions = value
         },

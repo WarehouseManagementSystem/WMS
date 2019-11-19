@@ -1,7 +1,7 @@
 <template>
     <th 
         v-if="!hideSelect" 
-        class="align-middle"
+        class="d-print-none align-middle"
         data-type="select" >
         <b-checkbox class="text-center" v-model="isChecked" />
     </th>

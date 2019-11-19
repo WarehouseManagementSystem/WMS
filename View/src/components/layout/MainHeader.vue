@@ -1,5 +1,5 @@
 <template>
-  <header id="header">
+  <header id="header" class="d-print-none">
     <div class="col shadow-sm navbar navbar-expand-lg navbar-dark bg-dark">
       <a class="navbar-brand d-inline-block text-truncate" href="#">
         <img src="@/assets/logo.png" width="30" height="30" alt="logo" />

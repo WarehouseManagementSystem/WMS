@@ -14,7 +14,7 @@
             <div class="modal-body">
                 <slot>{{ content }}</slot>
             </div>
-            <div class="modal-footer">
+            <div v-if="!hideFooter" class="modal-footer">
                 <slot name="footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary">Save changes</button>
@@ -41,6 +41,7 @@ export default {
         content: String,
         scrol: Boolean, //modal-dialog-scrollable
         center: Boolean, // modal-dialog-centered
+        hideFooter: Boolean,
         size: {
             type: String,
             default: '',
@@ -73,11 +74,12 @@ export default {
             return Object.getOwnPropertyDescriptor(config.ui.status, this.status)
         },
         iconClass: function () {
-            let icon = this.icon, color = ''
+            let icon = '', color = ''
             if (this.o && this.o.value) {
-                icon = this.o.value.icon, color = this.o.value.color
+                icon =  this.o.value.icon
+                color = this.o.value.color
             }
-            return `${icon} text-${color}`
+            return `${this.icon || icon} text-${color}`
         },
         fillTitle: function () {
             return this.title || this.o && this.o.value && this.o.value.title
