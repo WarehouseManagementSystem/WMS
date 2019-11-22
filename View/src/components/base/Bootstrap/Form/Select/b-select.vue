@@ -117,6 +117,11 @@ export default {
             if (this.$slots.valid || this.validInfo) util.dom.addClass(e.target, 'is-valid')
             this.$emit('valid')
         },
+    },
+    watch: {
+        value: function () {
+            this.isSelectedValue = this.value
+        },
     }
 }
 </script>

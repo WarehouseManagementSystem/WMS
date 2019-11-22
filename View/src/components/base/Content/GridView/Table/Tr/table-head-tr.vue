@@ -20,6 +20,7 @@
                 v-else
                 :key="cellIndex" 
                 :cell="cell" 
+                :sort="sort" 
                 :sortObj="sortObj" 
                 @table:sort="cell => $emit('table:sort', cell)" />
         </template>
@@ -48,6 +49,7 @@ export default {
     },
     props: {
         row: utilities.props.list,
+        sort: utilities.props.list,
         checked: Boolean,
         rowCount: Number,
         hideSerial: Boolean,

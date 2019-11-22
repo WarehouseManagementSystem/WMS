@@ -6,10 +6,9 @@
                 <table-colgroup :colgroup="colgroup" />
                 <table-head 
                     :head="head" 
-                    :class="theadClass" 
+                    :sort="sort" 
                     :sortObj="sortObj" 
-                    :colunms="fieldColunms" 
-                    :operate="operate.value" 
+                    :class="theadClass" 
                     :hideSerial="hideSerial" 
                     :hideSelect="hideSelect" 
                     :selectStatus="Number(selectStatus)" 
@@ -115,6 +114,9 @@ export default {
                 arr.splice(this.operate.index, 0, { $operate: this.operate.value })
             }
             return arr
+        },
+        sort: function () {
+            return this.list && this.list.sort || []
         },
         data: function () {
             return this.list && this.list.data || []

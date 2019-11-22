@@ -8,19 +8,21 @@
         :data-field="cell.field" >
         <div class="d-flex justify-content-center align-items-center">
             <font class="px-1">{{ cell.title }}</font>
-            <i v-if="cell.field && cell.sort" :class="iconClass" style="cursor: pointer" @click="$emit('table:sort', cell)" />
+            <i v-if="cell.field && !cell.children && sort.includes(cell.field)" :class="iconClass" style="cursor: pointer" @click="$emit('table:sort', cell)" />
         </div>
     </th>
 </template>
 
 <script>
 import config from '@/config/index.js'
+import utilities from '@/components/utilities/index.js'
 
 export default {
     name: 'table-head-th',
     props: {
         cell: Object,
         sortObj: Object,
+        sort: utilities.props.list,
     },
     computed: {
         icon: function () {

@@ -6,25 +6,25 @@
                 <div class="m-1 row">
                     <b-button-toolbar>
                         <b-button-group>
-                             <b-button color="secondary" size="sm">
+                             <b-button color="secondary" size="sm" v-tip="'Search'">
                                 <i :class="icon.search" />
                             </b-button>
-                            <b-button color="secondary" size="sm">
+                            <b-button color="secondary" size="sm" v-tip="'Search Plus'">
                                 <i :class="icon.searchPlus" />
                             </b-button>
-                            <b-button color="secondary" size="sm">
+                            <b-button color="secondary" size="sm" v-tip="'Sort Plus'" v-modal="'#sortmodal'" @click.native="sortPlusObj = Object.create(sortObj)">
                                 <i :class="icon.sort" />
                             </b-button>
-                            <b-button color="secondary" size="sm">
+                            <b-button color="secondary" size="sm" @click.native="reset" v-tip="'Reset'">
                                 <i :class="icon.sync" />
                             </b-button>
-                            <b-button color="secondary" size="sm" @click.native="print">
+                            <b-button color="secondary" size="sm" @click.native="print" v-tip="'Print'">
                                 <i :class="icon.print" />
                             </b-button>
                         </b-button-group>
                         <b-dropdown :list="downloadList" menuAlign="right" @menuClick="dataExport" hideToggle>
                             <template #trigger>
-                                <b-button color="secondary" size="sm">
+                                <b-button color="secondary" size="sm" v-tip="'Export'">
                                     <i :class="icon.fileExport" />
                                     <i :class="icon.caretDown" class="pl-1" />
                                 </b-button>
@@ -47,8 +47,8 @@
                     :hideSerial="hideSerial" 
                     v-model="selectedOptions" 
                     :selectStatus="selectStatus" 
-                    :data-primary-key="primaryKey" 
-                    @table:sort="cell => sort(cell)"
+                    :primary-key="primaryKey" 
+                    @table:sort="cell => tableSort(cell)"
                     @table:scroll="(event, type) => scroll(event, type)" /> <!-- fixedTableContainer -->
                <c-table 
                     v-if="fixedNum > 0" 
@@ -66,8 +66,8 @@
                     :hideFoot="hideFoot" 
                     :selected="selectedOptions" 
                     :selectStatus="selectStatus" 
-                    :data-primary-key="primaryKey" 
-                    @table:sort="cell => sort(cell)"
+                    :primary-key="primaryKey" 
+                    @table:sort="cell => tableSort(cell)"
                     @table:scroll="(event, type) => scroll(event, type)" /><!-- activeTableContainer -->
             </div> <!-- tableContainer -->
             <div ref="pagination" class="d-flex d-print-none align-items-end justify-content-between py-1" >
@@ -83,14 +83,31 @@
                         <!-- <b-button class="mx-1" size="sm" value="跳转" outline /> -->
                     </b-pagination>
                 </font>
-            </div>
+            </div> <!-- pagination -->
         </template>
-        <template v-else>
-            <div class="d-print-none text-center h-100 align-items-center justify-content-center">
+        <div v-else class="d-block d-print-none text-center h-100 align-items-center justify-content-center">
+            <template v-if="hideData">
                 <p class="display-4">No Related Data</p>
                 <small class="text-secondary"><i class="text-primary px-1" :class="icon.info"></i>No related data found or Data format error</small>
-            </div>
-        </template>
+            </template>
+            <template v-else-if="loading">
+                <b-loading color="primary" />
+                <p class="display-4">Loading...</p>
+            </template>
+        </div>
+        <b-modal id="sortmodal" title="Sort Plus" :icon="icon.sort">
+            <template>
+                <div class="row my-1" v-for="item in sort" :key="item">
+                    <font class="col-3">{{ lastColunms.filter(e => e.field == item)[0].title || item }}: </font>
+                    <div class="col-9"><b-select :list="['asc', 'desc']" :value="sortPlusObj[item]" @change="sortPlusChanged($event, item)" size="sm" /></div>
+                </div>
+            </template>
+            <template #footer>
+                <b-button color="secondary" data-dismiss="modal">Close</b-button>
+                <b-button color="primary" data-dismiss="modal" @click.native="clearSort">Clear Sort</b-button>
+                <b-button color="primary" data-dismiss="modal" @click.native="sortPlus">Sort</b-button>
+            </template>
+        </b-modal>
     </div> <!-- gridView -->
 </template>
 
@@ -112,13 +129,18 @@ import BNumber from '@/components/base/Bootstrap/Form/b-number.vue'
 import BSelect from '@/components/base/Bootstrap/Form/Select/b-select.vue'
 import BPagination from '@/components/base/Bootstrap/Navigation/Pagination/b-pag'
 
+import BModal from '@/components/base/Bootstrap/Modal/b-modal.vue'
+
+import BLoading from "@/components/base/Bootstrap/Loading/b-loading.vue"
+
+
 export default {
     name: 'grid-view',
-    components: { CTable, BButton, BButtonGroup, BButtonToolbar, BDropdown, BNumber, BSelect, BPagination, },
+    components: { CTable, BButton, BButtonGroup, BButtonToolbar, BDropdown, BNumber, BSelect, BPagination, BLoading, BModal, },
     data () {
         return {
+            loading: false, // 未使用
             selectedOptions: this.selected,
-            sortObj: {},
             downloadList: [
                 { value: 'JSON', type: 'json', },
                 { value: 'XML', type: 'xml', },
@@ -127,6 +149,8 @@ export default {
                 { value: 'SQL', type: 'sql', },
                 { value: 'MS-EXCEL', type: 'ms-excel', },
             ],
+            sortObj: {},
+            sortPlusObj: {},
             pageSizeList: [10, 25, 50, 75, 100],
             pageNumber: 1, // 页码
             pageSize: 25, // 每页条数
@@ -171,6 +195,9 @@ export default {
         head: function () {
             return this.list && this.list.head || []
         },
+        sort: function () {
+            return this.list && this.list.sort || []
+        },
         data: function () {
             return this.list && this.list.data || []
         },
@@ -195,6 +222,9 @@ export default {
         rowStyle: function () {
             return this.list && this.list.rowStyle || {}
         },
+        lastColunms: function () {
+            return this.getLastColunms()
+        },
         fixedNum: function () {
             return Number(this.fixed)
         },
@@ -209,6 +239,7 @@ export default {
             return {
                 head: this.fixedNum > 0 ? this.head.slice(0, this.fixedNum) : this.head,
                 operate: this.list.operate,
+                sort: this.sort,
                 data: this.fillData,
                 foot: this.foot,
                 rowStyle: this.rowStyle,
@@ -218,6 +249,7 @@ export default {
             if (this.fixedNum <= 0) return {}
             return {
                 head: this.head.slice(this.fixedNum),
+                sort: this.sort,
                 data: this.fillData,
                 foot: this.foot,
                 rowStyle: this.rowStyle,
@@ -278,7 +310,8 @@ export default {
                 await this.injectionHover(this.fixedTableTBody.children[0].children[1], this.activeTableTBody.children[0].children[1])
                 await this.injectionHover(this.activeTableTBody.children[0].children[1], this.fixedTableTBody.children[0].children[1])
             }
-            await this.$nextTick(await this.initHeight())
+            await this.$nextTick()
+            await this.initHeight()
         },
         initHeight: function () {
             if (!this.fixedTableTBody && !this.activeTableTBody) return
@@ -357,13 +390,6 @@ export default {
             }
             if (this.activeTableTFoot && Math.abs(xCoord) > 1) this.activeTableTFoot.scrollLeft = xCoord
         },
-        dataExport: function (item) {
-            if (!item || !item.type) return
-        },
-        sort: function (cell) {
-            this.$set(this.sortObj, cell.field, this.sortObj && this.sortObj[cell.field] == 'asc' ? 'desc' : 'asc')
-            this.$emit('table:sort', {sort: this.sortObj, cell: cell} )
-        },
         getLastColunms: function (head = this.head) {
             let arr = []
             head.forEach(e => {
@@ -371,14 +397,42 @@ export default {
             })
             return arr
         },
+        dataExport: function (item) {
+            if (!item || !item.type) return
+        },
+        tableSort: function (cell) {
+            this.$set(this.sortObj, cell.field, this.sortObj && this.sortObj[cell.field] == 'asc' ? 'desc' : 'asc')
+            this.$emit('table:sort', {sort: this.sortObj, cell: cell} )
+        },
+        sortPlusChanged: function (value, field) {
+            value
+                ? this.$set(this.sortPlusObj, field, value)
+                : this.$delete(this.sortPlusObj, field)
+        },
+        sortPlus: function () {
+            this.sortObj = Object.create(this.sortPlusObj)
+            this.$emit('table:sortPlus',this.sortObj)
+        },
+        clearSort: function () {
+            this.sortObj = {}
+            this.sortPlusObj = {}
+            this.$emit('table:sortClear')
+        },
+        reset: function () {
+            this.selectedOptions = this.selected
+            this.sortObj = {}
+            this.pageNumber = 1 // 页码
+            this.pageSize = 25 // 每页条数
+        },
         print: function () {
             printJS({
                 type: 'json',
                 printable: this.data,
                 repeatTableHeader: true,
-                properties: this.getLastColunms().map(e => ({field: e.field, displayName: e.title})),
+                properties: this.lastColunms.map(e => ({field: e.field, displayName: e.title})),
                 header: this.printTitle ? '<h3 class="text-center">'+ this.printTitle +'</h3>' : null,
             })
+            this.$emit('table:print')
         },
     },
 }

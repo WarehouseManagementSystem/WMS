@@ -1,8 +1,8 @@
 <template>
     <div>
-        <b-model v-if="show" id="Print" title="Print" size="xl" :icon="icon.print" center hideFooter>
-            <iframe src="/Plugin-Print" class=" border-0 w-100" style="height: 1000px" />
-        </b-model>
+        <b-modal v-if="show" id="Print" title="Print" size="xl" :icon="icon.print" center hideFooter>
+            <iframe src="/Plugin-Print" class=" border-0 w-100" style="height: 1000px" sandbox="allow-scripts" />
+        </b-modal>
     </div>
    
 </template>
@@ -14,11 +14,11 @@
  * 用
  */
 import config from '@/config/index.js'
-import BModel from '@/components/base/Bootstrap/Modal/b-modal.vue'
+import BModal from '@/components/base/Bootstrap/Modal/b-modal.vue'
 
 export default {
     name: 'b-print',
-    components: { BModel, },
+    components: { BModal, },
     props: {
         pURL: {
             type: String,

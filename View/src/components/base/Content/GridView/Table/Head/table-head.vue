@@ -5,6 +5,7 @@
                 v-if="index == 0"
                 :key="index"
                 :row="headRow" 
+                :sort="sort" 
                 :rowCount="rowCount" 
                 :hideSerial="hideSerial"
                 :hideSelect="hideSelect" 
@@ -18,6 +19,7 @@
                 :row="headRow" 
                 hideSerial
                 hideSelect 
+                :sort="sort" 
                 :sortObj="sortObj" 
                 @table:sort="cell => $emit('table:sort', cell)" />
         </template>
@@ -46,13 +48,13 @@ export default {
     },
     props: {
         head: utilities.props.list,
+        sort: utilities.props.list,
         hideSerial: Boolean,
         hideSelect: Boolean,
         selectStatus: Number,
         sortObj: Object,
     },
     computed: {
-        
     },
     mounted () {
         this.init()

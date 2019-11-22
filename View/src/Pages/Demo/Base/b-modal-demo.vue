@@ -1,11 +1,11 @@
 <template>
 <div>
-    <b-model v-if="show" id="exampleModal" title="title text" content="content text" :center="center" :size="size" :status="status"></b-model>
-    <b-model v-if="show" id="slotModal" title="slot Modal">
+    <b-modal v-if="show" id="exampleModal" title="title text" content="content text" :center="center" :size="size" :status="status"></b-modal>
+    <b-modal v-if="show" id="slotModal" title="slot Modal">
         you can add any string and DOM
-    </b-model>
-    <b-model v-if="show" id="iconModal" title="icon Modal" content="content text" :icon="icon"></b-model>
-    <b-model v-if="show" id="scrolModal" title="scrol Modal" content="content text" :scrol="scrol" :center="center" :status="status">
+    </b-modal>
+    <b-modal v-if="show" id="iconModal" title="icon Modal" content="content text" :icon="icon"></b-modal>
+    <b-modal v-if="show" id="scrolModal" title="scrol Modal" content="content text" :scrol="scrol" :center="center" :status="status">
         there is too long<br />
         there is too long<br />
         there is too long<br />
@@ -72,7 +72,7 @@
         there is too long<br />
         there is too long<br />
         there is too long<br />
-    </b-model>
+    </b-modal>
     <div class="row py-1">
         <font class="col-1">default</font>
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" @click="show=true">
@@ -158,11 +158,11 @@
 </template>
 
 <script>
-import BModel from '@/components/base/Bootstrap/Modal/b-modal.vue'
+import BModal from '@/components/base/Bootstrap/Modal/b-modal.vue'
 
 export default {
     name: 'b-modal-demo',
-    components: { BModel, },
+    components: { BModal, },
     data () {
         return {
             status: '',
