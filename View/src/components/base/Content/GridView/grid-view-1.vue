@@ -39,13 +39,8 @@
                     ref="fixedTable" 
                     :class="fixedNum > 0 ? `col-${fixedSizeNum}` : ''" 
                     :sortObj="sortObj" 
-                    :tableTheme="tableTheme"
-                    :tableSm="tableSm"
-                    :tableHover="tableHover"
-                    :tableStriped="tableStriped"
-                    :tableBordered="tableBordered"
-                    :tableBorderless="tableBorderless"
-                    :theadTheme="theadTheme"
+                    :tableClass="tableClass" 
+                    :theadClass="theadClass" 
                     :hideHead="hideHead" 
                     :hideData="hideData" 
                     :hideFoot="hideFoot" 
@@ -64,13 +59,8 @@
                     ref="activeTable" 
                     :class="`col-${12 - fixedSizeNum}`" 
                     :sortObj="sortObj" 
-                    :tableTheme="tableTheme"
-                    :tableSm="tableSm"
-                    :tableHover="tableHover"
-                    :tableStriped="tableStriped"
-                    :tableBordered="tableBordered"
-                    :tableBorderless="tableBorderless"
-                    :theadTheme="theadTheme"
+                    :tableClass="tableClass" 
+                    :theadClass="theadClass" 
                     :hideHead="hideHead" 
                     :hideData="hideData" 
                     :hideFoot="hideFoot" 
@@ -128,7 +118,7 @@ import utilities from '@/components/utilities/index.js'
 // 参考： https://printjs.crabbly.com/
 import printJS from 'print-js'
 
-import CTable from '@/components/base/Content/Table/c-table.vue'
+import CTable from './c-table.vue'
 
 import BButton from '@/components/base/Bootstrap/Form/Button/b-button.vue'
 import BButtonGroup from '@/components/base/Bootstrap/ButtonGroup/b-button-group.vue'
@@ -273,6 +263,18 @@ export default {
         },
         hideFoot: function () {
             return !this.foot || this.foot.length == 0
+        },
+        tableClass: function () {
+            let theme = this.tableTheme ? `table-${this.tableTheme}` : ''
+            let sm = this.tableSm ? 'table-sm' : ''
+            let hover = this.tableHover ? 'table-hover' : ''
+            let striped = this.tableStriped ? 'table-striped' : ''
+            let bordered = this.tableBordered ? 'table-bordered' : ''
+            let borderless = this.tableBorderless ? 'table-borderless' : ''
+            return `${theme} ${hover} ${striped} ${bordered} ${borderless} ${sm} `
+        },
+        theadClass: function () {
+            return this.theadTheme ? `thead-${this.theadTheme}` : ''
         },
         fixedTable: function () {
             return this.$refs && this.$refs.fixedTable
