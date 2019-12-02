@@ -9,7 +9,7 @@
         <table-select-td 
             :hideSelect="hideSelect || selectStatus != 2" 
             v-model="isChecked"/>
-        <template v-for="(col, colIndex) in colunms"  >
+        <template v-for="(col, colIndex) in columns"  >
             <table-operate-td 
                 :key="colIndex" 
                 v-if="col.$operate >= 0" 
@@ -38,7 +38,7 @@ export default {
         primaryKey: [ String, Number, ], 
         row: Object,
         index: Number,
-        colunms: Array,
+        columns: Array,
         rowStyle: Object,
         operate: Array,
         hideSerial: Boolean,

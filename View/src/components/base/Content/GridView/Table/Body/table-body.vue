@@ -7,7 +7,7 @@
             :index="rowIndex + 1" 
             :rowStyle="rowStyle" 
             :operate="operate" 
-            :colunms="colunms" 
+            :columns="columns" 
             :selectStatus="selectStatus" 
             :selectedOptions="selectedOptions" 
             :primary-key="primaryKey" 
@@ -40,7 +40,7 @@ export default {
     props: {
         data: utilities.props.list,
         primaryKey: [ String, Number, ], 
-        colunms: {
+        columns: {
             type: Array,
             default: () => []
         },

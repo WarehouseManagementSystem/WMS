@@ -24,7 +24,7 @@
                     <table-body 
                         :data="data" 
                         :rowStyle="rowStyle" 
-                        :colunms="fieldColunms" 
+                        :columns="fieldcolumns" 
                         :primaryKey="primaryKey" 
                         :operate="operate.value" 
                         :hideSerial="hideSerial" 
@@ -66,7 +66,7 @@ export default {
     data () {
         return {
             colgroup: [],
-            fieldColunms: [],
+            fieldcolumns: [],
             theadRowCount: 1,
             theadCheckboxChecked: false,
             selectedOptions: this.selected,
@@ -133,32 +133,32 @@ export default {
     },
     methods: {
         init: function () {
-            this.InitColgroupAndColunms()
+            this.InitColgroupAndcolumns()
         },
-        InitColgroupAndColunms: function () {
+        InitColgroupAndcolumns: function () {
             if (this.hideHead) return
-            this.colgroup = [], this.fieldColunms = []
+            this.colgroup = [], this.fieldcolumns = []
             if (!this.hideSerial) this.colgroup.push({ class: "text-center", style: "width: 58px;" } )
             if (this.selectStatus == 2 && !this.hideSelect) this.colgroup.push({ class: "text-center", style: "width: 35px;" } )
 
-            // let lastColunms = this.getLastColunms().filter(e => this.colunms.includes(e.field))
-            // if (this.operate && this.operate.value && this.operate.value.length > 0) lastColunms.splice(this.operate.index, 0, { $operate: this.operate.value, })
-            let colunms = this.getLastColunms()
+            // let lastcolumns = this.getLastColumns().filter(e => this.columns.includes(e.field))
+            // if (this.operate && this.operate.value && this.operate.value.length > 0) lastcolumns.splice(this.operate.index, 0, { $operate: this.operate.value, })
+            let columns = this.getLastColumns()
 
-            colunms.forEach(e => {
+            columns.forEach(e => {
                 if (e.$operate) {
                     this.colgroup.push({class: 'text-center', style: `width: ${2 * this.operate.value.length < 5 ? 5 : 1.8 * this.operate.value.length + 1}em;`} )
-                    this.fieldColunms.push({ $operate: this.operate.index })
+                    this.fieldcolumns.push({ $operate: this.operate.index })
                 } else {
                     this.colgroup.push({class: e.colClass, style: e.colStyle} )
-                    this.fieldColunms.push({ field: e.field, format: e.format, cellStyle: e.cellStyle, })
+                    this.fieldcolumns.push({ field: e.field, format: e.format, cellStyle: e.cellStyle, })
                 }
             })
         },
-        getLastColunms: function (head = this.head) {
+        getLastColumns: function (head = this.head) {
             let arr = []
             head.forEach(e => {
-                e.children ? arr.push(...this.getLastColunms(e.children)) : arr.push(e)
+                e.children ? arr.push(...this.getLastColumns(e.children)) : arr.push(e)
             })
             return arr
         },

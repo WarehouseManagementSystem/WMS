@@ -25,7 +25,7 @@
                     <table-body 
                         :data="data" 
                         :rowStyle="rowStyle" 
-                        :colunms="fieldColunms" 
+                        :columns="fieldcolumns" 
                         :primaryKey="primaryKey" 
                         :operate="operate.value" 
                         :hideSerial="hideSerial" 
@@ -57,6 +57,7 @@ import tableBody from './Body/table-body'
 
 export default {
     name: 'c-table',
+    mixins: [ utilities.mixins.grid.thead ],
     components: { tableColgroup, tableHead, tableBody, },
     model: {
         prop: 'selected',
@@ -65,9 +66,7 @@ export default {
     data () {
         return {
             colgroup: [], 
-            fieldColunms: [], 
-            theadRowCount: 1,
-            theadData: [],
+            fieldcolumns: [], 
             theadSelected: false, 
             selectedOptions: this.selected, 
         }
@@ -153,78 +152,27 @@ export default {
         },
     },
     async mounted () {
-        await this.InitColgroupAndColunms()
+        await this.InitColgroupAndcolumns()
         await this.initHead()
     },
     methods: {
         // head and colgroup
-        InitColgroupAndColunms: function () {
+        InitColgroupAndcolumns: function () {
             if (this.hideHead) return
-            this.colgroup = [], this.fieldColunms = []
+            this.colgroup = [], this.fieldcolumns = []
             if (!this.hideSerial) this.colgroup.push({ class: "text-center", style: "width: 58px;" } )
             if (this.status == 2 && !this.hideSelect) this.colgroup.push({ class: "text-center", style: "width: 35px;" } )
 
-            let colunms = this.getLastColunms()
-            colunms.forEach(e => {
+            let columns = this.getLastColumns()
+            columns.forEach(e => {
                 if (e.$operate) {
                     this.colgroup.push({class: 'text-center', style: `width: ${2 * this.operate.value.length < 5 ? 5 : 1.8 * this.operate.value.length + 1}em;`} )
-                    this.fieldColunms.push({ $operate: this.operate.index })
+                    this.fieldcolumns.push({ $operate: this.operate.index })
                 } else {
                     this.colgroup.push({class: e.colClass, style: e.colStyle} )
-                    this.fieldColunms.push({ field: e.field, format: e.format, cellStyle: e.cellStyle, })
+                    this.fieldcolumns.push({ field: e.field, format: e.format, cellStyle: e.cellStyle, })
                 }
             })
-        },
-        // head
-        getLastColunms: function (head = this.head) {
-            let arr = []
-            head.forEach(e => {
-                e.children ? arr.push(...this.getLastColunms(e.children)) : arr.push(e)
-            })
-            return arr
-        },
-        // head
-        initHead: function () {
-            this.theadRowCount = this.getTheadRowCount(this.head)
-            this.initHeadData(this.head)
-            this.getHeadData(this.head)
-        },
-        // head
-        getTheadRowCount: function (arr = [], count = 1) {
-            return Math.max(...arr.map(e => e.children ? this.getTheadRowCount(e.children, count + 1) : count))
-        },
-        // head
-        initHeadData: function (head = [], index = 0) {
-            if (!head || head.length == 0) return []
-            let vm = this
-            let hasChildren = head.some(e => e.children)
-            index += hasChildren ? 1 : 0
-            head.forEach(e => {
-                let colspan = vm.getCellColCount(e)
-                let rowspan = vm.getCellRowCount(e, hasChildren ? index - 1 : index)
-                e.colspan = colspan > 1 ? colspan : null
-                e.rowspan = rowspan > 1 ? rowspan : null
-                if (e.children) {
-                    if (e.sort) e.sort = false
-                    vm.initHeadData(e.children, index)
-                }
-            })
-        },
-        // head
-        getCellRowCount: function (obj = {}, index) {
-            return obj.children && obj.children.length > 0 ? 1 : this.theadRowCount - index
-        },
-        // head
-        getCellColCount: function (obj = {}, count = 1) {
-            return obj.children
-                ? obj.children.filter(e => !e.children).length + obj.children.filter(e => e.children).reduce( (acc, cur) => acc + this.getCellColCount(cur), 0) 
-                : count
-        },
-        // head
-        getHeadData: function (head = []) {
-            if (!head || head.length == 0) return []
-            this.theadData.push([...head])
-            this.getHeadData(head.filter(e => e.children).map(e => e.children).flat())
         },
     },
     watch: {

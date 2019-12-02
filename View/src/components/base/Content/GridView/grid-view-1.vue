@@ -98,7 +98,7 @@
         <b-modal id="sortmodal" title="Sort Plus" :icon="icon.sort">
             <template>
                 <div class="row my-1" v-for="item in sort" :key="item">
-                    <font class="col-3">{{ lastColunms.filter(e => e.field == item)[0].title || item }}: </font>
+                    <font class="col-3">{{ lastcolumns.filter(e => e.field == item)[0].title || item }}: </font>
                     <div class="col-9"><b-select :list="['asc', 'desc']" :value="sortPlusObj[item]" @change="sortPlusChanged($event, item)" size="sm" /></div>
                 </div>
             </template>
@@ -222,8 +222,8 @@ export default {
         rowStyle: function () {
             return this.list && this.list.rowStyle || {}
         },
-        lastColunms: function () {
-            return this.getLastColunms()
+        lastcolumns: function () {
+            return this.getLastColumns()
         },
         fixedNum: function () {
             return Number(this.fixed)
@@ -390,10 +390,10 @@ export default {
             }
             if (this.activeTableTFoot && Math.abs(xCoord) > 1) this.activeTableTFoot.scrollLeft = xCoord
         },
-        getLastColunms: function (head = this.head) {
+        getLastColumns: function (head = this.head) {
             let arr = []
             head.forEach(e => {
-                e.children ? arr.push(...this.getLastColunms(e.children)) : arr.push(e)
+                e.children ? arr.push(...this.getLastColumns(e.children)) : arr.push(e)
             })
             return arr
         },
@@ -429,7 +429,7 @@ export default {
                 type: 'json',
                 printable: this.data,
                 repeatTableHeader: true,
-                properties: this.lastColunms.map(e => ({field: e.field, displayName: e.title})),
+                properties: this.lastcolumns.map(e => ({field: e.field, displayName: e.title})),
                 header: this.printTitle ? '<h3 class="text-center">'+ this.printTitle +'</h3>' : null,
             })
             this.$emit('table:print')

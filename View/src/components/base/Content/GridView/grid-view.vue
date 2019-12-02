@@ -22,7 +22,7 @@
                                 <i :class="icon.print" />
                             </b-button>
                         </b-button-group>
-                        <b-dropdown :list="downloadList" menuAlign="right" @menuClick="dataExport" hideToggle>
+                        <b-dropdown :list="downloadList" menuAlign="right" @menuClick="item => dataExport(item)" hideToggle>
                             <template #trigger>
                                 <b-button color="secondary" size="sm" v-tip="'Export'">
                                     <i :class="icon.fileExport" />
@@ -108,7 +108,7 @@
         <b-modal id="sortmodal" title="Sort Plus" :icon="icon.sort">
             <template>
                 <div class="row my-1" v-for="item in sort" :key="item">
-                    <font class="col-3">{{ lastColunms.filter(e => e.field == item)[0].title || item }}: </font>
+                    <font class="col-3">{{ lastcolumns.filter(e => e.field == item)[0].title || item }}: </font>
                     <div class="col-9"><b-select :list="['asc', 'desc']" :value="sortPlusObj[item]" @change="sortPlusChanged($event, item)" size="sm" /></div>
                 </div>
             </template>
@@ -122,11 +122,12 @@
 </template>
 
 <script>
+// 参考： https://printjs.crabbly.com/
+import printJS from 'print-js'
+
 import util from '@/util/index.js'
 import config from '@/config/index.js'
 import utilities from '@/components/utilities/index.js'
-// 参考： https://printjs.crabbly.com/
-import printJS from 'print-js'
 
 import CTable from '@/components/base/Content/Table/c-table.vue'
 
@@ -152,11 +153,12 @@ export default {
             loading: false, // 未使用
             selectedOptions: this.selected,
             downloadList: [
-                { value: 'JSON', type: 'json', },
                 { value: 'XML', type: 'xml', },
                 { value: 'CSV', type: 'csv', },
                 { value: 'TXT', type: 'txt', },
                 { value: 'SQL', type: 'sql', },
+                { value: 'PDF', type: 'pdf', },
+                { value: 'JSON', type: 'json', },
                 { value: 'MS-EXCEL', type: 'ms-excel', },
             ],
             sortObj: {},
@@ -232,8 +234,8 @@ export default {
         rowStyle: function () {
             return this.list && this.list.rowStyle || {}
         },
-        lastColunms: function () {
-            return this.getLastColunms()
+        lastcolumns: function () {
+            return this.getLastColumns()
         },
         fixedNum: function () {
             return Number(this.fixed)
@@ -388,15 +390,41 @@ export default {
             }
             if (this.activeTableTFoot && Math.abs(xCoord) > 1) this.activeTableTFoot.scrollLeft = xCoord
         },
-        getLastColunms: function (head = this.head) {
+        getLastColumns: function (head = this.head) {
             let arr = []
             head.forEach(e => {
-                e.children ? arr.push(...this.getLastColunms(e.children)) : arr.push(e)
+                e.children ? arr.push(...this.getLastColumns(e.children)) : arr.push(e)
             })
             return arr
         },
         dataExport: function (item) {
             if (!item || !item.type) return
+            switch (item.type) {
+                case 'xml':
+                    util.file.xml.writer(this.data)
+                    break;
+                case 'csv':
+                    util.file.csv.writer(this.data)
+                    break;
+                case 'txt':
+                    util.file.txt.writer(this.data)
+                    break;
+                case 'sql':
+                    
+                    break;
+                case 'pdf':
+                    
+                    break;
+                case 'json':
+                    util.file.json.writer(this.data)
+                    break;
+                case 'ms-excel':
+                    util.file.excel.writer(this.data)
+                    break;
+                default:
+                    break;
+            }
+            return false
         },
         tableSort: function (cell) {
             this.$set(this.sortObj, cell.field, this.sortObj && this.sortObj[cell.field] == 'asc' ? 'desc' : 'asc')
@@ -427,7 +455,7 @@ export default {
                 type: 'json',
                 printable: this.data,
                 repeatTableHeader: true,
-                properties: this.lastColunms.map(e => ({field: e.field, displayName: e.title})),
+                properties: this.lastcolumns.map(e => ({field: e.field, displayName: e.title})),
                 header: this.printTitle ? '<h3 class="text-center">'+ this.printTitle +'</h3>' : null,
             })
             this.$emit('table:print')

@@ -49,16 +49,11 @@ export default {
                 sort: ['sex', '2-1-1', '2-2-2', ],
                 data: [
                     { id: 'id_1', name: 'mack', sex: 'man', age: 10, },
-                    { 
-                        id: { value: 'id_2', class: 'text-info',}, 
-                        name: { value: 'jack', class: 'text-info',}, 
-                        sex: 'man',
-                        age: 10,
-                    },
+                    { id: 'id_2', name: 'jack', sex: 'man',  age: 10, },
                     { id: 'id_3', name: 'mack', sex: 'man',  },
                     { id: 'id_4', name: 'mack', sex: 'man', age: 5, },
                     { id: 'id_5', name: 'mack', sex: 'man', age: 5, },
-                    { id: 'id_6', name: 'mack', sex: 'man', age: 10, $class: 'text-primary' },
+                    { id: 'id_6', name: 'mack', sex: 'man', age: 10, },
                     { id: 'id_7', name: 'mack', sex: 'man', age: 10, },
                     { id: 'id_8', name: 'mack', sex: 'man', age: 10, },
                     { id: 'id_9', name: 'mack', sex: 'man', age: 10, },
