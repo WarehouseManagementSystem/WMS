@@ -156,8 +156,8 @@ export default {
                 { value: 'XML', type: 'xml', },
                 { value: 'CSV', type: 'csv', },
                 { value: 'TXT', type: 'txt', },
-                { value: 'SQL', type: 'sql', },
-                { value: 'PDF', type: 'pdf', },
+                // { value: 'SQL', type: 'sql', },
+                // { value: 'PDF', type: 'pdf', },
                 { value: 'JSON', type: 'json', },
                 { value: 'MS-EXCEL', type: 'ms-excel', },
             ],
@@ -409,12 +409,12 @@ export default {
                 case 'txt':
                     util.file.txt.writer(this.data)
                     break;
-                case 'sql':
+                // case 'sql':
                     
-                    break;
-                case 'pdf':
+                //     break;
+                // case 'pdf':
                     
-                    break;
+                //     break;
                 case 'json':
                     util.file.json.writer(this.data)
                     break;

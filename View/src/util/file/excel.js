@@ -1,10 +1,12 @@
 import json from './json'
-import exportFile from './export'
+// import exportFile from './export'
 const xl = require('excel4node')
 // const express = require('express');
 // const app = express();
 
 /**
+ * Node读写Excel文件探究实践
+ * https://aotu.io/notes/2016/04/07/node-excel/index.html
  * https://stackoverflow.com/questions/28892885/javascript-json-to-excel-file-download/52948276
  * api documentation for excel4node (v1.2.1): 
  * https://npmdoc.github.io/node-npmdoc-excel4node/build/apidoc.html
@@ -35,9 +37,9 @@ let createSheet = (data, sheetName = 'sheet1' ) => {
     wb.write('Excel.xlsx');
 }
 let reader = () => { }
-let writer = (data, fileName) => {
+let writer = (data) => {
     json.toJSON(data)
-    let file = createSheet(data)
+    createSheet(data)
     // let dataUri = 'data:text/xls;charset=utf-8,' + encodeURIComponent(file)
     // exportFile.exportData(dataUri, fileName, '.xls')
 }
