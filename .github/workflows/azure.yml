@@ -16,7 +16,7 @@ on:
 env:
   AZURE_WEBAPP_NAME: WMS              # set this to your application's name
   AZURE_WEBAPP_PACKAGE_PATH: '.'      # set this to the path to your web app project, defaults to the repository root
-  NODE_VERSION: '10.15.0'            # set this to the node version to use
+  NODE_VERSION: '10.x'            # set this to the node version to use
 
 jobs:
   build-and-deploy:
@@ -25,7 +25,7 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - name: Use Node.js ${{ env.NODE_VERSION }}
-      uses: actions/checkout@master
+      uses: actions/setup-node@v1
       with:
         node-version: ${{ env.NODE_VERSION }}
     - name: npm install, build
