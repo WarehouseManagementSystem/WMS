@@ -33,6 +33,7 @@ jobs:
         # Build and test the project, then
         # deploy to Azure Web App.
         node -v
+        ls
         cd view
         npm install
         npm run build --if-present
