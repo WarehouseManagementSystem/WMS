@@ -34,7 +34,7 @@ jobs:
         # deploy to Azure Web App.
         node -v
         ls
-        cd view
+        cd View
         npm install
         npm run build --if-present
         # npm run test --if-present
