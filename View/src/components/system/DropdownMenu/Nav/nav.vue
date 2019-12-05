@@ -54,7 +54,7 @@ export default {
           this.Routers = conf.Modules
         })
         if (!this.Routers) {
-          console.warn('[System Error] routers is not an array')
+          // console.warn('[System Error] routers is not an array')
         }
     },
     InitSubsystem: function () {
