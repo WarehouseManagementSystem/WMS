@@ -10,8 +10,8 @@
 # For more samples to get started with GitHub Action workflows to deploy to Azure, refer to https://github.com/Azure/actions-workflow-samples
 on:
   push:
-    branches:
-      - master
+ #   branches:
+ #     - master
 
 env:
   AZURE_WEBAPP_NAME: WMS              # set this to your application's name
@@ -32,8 +32,6 @@ jobs:
       run: |
         # Build and test the project, then
         # deploy to Azure Web App.
-        node -v
-        ls
         cd View
         npm install
         npm run build --if-present
