@@ -28,7 +28,7 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ env.NODE_VERSION }}
-    - name: npm install, build and deploy
+    - name: npm install, build
       run: |
         # Build and test the project, then
         # deploy to Azure Web App.
@@ -41,7 +41,7 @@ jobs:
       uses: crazy-max/ghaction-github-pages@v1
       with:
         target_branch: gh-pages
-        build_dir: dist
+        build_dir: View/dist
         run: |
           ls
       env:
