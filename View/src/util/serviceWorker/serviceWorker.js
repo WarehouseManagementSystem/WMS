@@ -23,7 +23,7 @@ if ('serviceWorker' in navigator && navigator.serviceWorker) {
         return e.data
     })
 } else {
-    console.log('Service Worker is not supported');
+    // console.log('Service Worker is not supported');
 }
 
 // function postMessage(msg) {
