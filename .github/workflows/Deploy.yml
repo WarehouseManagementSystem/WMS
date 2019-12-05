@@ -8,6 +8,9 @@
 #
 # For more information on GitHub Actions for Azure, refer to https://github.com/Azure/Actions
 # For more samples to get started with GitHub Action workflows to deploy to Azure, refer to https://github.com/Azure/actions-workflow-samples
+
+name: Deploy to GitHub Page
+
 on:
   push:
     branches:
@@ -16,7 +19,7 @@ on:
 env:
   AZURE_WEBAPP_NAME: WMS              # set this to your application's name
   AZURE_WEBAPP_PACKAGE_PATH: '.'      # set this to the path to your web app project, defaults to the repository root
-  NODE_VERSION: '11.15.0'            # set this to the node version to use
+  NODE_VERSION: '11.15.0'             # set this to the node version to use
 
 jobs:
   build-and-deploy:
@@ -30,19 +33,15 @@ jobs:
         node-version: ${{ env.NODE_VERSION }}
     - name: npm install, build
       run: |
-        # Build and test the project, then
-        # deploy to Azure Web App.
+        # Build and test the project.
         git init
         cd View
         npm install
         npm run build --if-present
-        # npm run test --if-present
     - name: 'Deploy to Github Page'
       uses: crazy-max/ghaction-github-pages@v1
       with:
         target_branch: gh-pages
         build_dir: View/dist
-        run: |
-          ls
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
