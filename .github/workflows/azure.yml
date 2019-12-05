@@ -39,6 +39,7 @@ jobs:
         # npm run test --if-present
     - name: 'Deploy to Github Page'
       uses: crazy-max/ghaction-github-pages@v1
+      run: ls
       with:
         target_branch: gh-pages
         build_dir: View/build
