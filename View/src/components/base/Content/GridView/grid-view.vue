@@ -159,7 +159,7 @@ export default {
                 // { value: 'SQL', type: 'sql', },
                 // { value: 'PDF', type: 'pdf', },
                 { value: 'JSON', type: 'json', },
-                { value: 'MS-EXCEL', type: 'ms-excel', },
+                // { value: 'MS-EXCEL', type: 'ms-excel', },
             ],
             sortObj: {},
             sortPlusObj: {},
