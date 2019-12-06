@@ -22,12 +22,13 @@ export default {
                     type: Boolean,
                     default: true,
                 },
+                tempClass: String,
             },
             computed: {
                 objClass: function () {
                     let size = this.size ? `form-control-${this.size}` : ''
                     let border = !this.border ? 'border-0' : ''
-                    return `bg-${this.color} text-${this.textColor} ${size} ${border} text-${this.textAlign}`
+                    return `${this.tempClass} bg-${this.color} text-${this.textColor} ${size} ${border} text-${this.textAlign}`
                 },
                 inputListeners: function () {
                     var vm = this

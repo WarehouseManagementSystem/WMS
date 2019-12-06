@@ -42,7 +42,7 @@ export default {
         table: {
             operate,
         },// table
-        icon: icon, // icon
+        icon: icon, // icons
         status: status, // status
     }, // UI config
     

@@ -1,3 +1,4 @@
+// https://fontawesome.com
 // fas / far
 // -alt
 export default {
@@ -26,8 +27,6 @@ export default {
     print: 'fas fa-print', // print
     search: 'fas fa-search', // form b-text input search
     searchPlus: 'fas fa-search-plus', // search-plus
-    fileExport: 'fas fa-file-export', // file-export
-    fileImport: 'fas fa-file-import', // file-import
     filter: 'fas fa-filter', // filter 筛选
     hash: 'fab fa-slack-hash', // a hash （Anchor point）
     info: 'fas fa-info-circle', // table no data
@@ -40,5 +39,25 @@ export default {
     list: 'fas fa-list',
     thList: 'fas fa-th-list',
     listAlt: 'fas fa-list-alt',
+    // file
+    folder: 'fas fa-folder',
+    folders: 'fas fa-folders',
+    folderOpen: 'fas fa-folder-open',
+    file: 'fas fa-file',
+    fileAlt: 'fas fa-file-alt',
+    fileCsv: 'fas fa-file-csv',
+    filePdf: 'fas fa-file-pdf',
+    fileCode: 'fas fa-file-code',
+    fileImage: 'fas fa-file-image',
+    fileVideo: 'fas fa-file-video',
+    fileAudio: 'fas fa-file-audio',
+    fileWord: 'fas fa-file-word',
+    fileExcel: 'fas fa-file-excel',
+    filePowerpoint: 'fas fa-file-powerpoint',
+    fileSignature: 'fas fa-file-signature',
+    fileUpload: 'fas fa-file-upload',
+    fileDownload: 'fas fa-file-download',
+    fileExport: 'fas fa-file-export', // file-export
+    fileImport: 'fas fa-file-import', // file-import
     
 }
