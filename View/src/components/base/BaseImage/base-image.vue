@@ -1,5 +1,5 @@
 <template>
-​   <picture>
+    <picture>
         <source v-for="(img, index) in list" :key="index" :srcset="img.src" :media="img.media" :type="img.type">
         <img :src="imgSrc" class="img-fluid img-thumbnail" :alt="alt">
     </picture>

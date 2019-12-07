@@ -1,24 +1,35 @@
 <template>
-    <div>
-        <div class="d-table-row d-flex align-items-center">
-            <div class="d-table-cell text-secondary">
+    <div style="cursor: default;" >
+        <div class="d-table-row d-flex align-items-center" :class="labelChecked ? 'text-light bg-primary' : ''" @click.stop="clickOnItem"  @dblclick.stop="dblclickOnItem">
+            <div class="d-table-cell pl-1" :class="labelChecked ? 'text-light bg-primary' : 'text-secondary'">
                 <div v-if="isFolder" @click="open = !open">
                     <i class="mr-2" :class="open ? icon.caretDown : icon.caretRight" style="width: 10px" />
                     <i class="mr-2" :class="open ? icon.folderOpen : icon.folder" />
                 </div>
                 <i v-else class="mx-2" :class="icon.fileAlt"/>
-            </div>
-            <div class="d-table-cell" @dblclick.stop="dblclickOnLabel">
+            </div> <!-- icon -->
+            <div class="d-table-cell pr-1">
                 <font v-if="!editItem">{{ item.label }}</font>
-                <b-text tempClass="p-0" v-else v-model="item.label" size='sm' length="30" required @valid="editValid" @invalid="editInvalid" @click.stop="clickOnEdit" />
-            </div>
-        </div>
-            <c-tree 
-                class="mx-3" 
-                v-if="isFolder" 
-                v-show="open" 
-                :status="status" 
-                :list="item.children" />
+                <b-text 
+                    v-else 
+                    ref="edior" 
+                    size='sm' 
+                    length="30" 
+                    color="light" 
+                    tempClass="p-0" 
+                    required
+                    v-model="item.label" 
+                    @click.stop
+                    @valid="editValid" 
+                    @invalid="editInvalid" />
+            </div> <!-- label or edit -->
+        </div> <!-- item -->
+        <c-tree 
+            class="mx-3" 
+            v-if="isFolder" 
+            v-show="open" 
+            :status="status" 
+            :list="item.children" />
     </div>
 </template>
 
@@ -35,8 +46,9 @@ export default {
     data () {
         return {
             open: this.item.open,
-            editItem: false,
-            editError: false,
+            labelChecked: false,
+            editItem: false, // 编辑
+            editError: false, // 编辑错误
         }
     },
     props: {
@@ -58,11 +70,18 @@ export default {
         if (this.status == 1) document.removeEventListener('click')
     },
     methods: {
-        dblclickOnLabel: function () {
-            if (this.status == 1) this.editItem = true
+        clickOnItem: function () {
+            this.labelChecked = true
+            if (this.editItem) this.hideEditor()
+            this.$emit('item:selected', this.item)
         },
-        clickOnEdit: function (event) {
-            util.document.setCursorPos(event.target)
+        dblclickOnItem: async function () {
+            if (this.status == 1) {
+                this.editItem = true
+                await this.$nextTick()
+                // 自动全选 editor 中的内容
+                await util.document.setCursorPos(this.$refs.edior.$refs.text)
+            }
         },
         editValid: function () {
             this.editError = false
@@ -70,10 +89,11 @@ export default {
         editInvalid: function () {
             this.editError = true
         },
+        hideEditor: function () {
+            if (!this.editError) this.editItem = false
+        },
         addClickEventListener: function () {
-            if (this.status == 1) document.addEventListener('click', () => {
-                if (!this.editError) this.editItem = false
-            })
+            if (this.status == 1) document.addEventListener('click', this.hideEditor)
         },
     },
 }
