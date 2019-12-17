@@ -1,6 +1,6 @@
 <template>
   <div class="h-100 d-block">
-    
+      
   </div>
 </template>
 
@@ -20,9 +20,11 @@ export default {
     
   },
   methods: {
-  
+    
   },
 }
 </script>
 
-
+<style scoped>
+  
+</style>

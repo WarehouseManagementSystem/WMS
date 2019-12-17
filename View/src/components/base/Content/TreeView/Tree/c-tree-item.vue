@@ -1,20 +1,19 @@
 <template>
-    <div style="cursor: default;" >
+    <div>
         <div 
             class="d-table-row d-flex align-items-center" 
             :class="objClass" 
-            :style="objStyle" 
             ref="dropzone"
-            :draggable="canDrap" 
+            draggable="true" 
             @click.stop="clickOnItem" 
             @dblclick.stop="dblclickOnItem" 
             @dragstart="dragstart" 
+            @dragover.prevent="dragover" 
+            @dragleave="dragleave" 
             @dragend="dragend" 
             @dragexit="dragexit" 
-            @dragover="dragover" 
-            @dragenter.stop
-            @dragleave="dragleave" >
-            <div class="d-table-cell pl-1" :class="labelChecked ? 'text-light bg-primary' : 'text-secondary'"  @click.stop="open = !open">
+            @drop.stop.prevent="drop" >
+            <div class="d-table-cell pl-1" :class="selected ? 'text-light bg-primary' : 'text-secondary'"  @click.stop="open = !open">
                 <div v-if="isFolder">
                     <i class="mr-2" :class="open ? icon.caretDown : icon.caretRight" style="width: 10px" @dblclick.stop />
                     <i class="mr-2" :class="open ? icon.folderOpen : icon.folder"  @click.stop />
@@ -32,7 +31,8 @@
                     tempClass="p-0" 
                     required
                     v-model="item.label" 
-                    @click.stop
+                    @click.stop 
+                    @blur="editorBlur" 
                     @valid="editValid" 
                     @invalid="editInvalid" />
             </div> <!-- label or edit -->
@@ -63,35 +63,24 @@ export default {
     data () {
         return {
             open: this.item.open,
-            labelChecked: false,
+            selected: false,
             editItem: false, // 编辑
             editError: false, // 编辑错误
             dropStatus: 'default', // 拖拽状态
             // default: 默认, start: 开示, end: 结束, top: 上部, bottom: 下部
-            timer: null, // 停留计时器
         }
     },
     props: {
         item: utilities.props.item,
         status: Number,
-        disDrap: Boolean,
     },
     computed: {
         icon: function () {
             return config.ui.icon
         },
         objClass: function () {
-            let beChecked = this.labelChecked ? 'text-light bg-primary' : ''
-            let isDropzone = this.canDrap ? 'dropzone' : ''
-            return `${beChecked} ${isDropzone}`
-        },
-        objStyle: function () {
-            switch (this.dropStatus) {
-                case 'default': return ''
-                case 'start': return 'opacity: .5'
-                default: return ''
-            }
-            return ''
+            let beChecked = this.selected ? 'text-light bg-primary' : ''
+            return `${beChecked}`
         },
         isFolder: function () {
             return this.item.children
@@ -99,20 +88,11 @@ export default {
         canEdit: function () {
             return this.status == 1 && !this.disabled
         },
-        canDrap: function () {
-            return this.canEdit && !this.disDrap
-        },
-    },
-    mounted () {
-        if (this.canEdit) document.addEventListener('click', this.hideEditor)
-    },
-    destroyed () {
-        if (this.canEdit) document.removeEventListener('click', this.hideEditor)
     },
     methods: {
         clickOnItem: function () {
-            this.labelChecked = true
-            if (this.editItem) this.hideEditor()
+            this.selected = true
+            this.hideEditor()
             this.$emit('item:selected', this.item)
         },
         dblclickOnItem: async function () {
@@ -123,29 +103,35 @@ export default {
                 await util.document.setCursorPos(this.$refs.edior.$refs.text)
             }
         },
+        
         editValid: function () {
             this.editError = false
         },
         editInvalid: function () {
             this.editError = true
         },
-        hideEditor: function () {
-            if (!this.editError) this.editItem = false
+        editorBlur: function () {
+            this.hideEditor()
         },
-        dragstart: function () {
+        hideEditor: function () {
+            if (this.editItem && !this.editError) this.editItem = false
+        },
+        dragstart: function (event) {
+            event.target.style.opacity = '.5'
+            event.dataTransfer.setData('text/plain',null)
             this.dropStatus = 'start'
         },
-        dragend: function () {
+        dragend: function (event) {
+            event.target.style.opacity = ''
             this.dropStatus = 'end'
-             if (this.$store.state.timer) this.$store.commit('stopTimer')
+            if (this.$store.state.timer) this.$store.commit('stopTimer')
         },
         dragexit: function () {
             this.dropStatus = 'end'
             if (this.$store.state.timer) this.$store.commit('stopTimer')
         },
         dragover: function (event) {
-            if (this.dropStatus == 'start') return
-            let target = this.$refs.dropzone // this.getDropzone(event.target)
+            let target = this.$refs.dropzone
             if (this.isFolder) {
                 if (!this.$store.state.timer) {
                     util.dom.addClass(target, 'bg-light')
@@ -161,17 +147,22 @@ export default {
             }
         },
         dragleave: function (event) {
-            if (this.dropStatus == 'start') return
-            let target = this.$refs.dropzone // this.getDropzone(event.target)
+            let target = this.$refs.dropzone
+            util.dom.removeClass(target, 'border-primary')
+            util.dom.removeClass(target, `border-top`)
+            util.dom.removeClass(target, `border-bottom`)
+            util.dom.removeClass(target, 'bg-light')
+            if (this.isFolder && this.$store.state.timer) this.$store.commit('stopTimer')
+        },
+        drop: function (event) {
+            let target = this.$refs.dropzone
             util.dom.removeClass(target, 'border-primary')
             util.dom.removeClass(target, `border-top`)
             util.dom.removeClass(target, `border-bottom`)
             util.dom.removeClass(target, 'bg-light')
             this.dropStatus = 'default'
             if (this.isFolder && this.$store.state.timer) this.$store.commit('stopTimer')
-        },
-        getDropzone: function (event) {
-            return util.dom.hasClass(event, 'dropzone') ? event : this.getDropzone(event.parentElement)
+            this.$emit('item:drop', event, this.isFolder)
         },
     },
 }
