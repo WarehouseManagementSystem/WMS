@@ -67,7 +67,7 @@ export default {
             editItem: false, // 编辑
             editError: false, // 编辑错误
             dropStatus: 'default', // 拖拽状态
-            // default: 默认, start: 开示, end: 结束, top: 上部, bottom: 下部
+            // default: 默认, start: 开始, end: 结束, top: 上部, bottom: 下部
         }
     },
     props: {
@@ -103,7 +103,6 @@ export default {
                 await util.document.setCursorPos(this.$refs.edior.$refs.text)
             }
         },
-        
         editValid: function () {
             this.editError = false
         },
@@ -162,7 +161,7 @@ export default {
             util.dom.removeClass(target, 'bg-light')
             this.dropStatus = 'default'
             if (this.isFolder && this.$store.state.timer) this.$store.commit('stopTimer')
-            this.$emit('item:drop', event, this.isFolder)
+            this.$emit('item:drop', event, this.isFolder, this.dropStatus)
         },
     },
 }
