@@ -90,7 +90,7 @@ export default {
             return config.ui.icon
         },
         objClass: function () {
-            let isHover = this.hover ? ' shadow-sm bg-light text-primary font-weight-bolder' : ''
+            let isHover = this.hover ? 'bg-light text-primary font-weight-bolder' : ''
             let beChecked = this.isSelected ? 'text-light bg-primary' : ''
             return `${beChecked} ${isHover}`
         },

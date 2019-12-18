@@ -12,13 +12,13 @@
                             <b-button color="secondary" size="sm" v-tip="'Search Plus'">
                                 <i :class="icon.searchPlus" />
                             </b-button>
-                            <b-button color="secondary" size="sm" v-tip="'Sort Plus'" v-modal="'#sortmodal'" @click.native="sortPlusObj = Object.create(sortObj)">
+                            <b-button color="secondary" size="sm" v-tip="'Sort Plus'" v-modal="'#sortmodal'" @click="sortPlusObj = Object.create(sortObj)">
                                 <i :class="icon.sort" />
                             </b-button>
-                            <b-button color="secondary" size="sm" @click.native="reset" v-tip="'Reset'">
+                            <b-button color="secondary" size="sm" @click="reset" v-tip="'Reset'">
                                 <i :class="icon.sync" />
                             </b-button>
-                            <b-button color="secondary" size="sm" @click.native="print" v-tip="'Print'">
+                            <b-button color="secondary" size="sm" @click="print" v-tip="'Print'">
                                 <i :class="icon.print" />
                             </b-button>
                         </b-button-group>
@@ -114,8 +114,8 @@
             </template>
             <template #footer>
                 <b-button color="secondary" data-dismiss="modal">Close</b-button>
-                <b-button color="primary" data-dismiss="modal" @click.native="clearSort">Clear Sort</b-button>
-                <b-button color="primary" data-dismiss="modal" @click.native="sortPlus">Sort</b-button>
+                <b-button color="primary" data-dismiss="modal" @click="clearSort">Clear Sort</b-button>
+                <b-button color="primary" data-dismiss="modal" @click="sortPlus">Sort</b-button>
             </template>
         </b-modal>
     </div> <!-- gridView -->

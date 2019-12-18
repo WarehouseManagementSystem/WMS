@@ -9,7 +9,7 @@
         :aria-disabled="disabled"
         :tabindex="objTabindex" 
         :autocomplete="autocomplete" 
-        @click="onClick($event)"
+        @v-on="$listeners" 
         data-toggle="button" 
         role="button">
         <slot>{{ value }}</slot>
@@ -26,8 +26,7 @@
         :aria-disabled="disabled"
         :tabindex="objTabindex" 
         :autocomplete="autocomplete" 
-        @click="onClick($event)" 
-        data-toggle="button" />
+        v-on="$listeners"  />
     <button class="btn" 
         v-else 
         :class="objClass" 
@@ -38,8 +37,7 @@
         :aria-disabled="disabled" 
         :tabindex="objTabindex" 
         :autocomplete="autocomplete" 
-        @click="onClick($event)" 
-        data-toggle="button">
+        v-on="$listeners"  >
         <slot>{{ value }}</slot>
         <sr-message>{{ fillsrMessage }}</sr-message>
     </button>
@@ -106,16 +104,5 @@ export default {
             return this.srMessage
         },
     },
-    methods: {
-        onClick: function (e) {
-            if (this.type == 'submit') {
-                this.$emit('submit', e)
-            } else if (this.type == 'reset') {
-                this.$emit('reset', e)
-            } else {
-                this.$emit('click', e)
-            }
-        }
-    }
 }
 </script>

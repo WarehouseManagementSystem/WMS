@@ -17,8 +17,13 @@ export default {
     forward: 'fas fa-step-forward', // pagination forward
     download: 'fas fa-download', // a download
     view: 'fas fa-eye',// table operate view - far fa-eye
+    add: 'fas fa-plus',
+    addFolder: 'fas fa-folder-plus',
     edit: 'fas fa-edit', // table operate edit - fas fa-edit | far fa-edit
-    check: 'fas fa-mouse-pointer',// table operate check - far fa-check-circle | fas fa-mouse-pointer
+    check: 'fas fa-check',// table operate check - far fa-check-circle
+    unCheck: 'fas fa-eye-slash',
+    mousePointer: 'fas fa-mouse-pointer',
+    handPointer: 'fas fa-hand-pointer',
     delete: 'fas fa-trash-alt', // table operate edit - far fa-trash-alt
     trash: 'fas fa-trash', // trash
     flow: 'fas fa-paper-plane', // table operate flow
