@@ -5,6 +5,8 @@
             :class="objClass" 
             ref="dropzone"
             draggable="true" 
+            @mouseenter="mouseenterOnItem" 
+            @mouseleave="mouseleaveOnItem"
             @click.stop="clickOnItem" 
             @dblclick.stop="dblclickOnItem" 
             @dragstart="dragstart" 
@@ -13,7 +15,7 @@
             @dragend="dragend" 
             @dragexit="dragexit" 
             @drop.stop.prevent="drop" >
-            <div class="d-table-cell pl-1" :class="isSelected ? 'text-light bg-primary' : 'text-secondary'"  @click.stop="open = !open">
+            <div class="d-table-cell pl-1" :class="itemClass"  @click.stop="open = !open">
                 <div v-if="isFolder">
                     <i class="mr-2" :class="open ? icon.caretDown : icon.caretRight" style="width: 10px" @dblclick.stop />
                     <i class="mr-2" :class="open ? icon.folderOpen : icon.folder"  @click.stop />
@@ -66,6 +68,7 @@ export default {
         return {
             open: this.item.open,
             selectedOption: this.selected,
+            hover: false,
             editItem: false, // 编辑
             editError: false, // 编辑错误
             dropStatus: 'default', // 拖拽状态
@@ -87,8 +90,13 @@ export default {
             return config.ui.icon
         },
         objClass: function () {
+            let isHover = this.hover ? ' shadow-sm bg-light text-primary font-weight-bolder' : ''
             let beChecked = this.isSelected ? 'text-light bg-primary' : ''
-            return `${beChecked}`
+            return `${beChecked} ${isHover}`
+        },
+        itemClass: function () {
+            let beChecked = this.isSelected ? '' : 'text-secondary'
+            return `${beChecked} `
         },
         isFolder: function () {
             return this.item.children
@@ -101,10 +109,18 @@ export default {
         },
     },
     methods: {
+        mouseenterOnItem: function () {
+            if (!this.isSelected) this.hover = true
+        },
+        mouseleaveOnItem: function () {
+            if (!this.isSelected) this.hover = false
+        },
         clickOnItem: function () {
+            this.hover = false
             this.selectedOption = this.item
         },
         dblclickOnItem: async function () {
+            this.hover = false
             if (this.canEdit) {
                 this.editItem = true
                 await this.$nextTick()
