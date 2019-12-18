@@ -41,12 +41,9 @@ jobs:
         npm install
         npm run build --if-present
     - name: 'Deploy to Github Page'
-      run: | 
-        cd View/dist
-        git init
-        git add -A
-        git commit -m 'deploy'
-        git push -f "${{ env.REPOSITORIES }}" master:gh-pages
+      uses: crazy-max/ghaction-github-pages@v1
+      with:
+        target_branch: gh-pages
+        build_dir: View/dist
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        REPOSITORIES: ${{ git@github.com/WarehouseManagementSystem/WMS.git }}
