@@ -13,7 +13,7 @@
             @dragend="dragend" 
             @dragexit="dragexit" 
             @drop.stop.prevent="drop" >
-            <div class="d-table-cell pl-1" :class="selected ? 'text-light bg-primary' : 'text-secondary'"  @click.stop="open = !open">
+            <div class="d-table-cell pl-1" :class="isSelected ? 'text-light bg-primary' : 'text-secondary'"  @click.stop="open = !open">
                 <div v-if="isFolder">
                     <i class="mr-2" :class="open ? icon.caretDown : icon.caretRight" style="width: 10px" @dblclick.stop />
                     <i class="mr-2" :class="open ? icon.folderOpen : icon.folder"  @click.stop />
@@ -42,7 +42,9 @@
             v-if="isFolder" 
             v-show="open" 
             :status="status" 
-            :list="item.children" />
+            :list="item.children"
+            :primaryKey="primaryKey" 
+            v-model="selectedOption" />
     </div>
 </template>
 
@@ -63,7 +65,7 @@ export default {
     data () {
         return {
             open: this.item.open,
-            selected: false,
+            selectedOption: this.selected,
             editItem: false, // 编辑
             editError: false, // 编辑错误
             dropStatus: 'default', // 拖拽状态
@@ -73,27 +75,34 @@ export default {
     props: {
         item: utilities.props.item,
         status: Number,
+        primaryKey: {
+            type: String,
+            default: 'id',
+            require: true,
+        },
+        selected: Object,
     },
     computed: {
         icon: function () {
             return config.ui.icon
         },
         objClass: function () {
-            let beChecked = this.selected ? 'text-light bg-primary' : ''
+            let beChecked = this.isSelected ? 'text-light bg-primary' : ''
             return `${beChecked}`
         },
         isFolder: function () {
             return this.item.children
         },
         canEdit: function () {
-            return this.status == 1 && !this.disabled
+            return this.status == 1 && !this.item.disabled
+        },
+        isSelected: function () {
+            return this.selectedOption && this.item[this.primaryKey] && this.selectedOption[this.primaryKey] && this.selectedOption[this.primaryKey] == this.item[this.primaryKey]
         },
     },
     methods: {
         clickOnItem: function () {
-            this.selected = true
-            this.hideEditor()
-            this.$emit('item:selected', this.item)
+            this.selectedOption = this.item
         },
         dblclickOnItem: async function () {
             if (this.canEdit) {
@@ -164,6 +173,14 @@ export default {
             this.$emit('item:drop', event, this.isFolder, this.dropStatus)
         },
     },
+    watch: {
+        selected: function (value) {
+            this.selectedOption = value
+        },
+        selectedOption: function (value) {
+            this.$emit('item:selected', value)
+        },
+    }
 }
 
 </script>

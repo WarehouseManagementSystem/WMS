@@ -1,5 +1,5 @@
 <template>
-    <tree-view :list="list" status="1" />
+    <tree-view :list="list" status="1" v-model="selected" />
 </template>
 
 <script>
@@ -10,6 +10,7 @@ export default {
     components: { TreeView, },
     data () {
         return {
+            selected: {},
             list: [
                 { label: '1-a', value: '1-a', open: true,
                 children: [
