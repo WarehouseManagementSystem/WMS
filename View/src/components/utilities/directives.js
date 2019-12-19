@@ -7,7 +7,6 @@ import util from '@/util/index.js'
 
 // 注册一个全局自定义指令 `v-tip`(用于提示弹窗)
 Vue.directive('tip', (el, binding) => {
-
     let arg = binding.arg || 'tooltip'
     if (!['tooltip', 'popover'].includes(arg)) return
     if (!binding.value) return

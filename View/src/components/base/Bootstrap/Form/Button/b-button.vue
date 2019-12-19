@@ -6,7 +6,7 @@
         :disabled="disabled" 
         :aria-pressed="active" 
         :aria-disabled="disabled"
-        data-toggle="button" >
+        v-on="$listeners" >
         <slot>{{ value | worldUpperCase | firstUpperCase }}</slot>
         <sr-message>{{ fillsrMessage }}</sr-message>
     </button>
@@ -19,7 +19,8 @@
         :aria-pressed="active" 
         :disabled="disabled" 
         data-toggle="button" 
-        role="button" >
+        role="button" 
+        v-on="$listeners" >
         <slot>{{ value | worldUpperCase | firstUpperCase }}</slot>
         <sr-message>{{ fillsrMessage }}</sr-message>
     </base-a>
