@@ -103,7 +103,7 @@ export default {
         },
         click: function (value) {
             this.selectValue = this.formatDate(this.year, this.month, value)
-            this.$emit('dateChecked')
+            this.$emit('dateChecked', this.selectValue)
         },
         forward: function () {
             if (this.month == 0) {
@@ -112,14 +112,13 @@ export default {
             } else {
                 this.month -= 1
             }
-            
         },
         checknow: function () {
             this.year = this.now.getFullYear()
             this.month = this.now.getMonth()
             this.date = this.now.getDate()
             this.selectValue = this.formatDate(this.year, this.month, this.date)
-            this.$emit('dateChecked')
+            this.$emit('dateChecked', this.selectValue)
         },
         backward: function () {
             if (this.month == 11) {
@@ -130,13 +129,13 @@ export default {
             }
         },
         formatDate: function (year, month, date) {
-            return year + '-' + util.string.padStart(Number(month + 1), 2) + '-' + util.string.padStart(date, 2)
+            return new Date(year + '-' + util.string.padStart(Number(month + 1), 2) + '-' + util.string.padStart(date, 2))
         },
     },
     watch: {
-        selectValue: function (val) {
+        selectValue: function (value) {
             // 配合 v-model 工作
-            this.$emit('change', val)
+            this.$emit('change', value)
         },
     },
 }

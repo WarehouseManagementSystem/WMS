@@ -81,8 +81,8 @@ export default {
         },
     },
     mounted () {
-        this.year = this.value.getFullYear()
-        this.month = this.value.getMonth()
+        this.year = this.value.getFullYear && this.value.getFullYear()
+        this.month = this.value.getMonth && this.value.getMonth()
         this.selectValue = this.formatMonth(this.year, this.month)
     },
     methods: {
@@ -106,7 +106,7 @@ export default {
             this.year += 1
         },
         formatMonth: function (year, month) {
-            return year + '-' + util.string.padStart(Number(month + 1), 2)
+            return new Date(year + '-' + util.string.padStart(Number(month + 1), 2))
         },
     },
     watch: {

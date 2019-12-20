@@ -38,7 +38,6 @@ let reader = () => { }
 let writer = (data, fileName) => {
     json.toJSON(data)
     createSheet(data).writeToBuffer().then(function (buffer) {
-        debugger
         // Do something with buffer
         let dataUri = 'data:text/xls;charset=utf-8,' + encodeURIComponent(buffer)
         exportFile.exportData(dataUri, fileName, '.xls')

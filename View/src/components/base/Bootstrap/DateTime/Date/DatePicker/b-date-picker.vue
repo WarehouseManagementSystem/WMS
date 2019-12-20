@@ -6,7 +6,7 @@
         <template v-if="show">
             <year-picker v-if="pickertType === 'year'" style="min-width: 18em" v-model="selectValue" :min="dateMin" :max="dateMax" :hideHeader="hideHeader" :disabled="disabled" @year2Month="year2Month"></year-picker>
             <month-picker v-if="pickertType === 'month'" style="min-width: 15em" v-model="selectValue" :min="dateMin" :max="dateMax" :hideHeader="hideHeader" :disabled="disabled" @month2Year="month2Year" @month2Date="month2Date"></month-picker>
-            <date-picker v-if="pickertType === 'date'" style="min-width: 22em" v-model="selectValue" :min="dateMin" :max="dateMax" :hideHeader="hideHeader" :disabled="disabled" @date2Month="date2Month" @dateChecked="show = false" ></date-picker>
+            <date-picker v-if="pickertType === 'date'" style="min-width: 22em" v-model="selectValue" :min="dateMin" :max="dateMax" :hideHeader="hideHeader" :disabled="disabled" @date2Month="date2Month" @dateChecked="dateChecked" ></date-picker>
         </template>
     </dropdown-picker>
 </template>
@@ -23,7 +23,7 @@ import datePicker from './date-date-picker'
 export default {
     name: 'b-date-picker',
     components: { dropdownPicker, yearPicker, monthPicker, datePicker, },
-        mixins: [ utilities.mixins.form.base, utilities.mixins.form.readonly, ],
+    mixins: [ utilities.mixins.form.base, utilities.mixins.form.readonly, ],
     model: {
         prop: 'value',
         event: 'change'
@@ -156,41 +156,43 @@ export default {
             this.pickertType = 'year'
         },
         year2Month: function (value) {
+            this.date.setFullYear(value)
+            this.selectValue = this.date
             if (this.canHide) {
                 this.show = false
                 return
             }
-            this.date.setFullYear(value)
-            this.selectValue = this.date
             this.pickertType = 'month'
         },
         date2Month: function (value) {
-            let d = new Date(value)
-            this.date.setFullYear(d.getFullYear())
-            this.date.setMonth(d.getMonth())
-            this.date.setDate(d.getDate())
+            this.date.setFullYear(value.getFullYear())
+            this.date.setMonth(value.getMonth())
+            this.date.setDate(value.getDate())
             this.selectValue = this.date
             this.pickertType = 'month'
         },
         month2Date: function (value) {
+            this.date.setFullYear(value.getFullYear())
+            this.date.setMonth(value.getMonth())
+            this.selectValue = this.date
             if (this.canHide) {
                 this.show = false
                 return
             }
-            let d = new Date(value)
-            this.date.setFullYear(d.getFullYear())
-            this.date.setMonth(d.getMonth())
-            this.selectValue = this.date
             this.pickertType = 'date'
+        },
+        dateChecked: function (value) {
+            this.selectValue = new Date(value)
+            this.show = false
         },
         showOrHide: function (value) {
             this.show = value
         },
     },
     watch: {
-        selectValue: function () {
+        selectValue: function (value) {
             // 配合 v-model 工作
-            this.$emit('change', this.showValue)
+            this.$emit('change', this.formatDate(value))
         },
     },
 }

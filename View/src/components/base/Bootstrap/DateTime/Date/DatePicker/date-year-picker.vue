@@ -73,8 +73,8 @@ export default {
         },
     },
     mounted () {
-        this.start = this.formatStart(this.value.getFullYear() || this.year)
-        this.selectValue = new Date(this.value).getFullYear()
+        this.selectValue = new Date(this.value.toString().length < 7 ? this.value + '-01' : this.value).getFullYear() || this.year
+        this.start = this.formatStart(this.selectValue)
     },
     methods: {
         click: function (value) {
