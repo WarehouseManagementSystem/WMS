@@ -121,12 +121,11 @@ export default {
         },
         dblclickOnItem: async function () {
             this.hover = false
-            if (this.canEdit) {
-                this.editItem = true
-                await this.$nextTick()
-                // 自动全选 editor 中的内容
-                await util.document.setCursorPos(this.$refs.edior.$refs.text)
-            }
+            if (!this.canEdit) return
+            this.editItem = true
+            await this.$nextTick()
+            // 自动全选 editor 中的内容
+            await util.document.setCursorPos(this.$refs.edior.$refs.text)
         },
         editValid: function () {
             this.editError = false
