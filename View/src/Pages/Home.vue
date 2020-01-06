@@ -1,6 +1,5 @@
 <template>
   <div class="h-100 d-block">
-      
   </div>
 </template>
 
@@ -11,6 +10,7 @@
 export default {
   name: 'HomePage',
   components: {
+    
   },
   data () {
     return {

@@ -180,7 +180,7 @@ export default {
         props: {
             color: {
                 ...props.textColor,
-                default: '',
+                default: 'body',
             },
             status: {
                 type: String,

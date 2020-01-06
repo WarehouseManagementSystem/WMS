@@ -1,18 +1,18 @@
 <template>
     <div>
-        <div class="row mx-1">
-            <span class="col-auto text-right" v-if="prompt || minValue">{{ fillMinValue }}</span>
+        <div class="row align-items-center mx-1">
+            <span class="col-auto text-right text-monospace pl-0 pr-1" v-if="prompt || minValue">{{ fillMinValue }}</span>
             <input 
                 type="range" 
-                class="custom-range col align-middle" 
+                class="custom-range col" 
                 :min="min" 
                 :max="max" 
                 :step="step" 
                 :value="select" 
                 v-bind="$attrs" 
                 v-on="inputListeners" />
-            <span class="col-auto text-left" v-if="prompt || maxValue">{{ fillMaxValue }}</span>
-            <span class="col-auto text-left" v-if="!showValue">{{ select }}</span>
+            <span class="col-auto text-left text-monospace pl-1 pr-0" v-if="prompt || maxValue">{{ fillMaxValue }}</span>
+            <span class="col-auto text-left text-monospace px-1" v-if="!hideValue">{{ select }}</span>
         </div>
         <b-info :info="info" />
     </div>
@@ -88,5 +88,10 @@ export default {
             return this.maxValue ? this.maxValue : Number(this.max)
         },
     },
+    watch: {
+        value: function (value) {
+            this.select = Number(value)
+        },
+    }
 }
 </script>

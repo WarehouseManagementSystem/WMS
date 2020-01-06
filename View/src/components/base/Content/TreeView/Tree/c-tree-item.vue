@@ -169,7 +169,7 @@ export default {
                 util.dom.addClass(target, `border-${this.dropStatus}`)
             }
         },
-        dragleave: function (event) {
+        dragleave: function () {
             let target = this.$refs.dropzone
             util.dom.removeClass(target, 'border-primary')
             util.dom.removeClass(target, `border-top`)

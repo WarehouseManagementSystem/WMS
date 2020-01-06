@@ -1,6 +1,6 @@
 // https://fontawesome.com
 // fas / far
-// -alt
+// -alt | -circle
 export default {
     caretLeft: 'fas fa-caret-left', // pagination caret-lef
     caretRight: 'fas fa-caret-right', // pagination caret-right
@@ -64,5 +64,8 @@ export default {
     fileDownload: 'fas fa-file-download',
     fileExport: 'fas fa-file-export', // file-export
     fileImport: 'fas fa-file-import', // file-import
+    // controller
+    play: 'fas fa-play',
+    pause: 'fas fa-pause',
     
 }

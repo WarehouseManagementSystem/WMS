@@ -28,8 +28,10 @@ export default {
             SubsystemName: 'Content',
             Modules: [
                 { path: 'c-a', name: 'c-a', component: async () => await import(/* webpackChunkName: "content" */'@/Pages/Demo/Content/c-a-demo.vue'), },
+                { path: 'radio', name: 'radio', component: async () => await import(/* webpackChunkName: "content" */'@/Pages/Demo/Content/c-radio-demo.vue'), },
                 { path: 'c-table', name: 'c-table', component: async () => await import(/* webpackChunkName: "content" */'@/Pages/Demo/Content/c-table-demo.vue'), },
                 { path: 'tree-view', name: 'tree-view', component: async () => await import(/* webpackChunkName: "content" */'@/Pages/Demo/Content/tree-view-demo.vue'), },
+                
             ],
         },
         

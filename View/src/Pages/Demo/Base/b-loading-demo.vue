@@ -30,7 +30,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <font v-for="item in colors" :key="item" class="col-1">{{ item }}</font>
+                    <font v-for="item in colors" :key="item" class="col-1 text-wrap">{{ item }}</font>
                 </div>
             </div>
         </div>
@@ -47,7 +47,7 @@ export default {
     components: { BLoading, },
     data () {
         return {
-            colors: variables.base.color.bg,
+            colors: variables.base.color.text,
         }
     }
 }
