@@ -4,7 +4,7 @@
             
             <div  class=" text-center align-self-center">
                 <blockquote class="blockquote d-inline-flex m-0 py-1 w-100">
-                    <strong class="text-truncate" :class="!showAuthor ? 'w-100': 'w-75'">{{ loading ? 'loading...' : info.name }}</strong>
+                    <strong class="text-truncate" :class="!showAuthor ? 'w-100': 'w-75'">{{ title }}</strong>
                     <cite v-show="showAuthor"  class="text-capitalize w-25"> - {{ info.author }}</cite>
                 </blockquote>
                 <div class="py-1" style="font-size: 1.5em">
@@ -16,7 +16,7 @@
                 </div>
             </div>
         </div>
-        <b-range class="my-1 p-0" hideValue :min-value="seek" :max-value="length" :disabled="loading" @input="rangeInput" :value="value" />
+        <b-range class="my-1 p-0" hideValue :min-value="seek" :max-value="length" :max="max" :disabled="loading || error" @input="rangeInput" :value="value" />
     </div>
 </template>
 
@@ -45,10 +45,12 @@ export default {
     data () {
         return {
             value: 0,
+            max: 0,
             seek: '--:--',
             sound: null,
             soundID: null,
             length: '--:--',
+            errorMessage: null,
             info: {
                 name: 'Dorian',
                 author: 'author',
@@ -62,11 +64,14 @@ export default {
         icon: function () {
             return config.ui.icon
         },
+        showAuthor: function () {
+            return this.info.author && !this.error
+        },
+        title: function () {
+            return this.loading ? 'loading...' : this.error ? this.errorMessage : this.info.name
+        },
         loading: function () {
             return this.status == 'loading'
-        },
-        showAuthor: function () {
-            return this.info.author
         },
         playing: function () {
             return this.status == 'playing'
@@ -74,37 +79,58 @@ export default {
         pauseing: function () {
             return this.status == 'pauseing'
         },
+        error : function () {
+            return this.status == 'error'
+        },
     },
     mounted () {
         this.status = 'loading'
         this.sound = new Howl({
-            src: [require('@/assets/examp.mp3')],
+            // src: [require('example.mp3')],
             volume: 1,
             html5: true,
+            onloaderror: this.onloaderror,
             onload: this.onload,
             onend: this.onend,
             onplay: this.onplay,
             onseek: this.onseek,
+            onplayerror: () => {
+                this.sound.once('unlock', () => {
+                    this.sound.play();
+                })
+            },
         })
         this.status = 'pauseing'
     },
     beforeDestroy () {
-      this.sound = null,
-      clearInterval(this.timer)  
+        this.sound.unload()
+        this.sound = null,
+        clearInterval(this.timer)  
     },
     methods: {
         formatTime: function(s) {
             let secs = Math.round(s)
-            let minutes = Math.floor(secs / 60) || 0
-            let seconds = (secs - minutes * 60) || 0
-            return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`
+            let hour = Math.floor(secs / 60 / 60) || 0
+            let minutes = Math.floor((secs - hour * 60 * 60) / 60) || 0
+            let seconds = (secs - hour * 60 * 60 - minutes * 60) || 0
+            return hour > 0 
+                    ? `${hour}:${util.string.padStart(minutes, 2, '0')}:${util.string.padStart(seconds, 2, '0')}`
+                    : `${minutes}:${util.string.padStart(seconds, 2, '0')}`
+        },
+        onloaderror: function () {
+            this.status = 'error',
+            this.errorMessage = 'load error'
         },
         onload: function () {
-            this.seek = '0:00'
-            this.length = this.formatTime(this.sound.duration(this.soundID))
+            this.errorMessage = null
+            this.max = this.sound.duration(this.soundID)
+            this.length = this.formatTime(this.max)
+            this.seek = this.max > 60 * 60 ? '0:00:00' : '0:00'
         },
         play: function () {
             if (this.loading) return
+            this.errorMessage = null
+            if (this.sound.duration(this.soundID) == this.value) this.value = 0
             this.soundID = this.sound.play()
             this.status = 'playing'
         },
@@ -118,9 +144,11 @@ export default {
             clearInterval(this.timer)
         },
         onplay: function () {
+            let seek
             this.timer = setInterval(() => {
                 this.value = Math.floor((this.sound.seek(this.soundID) || 0) + 1)
-                this.seek = this.formatTime(this.value)
+                seek = this.formatTime(this.value)
+                this.seek = this.max > 60 * 60 ? util.string.padStart(seek, 7, '0:00:00') : seek
             }, 1000)
         },
         onseek: async function () {
@@ -128,7 +156,7 @@ export default {
             this.seek = this.formatTime(this.sound.seek(this.soundID))
         },
         rangeInput: function (value) {
-            this.sound.seek(this.sound.duration() * value / 100)
+            this.sound.seek(value)
         },
         mouseover: function (event) {
             if (this.loading) return
