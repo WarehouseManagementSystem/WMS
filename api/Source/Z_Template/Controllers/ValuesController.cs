@@ -19,33 +19,33 @@ namespace api.Source.Z_Template.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
-        // GET api/values
+        // GET api/Z_Template/ValuesController/values
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
             return new string[] { "value1", "value2" };
         }
 
-        // GET api/values/5
+        // GET api/Z_Template/ValuesController/values/{id}
         [HttpGet("{id}")]
         public ActionResult<string> Get(int id)
         {
-            return "value";
+            return id.ToString();
         }
 
-        // POST api/values
+        // POST api/Z_Template/ValuesController/values
         [HttpPost]
         public void Post([FromBody] string value)
         {
         }
 
-        // PUT api/values/5
+        // PUT api/Z_Template/ValuesController/values/{id}
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
         }
 
-        // DELETE api/values/5
+        // DELETE api/Z_Template/ValuesController/values/{id}
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
