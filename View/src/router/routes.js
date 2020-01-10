@@ -6,15 +6,12 @@ import bRouters from './Subsystem/b'
 import cRouters from './Subsystem/c'
 import SystemRouters from './Subsystem/system'
 
-// Plugin
-import Plugin from './plugin'
-
 const Modules = [
     util.GetModels(demoRouters),
     util.GetModels(bRouters),
     util.GetModels(cRouters),
     util.GetModels(SystemRouters),
-    util.GetModels(Plugin),
+    // util.GetModels(Plugin),
 ]
 
 const Routers = [
@@ -22,7 +19,7 @@ const Routers = [
     ...util.GetRouters(bRouters),               // b
     ...util.GetRouters(cRouters),               // c
     ...util.GetRouters(SystemRouters),          // System
-    ...util.GetRouters(Plugin),
+    // ...util.GetRouters(Plugin),
 ]
 
 export default Routers

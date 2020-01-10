@@ -13,12 +13,9 @@ export default {
     sort: 'fas fa-sort', // table sort
     sortUp: "fas fa-sort-up", // table sort up
     sortDown: 'fas fa-sort-down', // table sort down
-    backward: 'fas fa-step-backward', // pagination backward
-    forward: 'fas fa-step-forward', // pagination forward
     download: 'fas fa-download', // a download
     view: 'fas fa-eye',// table operate view - far fa-eye
     add: 'fas fa-plus',
-    addFolder: 'fas fa-folder-plus',
     edit: 'fas fa-edit', // table operate edit - fas fa-edit | far fa-edit
     check: 'fas fa-check',// table operate check - far fa-check-circle
     unCheck: 'fas fa-eye-slash',
@@ -44,10 +41,13 @@ export default {
     list: 'fas fa-list',
     thList: 'fas fa-th-list',
     listAlt: 'fas fa-list-alt',
+    rss: 'fas fa-rss',
     // file
     folder: 'fas fa-folder',
     folders: 'fas fa-folders',
     folderOpen: 'fas fa-folder-open',
+    folderPlus: 'fas fa-folder-plus',
+    folderMinus: 'fas fa-folder-minus',
     file: 'fas fa-file',
     fileAlt: 'fas fa-file-alt',
     fileCsv: 'fas fa-file-csv',
@@ -67,5 +67,19 @@ export default {
     // controller
     play: 'fas fa-play',
     pause: 'fas fa-pause',
-    
+    stop: 'fas fa-stop',
+    circle: 'fas fa-circle',
+    backward: 'fas fa-backward',
+    forward: 'fas fa-forward',
+    stepBackward: 'fas fa-step-backward',
+    stepForward: 'fas fa-step-forward',
+    fastBackward: 'fas fa-fast-backward',
+    fastForward: 'fas fa-fast-forward',
+    volumeUp:'fas fa-volume-up',
+    volumeDown: 'fas fa-volume-down',
+    volumeOff: 'fas fa-volume-off',
+    volumeMute: 'fas fa-volume-mute',
+    microphone: 'fas fa-microphone',
+    microphoneSlash: 'fas fa-microphone-slash',
+    eject: 'fas fa-eject',
 }
