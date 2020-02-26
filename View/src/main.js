@@ -5,7 +5,8 @@ import router from '@/router/index'
 import store from '@/store'
 // 资源文件
 // bootstrap
-import 'bootstrap'
+import 'jquery'
+import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 import 'bootstrap/dist/css/bootstrap.min.css'
 // 字体图标
 import '@fortawesome/fontawesome-free/css/all.min.css'
