@@ -13,7 +13,7 @@ let getThemes = () => {
 let getThemesList = async () => { 
     if (!localStorage.themesList) { 
         await getThemes().then(data => localStorage.themesList = JSON.stringify(data.themes))
-                .catch(e => console.log('[Vue UI Error][Theme]Themes loaded error: ', e.message))
+                // .catch(e => console.log('[Vue UI Error][Theme]Themes loaded error: ', e.message))
     }
     return localStorage.themesList
 }
