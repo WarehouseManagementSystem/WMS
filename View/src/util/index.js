@@ -1,6 +1,6 @@
 import docCookies from './storage/cookies'
 import docStorage from './storage/installStorage_strict'
-import serviceWorker from './serviceWorker/serviceWorker'
+// import serviceWorker from './serviceWorker/serviceWorker'
 
 import dom from './dom'
 import obj from './object'
@@ -23,7 +23,7 @@ export default {
     storage: {
         cookies: docCookies,
     },
-    serviceWorker: serviceWorker,
+    // serviceWorker: serviceWorker,
     clone: clone,
     // 解决 JSON.stringify() 的 
     // ‘Chrome sendrequest error: TypeError: Converting circular structure to JSON’
