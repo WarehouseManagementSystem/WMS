@@ -1,5 +1,6 @@
 # 仓库管理系统（Warehouse Management System/WMS）
 
+![Deploy to GitHub Page](https://github.com/WarehouseManagementSystem/WMS/workflows/Deploy%20to%20GitHub%20Page/badge.svg)
 > [Demo](https://warehousemanagementsystem.github.io/WMS/#)
 
 ## 开发环境
