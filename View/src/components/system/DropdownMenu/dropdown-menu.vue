@@ -1,6 +1,6 @@
 <template>
     <div id="dropdownMenu" style="cursor: default;" class="border-0" :model="show">
-        <button id="dropdownMenuButton" class="btn btn-dark d-inline-flex" style="cursor: default;"  role="button" @click="show = !show">
+        <button id="dropdownMenuButton" class="btn btn-primary d-inline-flex" style="cursor: default;"  role="button" @click="show = !show">
             <i class="fas fa-bars align-self-center px-1"></i>
             <font class="align-self-center px-1">menu</font>
         </button>

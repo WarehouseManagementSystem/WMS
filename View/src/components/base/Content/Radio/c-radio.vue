@@ -1,22 +1,30 @@
 <template>
     <div class=" bg-light border border-muted rounded text-muted" style="width: 340px; height: 115px">
         <div class="py-1 mx-0" style="height: 70%">
-            
             <div  class=" text-center align-self-center">
                 <blockquote class="blockquote d-inline-flex m-0 py-1 w-100">
                     <strong class="text-truncate" :class="!showAuthor ? 'w-100': 'w-75'">{{ title }}</strong>
                     <cite v-show="showAuthor"  class="text-capitalize w-25"> - {{ info.author }}</cite>
                 </blockquote>
                 <div class="py-1" style="font-size: 1.5em">
-                    <i class='rounded-circle mx-4' style="cursor: grab;" :class="icon.backward" @mouseover="mouseover" @mouseleave="mouseleave" />
+                    <i class='rounded-circle mx-4' style="cursor: grab;" :class="icon.stepBackward" @mouseover="mouseover" @mouseleave="mouseleave" />
                     <b-loading v-show="loading" class='rounded-circle mx-4' status='grow' />
                     <i v-show="pauseing" class='rounded-circle mx-4' style="cursor: grab;" :class="icon.play" @click="play" @mouseover="mouseover" @mouseleave="mouseleave" :disabled="loading" />
                     <i v-show="playing" class='rounded-circle mx-4' style="cursor: grab;" :class="icon.pause" @click="pause" @mouseover="mouseover" @mouseleave="mouseleave" :disabled="loading" />
-                    <i class='rounded-circle mx-4' style="cursor: grab;" :class="icon.forward" @mouseover="mouseover" @mouseleave="mouseleave" />
+                    <i class='rounded-circle mx-4' style="cursor: grab;" :class="icon.stepForward" @mouseover="mouseover" @mouseleave="mouseleave" />
                 </div>
             </div>
         </div>
-        <b-range class="my-1 p-0" hideValue :min-value="seek" :max-value="length" :max="max" :disabled="loading || error" @input="rangeInput" :value="value" />
+        <div class="row my-1 mx-1">
+            <b-range class="col p-0" hideValue :min-value="seek" :max-value="length" :max="max" :disabled="loading || error" @input="rangeInput" :value="value" />
+            <div class="col-auto px-1" style="width: 1.5em" @mouseover="audoMouseover" @mouseleave="audoMouseleave">
+                <i style="cursor: grab;" :class="mute ? icon.volumeMute : icon.volumeUp" @click="audioMuteClick" />
+                <div v-show="audioMuteRangeShow" class="shadow-sm bg-light" style="width: 75px; position: absolute; top: -45px; left: -25px; transform: rotate(-90deg)">
+                    <b-range class="p-0" hideValue max="1" step='0.01' v-model.number="volume" />
+                </div>
+            </div>
+        </div>
+        
     </div>
 </template>
 
@@ -46,10 +54,13 @@ export default {
         return {
             value: 0,
             max: 0,
+            mute: false,
+            volume: 0.5,
             seek: '--:--',
             sound: null,
             soundID: null,
             length: '--:--',
+            audioMuteRangeShow: false,
             errorMessage: null,
             info: {
                 name: 'Dorian',
@@ -87,13 +98,16 @@ export default {
         this.status = 'loading'
         this.sound = new Howl({
             // src: [require('example.mp3')],
-            volume: 1,
+            volume: this.volume,
             html5: true,
+            mute: this.mute,
             onloaderror: this.onloaderror,
             onload: this.onload,
             onend: this.onend,
             onplay: this.onplay,
             onseek: this.onseek,
+            onmute: this.onmute,
+            onvolume: this.onvolume,
             onplayerror: () => {
                 this.sound.once('unlock', () => {
                     this.sound.play();
@@ -155,6 +169,12 @@ export default {
             await this.$nextTick()
             this.seek = this.formatTime(this.sound.seek(this.soundID))
         },
+        onmute: function () {
+            this.mute = !this.mute
+        },
+        onvolume: function () {
+            if (this.mute) this.sound.mute(false, this.soundID)
+        },
         rangeInput: function (value) {
             this.sound.seek(value)
         },
@@ -165,6 +185,20 @@ export default {
         mouseleave: function (event) {
             if (this.loading) return
             util.dom.removeClass(event.target, 'text-primary')
+        },
+        audioMuteClick: function () {
+            this.sound.mute(!this.mute, this.soundID)
+        },
+        audoMouseover: function () {
+            this.audioMuteRangeShow = true
+        },
+        audoMouseleave: function () {
+            this.audioMuteRangeShow = false
+        },
+    },
+    watch: {
+        volume: function (value) {
+            this.sound.volume(value, this.soundID)
         },
     },
 }

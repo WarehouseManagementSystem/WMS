@@ -10,32 +10,24 @@
     <path d="M333.590658 594.033341 167.8171 759.804852 64.218604 655.67219 64.218604 958.270996 366.342596 958.502263 262.234493 855.071589 428.421466 688.86108Z"
       p-id="2073"></path>
   </svg> -->
-  <i @click='click' class="screenfull-svg fas fa-compress-arrows-alt" :width="width" :height="height"></i>
+  <i @click='click' class="align-middle rounded-circle " :class="icon.compressArrowsAlt" />
 </template>
 
 <script>
 import screenfull from 'screenfull'
+import config from '@/config/index.js'
 
 export default {
   name: 'screenfull',
-  props: {
-    width: {
-      type: Number,
-      default: 32
-    },
-    height: {
-      type: Number,
-      default: 32
-    },
-    fill: {
-      type: String,
-      default: '#48576a'
-    }
-  },
   data() {
     return {
       isFullscreen: false
     }
+  },
+  computed: {
+      icon: function () {
+          return config.ui.icon
+      },
   },
   methods: {
     click() {
@@ -46,13 +38,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.screenfull-svg {
-  display: inline-block;
-  cursor: pointer;
-  fill: #fff;;
-  width: 20px;
-  height: 20px;
-}
-</style>

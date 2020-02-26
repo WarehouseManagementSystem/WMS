@@ -3,7 +3,7 @@
         <div v-if="canEdit">
             <b-button-group>
                 <b-button size="sm" outline v-tip="'Add Item'"><i :class="icon.add" /></b-button>
-                <b-button size="sm" outline v-tip="'Add Folder'"><i :class="icon.addFolder" /></b-button>
+                <b-button size="sm" outline v-tip="'Add Folder'"><i :class="icon.folderPlus" /></b-button>
                 <b-button v-if="hideClearCheck" v-tip="'Clear Check'" @click="clickClearCheck" outline><i :class="icon.unCheck" /></b-button>
                 <b-button v-if="hideDelete" v-tip="'Delete'" outline><i :class="icon.delete" /></b-button>
             </b-button-group>

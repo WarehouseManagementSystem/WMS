@@ -1,16 +1,16 @@
 <template>
-    <nav id="nav" class="position-absolute container bg-light border border-dark rounded-lg shadow-lg w-50 h-75 m-1" style="min-width: 425px; max-width: 720px; z-index:1070;">
-      <div class="row overflow-auto border rounded-lg h-100 p-1">
-          <ul class="list-group col-4 d-inline-block overflow-auto bg-dark border border-dark rounded-lg h-100 p-0">
+    <nav id="nav" class="position-absolute container bg-light border border-primary rounded-lg shadow-lg w-50 h-75 m-1" style="min-width: 425px; max-width: 720px; z-index:1070;">
+      <div class="row overflow-auto border rounded-lg rounded-left h-100 p-1">
+          <ul class="list-group col-4 d-inline-block overflow-auto bg-primary rounded-left h-100 p-0">
             <!-- 建议不多于七个汉子，超出部分会被隐藏 -->
             <div v-for="(item, index) in Subsystem" :key="index" @click="InitModules(item)">
-              <router-link class="list-group-item bg-dark text-white text-decoration-none d-flex justify-content-between" style="cursor: default;" to="">
+              <router-link class="list-group-item bg-primary text-white text-decoration-none d-flex justify-content-between" style="cursor: default;" to="">
                 <font class="text-truncate">{{ item }}</font>
                 <i class="fas fa-caret-right"></i>
               </router-link>
             </div>
           </ul>
-          <ul class="list-group col-8 d-inline-block overflow-auto bg-light border border-dark rounded-lg h-100 p-0">
+          <ul class="list-group col-8 d-inline-block overflow-auto bg-light border border-primary rounded-right h-100 p-0">
             <NavItem v-for="(item, key) in Modules" 
                 :key="key" 
                 class="NavItem"

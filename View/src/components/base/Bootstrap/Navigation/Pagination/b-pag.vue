@@ -1,7 +1,7 @@
 <template>
     <nav aria-label="Page navigation">
         <ul class="pagination m-0">
-            <item :disabled="startDisabled" @click.native="startClick"><slot name="start"><i :class="icon.backward"></i></slot></item>
+            <item :disabled="startDisabled" @click.native="startClick"><slot name="start"><i :class="icon.stepBackward"></i></slot></item>
             <item :disabled="previousDisabled" @click.native="previousClick" ><slot name="previous"><i :class="icon.caretLeft"></i></slot></item>
             <slot>
                 <item 
@@ -14,7 +14,7 @@
                 />
             </slot>
             <item :disabled="nextDisabled" @click.native="nextClick" ><slot name="next"><i :class="icon.caretRight"></i></slot></item>
-            <item :disabled="endDisabled" @click.native="endClick" ><slot name="end"><i :class="icon.forward"></i></slot></item>
+            <item :disabled="endDisabled" @click.native="endClick" ><slot name="end"><i :class="icon.stepForward"></i></slot></item>
         </ul>
     </nav>
 </template>

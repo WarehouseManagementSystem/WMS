@@ -1,30 +1,26 @@
 <template>
-<div>
-  <!-- <span>language:</span>
-  <select v-model.lazy="$i18n.locale" @change="lamgChange" :class="form-control">
-    <option v-for="lang in langs" :key="lang.code" :value="lang.code">{{ lang.name }}</option>
-  </select> -->
-      <div class="nav-link dropdown-toggle"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        language
-      </div>
-      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <font class="dropdown-item"  v-for="lang in langs" :class="{ active: locale === lang.code }" :key="lang.code" :value="lang.code" @click="lamgChange(lang.code)">{{ lang.name }}</font>
-      </div>
-    </div>
+  <b-dropdown v-if="langs.length > 0" trigger="language" :list="langs" :select="select" @menuClick="lamgChange" />
 </template>
 
 <script>
 import config from "@/config/index";
 import { loadLanguageAsync } from "@/lang/index";
+import BDropdown from '@/components/base/Bootstrap/Dropdown/b-dropdown.vue'
 
 export default {
   name: "lang-select",
+  components: { BDropdown },
   data() {
     // return { langs: ["zh", "en"] }
     return {
       locale: this.$i18n.locale,
-      langs: config.lang.langsList, // 支持的语言列表
+      langs: config.lang.langsList.map(e => ({value: e.name, code: e.code})), // 支持的语言列表
     }; 
+  },
+  computed: {
+    select: function () {
+      return this.langs.find && this.langs.find(e => e.code == this.locale).value
+    },
   },
   mounted() {
     loadLanguageAsync(config.lang.fallbackLocale); // 加载备用语言包
@@ -34,10 +30,10 @@ export default {
     this.locale = config.lang.defaultLocale // 加载默认语言
   },
   methods: {
-    lamgChange: function(code) {
-      this.locale = code
+    lamgChange: function(item) {
+      this.locale = item.code
       loadLanguageAsync(this.locale); // 加载所选择的语言
-    }
+    },
   }
-};
+}
 </script>

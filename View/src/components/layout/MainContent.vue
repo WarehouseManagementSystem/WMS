@@ -3,7 +3,7 @@
     <!-- 路由出口 -->
     <!-- 路由匹配到的组件将渲染在这里 -->
     
-    <div class="border rounded p-1 m-1">
+    <div class="rounded p-1 m-1">
       <transition name="component-fade" mode="out-in">
         <router-view style="min-height: 1000px"></router-view>
       </transition>

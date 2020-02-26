@@ -1,19 +1,16 @@
 <template>
-    <img src="@/assets/Avatar.png" :width="width" :height="height" alt="User Avatar" class="rounded-circle border border-primary">
+    <i class="rounded-circle" :class="icon.user" alt="User Avatar" style="wdith: 1.5em; height: 1.5em;" />
 </template>
 
 <script>
+import config from '@/config/index.js'
+
 export default {
     name: 'avatar',
-    props: {
-        width: {
-            type: Number,
-            default: 30
+    computed: {
+        icon: function () {
+            return config.ui.icon
         },
-         height: {
-            type: Number,
-            default: 30
-        },
-    },
+    }
 }
 </script>
