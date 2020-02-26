@@ -7,7 +7,7 @@ import store from '@/store'
 // bootstrap
 import 'jquery'
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'
-import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/scss/bootstrap.scss'
 // 字体图标
 import '@fortawesome/fontawesome-free/css/all.min.css'
 // vue directives
