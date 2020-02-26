@@ -1,25 +1,26 @@
 <template>
     <div>
-        <div v-for="(item, index) in Paths" :key="index" class="d-inline-flex overflow-auto">
-            <div class="btn btn-dark text-truncate d-inline-block px-1" role="button"
+        <div v-for="(item, index) in Paths" :key="index" class="container overflow-auto px-0">
+            <div class="btn btn-primary text-truncate d-flex justify-content-between align-items-center px-1" role="button"
+                :class="{ active: $route.path == item.pathInfo.path }" 
                 v-if="item.pathInfo.name && item.pathInfo.path" 
                 @click.right="mouseRightClick(event, item)" 
                 @dblclick="$router.replace(item.pathInfo)">
-                <i class="fas fa-times-circle text-secondary align-self-center px-1" @click.stop="closeTab(item, 'closeIco')"></i>
-                <router-link class="text-truncate text-decoration-none text-center d-inline-flex" style="min-width: 3rem;" :class="[ $route.path == item.pathInfo.path ? 'text-primary' : 'text-light' ]" :to="item.pathInfo.path" >
-                    <font class="px-1 align-self-center px-1">{{ item.pathInfo.name }}</font>
+                <router-link class="text-white text-truncate text-decoration-none text-center" style="min-width: 3rem;" :to="item.pathInfo.path" >
+                    <font class="px-1 px-1">{{ item.pathInfo.name }}</font>
                 </router-link>
+                <i class="fas fa-times-circle px-1" style="font-size: 0.8em" @click.stop="closeTab(item, 'closeIco')"></i>
             </div>
         </div>
         <!-- 右键菜单 -->
         <ul class="list-group p-1" v-show="isShow" style="position: absolute; z-index: 1050" :style="{ 'top': top, 'left': left }">
-            <li class="list-group-item list-group-item-action btn btn-light p-1" role="button" @mousedown="closeTab(RightClickItem, 'rigthClick')">
+            <li class="list-group-item list-group-item-action btn p-1" role="button" @mousedown="closeTab(RightClickItem, 'rigthClick')">
                 <font class="text-truncate text-decoration-none text-center text-muted d-inline-block" >Close</font>
             </li>
-            <li class="list-group-item list-group-item-action btn btn-light p-1" role="button" @mousedown="closeOthers(RightClickItem)">
+            <li class="list-group-item list-group-item-action btn p-1" role="button" @mousedown="closeOthers(RightClickItem)">
                 <font class="text-truncate text-decoration-none text-center text-muted d-inline-block" >Close Others</font>
             </li>
-            <li class="list-group-item list-group-item-action btn btn-light p-1" role="button" @mousedown="closeAll">
+            <li class="list-group-item list-group-item-action btn p-1" role="button" @mousedown="closeAll">
                 <font class="text-truncate text-decoration-none text-center text-muted d-inline-block" >Closs All</font>
             </li>
         </ul>

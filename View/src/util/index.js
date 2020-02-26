@@ -1,4 +1,3 @@
-import './bootstrap/index'
 import docCookies from './storage/cookies'
 import docStorage from './storage/installStorage_strict'
 import serviceWorker from './serviceWorker/serviceWorker'

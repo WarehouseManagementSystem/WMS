@@ -3,12 +3,22 @@ import Vue from 'vue'
 import App from '@/App.vue'
 import router from '@/router/index'
 import store from '@/store'
-
-import '@/components/utilities/directives.js'
 // 资源文件
+// bootstrap
+import 'jquery'
+import 'bootstrap/dist/js/bootstrap.bundle.min.js'
+import 'bootstrap/dist/css/bootstrap.css'
+// 字体图标
 import '@fortawesome/fontawesome-free/css/all.min.css'
+// vue directives
+import '@/components/utilities/directives.js'
 // 第三方库
 import i18n from '@/lang/index.js'
+/********************/
+// Plugin
+import theme from '@/Plugin/themes'
+// use Plugins
+Vue.use(theme)
 
 Vue.config.productionTip = false
 
@@ -30,5 +40,7 @@ new Vue({
       delete sessionStorage.redirect
       this.$router.push(redirect)
     }
+    // 如果存在 theme 即用户修改过主题，则在加载时调用
+    if (localStorage.theme) this.$theme.setTheme()
   }
 }).$mount('#app')

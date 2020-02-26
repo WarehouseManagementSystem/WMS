@@ -16,6 +16,7 @@
 [velocity-animate]:                         https://github.com/julianshapiro/velocity
 [moment]:                                   http://momentjs.cn/
 [print]:                                    https://printjs.crabbly.com/
+[bootswatch]:                               https://bootswatch.com/
 <!-- bootstrap 组件 -->
 [bootstrap alert]:                          https://getbootstrap.com/docs/4.3/components/alerts/
 [b-alert]:                                  ../View/src/components/base/Bootstrap/Alert
@@ -75,11 +76,17 @@
 [b-reset]:                                  .../View/src/components/base/Bootstrap/Form/Button
 [b-submit]:                                 .../View/src/components/base/Bootstrap/Form/Button
 [b-button-group]:                           https://getbootstrap.com/docs/4.3/components/button-group/
+[lang-select]:                             ../View/src/components/system/LangSelect
+[theme-select]:                             ../View/src/components/system/ThemeSelect
 
 <!-- directive -->
 [v-tip]:                                    ../View/src/components/utilities/directives.js
 [Bootstrap popovers]:                       https://getbootstrap.com/docs/4.3/components/popovers/
 [Bootstrap tooltips]:                       https://getbootstrap.com/docs/4.3/components/tooltips/
+
+<!-- Plugin -->
+[theme]:                                    ../View/src/Plugin/themes
+
 <!-- pages -->
 [b-text-demo]:                              ../View/src/Pages/Demo/Form/b-text-demo.vue
 [b-textarea-demo]:                          ../View/src/Pages/Demo/Form/b-text-demo.vue
@@ -110,6 +117,17 @@
 [b-badge-demo]:                             ../View/src/Pages/Demo/Base/b-badge-demo.vue
 [b-button-demo]:                            ../View/src/Pages/Demo/Form/b-button-demo.vue
 [b-alert-demo]:                             ../View/src/Pages/Demo/Base/b-alert-demo.vue
+
+2020-02-26
+
+* view add Vue Plugin: [theme]
+* add [theme-select]
+* edit header template for theme
+* edit [lang-select]
+
+2020-02-22
+
+* view import [bootswatch] for theme
 
 2019-09-26
 

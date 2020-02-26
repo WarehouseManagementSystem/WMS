@@ -82,4 +82,11 @@ export default {
     microphone: 'fas fa-microphone',
     microphoneSlash: 'fas fa-microphone-slash',
     eject: 'fas fa-eject',
+    compress: 'fas fa-compress',
+    compressArrowsAlt: 'fas fa-compress-arrows-alt',
+    // user
+    user: 'fas fa-user',
+    userTie: 'fas fa-user-tie',
+    userTag: 'fas fa-user-tag',
+    userPlus: 'fas fa-user-plus',
 }
