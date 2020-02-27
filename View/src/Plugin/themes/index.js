@@ -2,6 +2,7 @@
 let themeUrl = 'https://bootswatch.com/api/4.json'
 // 默认主题
 const defaultTheme = 'Default'
+const defaultThemeUrl = 'https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css'
 // 当前主题
 localStorage.theme = localStorage.theme || defaultTheme
 
@@ -38,7 +39,7 @@ let setTheme = async (themeName = localStorage.theme) => {
         head.appendChild(link)
     }
 
-    link.href = themeName === defaultTheme ? '' : theme && theme.cssMin // `bootswatch/dist/${urls.themes[3].name}/bootstrap.min.css`
+    link.href = themeName === defaultTheme ? defaultThemeUrl : theme && theme.cssMin // `bootswatch/dist/${urls.themes[3].name}/bootstrap.min.css`
 }
 
 export default {
@@ -46,6 +47,7 @@ export default {
         Vue.prototype.$theme = {
             themeUrl,
             defaultTheme,
+            defaultThemeUrl,
             getThemesList,
             setTheme,
         }
