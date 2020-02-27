@@ -26,9 +26,9 @@
         <div class="row my-1">
             <font class="col-1">color</font>
             <div class="col-11">
-                <b-badge v-for="item in colors" :key="item" class="m-1" :color="item"></b-badge>
+                <b-badge v-for="item in colors" :key="item + '1'" class="m-1" :color="item"></b-badge>
                 <br/>
-                <b-badge v-for="item in colors" :key="item" class="m-1" :color="item">{{item}}</b-badge>
+                <b-badge v-for="item in colors" :key="item + '2'" class="m-1" :color="item">{{item}}</b-badge>
             </div>
         </div>
     </div>
