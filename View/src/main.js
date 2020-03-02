@@ -7,8 +7,9 @@ import store from '@/store'
 // bootstrap
 import 'jquery'
 import 'bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css'
 // 字体图标
-import '../node_modules/@fortawesome/fontawesome-free/css/all.min.css'
+import '@fortawesome/fontawesome-free/css/all.min.css'
 // vue directives
 import '@/components/utilities/directives.js'
 // 第三方库
