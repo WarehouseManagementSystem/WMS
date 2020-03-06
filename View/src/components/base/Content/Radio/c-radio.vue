@@ -1,30 +1,27 @@
 <template>
-    <div class=" bg-light border border-muted rounded text-muted" style="width: 340px; height: 115px">
-        <div class="py-1 mx-0" style="height: 70%">
-            <div  class=" text-center align-self-center">
-                <blockquote class="blockquote d-inline-flex m-0 py-1 w-100">
-                    <strong class="text-truncate" :class="!showAuthor ? 'w-100': 'w-75'">{{ title }}</strong>
-                    <cite v-show="showAuthor"  class="text-capitalize w-25"> - {{ info.author }}</cite>
-                </blockquote>
-                <div class="py-1" style="font-size: 1.5em">
-                    <i class='rounded-circle mx-4' style="cursor: grab;" :class="icon.stepBackward" @mouseover="mouseover" @mouseleave="mouseleave" />
-                    <b-loading v-show="loading" class='rounded-circle mx-4' status='grow' />
-                    <i v-show="pauseing" class='rounded-circle mx-4' style="cursor: grab;" :class="icon.play" @click="play" @mouseover="mouseover" @mouseleave="mouseleave" :disabled="loading" />
-                    <i v-show="playing" class='rounded-circle mx-4' style="cursor: grab;" :class="icon.pause" @click="pause" @mouseover="mouseover" @mouseleave="mouseleave" :disabled="loading" />
-                    <i class='rounded-circle mx-4' style="cursor: grab;" :class="icon.stepForward" @mouseover="mouseover" @mouseleave="mouseleave" />
+    <div class="container bg-light border border-light rounded-pill">
+        <div class="row my-1 px-1 align-items-center">
+            <!-- 控制器 -->
+            <div class="col-auto row mx-1 px-0">
+                <c-controller-button :icon="icon.stepBackward" v-show="showStepBackward" :disabled="disabledStepBackward" />
+                <b-loading v-show="status == EStatus.loading" class='btn btn-outline-primary rounded-circle' status='grow' />
+                <c-controller-button :icon="icon.play" v-show="showPlay" :disabled="disabledPlay" @click.native="play" />
+                <c-controller-button :icon="icon.pause" v-show="showPause" :disabled="disabledPause" @click.native="pause" />
+                <c-controller-button :icon="icon.stepForward" v-show="showStepForward" :disabled="disabledStepForward" />
+                 <!-- 音量 -->
+                <div class="row mx-0 align-items-center" @mouseover="audoMouseover" @mouseleave="audoMouseleave">
+                    <c-controller-button  @click.native="audioMuteClick" :icon="mute ? icon.volumeMute : icon.volumeUp" />
+                    <b-range v-show="audioMuteRangeShow" class="p-0" style="width: 80px;" hideValue max="1" step='0.01' v-model.number="volumeRange" />
                 </div>
             </div>
-        </div>
-        <div class="row my-1 mx-1">
-            <b-range class="col p-0" hideValue :min-value="seek" :max-value="length" :max="max" :disabled="loading || error" @input="rangeInput" :value="value" />
-            <div class="col-auto px-1" style="width: 1.5em" @mouseover="audoMouseover" @mouseleave="audoMouseleave">
-                <i style="cursor: grab;" :class="mute ? icon.volumeMute : icon.volumeUp" @click="audioMuteClick" />
-                <div v-show="audioMuteRangeShow" class="shadow-sm bg-light" style="width: 75px; position: absolute; top: -45px; left: -25px; transform: rotate(-90deg)">
-                    <b-range class="p-0" hideValue max="1" step='0.01' v-model.number="volume" />
-                </div>
+            <!-- 播放进度 -->
+            <div class="col px-1 align-items-center border-left border-right">
+                <b-range hideValue :max="duration" :disabled="disabledSeekRange" @input="seekInput" :value="seek" />
+            </div>
+            <div class="col-auto align-items-center">
+                <font>{{ seekTime }} / {{ durationTime }}</font>
             </div>
         </div>
-        
     </div>
 </template>
 
@@ -44,77 +41,129 @@ import config from '@/config/index.js'
  */
 import {Howl} from 'howler'
 
+import CControllerButton from './c-controller-button'
 import BRange from '@/components/base/Bootstrap/Form/b-range.vue'
 import BLoading from "@/components/base/Bootstrap/Loading/b-loading.vue"
 
 export default {
-    name: 'c-radio',
-    components: { BRange, BLoading, },
+    name: 'c-raido',
+    components: { CControllerButton, BRange, BLoading, },
     data () {
         return {
-            value: 0,
-            max: 0,
-            mute: false,
-            volume: 0.5,
-            seek: '--:--',
-            sound: null,
-            soundID: null,
-            length: '--:--',
-            audioMuteRangeShow: false,
-            errorMessage: null,
-            info: {
-                name: 'Dorian',
-                author: 'author',
-                img: '',
+            sound: Object, // 声音对象
+            soundId: Object, // 声音对象 Id
+            seek: 0, // 播放进度
+            mute: false, // 是否静音
+            volume: 0.5,// 音量
+            volumeRange: 0.5,
+            status: null, // 状态
+            EStatus: { // 状态 枚举
+                loading: 'loading', // 加载
+                loaded: 'loaded',
+                loaderror: 'loaderror', // 加载错误
+                playing: 'playing', // 播放
+                playerror: 'playerror', // 播放错误
+                pauseing: 'pauseing', // 暂停
+                finished: 'finished', // 播放结束
             },
-            status: 'loading', // loading: 加载，playing: 播放，pauseing: 暂停
-            timer: null,
+            audioMuteRangeShow: false, // 显示调节音量按钮
+            timer: null, // 计时器
         }
     },
+    props: {
+        playList: { // 播放列表
+            type: Array,
+            default: () => [],
+        },
+        index: { // 序号
+            type: Number,
+            default: 0,
+            validator: function (val) {
+                return !isNaN(val) && val >= 0
+            }
+        },
+    },
     computed: {
+        // ------ icon ------
         icon: function () {
             return config.ui.icon
         },
-        showAuthor: function () {
-            return this.info.author && !this.error
+        // ------ sound opt ------
+        duration: function () { // 播放时长
+            return this.sound && this.sound.duration ? this.sound.duration(this.soundId) : 0
         },
-        title: function () {
-            return this.loading ? 'loading...' : this.error ? this.errorMessage : this.info.name
+        seekTime: function () { // 播放时间
+            if (this.seek == 0 && this.duration != 0) 
+                return this.duration - 60 * 60 > 0 ? '0:00:00' : '0:00'
+            else 
+                return this.formatTime(this.seek)
         },
-        loading: function () {
-            return this.status == 'loading'
+        durationTime: function () { // 总时长
+            return this.formatTime(this.duration)
         },
-        playing: function () {
-            return this.status == 'playing'
+        // ------ PlayList ------
+        checkedPlayList: function () { // 播放列表
+            return this.playList.filter(e => e.src)
         },
-        pauseing: function () {
-            return this.status == 'pauseing'
+        isPlaseList: function () { // 列表/单文件
+            return this.checkedPlayList && this.checkedPlayList.length > 0
         },
-        error : function () {
-            return this.status == 'error'
+        isError: function () {
+            return this.status == this.EStatus.loaderror || this.status == this.EStatus.playerror
+        },
+        // ------ controllers ------
+        showPlay: function () {
+            return this.status == this.EStatus.pauseing || 
+            this.status == this.EStatus.finished || 
+            this.status == this.EStatus.loaded
+        },
+        disabledPlay: function () {
+            return this.duration == 0
+        },
+        showPause: function () {
+            return this.status == this.EStatus.playing
+        },
+        disabledPause: function () {
+            return false
+        },
+        disabledSeekRange: function () {
+            return this.disabledPlay
+        },
+        showStepBackward: function () {
+            return this.isPlaseList
+        },
+        disabledStepBackward: function () {
+            return this.showStepBackward && this.index == 0
+        },
+        showStepForward: function () {
+            return this.isPlaseList
+        },
+        disabledStepForward: function () {
+            return this.showStepForward && this.index < this.checkedPlayList.length - 1
         },
     },
     mounted () {
-        this.status = 'loading'
+        this.status = this.EStatus.loading
         this.sound = new Howl({
-            // src: [require('example.mp3')],
+            src: ['example.mp3'],
             volume: this.volume,
             html5: true,
             mute: this.mute,
-            onloaderror: this.onloaderror,
             onload: this.onload,
-            onend: this.onend,
+            onloaderror: this.onloaderror,
             onplay: this.onplay,
+            onend: this.onend,
             onseek: this.onseek,
             onmute: this.onmute,
             onvolume: this.onvolume,
             onplayerror: () => {
                 this.sound.once('unlock', () => {
-                    this.sound.play();
+                    this.play()
                 })
             },
         })
-        this.status = 'pauseing'
+        this.status = this.EStatus.pauseing
+        this.volumeRange = this.mute ? 0 : this.volume
     },
     beforeDestroy () {
         this.sound.unload()
@@ -122,72 +171,65 @@ export default {
         clearInterval(this.timer)  
     },
     methods: {
+        // 格式化时间
+        // 从秒转换成时分秒
         formatTime: function(s) {
             let secs = Math.round(s)
             let hour = Math.floor(secs / 60 / 60) || 0
             let minutes = Math.floor((secs - hour * 60 * 60) / 60) || 0
             let seconds = (secs - hour * 60 * 60 - minutes * 60) || 0
-            return hour > 0 
+            return this.duration - 60 * 60 > 0 
                     ? `${hour}:${util.string.padStart(minutes, 2, '0')}:${util.string.padStart(seconds, 2, '0')}`
                     : `${minutes}:${util.string.padStart(seconds, 2, '0')}`
         },
-        onloaderror: function () {
-            this.status = 'error',
-            this.errorMessage = 'load error'
-        },
+        // ----- sound event ------
         onload: function () {
-            this.errorMessage = null
-            this.max = this.sound.duration(this.soundID)
-            this.length = this.formatTime(this.max)
-            this.seek = this.max > 60 * 60 ? '0:00:00' : '0:00'
+            this.status = this.EStatus.loaded
         },
+        onloaderror: function () {
+            this.status = this.EStatus.loaderror
+        },
+        // ------ 播放控制 ------
         play: function () {
-            if (this.loading) return
-            this.errorMessage = null
-            if (this.sound.duration(this.soundID) == this.value) this.value = 0
-            this.soundID = this.sound.play()
-            this.status = 'playing'
+            if (this.status == this.EStatus.loading) return
+            if (this.duration == this.seek) this.seek = 0
+            this.soundId = this.sound.play()
+            this.status = this.EStatus.playing
         },
         pause: function () {
-            if (this.loading) return
+            if (this.status != this.EStatus.playing) return
             this.sound.pause()
-            this.status = 'pauseing'
-        },
-        onend: function () {
-            this.status = 'pauseing'
-            clearInterval(this.timer)
+            this.status = this.EStatus.pauseing
         },
         onplay: function () {
-            let seek
             this.timer = setInterval(() => {
-                this.value = Math.floor((this.sound.seek(this.soundID) || 0) + 1)
-                seek = this.formatTime(this.value)
-                this.seek = this.max > 60 * 60 ? util.string.padStart(seek, 7, '0:00:00') : seek
+                this.seek = Math.floor((this.sound.seek(this.soundId) || 0) + 1)
             }, 1000)
+        },
+        onend: function () {
+            this.status = this.EStatus.finished
+            clearInterval(this.timer)
+        },
+        // ------ 进度调节 ------
+        seekInput: function (value) {
+            this.sound.seek(value, this.soundId)
         },
         onseek: async function () {
             await this.$nextTick()
-            this.seek = this.formatTime(this.sound.seek(this.soundID))
+            // 在调整进度时会出现静音的情况，暂不清楚原因，使用此方法可解决
+            this.sound.mute(false, this.soundId)
+            this.mute = false
         },
+        // ------ 声音 ------
         onmute: function () {
-            this.mute = !this.mute
+            this.volumeRange = this.mute ? 0 : this.volume
         },
         onvolume: function () {
-            if (this.mute) this.sound.mute(false, this.soundID)
+            if (this.mute) this.mute = false
         },
-        rangeInput: function (value) {
-            this.sound.seek(value)
-        },
-        mouseover: function (event) {
-            if (this.loading) return
-            util.dom.addClass(event.target, 'text-primary')
-        },
-        mouseleave: function (event) {
-            if (this.loading) return
-            util.dom.removeClass(event.target, 'text-primary')
-        },
+        // ------ 静音按钮事件 ------
         audioMuteClick: function () {
-            this.sound.mute(!this.mute, this.soundID)
+            this.mute = !this.mute
         },
         audoMouseover: function () {
             this.audioMuteRangeShow = true
@@ -197,9 +239,20 @@ export default {
         },
     },
     watch: {
-        volume: function (value) {
-            this.sound.volume(value, this.soundID)
+        volumeRange: function (value) {
+            if (!this.mute || value != 0) this.volume = value
         },
+        volume: function (value) {
+            if (value == 0 ) {
+                this.mute = true
+            } else {
+                this.sound.volume(value, this.soundId)
+                if (this.mute) this.mute = false
+            }
+        },
+        mute: function (value) {
+            this.sound.mute(value, this.soundId)
+        }
     },
 }
 </script>

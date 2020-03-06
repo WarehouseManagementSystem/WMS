@@ -29,28 +29,14 @@
 
 <script>
 import router from '@/router/index'
-import util from '@/util/index'
-
-let pathList = [], maxHistory = 0
-router.afterEach((to, from) => {
-    if (to && to.path != '/' && to != from) {
-        let flag = false
-        for (const item of pathList) {
-            if (item.pathInfo.path == to.path) { 
-                item.index = ++maxHistory
-                flag = true
-                break
-            }
-        }
-        if (!flag)  pathList.push({ pathInfo: to, index: ++maxHistory} )
-    }
-})
 
 export default {
     name: 'nav-tabs',
     data () {
         return {
-            Paths: pathList,
+            pathList: [],
+            maxHistory: 0,
+            Paths: [],
             RightClickItem: null,
             top: '0px',
             left: '0px',
@@ -58,19 +44,29 @@ export default {
         }
     },
     created () {
-        this.$nextTick(() => // 使用 sessionStorage 保持用户打开的页面数据，防止刷新时丢失，在会话结束时销毁（暂缓）
-            pathList.push(...util.JSON.parse(sessionStorage.getItem('System_NavTabs_PathList')) || [])
-        )
-        
-    },
-    beforeUpdate () {
-        this.$nextTick(() => sessionStorage.setItem('System_NavTabs_PathList', util.JSON.stringify(pathList)))
+        router.afterEach((to, from) => {
+            if (to && to.path != '/' && to != from) {
+                let flag = false
+                for (const item of this.pathList) {
+                    if (item.pathInfo.path == to.path) { 
+                        item.index = ++this.maxHistory
+                        flag = true
+                        break
+                    }
+                }
+                if (!flag)  this.pathList.push({ pathInfo: to, index: ++this.maxHistory} )
+            }
+        })
+        this.Paths = this.pathList
+        this.$nextTick(() => { // 使用 sessionStorage 保持用户打开的页面数据，防止刷新时丢失，在会话结束时销毁（暂缓）
+            if (sessionStorage.System_NavTabs_PathList) this.pathList.push(...JSON.parse(sessionStorage.System_NavTabs_PathList) || [])
+        })
     },
     methods: {
         removePath: function (url) {
-            for (let n = 0; n < pathList.length; n++) {
-                if (pathList[n].pathInfo.path == url) {
-                    pathList.splice(n, 1)
+            for (let n = 0; n < this.pathList.length; n++) {
+                if (this.pathList[n].pathInfo.path == url) {
+                    this.pathList.splice(n, 1)
                     break
                 }
             }
@@ -84,10 +80,10 @@ export default {
             // 关闭的标签不是当前所在的地址，直接返回
             if (this.$route.path != willClose.pathInfo.path) return
             // 关闭的标签是当前所在的地址，则路由回退最近访问的地址
-            if (pathList.length == 0) {
+            if (this.pathList.length == 0) {
                 this.$router.push('/')
             } else {
-                let arr = pathList.slice(0)
+                let arr = this.pathList.slice(0)
                 // 将地址数组按点击的先后顺序进行反向排序（a.index - b.index 越迟被点击的差值越大，就会排的越靠后），取最后一个进行跳转
                 let item = Object.assign({}, arr.sort((a, b) => a.index - b.index)[arr.length - 1].pathInfo)
                 this.$router.push(item.path)
@@ -97,9 +93,9 @@ export default {
         closeOthers: function (item) {
             if (!(item && item.pathInfo)) return
             // 清空数组（pathList = [] vue 无法追踪变化）
-            maxHistory = 0
-            pathList.splice(0, pathList.length)
-            pathList.push({ pathInfo: item.pathInfo, index: ++maxHistory })
+            this.maxHistory = 0
+            this.pathList.splice(0, this.pathList.length)
+            this.pathList.push({ pathInfo: item.pathInfo, index: ++this.maxHistory })
             // 未关闭的标签是当前所在的地址不跳转
             if (this.$route.path == item.pathInfo.path) return
             // 未关闭的标签不是当前所在的地址
@@ -108,8 +104,8 @@ export default {
         // 全部关闭
         closeAll: function () {
             // 清空数组（pathList = [] vue 无法追踪变化）
-            pathList.splice(0, pathList.length)
-            maxHistory = 0
+            this.pathList.splice(0, this.pathList.length)
+            this.maxHistory = 0
             this.$router.push('/')
         },
          // 绑定隐藏菜单事件
@@ -144,6 +140,9 @@ export default {
         isShow: function (newValue) {
             newValue ? this.bindHideEvents() : this.unbindHideEvents()
         },
+        'pathList.length': function () {
+            sessionStorage.System_NavTabs_PathList = JSON.stringify(this.pathList)
+        }
     },
 }
 </script>

@@ -12,8 +12,6 @@ import { clone } from './clone'
 
 import file from './file/index'
 
-import circularJSON from 'circular-json'
-
 // 解决 storage 兼容性问题
 docStorage.installLocalStorage()
 docStorage.installSessionStorage()
@@ -25,12 +23,6 @@ export default {
     },
     // serviceWorker: serviceWorker,
     clone: clone,
-    // 解决 JSON.stringify() 的 
-    // ‘Chrome sendrequest error: TypeError: Converting circular structure to JSON’
-    // 参考链接
-    // https://blog.csdn.net/hhthwx/article/details/79307843
-    // https://stackoverflow.com/questions/4816099/chrome-sendrequest-error-typeerror-converting-circular-structure-to-json
-    JSON: circularJSON,
     random: random,
     dom: dom,
     string: string,
