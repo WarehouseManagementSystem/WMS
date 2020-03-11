@@ -17,8 +17,11 @@ import i18n from '@/lang/index.js'
 /********************/
 // Plugin
 import theme from '@/Plugin/themes'
+import VuePageTransition from 'vue-page-transition'
+
 // use Plugins
 Vue.use(theme)
+Vue.use(VuePageTransition)
 
 Vue.config.productionTip = false
 

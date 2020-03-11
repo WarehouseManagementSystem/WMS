@@ -1,25 +1,33 @@
 <template>
-    <div class="container bg-light border border-light rounded-pill">
+    <div 
+        class="container bg-light border border-light rounded-pill"
+        @dragenter.stop
+        @dragover.stop.prevent
+        @drop.stop.prevent="drop" >
         <div class="row my-1 px-1 align-items-center">
             <!-- 控制器 -->
             <div class="col-auto row mx-1 px-0">
                 <c-controller-button :icon="icon.stepBackward" v-show="showStepBackward" :disabled="disabledStepBackward" />
                 <b-loading v-show="status == EStatus.loading" class='btn btn-outline-primary rounded-circle' status='grow' />
+                <c-controller-button :icon="icon.stop" v-show="status == EStatus.loading" @click.native="stopload" />
                 <c-controller-button :icon="icon.play" v-show="showPlay" :disabled="disabledPlay" @click.native="play" />
                 <c-controller-button :icon="icon.pause" v-show="showPause" :disabled="disabledPause" @click.native="pause" />
                 <c-controller-button :icon="icon.stepForward" v-show="showStepForward" :disabled="disabledStepForward" />
-                 <!-- 音量 -->
-                <div class="row mx-0 align-items-center" @mouseover="audoMouseover" @mouseleave="audoMouseleave">
-                    <c-controller-button  @click.native="audioMuteClick" :icon="mute ? icon.volumeMute : icon.volumeUp" />
-                    <b-range v-show="audioMuteRangeShow" class="p-0" style="width: 80px;" hideValue max="1" step='0.01' v-model.number="volumeRange" />
-                </div>
+            </div>
+            <!-- 音量 -->
+            <div class="row mx-0 align-items-center d-none d-sm-inline-flex" @mouseover="audoMouseover" @mouseleave="audoMouseleave">
+                <c-controller-button  @click.native="audioMuteClick" :icon="mute ? icon.volumeMute : icon.volumeUp" class="mr-1" />
+                <vue-page-transition name="fade-in-right" class=" d-none d-lg-inline">
+                    <b-range v-show="audioMuteRangeShow" class="p-0" hideValue max="1" step='0.01' v-model.number="volumeRange" />
+                </vue-page-transition>
             </div>
             <!-- 播放进度 -->
             <div class="col px-1 align-items-center border-left border-right">
-                <b-range hideValue :max="duration" :disabled="disabledSeekRange" @input="seekInput" :value="seek" />
+                <font v-if="isError" class="text-danger">Play Error: File not found or In an unsupported format</font>
+                <b-range v-else hideValue :max="duration" :disabled="disabledSeekRange" @input="seekInput" :value="seek" />
             </div>
             <div class="col-auto align-items-center">
-                <font>{{ seekTime }} / {{ durationTime }}</font>
+                <font>{{ seekTime }} <br> {{ durationTime }}</font>
             </div>
         </div>
     </div>
@@ -50,16 +58,18 @@ export default {
     components: { CControllerButton, BRange, BLoading, },
     data () {
         return {
-            sound: Object, // 声音对象
-            soundId: Object, // 声音对象 Id
+            boblSrc: null,
+            sound: null, // 声音对象
+            soundId: '', // 声音对象 Id
             seek: 0, // 播放进度
             mute: false, // 是否静音
             volume: 0.5,// 音量
             volumeRange: 0.5,
             status: null, // 状态
             EStatus: { // 状态 枚举
+                unloaded: 'unloaded', // 未加载
                 loading: 'loading', // 加载
-                loaded: 'loaded',
+                loaded: 'loaded', // 加载错误
                 loaderror: 'loaderror', // 加载错误
                 playing: 'playing', // 播放
                 playerror: 'playerror', // 播放错误
@@ -115,7 +125,8 @@ export default {
         showPlay: function () {
             return this.status == this.EStatus.pauseing || 
             this.status == this.EStatus.finished || 
-            this.status == this.EStatus.loaded
+            this.status == this.EStatus.loaded || 
+            this.status == this.EStatus.unloaded
         },
         disabledPlay: function () {
             return this.duration == 0
@@ -143,32 +154,11 @@ export default {
         },
     },
     mounted () {
-        this.status = this.EStatus.loading
-        this.sound = new Howl({
-            src: ['example.mp3'],
-            volume: this.volume,
-            html5: true,
-            mute: this.mute,
-            onload: this.onload,
-            onloaderror: this.onloaderror,
-            onplay: this.onplay,
-            onend: this.onend,
-            onseek: this.onseek,
-            onmute: this.onmute,
-            onvolume: this.onvolume,
-            onplayerror: () => {
-                this.sound.once('unlock', () => {
-                    this.play()
-                })
-            },
-        })
-        this.status = this.EStatus.pauseing
+        this.status = this.EStatus.unloaded
         this.volumeRange = this.mute ? 0 : this.volume
     },
     beforeDestroy () {
-        this.sound.unload()
-        this.sound = null,
-        clearInterval(this.timer)  
+        this.clear()
     },
     methods: {
         // 格式化时间
@@ -189,9 +179,11 @@ export default {
         onloaderror: function () {
             this.status = this.EStatus.loaderror
         },
+        stopload: function () {
+            this.clear()
+        },
         // ------ 播放控制 ------
         play: function () {
-            if (this.status == this.EStatus.loading) return
             if (this.duration == this.seek) this.seek = 0
             this.soundId = this.sound.play()
             this.status = this.EStatus.playing
@@ -236,6 +228,54 @@ export default {
         },
         audoMouseleave: function () {
             this.audioMuteRangeShow = false
+        },
+        // ------- drop ---------
+        drop: function (e) {
+            let files = e.dataTransfer.files
+            this.filesHandler(files)
+        },
+        filesHandler: async function (files) {
+            this.clear()
+
+            if (files.length == 0) return
+            this.boblSrc = await window.URL.createObjectURL(files[0])
+            
+            // this.boblSrc = URL.createObjectURL(files[0])
+            this.sound = new Howl({
+                src: [this.boblSrc],
+                format: ['mp3'],
+                volume: this.volume,
+                buffer: true,
+                mute: this.mute,
+                onload: this.onload,
+                onloaderror: this.onloaderror,
+                onplay: this.onplay,
+                onend: this.onend,
+                onseek: this.onseek,
+                onmute: this.onmute,
+                onvolume: this.onvolume,
+                onplayerror: () => {
+                    this.sound.once('unlock', () => {
+                        this.play()
+                    })
+                },
+            })
+
+            this.status = this.sound.state()
+            window.URL.revokeObjectURL(this.boblSrc)
+        },
+        clear: function () {
+            this.status = this.EStatus.unloaded
+            this.seek = 0
+            if (this.sound) {
+                this.sound.unload()
+                this.sound = null
+            }
+            if (this.timer) clearInterval(this.timer)
+            if (this.boblSrc) {
+                window.URL.revokeObjectURL(this.boblSrc)
+                this.boblSrc = null
+            }
         },
     },
     watch: {
