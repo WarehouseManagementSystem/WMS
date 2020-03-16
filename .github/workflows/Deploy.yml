@@ -15,8 +15,8 @@ on:
   push:
     branches:
       - master
-    # paths:
-    #   - 'View/**'
+    paths:
+      - 'View/**'
 
 env:
   AZURE_WEBAPP_NAME: WMS              # set this to your application's name
