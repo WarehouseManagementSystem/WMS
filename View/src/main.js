@@ -16,7 +16,7 @@ import '@/components/utilities/directives.js'
 import i18n from '@/lang/index.js'
 /********************/
 // Plugin
-import theme from '@/Plugin/themes'
+import theme from '@/plugin/themes'
 import VuePageTransition from 'vue-page-transition'
 
 // use Plugins
