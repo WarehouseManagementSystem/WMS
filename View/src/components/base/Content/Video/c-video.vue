@@ -71,7 +71,7 @@ export default {
             poster: "http://vjs.zencdn.net/v/oceans.png",
             width: 346,
             sources: [
-                { src: 'http://192.168.0.107:5000/名探偵コナン/【名探偵コナン】剧集/TV合集[日语＆国语＆粤语＆各种语][MKV＆MP4＆RMVB]/最近剧集/2020/966%20大怪兽哥美拉vs假面超人（破）.mp4', type: 'video/mp4', },
+                { src: '...', },
             ],
         }
         this.player = videojs(this.$refs.videoPlayer, this.options, function onPlayerReady() {
