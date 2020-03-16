@@ -71,7 +71,7 @@ export default {
             poster: "http://vjs.zencdn.net/v/oceans.png",
             width: 346,
             sources: [
-                { src: '...', },
+                { src: 'http://localhost:5000/名探偵コナン/【名探偵コナン】剧集/TV合集[日语＆国语＆粤语＆各种语][MKV＆MP4＆RMVB]/最近剧集/2020/971%20目标是警视厅交通部（一）.mp4', },
             ],
         }
         this.player = videojs(this.$refs.videoPlayer, this.options, function onPlayerReady() {

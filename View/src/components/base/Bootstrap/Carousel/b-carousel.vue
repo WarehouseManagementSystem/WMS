@@ -34,12 +34,15 @@
 
 import BCarouselItem from './b-carousel-item'
 import srMessage from '@/components/base/Bootstrap/SrOney/b-sr-only.vue'
+
+import BaseA from '@/components/base/Content/A/c-a.vue'
+
 import util from '@/util/index.js'
 import utilities from '@/components/utilities/index.js'
 
 export default {
     name: 'b-carousel',
-    components: { BCarouselItem, baseA, srMessage, },
+    components: { BCarouselItem, BaseA, srMessage, },
     data () {
         return {
             activeIndex: 0,

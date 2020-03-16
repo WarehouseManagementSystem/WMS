@@ -25,7 +25,7 @@ export default {
         },
         start: {
             type: Number,
-            validator: fvalue => !isNaN(value) && value > 0 && value < 13,
+            validator: value => !isNaN(value) && value > 0 && value < 13,
         },
         end: {
             type: Number,

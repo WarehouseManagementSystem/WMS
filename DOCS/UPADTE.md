@@ -87,7 +87,7 @@
 [Bootstrap tooltips]:                       https://getbootstrap.com/docs/4.3/components/tooltips/
 
 <!-- Plugin -->
-[theme]:                                    ../View/src/Plugin/themes
+[theme]:                                    ../View/srcplugin/themes
 
 <!-- pages -->
 [b-text-demo]:                              ../View/src/Pages/Demo/Form/b-text-demo.vue

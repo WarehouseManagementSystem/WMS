@@ -1,8 +1,8 @@
-// vue
 import Vue from 'vue'
-import App from '@/App.vue'
-import router from '@/router/index'
-import store from '@/store'
+import App from './App.vue'
+import './registerServiceWorker'
+import router from './router'
+import store from './store'
 // 资源文件
 // bootstrap
 import 'jquery'
@@ -16,7 +16,7 @@ import '@/components/utilities/directives.js'
 import i18n from '@/lang/index.js'
 /********************/
 // Plugin
-import theme from '@/Plugin/themes'
+import theme from '@/plugin/themes'
 import VuePageTransition from 'vue-page-transition'
 
 // use Plugins
@@ -24,7 +24,7 @@ Vue.use(theme)
 Vue.use(VuePageTransition)
 
 Vue.config.productionTip = false
-
+/* eslint-disable */
 new Vue({
   router,
   store,
