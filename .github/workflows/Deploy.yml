@@ -37,7 +37,7 @@ jobs:
       run: |
         # Build and test the project.
         git init
-        cd View
+        cd view
         npm install
         npm run build --if-present
     - name: 'Deploy to Github Page'
