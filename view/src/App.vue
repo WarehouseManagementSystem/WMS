@@ -13,6 +13,14 @@
 </template>
 
 <script>
+// 资源文件
+// bootstrap
+import 'jquery'
+import 'bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css'
+// 字体图标
+import '@fortawesome/fontawesome-free/css/all.min.css'
+
 import MainHeader from "@/components/layout/MainHeader.vue";
 import MainContent from "@/components/layout/MainContent.vue";
 import MainFooter from "@/components/layout/MainFooter.vue";

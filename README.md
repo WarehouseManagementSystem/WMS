@@ -1,7 +1,9 @@
 # 仓库管理系统（Warehouse Management System/WMS）
 
-<!-- ![Deploy to GitHub Page](https://github.com/WarehouseManagementSystem/WMS/workflows/Deploy%20to%20GitHub%20Page/badge.svg)
-> [Demo](https://warehousemanagementsystem.github.io/WMS/#) -->
+![Deploy to GitHub Page](https://github.com/WarehouseManagementSystem/WMS/workflows/Deploy%20to%20GitHub%20Page/badge.svg)
+[![Dependabot compatibility score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=acorn&package-manager=npm_and_yarn&previous-version=6.4.0&new-version=6.4.1)](https://help.github.com/articles/configuring-automated-security-fixes)
+> [Demo](https://warehousemanagementsystem.github.io/WMS/#)
+
 
 ## 开发环境
 
