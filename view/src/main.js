@@ -3,13 +3,7 @@ import Vue from 'vue'
 import App from '@/App.vue'
 import router from '@/router/index'
 import store from '@/store'
-// 资源文件
-// bootstrap
-import 'jquery'
-import 'bootstrap'
-import 'bootstrap/dist/css/bootstrap.min.css'
-// 字体图标
-import '@fortawesome/fontawesome-free/css/all.min.css'
+
 // vue directives
 import '@/components/utilities/directives.js'
 // 第三方库

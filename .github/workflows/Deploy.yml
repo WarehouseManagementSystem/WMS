@@ -15,8 +15,8 @@ on:
   push:
     branches:
       - master
-    # paths:
-    #   - 'view/**'
+    paths:
+      - 'view/**'
 
 env:
   AZURE_WEBAPP_NAME: WMS              # set this to your application's name
@@ -44,6 +44,6 @@ jobs:
       uses: crazy-max/ghaction-github-pages@v1
       with:
         target_branch: gh-pages
-        build_dir: View/dist
+        build_dir: view/dist
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
