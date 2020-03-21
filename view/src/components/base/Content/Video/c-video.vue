@@ -74,6 +74,7 @@ export default {
                 remainingTimeDisplay: false,
                 progressControl: true,
                 subtitlesButton: true,
+                pictureInPictureToggle: true,
                 fullscreenToggle: true,
               },
             },
