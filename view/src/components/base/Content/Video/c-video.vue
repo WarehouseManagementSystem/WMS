@@ -1,6 +1,5 @@
 <template>
-    <video
-        ref="videoPlayer" class="video-js vjs-default-skin" >
+    <video ref="videoPlayer" playsinline class="video-js vjs-default-skin">
         <!-- <source src="http://localhost:5000/名探偵コナン/【名探偵コナン】剧集/TV合集[日语＆国语＆粤语＆各种语][MKV＆MP4＆RMVB]/[国语＆粤语＆日语＆西班牙语＆加泰罗尼亚语]TV1-468[标清][MKV][无更新]/101-200/名侦探柯南150.mkv" type='video/x-matroska; codecs="theora, vorbis"' >
         <source src="http://localhost:5000/名探偵コナン/【名探偵コナン】剧集/TV合集[日语＆国语＆粤语＆各种语][MKV＆MP4＆RMVB]/[国语＆粤语＆日语＆西班牙语＆加泰罗尼亚语]TV1-468[标清][MKV][无更新]/101-200/名侦探柯南150.mkv" type='video/mp4' > -->
         <!-- <source src="http://192.168.0.107:5000/名探偵コナン/【名探偵コナン】剧集/TV合集[日语＆国语＆粤语＆各种语][MKV＆MP4＆RMVB]/最近剧集/2020/966%20大怪兽哥美拉vs假面超人（破）.mp4" type="video/mp4"> -->
@@ -58,10 +57,26 @@ export default {
             bigPlayButton: true,
             textTrackDisplay: false,
             posterImage: true,
-            errorDisplay: false,
-            controlBar: true,
+            errorDisplay: true,
             controls: true, 
+            preload: "auto",
             autoplay: false, 
+            controlBar: {
+              children: { 
+                playToggle: true,
+                volumePanel: {
+                  inline: false,
+                },
+                volumeMenuButton: true,
+                currentTimeDisplay: true,
+                timeDivider: true,
+                durationDisplay: true,
+                remainingTimeDisplay: false,
+                progressControl: true,
+                subtitlesButton: true,
+                fullscreenToggle: true,
+              },
+            },
             userActions: {
               hotkeys: true,
             },
@@ -71,26 +86,81 @@ export default {
             playbackRates: [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2],
             poster: "http://vjs.zencdn.net/v/oceans.png",
             width: 346,
-            
             sources: [
-            
-                { src: '...', },
+                { src: 'https://d2zihajmogu5jn.cloudfront.net/advanced-fmp4/master.m3u8', type: 'application/x-mpegURL' },
+                // { src: 'http://192.168.0.107:5000/名探偵コナン/【名探偵コナン】剧集/TV合集[日语＆国语＆粤语＆各种语][MKV＆MP4＆RMVB]/最近剧集/2020/967%20大怪兽哥美拉vs假面超人（急）.mp4', },
             ],
         }
+        this.addTitleComponent()
         this.player = videojs(this.$refs.videoPlayer, this.options, function onPlayerReady() {
-            
-        })
-        
+          if (process.env.NODE_ENV === 'production') console.log('video ready')
+        }).addChild('TitleBar', {text: 'The Title of The Video!'})
     },
     beforeDestroy() {
         if (this.player) {
             this.player.dispose()
+            this.player = null
         }
+    },
+    methods: {
+      addTitleComponent: function () {
+        // Get the Component base class from Video.js
+        var Component = videojs.getComponent('Component');
+
+        // The videojs.extend function is used to assist with inheritance. In
+        // an ES6 environment, `class TitleBar extends Component` would work
+        // identically.
+        var TitleBar = videojs.extend(Component, {
+
+          // The constructor of a component receives two arguments: the
+          // player it will be associated with and an object of options.
+          constructor: function(player, options) {
+
+            // It is important to invoke the superclass before anything else, 
+            // to get all the features of components out of the box!
+            Component.apply(this, arguments);
+
+            // If a `text` option was passed in, update the text content of 
+            // the component.
+            if (options.text) {
+              this.updateTextContent(options.text);
+            }
+          },
+
+          // The `createEl` function of a component creates its DOM element.
+          createEl: function() {
+            return videojs.dom.createEl('div', {
+
+              // Prefixing classes of elements within a player with "vjs-" 
+              // is a convention used in Video.js.
+              className: 'vjs-title-bar'
+            });
+          },
+
+          // This function could be called at any time to update the text 
+          // contents of the component.
+          updateTextContent: function(text) {
+
+            // If no text was provided, default to "Title Unknown"
+            if (typeof text !== 'string') {
+              text = 'Title Unknown';
+            }
+
+            // Use Video.js utility DOM methods to manipulate the content
+            // of the component's element.
+            videojs.dom.emptyEl(this.el());
+            videojs.dom.appendContent(this.el(), text);
+          }
+        });
+
+        // Register the component with Video.js, so it can be used in players.
+        videojs.registerComponent('TitleBar', TitleBar);
+      }
     }
 }
 </script>
 
-<style lang="scss" scoped>
+<style scoped lang="scss">
 /*
   Player Skin Designer for Video.js
   http://videojs.com
@@ -134,7 +204,12 @@ $center-big-play-button: true; // true default
    To center it set the align values to center and middle. The typical location
    of the button is the center, but there is trend towards moving it to a corner
    where it gets out of the way of valuable content in the poster image.*/
-.vjs-default-skin .vjs-big-play-button {
+/* about /deep/
+    vue-loader > 范围CSS > 深度选择器
+    https://vue-loader.vuejs.org/guide/scoped-css.html#mixing-local-and-global-styles
+    /deep/ 可以使带有 scoped 的 css 作用于子组件同时避免全样式局污染
+*/
+.vjs-default-skin /deep/ .vjs-big-play-button {
   /* The font size is what makes the big play button...big. 
      All width/height values use ems, which are a multiple of the font size.
      If the .video-js font-size is 10px, then 3em equals 30px.*/
@@ -144,7 +219,7 @@ $center-big-play-button: true; // true default
      Now that font size is set, the following em values will be a multiple of the
      new font size. If the font-size is 3em (30px), then setting any of
      the following values to 3em would equal 30px. 3 * font-size. */
-  $big-play-width: 1.5em; 
+  $big-play-width: 3em; 
   /* 1.5em = 45px default */
   $big-play-height: 1.5em;
 
@@ -155,7 +230,7 @@ $center-big-play-button: true; // true default
   /* 0.06666em = 2px default */
   border: 0.06666em solid $primary-foreground-color;
   /* 0.3em = 9px default */
-  border-radius: 1em;
+  border-radius: 0.3em;
 
   @if $center-big-play-button {
     /* Align center */
@@ -172,9 +247,9 @@ $center-big-play-button: true; // true default
 
 /* The default color of control backgrounds is mostly black but with a little
    bit of blue so it can still be seen on all-black video frames, which are common. */
-.video-js .vjs-control-bar,
-.video-js .vjs-big-play-button,
-.video-js .vjs-menu-button .vjs-menu-content {
+.video-js /deep/ .vjs-control-bar,
+.video-js /deep/ .vjs-big-play-button,
+.video-js /deep/ .vjs-menu-button .vjs-menu-content {
   /* IE8 - has no alpha support */
   background-color: $primary-background-color;
   /* Opacity: 1.0 = 100%, 0.0 = 0% */
@@ -186,21 +261,21 @@ $center-big-play-button: true; // true default
 $slider-bg-color: lighten($primary-background-color, 33%);
 
 /* Slider - used for Volume bar and Progress bar */
-.video-js .vjs-slider {
+.video-js /deep/ .vjs-slider {
   background-color: $slider-bg-color;
   background-color: rgba($slider-bg-color, 0.5);
 }
 
 /* The slider bar color is used for the progress bar and the volume bar
    (the first two can be removed after a fix that's coming) */
-.video-js .vjs-volume-level,
-.video-js .vjs-play-progress,
-.video-js .vjs-slider-bar {
+.video-js /deep/ .vjs-volume-level,
+.video-js /deep/ .vjs-play-progress,
+.video-js /deep/ .vjs-slider-bar {
   background: $primary-foreground-color;
 }
 
 /* The main progress bar also has a bar that shows how much has been loaded. */
-.video-js .vjs-load-progress {
+.video-js /deep/ .vjs-load-progress {
   /* For IE8 we'll lighten the color */
   background: lighten($slider-bg-color, 25%);
   /* Otherwise we'll rely on stacked opacities */
@@ -209,10 +284,56 @@ $slider-bg-color: lighten($primary-background-color, 33%);
 
 /* The load progress bar also has internal divs that represent
    smaller disconnected loaded time ranges */
-.video-js .vjs-load-progress div {
+.video-js /deep/ .vjs-load-progress div {
   /* For IE8 we'll lighten the color */
   background: lighten($slider-bg-color, 50%);
   /* Otherwise we'll rely on stacked opacities */
   background: rgba($slider-bg-color, 0.75);
 }
+
+.video-js /deep/ .vjs-time-control {
+  padding: 1px;
+  display: block;
+}
+.video-js /deep/ .vjs-remaining-time {
+  padding: 1px;
+  display: none;
+}
+.video-js /deep/ .vjs-time-divider {
+  width: 3px;
+  min-width: 3px;
+  margin: auto;
+  padding: auto 1px;
+}
+
+/* ------------------ Videojs Plugin ------------------ */
+// title
+.video-js /deep/ .vjs-title-bar {
+  /* IE8 - has no alpha support */
+  background-color: $primary-background-color;
+  /* Opacity: 1.0 = 100%, 0.0 = 0% */
+  background-color: rgba($primary-background-color, 0.7);
+  color: $primary-foreground-color;
+  font-size: 1.5em;
+  /*
+    By default, do not show the title bar.
+  */
+  display: none;
+  padding: .5em;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+/* 
+  Only show the title bar after playback has begun (so as not to hide
+  the big play button) and only when paused or when the user is 
+  interacting with the player.
+*/
+.video-js.vjs-paused.vjs-has-started /deep/ .vjs-title-bar,
+.video-js.vjs-user-active.vjs-has-started /deep/ .vjs-title-bar {
+  display: block;
+}
+
 </style>
