@@ -89,7 +89,7 @@ export default {
             width: 346,
             sources: [
                 { src: 'https://d2zihajmogu5jn.cloudfront.net/advanced-fmp4/master.m3u8', type: 'application/x-mpegURL' },
-                // { src: 'http://192.168.0.107:5000/名探偵コナン/【名探偵コナン】剧集/TV合集[日语＆国语＆粤语＆各种语][MKV＆MP4＆RMVB]/最近剧集/2020/967%20大怪兽哥美拉vs假面超人（急）.mp4', },
+                
             ],
         }
         this.addTitleComponent()
