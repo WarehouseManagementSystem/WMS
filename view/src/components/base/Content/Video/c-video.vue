@@ -66,6 +66,14 @@ export default {
               },
               html5: { hls: { withCredentials: false }},
               sources: [
+                {
+                  type: 'video/mp4',
+                  src: 'https://vjs.zencdn.net/v/oceans.mp4',
+                },
+                {
+                  type: 'video/webm',
+                  src: 'https://vjs.zencdn.net/v/oceans.webm'
+                },
                 // {
                 //   type: 'rtmp/mp4',
                 //   src: 'rtmp://184.72.239.149/vod/&mp4:BigBuckBunny_115k.mov'
@@ -92,10 +100,10 @@ export default {
                 //   type: 'application/x-mpegURL',
                 //   src: 'https://d2zihajmogu5jn.cloudfront.net/advanced-fmp4/master.m3u8',
                 // },
-                {
-                  type: "video/mp4",
-                  src: 'http://192.168.0.107:5000/名探偵コナン/【名探偵コナン】剧集/TV合集[日语＆国语＆粤语＆各种语][MKV＆MP4＆RMVB]/最近剧集/2020/966%20大怪兽哥美拉vs假面超人（破）.mp4',
-                },
+                // {
+                //   type: "video/mp4",
+                //   src: 'url.mkv',
+                // },
                 // { src: 'http://vjs.zencdn.net/v/oceans.mp4', type: 'video/mp4' },
                 // { src: 'http://vjs.zencdn.net/v/oceans.webm', type: 'video/webm' },
                 // { type: "video/mp4", src: 'url.mkv', },
@@ -163,6 +171,7 @@ $center-big-play-button: true; // true default
 
 .video-js {
   max-width: 100%;
+  max-height: 70%;
 
   /* The base font size controls the size of everything, not just text.
      All dimensions use em-based sizes so that the scale along with the font size.
