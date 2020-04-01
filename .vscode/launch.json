@@ -4,7 +4,7 @@
    // For further information visit https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md
    "version": "0.2.0",
    "configurations": [
-       
+
         {
             "name": ".NET Core Launch (web)",
             "type": "coreclr",
@@ -51,30 +51,39 @@
             // your web server url
             "url": "http://localhost:8080",
             // set your webroot directory
-            "webRoot": "${workspaceRoot}/View/dist"
-        }
+            "webRoot": "${workspaceRoot}/view/dist"
+        },
+        {
+          "type": "android-webview",
+          "request": "attach",
+          "name": "Attach to Android WebView",
+          "application": "com.android.chrome",
+          "webRoot": "${workspaceRoot}/view/dist",
+          "urlFilter": "http://localhost:8080"
+      },
+      {
+        "type": "chrome",
+        "request": "launch",
+        "name": "vuejs: chrome",
+        "url": "http://localhost:8080",
+        "webRoot": "${workspaceFolder}/view/src",
+        "breakOnLoad": true,
+        "sourceMapPathOverrides": {
+            "webpack:///./src/*": "${webRoot}/*"
+          }
+        },
+        {
+          "type": "firefox",
+          "request": "launch",
+          "name": "vuejs: firefox",
+          "url": "http://localhost:8080",
+          "webRoot": "${workspaceFolder}/src",
+          "pathMappings": [{ "url": "webpack:///src/", "path": "${webRoot}/" }]
+        },
         {
             "version": "0.2.0",
             "configurations": [
-                {
-                "type": "chrome",
-                "request": "launch",
-                "name": "vuejs: chrome",
-                "url": "http://localhost:8080",
-                "webRoot": "${workspaceFolder}/View/src",
-                "breakOnLoad": true,
-                "sourceMapPathOverrides": {
-                    "webpack:///./src/*": "${webRoot}/*"
-                }
-                },
-                {
-                "type": "firefox",
-                "request": "launch",
-                "name": "vuejs: firefox",
-                "url": "http://localhost:8080",
-                "webRoot": "${workspaceFolder}/src",
-                "pathMappings": [{ "url": "webpack:///src/", "path": "${webRoot}/" }]
-                }
+
             ]
         }
     ,]

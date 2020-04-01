@@ -16,7 +16,9 @@
 [moment]:                                   http://momentjs.cn/
 [print]:                                    https://printjs.crabbly.com/
 [bootswatch]:                               https://bootswatch.com/
-[howler.js]:                                 https://howlerjs.com
+[howler.js]:                                https://howlerjs.com
+[video.js]:                                https://videojs.com/
+[videojs-mobile-ui]:                        https://github.com/mister-ben/videojs-mobile-ui
 
 <!-- bootstrap 组件 -->
 [bootstrap alert]:                          https://getbootstrap.com/docs/4.3/components/alerts/
@@ -80,6 +82,7 @@
 [lang-select]:                             ../View/src/components/system/LangSelect
 [theme-select]:                             ../View/src/components/system/ThemeSelect
 [c-radio]:                                  ../View/src/components/base/Content/Radio
+[c-video]:                                  ../view/src/components/base/Content/Video
 
 <!-- directive -->
 [v-tip]:                                    ../View/src/components/utilities/directives.js
@@ -120,10 +123,16 @@
 [b-button-demo]:                            ../View/src/Pages/Demo/Form/b-button-demo.vue
 [b-alert-demo]:                             ../View/src/Pages/Demo/Base/b-alert-demo.vue
 [c-radio-demo]:                             ../View/src/Pages/Demo/Content/c-radio-demo.vue
+[c-video-demo]:                             ../view/src/Pages/Demo/Content/c-video-demo.vue
+2020-04-01
+
+* view 控件 add [c-video] [c-video-demo]
+* view add npm package [video.js] for video player
+* thankes [video.js]`s plugin: [videojs-mobile-ui] for video player mobile ui(copy and edit code)
 
 2020-03-06
 
-* view 空间 add [c-radio] [c-radio-demo]
+* view 控件 add [c-radio] [c-radio-demo]
 * view add npm package [howler.js] for audio play
 *  view debug remove [circular-json] （2019-03-25）
 

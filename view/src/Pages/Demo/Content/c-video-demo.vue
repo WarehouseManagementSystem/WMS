@@ -1,6 +1,6 @@
 <template>
     <div>
-        <c-video />
+        <c-video  />
     </div>
 
 </template>
@@ -11,5 +11,15 @@ import CVideo from '@/components/base/Content/Video/c-video.vue'
 export default {
     name: 'c-video-demo',
     components: {CVideo, },
+    data: () => {
+      return {
+        opt: {
+          sources: [
+
+
+          ]
+        },
+      }
+    }
 }
 </script>
