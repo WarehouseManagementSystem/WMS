@@ -16,7 +16,7 @@ const defaults = {
   }
 };
 
-const screen = window.screen;
+let screen = window.screen;
 
 const angle = () => {
   // iOS
@@ -61,8 +61,11 @@ const onPlayerReady = (player, options) => {
   }
 
   // Insert before the control bar
-  const controlBarIdx = player.children_.indexOf(player.getChild('ControlBar')) - 1;
-  player.addChild('touchOverlay', options.touchControls, controlBarIdx);
+  const ControlBar = player.getChild('ControlBar')
+  const controlBarIdx = player.children_.indexOf(ControlBar) - 2
+  player.addChild('touchOverlay', options.touchControls, controlBarIdx)
+  const PlayToggle = ControlBar && ControlBar.getChild('PlayToggle')
+  PlayToggle.hide()
 
   let locked = false;
 
@@ -70,7 +73,6 @@ const onPlayerReady = (player, options) => {
 
     if (currentAngle === 90 || currentAngle === 270 || currentAngle === -90) {
       if (player.paused() === false) {
-        player.requestFullscreen();
         if (options.fullscreen.lockOnRotate &&
             screen.orientation && screen.orientation.lock) {
           screen.orientation.lock('landscape').then(() => {
@@ -142,8 +144,27 @@ const mobileUi = function(options = defaults) {
   }
 };
 
-mobileUi.VERSION = '0.0.1'
-// Register the plugin with video.js.
-// registerPlugin('mobileUi', mobileUi);
+const init = function() {
+  if (!videojs.getPlugin('mobileUi'))
+    videojs.registerPlugin('mobileUi', mobileUi)
+}
 
-export default mobileUi;
+const dispose = function () {
+  if (!videojs.browser.IS_ANDROID || !videojs.browser.IS_IOS) return
+  if (videojs.browser.IS_IOS) {
+    window.removeEventListener('orientationchange');
+  } else {
+    // addEventListener('orientationchange') is not a user interaction on Android
+    screen.orientation.onchange = null;
+  }
+  screen.orientation.unlock()
+  if (screen) screen = null
+}
+
+mobileUi.VERSION = '0.0.1'
+
+export default {
+  init,
+  dispose,
+  mobileUi,
+}

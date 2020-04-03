@@ -1,6 +1,6 @@
 import videojs from 'video.js'
 
-export default () => {
+const init = () => {
   // Get the Component base class from Video.js
   var Component = videojs.getComponent('Component');
 
@@ -52,4 +52,8 @@ export default () => {
 
   // Register the component with Video.js, so it can be used in players.
   videojs.registerComponent('TitleBar', TitleBar);
+}
+
+export default {
+  init,
 }

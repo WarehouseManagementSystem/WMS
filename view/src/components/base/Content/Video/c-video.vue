@@ -53,6 +53,7 @@ export default {
               bigPlayButton: true,
               // textTrackDisplay: false, // 字幕
               preloadTextTracks: false,
+              techOrder: ["html5",],
               preload: "auto", // offeline 后可自动重新加载
               poster: "http://vjs.zencdn.net/v/oceans.png",
               playbackRates: [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2],
@@ -66,14 +67,14 @@ export default {
               },
               html5: { hls: { withCredentials: false }},
               sources: [
-                {
-                  type: 'video/mp4',
-                  src: 'https://vjs.zencdn.net/v/oceans.mp4',
-                },
-                {
-                  type: 'video/webm',
-                  src: 'https://vjs.zencdn.net/v/oceans.webm'
-                },
+                // {
+                //   type: 'video/mp4',
+                //   src: 'https://vjs.zencdn.net/v/oceans.mp4',
+                // },
+                // {
+                //   type: 'video/webm',
+                //   src: 'https://vjs.zencdn.net/v/oceans.webm'
+                // },
                 // {
                 //   type: 'rtmp/mp4',
                 //   src: 'rtmp://184.72.239.149/vod/&mp4:BigBuckBunny_115k.mov'
@@ -88,10 +89,10 @@ export default {
                 //   type: "application/x-mpegURL",
                 //   src: "https://d2zihajmogu5jn.cloudfront.net/bipbop-advanced/bipbop_16x9_variant.m3u8"
                 // },
-                // {
-                //   type: 'application/x-mpegURL',
-                //   src: 'https://d2zihajmogu5jn.cloudfront.net/bipbop-advanced/bipbop_16x9_variant.m3u8',
-                // },
+                {
+                  type: 'application/x-mpegURL',
+                  src: 'https://d2zihajmogu5jn.cloudfront.net/bipbop-advanced/bipbop_16x9_variant.m3u8',
+                },
                 // {
                 //   type: 'application/dash+xml',
                 //   src: 'https://dash.akamaized.net/akamai/bbb_30fps/bbb_30fps.mpd',
@@ -120,17 +121,18 @@ export default {
         }
     },
     mounted () {
-      if (!videojs.getPlugin('mobileUi')) videojs.registerPlugin('mobileUi', plugins.mobileUi)
-      plugins.title()
+      plugins.title.init()
+      plugins.mobileUi.init()
 
       this.player = videojs(this.$refs.videoPlayer, videojs.mergeOptions(this.defaultOptions, this.options))
-      this.player.addChild('TitleBar', {text: 'The Title of The Video!'})
+      this.player.addChild('TitleBar', {text: 'The title of the video!'})
       this.player.mobileUi()
     },
     beforeDestroy () {
         if (this.player) {
-            this.player.dispose()
-            this.player = null
+          plugins.mobileUi.dispose()
+          this.player.dispose()
+          this.player = null
         }
     },
     methods: {
