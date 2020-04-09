@@ -4,8 +4,8 @@ import filters from './filters'
 import directives from './directives'
 
 export default {
-        props,
-        mixins,
-        filters,
-        directives,
+  props,
+  mixins,
+  filters,
+  directives,
 }

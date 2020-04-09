@@ -79,13 +79,15 @@
 [b-reset]:                                  .../View/src/components/base/Bootstrap/Form/Button
 [b-submit]:                                 .../View/src/components/base/Bootstrap/Form/Button
 [b-button-group]:                           https://getbootstrap.com/docs/4.3/components/button-group/
-[lang-select]:                             ../View/src/components/system/LangSelect
+[lang-select]:                              ../View/src/components/system/LangSelect
 [theme-select]:                             ../View/src/components/system/ThemeSelect
 [c-radio]:                                  ../View/src/components/base/Content/Radio
 [c-video]:                                  ../view/src/components/base/Content/Video
+[c-image]:                                  ../view/src/components/base/Bootstrap/Image
 
 <!-- directive -->
 [v-tip]:                                    ../View/src/components/utilities/directives.js
+[v-lazy]:                                   ../View/src/components/utilities/directives.js
 [Bootstrap popovers]:                       https://getbootstrap.com/docs/4.3/components/popovers/
 [Bootstrap tooltips]:                       https://getbootstrap.com/docs/4.3/components/tooltips/
 
@@ -124,6 +126,13 @@
 [b-alert-demo]:                             ../View/src/Pages/Demo/Base/b-alert-demo.vue
 [c-radio-demo]:                             ../View/src/Pages/Demo/Content/c-radio-demo.vue
 [c-video-demo]:                             ../view/src/Pages/Demo/Content/c-video-demo.vue
+
+2020-04-09
+
+* view add directives [v-lazy] fro lazy load when the element show in view
+* view edit [base-img] tp [c-image] add [v-lazy]
+
+
 2020-04-01
 
 * view 控件 add [c-video] [c-video-demo]

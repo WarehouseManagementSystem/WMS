@@ -35,6 +35,6 @@ export default {
     show: function () {
       return this.$route.fullPath.includes('/Plugin-')
     },
-  }
+  },
 };
 </script>

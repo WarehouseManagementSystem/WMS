@@ -32,10 +32,12 @@ export default {
                 { path: 'c-video', name: 'c-video', component: async () => await import(/* webpackChunkName: "content" */'@/Pages/Demo/Content/c-video-demo.vue'), },
                 { path: 'c-table', name: 'c-table', component: async () => await import(/* webpackChunkName: "content" */'@/Pages/Demo/Content/c-table-demo.vue'), },
                 { path: 'tree-view', name: 'tree-view', component: async () => await import(/* webpackChunkName: "content" */'@/Pages/Demo/Content/tree-view-demo.vue'), },
-                
+                { path: 'video-player', name: 'video-player', component: async () => await import(/* webpackChunkName: "content" */'@/Pages/Demo/Content/c-video-player-demo.vue'), },
+
+
             ],
         },
-        
+
         {
             SubsystemName: 'Form',
             Modules: [
@@ -50,7 +52,7 @@ export default {
                 { path: 'b-select', name: 'b-select', component: async () => await import(/* webpackChunkName: "form" */'@/Pages/Demo/Form/b-select-demo.vue'), },
                 // { path: 'b-hidden', name: 'b-hidden', component: async () => await import(/* webpackChunkName: "form" */'@/Pages/Demo/Form/b-hidden-demo.vue'), },
                 { path: 'b-button', name: 'b-button', component: async () => await import(/* webpackChunkName: "form" */'@/Pages/Demo/Form/b-button-demo.vue'), },
-                
+
             ]
         },
         {
@@ -66,6 +68,6 @@ export default {
                 { path: 'v-tip', name: 'v-tip', component: async () => await import(/* webpackChunkName: "directive" */'@/Pages/Demo/Directive/b-tooltip-demo.vue'), },
             ]
         },
-        
+
     ],
 }

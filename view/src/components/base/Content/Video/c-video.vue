@@ -1,5 +1,5 @@
 <template>
-    <video ref="videoPlayer" playsinline class="video-js vjs-default-skin">
+    <video ref="videoPlayer" class="video-js vjs-default-skin">
         <p class="vjs-no-js">
             To view this video please enable JavaScript, and consider upgrading to a
             web browser that
@@ -84,15 +84,15 @@ export default {
                 //   type: 'application/x-mpegURL',
                 //   src: 'http://playertest.longtailvideo.com/adaptive/bipbop/gear4/prog_index.m3u8'
                 // },
-                // {
-                //   withCredentials: false,
-                //   type: "application/x-mpegURL",
-                //   src: "https://d2zihajmogu5jn.cloudfront.net/bipbop-advanced/bipbop_16x9_variant.m3u8"
-                // },
                 {
-                  type: 'application/x-mpegURL',
-                  src: 'https://d2zihajmogu5jn.cloudfront.net/bipbop-advanced/bipbop_16x9_variant.m3u8',
+                  withCredentials: false,
+                  type: "application/x-mpegURL",
+                  src: "https://d2zihajmogu5jn.cloudfront.net/bipbop-advanced/bipbop_16x9_variant.m3u8"
                 },
+                // {
+                //   type: 'application/x-mpegURL',
+                //   src: 'https://d2zihajmogu5jn.cloudfront.net/bipbop-advanced/bipbop_16x9_variant.m3u8',
+                // },
                 // {
                 //   type: 'application/dash+xml',
                 //   src: 'https://dash.akamaized.net/akamai/bbb_30fps/bbb_30fps.mpd',
@@ -173,7 +173,6 @@ $center-big-play-button: true; // true default
 
 .video-js {
   max-width: 100%;
-  max-height: 70%;
 
   /* The base font size controls the size of everything, not just text.
      All dimensions use em-based sizes so that the scale along with the font size.
