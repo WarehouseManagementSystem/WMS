@@ -3,15 +3,15 @@
         <ul class="pagination m-0">
             <item :disabled="startDisabled" @click.native="startClick"><slot name="start"><i :class="icon.stepBackward"></i></slot></item>
             <item :disabled="previousDisabled" @click.native="previousClick" ><slot name="previous"><i :class="icon.caretLeft"></i></slot></item>
-            <slot>
-                <item 
-                    v-for="(value, index) in list" 
-                    :key="index" 
-                    :value="value" 
-                    :active="select == value" 
-                    :disabled="separator === value" 
-                    @click.native="itemClick(value)" 
-                />
+              <slot>
+                  <item
+                      v-for="(value, index) in list"
+                      :key="index"
+                      :value="value"
+                      :active="select == value"
+                      :disabled="separator === value"
+                      @click.native="itemClick(value)"
+                  />
             </slot>
             <item :disabled="nextDisabled" @click.native="nextClick" ><slot name="next"><i :class="icon.caretRight"></i></slot></item>
             <item :disabled="endDisabled" @click.native="endClick" ><slot name="end"><i :class="icon.stepForward"></i></slot></item>
@@ -81,7 +81,7 @@ export default {
             const start = Number(this.start), end = Number(this.end), total = Number(this.total)
             const length = end - start + 1
             if (length <= total) return Array.from({ length: length }, (v, i) => start + i )
- 
+
             if (this.select < start + total) {
                 if (end - 3 < start + total) {
                     arr = Array.from({ length: length}, (v, i) => start + i )

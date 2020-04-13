@@ -1,18 +1,19 @@
 <template>
-    <ul class="list-group" 
+    <ul class="list-group"
         :class="{'list-group-flush': flush, 'list-group-horizontal': inline, }">
         <slot v-if="$slots.default"></slot>
-        <list-items 
-            v-else 
-            v-for="(item, index) in list" 
-            :key="index" 
+        <list-items
+            v-else
+            v-for="(item, index) in list"
+            :key="index"
             :class="{'flex-fill': fill}"
-            :text="item.text" 
-            :href="item.href" 
-            :srMessage="item.srMessage" 
-            :color="item.color || color" 
-            :disabled="disabled || item.disabled" 
-            :active="select ? select == item.text : item.active" 
+            :text="item.text"
+            :href="item.href"
+            :srMessage="item.srMessage"
+            :color="item.color || color"
+            :disabled="disabled || item.disabled"
+            @click.native="$emit('click', item.value || item.text)"
+            :active="select ? select == item.value || select == item.text : item.active"
         />
     </ul>
 </template>
@@ -25,6 +26,10 @@ import listItems from './b-list-item'
 export default {
     name: 'b-list',
     components: { listItems, },
+    model: {
+        prop: 'select',
+        event: 'click'
+    },
     props: {
         list: utilities.props.list,
         color: {

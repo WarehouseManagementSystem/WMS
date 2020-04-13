@@ -5,16 +5,17 @@
         <template v-else v-for="(item, index) in list">
             <nav-item-dropdown
                 v-if="item.dropdown"
-                :key="index" 
-                :list="item.list" 
+                :key="index"
+                :list="item.list"
                 :text="item.text" />
-            <nav-item 
-                v-else 
-                :key="index" 
-                :text="item.text" 
-                :href="item.href" 
-                :disabled="item.disabled" 
-                :active="select ? select == item.text : item.active" />
+            <nav-item
+                v-else
+                :key="index"
+                :text="item.text"
+                :href="item.href"
+                :disabled="item.disabled"
+                @click.native="$emit('click', item.value || item.text)"
+                :active="select ? select == item.text || select == item.value : item.active" />
         </template>
     </ul>
 </template>
@@ -28,6 +29,10 @@ import NavItemDropdown from './b-nav-item-dropdown'
 export default {
     name: 'b-nav',
     components: { NavItem, NavItemDropdown, },
+    model: {
+        prop: 'select',
+        event: 'click'
+    },
     props: {
         list: utilities.props.list,
         select: utilities.props.text,
@@ -49,6 +54,6 @@ export default {
             if (this.justified) c += ' nav-justified '
             return c
         },
-    }
+    },
 }
 </script>

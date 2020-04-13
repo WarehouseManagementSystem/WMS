@@ -84,6 +84,7 @@
 [c-radio]:                                  ../View/src/components/base/Content/Radio
 [c-video]:                                  ../view/src/components/base/Content/Video
 [c-image]:                                  ../view/src/components/base/Bootstrap/Image
+[c-video-player]:                           ../view/src/components/base/Content/VideoPlayer
 
 <!-- directive -->
 [v-tip]:                                    ../View/src/components/utilities/directives.js
@@ -126,6 +127,11 @@
 [b-alert-demo]:                             ../View/src/Pages/Demo/Base/b-alert-demo.vue
 [c-radio-demo]:                             ../View/src/Pages/Demo/Content/c-radio-demo.vue
 [c-video-demo]:                             ../view/src/Pages/Demo/Content/c-video-demo.vue
+[c-video-player]:                           ../view/src/Pages/Demo/Content/c-video-player-demo.vue
+
+2020-04-13
+
+* view add [c-video-player] [c-video-player-demo]
 
 2020-04-09
 
