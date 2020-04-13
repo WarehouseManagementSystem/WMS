@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["lang-en-US"],{"48b4":function(e,o,n){"use strict";n.r(o);var a={time:{},number:{},lang:{nav:{Home:"Home",About:"About"},systemName:"System Name",hello:"hello world"}};o["default"]=a}}]);
+//# sourceMappingURL=lang-en-US.01b1d736.js.map
