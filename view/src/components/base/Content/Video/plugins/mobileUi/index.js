@@ -72,15 +72,13 @@ const onPlayerReady = (player, options) => {
   const rotationHandler = (currentAngle = angle()) => {
 
     if (currentAngle === 90 || currentAngle === 270 || currentAngle === -90) {
-      if (player.paused() === false) {
-        if (options.fullscreen.lockOnRotate &&
-            screen.orientation && screen.orientation.lock) {
-          screen.orientation.lock('landscape').then(() => {
-            locked = true;
-          }).catch(() => {
-            videojs.log('orientation lock not allowed');
-          });
-        }
+      if (options.fullscreen.lockOnRotate &&
+          screen.orientation && screen.orientation.lock) {
+        screen.orientation.lock('landscape').then(() => {
+          locked = true;
+        }).catch(() => {
+          videojs.log('orientation lock not allowed');
+        });
       }
     }
     if (currentAngle === 0 || currentAngle === 180) {

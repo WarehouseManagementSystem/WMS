@@ -17,8 +17,9 @@
 [print]:                                    https://printjs.crabbly.com/
 [bootswatch]:                               https://bootswatch.com/
 [howler.js]:                                https://howlerjs.com
-[video.js]:                                https://videojs.com/
+[video.js]:                                 https://videojs.com/
 [videojs-mobile-ui]:                        https://github.com/mister-ben/videojs-mobile-ui
+[bs-custom-file-input]:                     https://www.npmjs.com/package/bs-custom-file-input
 
 <!-- bootstrap 组件 -->
 [bootstrap alert]:                          https://getbootstrap.com/docs/4.3/components/alerts/
@@ -128,6 +129,10 @@
 [c-radio-demo]:                             ../View/src/Pages/Demo/Content/c-radio-demo.vue
 [c-video-demo]:                             ../view/src/Pages/Demo/Content/c-video-demo.vue
 [c-video-player]:                           ../view/src/Pages/Demo/Content/c-video-player-demo.vue
+
+2020-04-14
+
+* view add [bs-custom-file-input] for b-file
 
 2020-04-13
 
