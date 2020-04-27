@@ -1,5 +1,5 @@
 <template>
-    <div 
+    <div
         class="container bg-light border border-light rounded-pill"
         @dragenter.stop
         @dragover.stop.prevent
@@ -37,7 +37,7 @@
 import util from '@/util/index.js'
 import config from '@/config/index.js'
 
-/** 
+/**
  * howler.js HomePage
  * https://howlerjs.com
  * howler.js Github
@@ -54,7 +54,7 @@ import BRange from '@/components/base/Bootstrap/Form/b-range.vue'
 import BLoading from "@/components/base/Bootstrap/Loading/b-loading.vue"
 
 export default {
-    name: 'c-raido',
+    name: 'c-auido',
     components: { CControllerButton, BRange, BLoading, },
     data () {
         return {
@@ -103,9 +103,9 @@ export default {
             return this.sound && this.sound.duration ? this.sound.duration(this.soundId) : 0
         },
         seekTime: function () { // 播放时间
-            if (this.seek == 0 && this.duration != 0) 
+            if (this.seek == 0 && this.duration != 0)
                 return this.duration - 60 * 60 > 0 ? '0:00:00' : '0:00'
-            else 
+            else
                 return this.formatTime(this.seek)
         },
         durationTime: function () { // 总时长
@@ -123,9 +123,9 @@ export default {
         },
         // ------ controllers ------
         showPlay: function () {
-            return this.status == this.EStatus.pauseing || 
-            this.status == this.EStatus.finished || 
-            this.status == this.EStatus.loaded || 
+            return this.status == this.EStatus.pauseing ||
+            this.status == this.EStatus.finished ||
+            this.status == this.EStatus.loaded ||
             this.status == this.EStatus.unloaded
         },
         disabledPlay: function () {
@@ -168,7 +168,7 @@ export default {
             let hour = Math.floor(secs / 60 / 60) || 0
             let minutes = Math.floor((secs - hour * 60 * 60) / 60) || 0
             let seconds = (secs - hour * 60 * 60 - minutes * 60) || 0
-            return this.duration - 60 * 60 > 0 
+            return this.duration - 60 * 60 > 0
                     ? `${hour}:${util.string.padStart(minutes, 2, '0')}:${util.string.padStart(seconds, 2, '0')}`
                     : `${minutes}:${util.string.padStart(seconds, 2, '0')}`
         },
@@ -239,7 +239,7 @@ export default {
 
             if (files.length == 0) return
             this.boblSrc = await window.URL.createObjectURL(files[0])
-            
+
             // this.boblSrc = URL.createObjectURL(files[0])
             this.sound = new Howl({
                 src: [this.boblSrc],

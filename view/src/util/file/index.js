@@ -5,6 +5,7 @@ import pdf from './pdf'
 import sql from './sql'
 import json from './json'
 import excel from './excel'
+import tools from './tools'
 
 export default {
     xml,
@@ -14,4 +15,5 @@ export default {
     sql,
     json,
     excel,
+    tools,
 }

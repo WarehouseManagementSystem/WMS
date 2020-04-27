@@ -1,4 +1,4 @@
-/* 
+/*
  * mixins
  * 通用混入
 **/
@@ -25,11 +25,15 @@ export default {
                 tempClass: String,
             },
             computed: {
-                objClass: function () {
-                    let size = this.size ? `form-control-${this.size}` : ''
-                    let border = !this.border ? 'border-0' : ''
-                    return `${this.tempClass} bg-${this.color} text-${this.textColor} ${size} ${border} text-${this.textAlign}`
-                },
+                // edit 2020-04-15
+                // 未校验正确性
+                // 影响范围 所有使用了 utilities.mixins.form.base 的组件
+                // TODO: 校验正确性
+                // objClass: function () {
+                //     let size = this.size ? `form-control-${this.size}` : ''
+                //     let border = !this.border ? 'border-0' : ''
+                //     return `${this.tempClass} bg-${this.color} text-${this.textColor} ${size} ${border} text-${this.textAlign}`
+                // },
                 inputListeners: function () {
                     var vm = this
                     // `Object.assign` 将所有的对象合并为一个新对象
@@ -66,9 +70,9 @@ export default {
             },
             computed: {
                 objClass: function () {
-                    return `btn-${this.outline ? 'outline-' : ''}${this.color} 
+                    return `btn-${this.outline ? 'outline-' : ''}${this.color}
                         ${this.textColor ? `text-${this.textColor}` : ''}
-                        ${this.size ? `btn-${this.size}` : ''} 
+                        ${this.size ? `btn-${this.size}` : ''}
                         ${this.block ? 'btn-block' : ''}
                         ${this.active ? 'active' : ''}
                         ${(this.disabled && this.href) ? 'disabled' : ''}`
@@ -121,7 +125,7 @@ export default {
                     // 正则校验（传入字符串长度为 0、无正则表达式 不做校验直接返回 true，验证通过返回 true）
                     if (!this.validateRange(value, regex)) { util.dom.addClass(e.target, 'is-invalid'); return }
                     util.dom.removeClass(e.target, 'is-invalid') // 移除可能的 is-invalid
-                    // 当存在 valid slot 或 validInfo 时 
+                    // 当存在 valid slot 或 validInfo 时
                     if (this.$slots.valid || this.validInfo) util.dom.addClass(e.target, 'is-valid')
                     this.$emit('valid')
                 },
@@ -170,7 +174,7 @@ export default {
                 disabled: props.disabled,
             },
             computed: {
-                readonlyClass: function () { 
+                readonlyClass: function () {
                     return this.readonly ? 'form-control-plaintext' : ''
                 },
             },
