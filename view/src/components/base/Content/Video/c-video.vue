@@ -84,11 +84,11 @@ export default {
                 //   type: 'application/x-mpegURL',
                 //   src: 'http://playertest.longtailvideo.com/adaptive/bipbop/gear4/prog_index.m3u8'
                 // },
-                {
-                  withCredentials: false,
-                  type: "application/x-mpegURL",
-                  src: "https://d2zihajmogu5jn.cloudfront.net/bipbop-advanced/bipbop_16x9_variant.m3u8"
-                },
+                // {
+                //   withCredentials: false,
+                //   type: "application/x-mpegURL",
+                //   src: "https://d2zihajmogu5jn.cloudfront.net/bipbop-advanced/bipbop_16x9_variant.m3u8"
+                // },
                 // {
                 //   type: 'application/x-mpegURL',
                 //   src: 'https://d2zihajmogu5jn.cloudfront.net/bipbop-advanced/bipbop_16x9_variant.m3u8',
@@ -105,7 +105,7 @@ export default {
                 //   type: "video/mp4",
                 //   src: 'url.mkv',
                 // },
-                // { src: 'http://vjs.zencdn.net/v/oceans.mp4', type: 'video/mp4' },
+                { src: 'http://vjs.zencdn.net/v/oceans.mp4', type: 'video/mp4' },
                 // { src: 'http://vjs.zencdn.net/v/oceans.webm', type: 'video/webm' },
                 // { type: "video/mp4", src: 'url.mkv', },
                 // { type: "video/webm", src: 'url.mkv', },

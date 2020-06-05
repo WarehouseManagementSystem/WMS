@@ -14,4 +14,5 @@
 
 > - [ ] need to do
 
-[Jumbotron]:                                https://getbootstrap.com/docs/4.3/components/jumbotron/
+- [ ] [Jumbotron](https://getbootstrap.com/docs/4.3/components/jumbotron/)
+- [ ] [base mixins](view/src/components/utilities/mixins.js) 正确性校验 2020-04-15

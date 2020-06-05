@@ -20,7 +20,7 @@
 [video.js]:                                 https://videojs.com/
 [videojs-mobile-ui]:                        https://github.com/mister-ben/videojs-mobile-ui
 [bs-custom-file-input]:                     https://www.npmjs.com/package/bs-custom-file-input
-
+[filepond]:                                 https://github.com/pqina/filepond
 <!-- bootstrap 组件 -->
 [bootstrap alert]:                          https://getbootstrap.com/docs/4.3/components/alerts/
 [b-alert]:                                  ../View/src/components/base/Bootstrap/Alert
@@ -82,7 +82,7 @@
 [b-button-group]:                           https://getbootstrap.com/docs/4.3/components/button-group/
 [lang-select]:                              ../View/src/components/system/LangSelect
 [theme-select]:                             ../View/src/components/system/ThemeSelect
-[c-radio]:                                  ../View/src/components/base/Content/Radio
+[c-audio]:                                  ../View/src/components/base/Content/Audio
 [c-video]:                                  ../view/src/components/base/Content/Video
 [c-image]:                                  ../view/src/components/base/Bootstrap/Image
 [c-video-player]:                           ../view/src/components/base/Content/VideoPlayer
@@ -126,9 +126,14 @@
 [b-badge-demo]:                             ../View/src/Pages/Demo/Base/b-badge-demo.vue
 [b-button-demo]:                            ../View/src/Pages/Demo/Form/b-button-demo.vue
 [b-alert-demo]:                             ../View/src/Pages/Demo/Base/b-alert-demo.vue
-[c-radio-demo]:                             ../View/src/Pages/Demo/Content/c-radio-demo.vue
+[c-audio-demo]:                             ../View/src/Pages/Demo/Content/c-audio-demo.vue
 [c-video-demo]:                             ../view/src/Pages/Demo/Content/c-video-demo.vue
 [c-video-player]:                           ../view/src/Pages/Demo/Content/c-video-player-demo.vue
+
+2020-04-27
+
+* view delete [bs-custom-file-input]
+* view add [filepond] for b-file
 
 2020-04-14
 
@@ -152,7 +157,7 @@
 
 2020-03-06
 
-* view 控件 add [c-radio] [c-radio-demo]
+* view 控件 add [c-audio] [c-audio-demo]
 * view add npm package [howler.js] for audio play
 *  view debug remove [circular-json] （2019-03-25）
 
