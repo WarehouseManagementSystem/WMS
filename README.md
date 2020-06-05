@@ -4,6 +4,8 @@
 [![Dependabot compatibility score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=acorn&package-manager=npm_and_yarn&previous-version=6.4.0&new-version=6.4.1)](https://help.github.com/articles/configuring-automated-security-fixes)
 > [Demo](https://warehousemanagementsystem.github.io/WMS/#)
 
+> 此存储库已归档，不再维护 2020-06-05  
+> view 部分已作为单独的 vue 组件项目 [v-ui/vue-ui](https://github.com/v-ui/vue-ui) 开发
 
 ## 开发环境
 
